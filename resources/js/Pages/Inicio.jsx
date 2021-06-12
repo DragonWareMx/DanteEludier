@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout';
 import '/css/inicio.css';
 import Grid from '@material-ui/core/Grid';
 
+//Iconos
+import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+
 const Inicio = () => {
     return (
         <>
