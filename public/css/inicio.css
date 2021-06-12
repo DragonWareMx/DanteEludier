@@ -1,0 +1,27 @@
+.portadaInicio{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.portadaInicio img{
+    object-fit: cover;
+    width: auto;
+}
+
+.inicio_rounded{
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 1360px;
+    padding-top:40px;
+    margin-top: -80px;
+    margin-bottom:100px;
+}
+
+@media (max-width: 600px){
+    .portadaInicio img{
+        object-fit: cover;
+        width: 100%;
+    }
+}
