@@ -78,3 +78,27 @@
 
     color: #232323;
 }
+
+.btn-login{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #FFFFFF;
+
+    background-color: #000000;
+    border-radius: 50px;
+
+    width: 160px;
+    height: 38px;
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.col-izq{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center !important;
+}
