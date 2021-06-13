@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 
 import "../../../public/css/layout.css";
+import "../../../public/css/animations.css";
 
 export default function Layout({ title, pageTitle, children }) {
     useEffect(() => {
