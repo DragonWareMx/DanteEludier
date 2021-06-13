@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 
+import "../../../public/css/layout.css";
+
 export default function Layout({ title, pageTitle, children }) {
     useEffect(() => {
         document.title = title;
