@@ -1,0 +1,140 @@
+.libros_left{
+    width: 55%;
+    padding-top:40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.libros_right{
+    width: 45%;
+    display: flex;
+}
+
+.libro_titulo{
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 42px;
+    color: #323232;
+    width: 100%;
+    margin-left: 55px;
+}
+
+.libro_subtitulo{
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: #999999;
+    width: 100%;
+    margin-left: 55px;
+}
+
+.libro_resumen{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: #999999;
+    margin-left:55px;
+    margin-top:32px;
+}
+
+.libro_comprar, .libro_comprar2{
+    width: 166.62px;
+    height: 45px;
+    background: #323232;
+    border:none;
+    border-radius: 50px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration:none;
+}
+
+.libro_comprar2, .libro_comprar2Grid{
+    display: none;
+}
+
+.libro_comprar:hover{
+    width: 175px;
+    margin-left: 13px;
+    transition: all 0.3s;
+}
+
+.libro_img1{
+    max-width:30%;
+    object-fit: contain;
+    margin-left:40px;
+}
+
+.libro_img2{
+    width: 50%;
+    object-fit: contain;
+    margin-left:-55px;
+    padding-top:55px;
+}
+
+@media(max-width:600px){
+    .libros_left{
+        width: 100%;
+        padding-top :0px;
+        margin-top:0px;
+        padding-left: 30px;
+        padding-right:30px;
+    }
+    .libro_titulo{
+        margin-left: 0px;
+    }
+    
+    .libro_subtitulo{
+        margin-left: 0px;
+    }
+    
+    .libro_resumen{
+        margin-left:0px;
+    }
+    
+    .libro_comprar{
+        display: none;
+    }
+
+    .libros_right{
+        width:100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .libro_img1{
+        max-width:25%;
+        margin-left:0px;
+    }
+    
+    .libro_img2{
+        width: 45%;
+        margin-left:-55px;
+        padding-top:30px;
+    }
+
+    .libro_comprar2Grid{
+        display: flex;
+        justify-content: center;
+    }
+
+    .libro_comprar2{
+        display: flex;
+        height: 37px;
+        margin-top: 20px;
+        width: 70%;
+        font-size: 12px;
+        justify-content: center;
+    }
+}
