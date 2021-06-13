@@ -5,23 +5,30 @@
 }
 .portadaInicio img{
     object-fit: cover;
-    width: auto;
+    width: 40%;
 }
 
 .inicio_rounded{
     background-color: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
     border-radius: 8px;
-    width: 90%;
-    max-width: 1360px;
+    width: 95%;
+    max-width: 1800px;
     padding-top:40px;
     margin-top: -80px;
     margin-bottom:100px;
+    transition: all 0.3s;
 }
 
 @media (max-width: 600px){
     .portadaInicio img{
         object-fit: cover;
+        width: 90%;
+    }
+
+    .inicio_rounded{
         width: 100%;
+        border-radius: 0px;
+        transition: all 0.3s;
     }
 }
