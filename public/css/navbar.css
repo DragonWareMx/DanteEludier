@@ -1,0 +1,10 @@
+.nvbr {
+    max-height: 60px;
+    color: white;
+    background-color: transparent;
+    transition: background-color 200ms linear;
+}
+
+.colorChange {
+    background-color: black !important;
+}
