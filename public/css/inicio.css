@@ -20,6 +20,29 @@
     transition: all 0.3s;
 }
 
+.owl-item{
+    height: 70px !important;
+}
+
+.clientes_item{
+    height: 100%;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.clientes_item img{
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.rojito{
+    background-color: red;
+}
+
+.moradito{
+    background-color: purple;
+}
 @media (max-width: 600px){
     .portadaInicio img{
         object-fit: cover;

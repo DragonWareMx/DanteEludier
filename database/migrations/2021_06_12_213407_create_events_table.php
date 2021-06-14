@@ -16,6 +16,13 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('sede', 255);
+            $table->decimal('precio');
+            $table->unsignedInteger('limite');
+            $table->decimal('descuento');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            
         });
     }
 

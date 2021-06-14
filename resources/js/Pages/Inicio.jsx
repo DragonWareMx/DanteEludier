@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 //componentes
 import Libro from '../components/Libro';
 import Club from '../components/Club';
+import Clientes from '../components/Clientes';
 
 //Iconos
 import FacebookIcon from '@material-ui/icons/Facebook';
@@ -32,6 +33,7 @@ const Inicio = () => {
                 <div className="inicio_rounded">
                     <Libro />
                     <Club />
+                    <Clientes />
                 </div>
             </Grid>  
         </>
