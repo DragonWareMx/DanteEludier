@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class book extends Model
 {
     use HasFactory;
+
+    public function images()
+    {
+        return $this->hasMany('App\Models\BookImage');
+    }
 }
