@@ -20384,174 +20384,177 @@ var Login = function Login() {
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-    className: "container",
+    className: "mi-contenedor",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-      className: "row",
+      className: "container",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        className: "col",
+        className: "row",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-          className: "card mt-5 mb-5 card-login",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-            className: "card-body",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-              className: "card-title",
-              children: "Iniciar sesi\xF3n"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-              className: "row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "col-lg-5 pr-5 mb-lg-5 col-izq",
-                style: {
-                  marginBottom: "10px"
-                },
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                  style: {
-                    display: "flex",
-                    marginBottom: "10px"
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_School__WEBPACK_IMPORTED_MODULE_9__.default, {
-                    fontSize: 'default'
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                    "class": "texto-info",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
-                      children: "Talleres"
-                    }), "Asiste y transforma tu vida y tus finanzas."]
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                  style: {
-                    display: "flex",
-                    marginBottom: "10px"
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_Work__WEBPACK_IMPORTED_MODULE_10__.default, {
-                    fontSize: 'default'
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                    "class": "texto-info",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
-                      children: "Mentor\xEDa"
-                    }), "Descubre el empresario que de verdad eres."]
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                  style: {
-                    display: "flex",
-                    marginBottom: "10px"
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_SupervisorAccount__WEBPACK_IMPORTED_MODULE_11__.default, {
-                    fontSize: 'default'
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                    "class": "texto-info",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
-                      children: "Gesti\xF3n de talento"
-                    }), "Formaci\xF3n de equipos de alto rendimiento"]
-                  })]
-                })]
+          className: "col",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            className: "card mt-5 mb-5 card-login",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+              className: "card-body",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                className: "card-title",
+                children: "Iniciar sesi\xF3n"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "col-lg-7 mb-lg-5",
+                className: "row",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                  className: "text-no-tienes",
-                  children: ["\xBFNo tienes una cuenta? ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-                    href: ziggy_js__WEBPACK_IMPORTED_MODULE_2___default()('register'),
-                    children: "Registrate"
+                  className: "col-lg-5 pr-5 mb-lg-5 col-izq",
+                  style: {
+                    marginBottom: "10px"
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                    style: {
+                      display: "flex",
+                      marginBottom: "10px"
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_School__WEBPACK_IMPORTED_MODULE_9__.default, {
+                      fontSize: 'default'
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                      "class": "texto-info",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
+                        children: "Talleres"
+                      }), "Asiste y transforma tu vida y tus finanzas."]
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                    style: {
+                      display: "flex",
+                      marginBottom: "10px"
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_Work__WEBPACK_IMPORTED_MODULE_10__.default, {
+                      fontSize: 'default'
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                      "class": "texto-info",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
+                        children: "Mentor\xEDa"
+                      }), "Descubre el empresario que de verdad eres."]
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                    style: {
+                      display: "flex",
+                      marginBottom: "10px"
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_SupervisorAccount__WEBPACK_IMPORTED_MODULE_11__.default, {
+                      fontSize: 'default'
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                      "class": "texto-info",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
+                        children: "Gesti\xF3n de talento"
+                      }), "Formaci\xF3n de equipos de alto rendimiento"]
+                    })]
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
-                  onSubmit: handleSubmit,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
-                    className: "mb-4",
-                    container: true,
-                    spacing: 1,
-                    alignItems: errors.email ? "center" : "flex-end",
-                    wrap: "nowrap",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
-                      item: true,
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_Mail__WEBPACK_IMPORTED_MODULE_13__.default, {})
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
-                      item: true,
-                      style: {
-                        width: '100%'
-                      },
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_14__.default, {
-                        fullWidth: true,
-                        error: errors.email ? true : false,
-                        className: (0,clsx__WEBPACK_IMPORTED_MODULE_5__.default)(classes.margin, classes.textField),
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_15__.default, {
-                          htmlFor: "email",
-                          children: "Correo electr\xF3nico"
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_16__.default, {
-                          id: "email",
-                          type: 'email',
-                          value: values.email,
-                          onChange: handleChange('email')
-                        }), errors.email && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_17__.default, {
-                          id: "component-error-text",
-                          children: errors.email
-                        })]
-                      })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                  className: "col-lg-7 mb-lg-5",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                    className: "text-no-tienes",
+                    children: ["\xBFNo tienes una cuenta? ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+                      href: ziggy_js__WEBPACK_IMPORTED_MODULE_2___default()('register'),
+                      children: "Registrate"
                     })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
-                    className: "mb-2",
-                    container: true,
-                    spacing: 1,
-                    alignItems: errors.password ? "center" : "flex-end",
-                    wrap: "nowrap",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
-                      item: true,
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_18__.default, {})
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
-                      item: true,
-                      style: {
-                        width: '100%'
-                      },
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_14__.default, {
-                        fullWidth: true,
-                        error: errors.password ? true : false,
-                        className: (0,clsx__WEBPACK_IMPORTED_MODULE_5__.default)(classes.margin, classes.textField),
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_15__.default, {
-                          htmlFor: "password",
-                          children: "Contrase\xF1a"
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_16__.default, {
-                          id: "password",
-                          type: values.showPassword ? 'text' : 'password',
-                          value: values.password,
-                          onChange: handleChange('password'),
-                          endAdornment: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_19__.default, {
-                            position: "end",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_20__.default, {
-                              "aria-label": "toggle password visibility",
-                              onClick: handleClickShowPassword,
-                              onMouseDown: handleMouseDownPassword,
-                              children: values.showPassword ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_21__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_22__.default, {})
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
+                    onSubmit: handleSubmit,
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
+                      className: "mb-4",
+                      container: true,
+                      spacing: 1,
+                      alignItems: errors.email ? "center" : "flex-end",
+                      wrap: "nowrap",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
+                        item: true,
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_Mail__WEBPACK_IMPORTED_MODULE_13__.default, {})
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
+                        item: true,
+                        style: {
+                          width: '100%'
+                        },
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_14__.default, {
+                          fullWidth: true,
+                          error: errors.email ? true : false,
+                          className: (0,clsx__WEBPACK_IMPORTED_MODULE_5__.default)(classes.margin, classes.textField),
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_15__.default, {
+                            htmlFor: "email",
+                            children: "Correo electr\xF3nico"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_16__.default, {
+                            id: "email",
+                            type: 'email',
+                            value: values.email,
+                            onChange: handleChange('email')
+                          }), errors.email && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_17__.default, {
+                            id: "component-error-text",
+                            children: errors.email
+                          })]
+                        })
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
+                      className: "mb-2",
+                      container: true,
+                      spacing: 1,
+                      alignItems: errors.password ? "center" : "flex-end",
+                      wrap: "nowrap",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
+                        item: true,
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_18__.default, {})
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_12__.default, {
+                        item: true,
+                        style: {
+                          width: '100%'
+                        },
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_14__.default, {
+                          fullWidth: true,
+                          error: errors.password ? true : false,
+                          className: (0,clsx__WEBPACK_IMPORTED_MODULE_5__.default)(classes.margin, classes.textField),
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_15__.default, {
+                            htmlFor: "password",
+                            children: "Contrase\xF1a"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_16__.default, {
+                            id: "password",
+                            type: values.showPassword ? 'text' : 'password',
+                            value: values.password,
+                            onChange: handleChange('password'),
+                            endAdornment: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_19__.default, {
+                              position: "end",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_20__.default, {
+                                "aria-label": "toggle password visibility",
+                                onClick: handleClickShowPassword,
+                                onMouseDown: handleMouseDownPassword,
+                                children: values.showPassword ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_21__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_22__.default, {})
+                              })
                             })
-                          })
-                        }), errors.password && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_17__.default, {
-                          id: "component-error-text",
-                          children: errors.password
-                        })]
+                          }), errors.password && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_17__.default, {
+                            id: "component-error-text",
+                            children: errors.password
+                          })]
+                        })
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "text-no-tienes mb-5",
+                      style: {
+                        textAlign: "left"
+                      },
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+                        href: ziggy_js__WEBPACK_IMPORTED_MODULE_2___default()('password.request'),
+                        children: "\xBFOlvidaste tu contrase\xF1a?"
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "mb-1",
+                      style: {
+                        display: "flex"
+                      },
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                        className: "btn-login",
+                        type: "submit",
+                        children: "INICIAR SESI\xD3N"
                       })
                     })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                    className: "text-no-tienes mb-5",
-                    style: {
-                      textAlign: "left"
-                    },
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-                      href: ziggy_js__WEBPACK_IMPORTED_MODULE_2___default()('password.request'),
-                      children: "\xBFOlvidaste tu contrase\xF1a?"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                    className: "mb-1",
-                    style: {
-                      display: "flex"
-                    },
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                      className: "btn-login",
-                      type: "submit",
-                      children: "INICIAR SESI\xD3N"
-                    })
                   })]
                 })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                className: "card-terminos",
+                children: "Este sitio est\xE1 protegido por reCaPTCHA y aplican las Pol\xEDtica de privacidad y los T\xE9rminos de servicio de Google."
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-              className: "card-terminos",
-              children: "Este sitio est\xE1 protegido por reCaPTCHA y aplican las Pol\xEDtica de privacidad y los T\xE9rminos de servicio de Google."
-            })]
+            })
           })
         })
       })
@@ -21407,7 +21410,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card-login{\r\n    background: #FFFFFF;\r\n    box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);\r\n    border-radius: 8px;\r\n    padding-left: 4% !important;\r\n    padding-right: 4% !important;\r\n}\r\n\r\n.card-login .card-body{\r\n    padding-bottom: 14px !important;\r\n}\r\n\r\n.card-login .card-title{\r\n    font-family: 'Roboto Slab';\r\n    font-style: normal;\r\n    font-weight: bold;\r\n    font-size: 36px;\r\n    line-height: 47px;\r\n\r\n    color: #323232;\r\n    text-align: center;\r\n}\r\n\r\n.card-login .card-terminos{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: 300;\r\n    font-size: 13px;\r\n    line-height: 15px;\r\n\r\n    color: #5C5C5C;\r\n    text-align: center;\r\n    margin-top: 14px;\r\n}\r\n\r\n.texto-info h2{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: bold;\r\n    font-size: 20px;\r\n    line-height: 23px;\r\n\r\n    color: #989898;\r\n\r\n    margin: 0px 0px 5px 0px !important;\r\n}\r\n\r\n.texto-info{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: normal;\r\n    font-size: 15px;\r\n    line-height: 18px;\r\n\r\n    color: #BFBFBF;\r\n\r\n    margin-left: 12px;\r\n    text-align: justify;\r\n}\r\n\r\n.text-no-tienes{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: 300;\r\n    font-size: 14px;\r\n    line-height: 16px;\r\n\r\n    color: #989898;\r\n    text-align: right;\r\n}\r\n\r\n.text-no-tienes a{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: 300;\r\n    font-size: 14px;\r\n    line-height: 16px;\r\n\r\n    color: #232323;\r\n}\r\n\r\n.btn-login{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: normal;\r\n    font-size: 14px;\r\n    line-height: 16px;\r\n\r\n    color: #FFFFFF;\r\n\r\n    background-color: #000000;\r\n    border-radius: 50px;\r\n\r\n    width: 160px;\r\n    height: 38px;\r\n    margin-left: auto;\r\n    margin-right: 0px;\r\n}\r\n\r\n.col-izq{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-items: center !important;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".card-login{\r\n    background: #FFFFFF;\r\n    box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);\r\n    border-radius: 8px;\r\n    padding-left: 4% !important;\r\n    padding-right: 4% !important;\r\n    padding-top: 4% !important;\r\n}\r\n\r\n.card-login .card-body{\r\n    padding-bottom: 24px !important;\r\n}\r\n\r\n.card-login .card-title{\r\n    font-family: 'Roboto Slab';\r\n    font-style: normal;\r\n    font-weight: bold;\r\n    font-size: 36px;\r\n    line-height: 47px;\r\n\r\n    color: #323232;\r\n    text-align: center;\r\n}\r\n\r\n.card-login .card-terminos{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: 300;\r\n    font-size: 13px;\r\n    line-height: 15px;\r\n\r\n    color: #5C5C5C;\r\n    text-align: center;\r\n    margin-top: 14px;\r\n}\r\n\r\n.texto-info h2{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: bold;\r\n    font-size: 20px;\r\n    line-height: 23px;\r\n\r\n    color: #989898;\r\n\r\n    margin: 0px 0px 5px 0px !important;\r\n}\r\n\r\n.texto-info{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: normal;\r\n    font-size: 15px;\r\n    line-height: 18px;\r\n\r\n    color: #BFBFBF;\r\n\r\n    margin-left: 12px;\r\n    text-align: justify;\r\n}\r\n\r\n.text-no-tienes{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: 300;\r\n    font-size: 14px;\r\n    line-height: 16px;\r\n\r\n    color: #989898;\r\n    text-align: right;\r\n}\r\n\r\n.text-no-tienes a{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: 300;\r\n    font-size: 14px;\r\n    line-height: 16px;\r\n\r\n    color: #232323;\r\n}\r\n\r\n.btn-login{\r\n    font-family: Roboto;\r\n    font-style: normal;\r\n    font-weight: normal;\r\n    font-size: 14px;\r\n    line-height: 16px;\r\n\r\n    color: #FFFFFF;\r\n\r\n    background-color: #000000;\r\n    border-radius: 50px;\r\n\r\n    width: 160px;\r\n    height: 38px;\r\n    margin-left: auto;\r\n    margin-right: 0px;\r\n}\r\n\r\n.col-izq{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-items: center !important;\r\n}\r\n\r\n.mi-contenedor{\r\n    background:  linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(\"/img/portadas/background1.jpg\");\r\n    min-height: calc( 100vh - 238px);\r\n    padding-top: 30px;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
