@@ -1,0 +1,36 @@
+.portadaContacto {
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.portadaContacto img {
+    object-fit: cover;
+    width: 100%;
+    opacity: 0.2;
+}
+
+.contacto_rounded {
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    width: 95%;
+    max-width: 1800px;
+    margin-top: -80px;
+    margin-bottom: 100px;
+    transition: all 0.3s;
+}
+
+@media (max-width: 600px) {
+    .portadaInicio img {
+        object-fit: cover;
+        width: 90%;
+    }
+
+    .contacto_rounded {
+        width: 100%;
+        border-radius: 0px;
+        transition: all 0.3s;
+    }
+}
