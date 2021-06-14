@@ -16,6 +16,7 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 const Inicio = () => {
     return (
         <>
+            <div style={{ height: 60, backgroundColor: "#000000" }}></div>
             <div style={{width:'100%',backgroundColor:'#000000'}}>
                 <div className="portadaInicio">
                     <img src="/img/portadas/portada1.jpg"></img>

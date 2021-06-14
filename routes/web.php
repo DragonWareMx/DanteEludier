@@ -25,6 +25,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/inicio', [App\Http\Controllers\InicioController::class, 'index'])->name('inicio');
 
+Route::get('/contacto', [App\Http\Controllers\ContactoController::class, 'index'])->name('contacto');
+
 Route::get('/inertia', function () {
     return Inertia::render('Ejemplo');
 });
