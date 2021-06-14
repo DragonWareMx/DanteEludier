@@ -59,31 +59,48 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
     const classes = useStyles();
     const theme = useTheme();
-    const [idioma, setIdioma] = React.useState("ES");
+    const [colorChange, setColorchange] = React.useState(false);
+    const darkTheme = createMuiTheme({
+        palette: {
+            type: "dark",
+        },
+    });
 
+    const [idioma, setIdioma] = React.useState("ES");
     const handleChange = (event) => {
         setIdioma(event.target.value);
     };
 
-    const [open, setOpen] = React.useState(false);
+    const changeNavbarColor = () => {
+        if (window.scrollY >= 60) {
+            setColorchange(true);
+        } else {
+            setColorchange(false);
+        }
+    };
+    window.addEventListener("scroll", changeNavbarColor);
 
+    const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
-
     const handleDrawerClose = () => {
         setOpen(false);
     };
 
     return (
-        <div>
+        <div className="fixed-top">
             {/* NAVBAR >= 992px */}
             <div className="d-none d-lg-block">
-                <div className="nvbr p-3 d-flex">
+                <div
+                    className={`nvbr p-3 d-flex ${
+                        colorChange ? "colorChange" : ""
+                    }`}
+                >
                     <div className="mr-auto">
                         <img
                             src="/img/danteLogoBlanco.png"
-                            style={{ maxHeight: 60 }}
+                            style={{ maxHeight: 40 }}
                         />
                     </div>
                     <div className="align-self-center">
@@ -91,6 +108,7 @@ export default function Navbar() {
                             style={{ color: "#FFFFFF" }}
                             href="#contained-buttons"
                             startIcon={<HomeIcon />}
+                            className="grow"
                         >
                             HOME
                         </Button>
@@ -98,6 +116,7 @@ export default function Navbar() {
                             style={{ color: "#FFFFFF" }}
                             href="#contained-buttons"
                             startIcon={<AddIcon />}
+                            className="ml-3 grow"
                         >
                             DE DANTE ELUDIER
                         </Button>
@@ -105,6 +124,7 @@ export default function Navbar() {
                             style={{ color: "#FFFFFF" }}
                             href="#contained-buttons"
                             startIcon={<RoomIcon />}
+                            className="ml-3 grow"
                         >
                             CONTACTO
                         </Button>
@@ -112,6 +132,7 @@ export default function Navbar() {
                             style={{ color: "#FFFFFF" }}
                             href="#contained-buttons"
                             startIcon={<BookmarkIcon />}
+                            className="ml-3 grow"
                         >
                             LIBROS
                         </Button>
@@ -119,6 +140,7 @@ export default function Navbar() {
                             variant="contained"
                             color="primary"
                             startIcon={<SchoolIcon />}
+                            className="ml-3"
                         >
                             PRODUCTOS
                         </ColorButton>
@@ -139,7 +161,11 @@ export default function Navbar() {
             </div>
 
             <div className="d-lg-none">
-                <div className="nvbr p-3 d-flex">
+                <div
+                    className={`nvbr p-3 d-flex ${
+                        colorChange ? "colorChange" : ""
+                    }`}
+                >
                     <IconButton
                         aria-label="delete"
                         style={{ color: "#FFFFFF" }}
@@ -159,76 +185,78 @@ export default function Navbar() {
                         <SchoolIcon />
                     </IconButton>
 
-                    <Drawer
-                        className={classes.drawer}
-                        variant="temporary"
-                        anchor="top"
-                        open={open}
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                        onClose={() => setOpen(false)}
-                    >
-                        <div className={classes.drawerHeader}>
-                            <IconButton onClick={handleDrawerClose}>
-                                {theme.direction === "ltr" ? (
-                                    <ChevronLeftIcon />
-                                ) : (
-                                    <ChevronRightIcon />
+                    <ThemeProvider theme={darkTheme}>
+                        <Drawer
+                            className={classes.drawer}
+                            variant="temporary"
+                            anchor="top"
+                            open={open}
+                            classes={{
+                                paper: classes.drawerPaper,
+                            }}
+                            onClose={() => setOpen(false)}
+                        >
+                            <div className={classes.drawerHeader}>
+                                <IconButton onClick={handleDrawerClose}>
+                                    {theme.direction === "ltr" ? (
+                                        <ChevronLeftIcon />
+                                    ) : (
+                                        <ChevronRightIcon />
+                                    )}
+                                </IconButton>
+                            </div>
+                            <Divider />
+                            <List>
+                                <ListItem button key="Inicio">
+                                    <ListItemIcon>
+                                        <HomeIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Inicio" />
+                                </ListItem>
+                                <ListItem button key="De Dante Eludier">
+                                    <ListItemIcon>
+                                        <AddIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="De Dante Eludier" />
+                                </ListItem>
+                                <ListItem button key="Contacto">
+                                    <ListItemIcon>
+                                        <RoomIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Contacto" />
+                                </ListItem>
+                                <ListItem button key="Libros">
+                                    <ListItemIcon>
+                                        <BookmarkIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Libros" />
+                                </ListItem>
+                                <ListItem button key="Productos">
+                                    <ListItemIcon>
+                                        <SchoolIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Productos" />
+                                </ListItem>
+                            </List>
+                            <Divider />
+                            <List>
+                                {["All mail", "Trash", "Spam"].map(
+                                    (text, index) => (
+                                        <ListItem button key={text}>
+                                            <ListItemIcon>
+                                                {index % 2 === 0 ? (
+                                                    <InboxIcon />
+                                                ) : (
+                                                    <MailIcon />
+                                                )}
+                                            </ListItemIcon>
+                                            <ListItemText primary={text} />
+                                        </ListItem>
+                                    )
                                 )}
-                            </IconButton>
-                        </div>
-                        <Divider />
-                        <List>
-                            <ListItem button key="Inicio">
-                                <ListItemIcon>
-                                    <HomeIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Inicio" />
-                            </ListItem>
-                            <ListItem button key="De Dante Eludier">
-                                <ListItemIcon>
-                                    <AddIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="De Dante Eludier" />
-                            </ListItem>
-                            <ListItem button key="Contacto">
-                                <ListItemIcon>
-                                    <RoomIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Contacto" />
-                            </ListItem>
-                            <ListItem button key="Libros">
-                                <ListItemIcon>
-                                    <BookmarkIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Libros" />
-                            </ListItem>
-                            <ListItem button key="Productos">
-                                <ListItemIcon>
-                                    <SchoolIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Productos" />
-                            </ListItem>
-                        </List>
-                        <Divider />
-                        <List>
-                            {["All mail", "Trash", "Spam"].map(
-                                (text, index) => (
-                                    <ListItem button key={text}>
-                                        <ListItemIcon>
-                                            {index % 2 === 0 ? (
-                                                <InboxIcon />
-                                            ) : (
-                                                <MailIcon />
-                                            )}
-                                        </ListItemIcon>
-                                        <ListItemText primary={text} />
-                                    </ListItem>
-                                )
-                            )}
-                        </List>
-                    </Drawer>
+                            </List>
+                        </Drawer>
+                    </ThemeProvider>
                 </div>
             </div>
         </div>
