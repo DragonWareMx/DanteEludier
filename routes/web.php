@@ -27,6 +27,8 @@ Route::get('/inicio', [App\Http\Controllers\InicioController::class, 'index'])->
 
 Route::get('/contacto', [App\Http\Controllers\ContactoController::class, 'index'])->name('contacto');
 
+Route::get('/Dante', [App\Http\Controllers\DanteController::class, 'index'])->name('Dante');
+
 Route::get('/inertia', function () {
     return Inertia::render('Ejemplo');
 });
