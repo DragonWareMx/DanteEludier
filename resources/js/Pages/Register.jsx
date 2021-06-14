@@ -46,7 +46,7 @@ const Register = () => {
     const { errors } = usePage().props;
 
     const [values, setValues] = React.useState({
-        _method: 'post',
+        _method: 'register',
         email: '',
         nombre: '',
         telefono: '',
@@ -135,7 +135,7 @@ const Register = () => {
                                                 </Grid>
                                             </Grid>
 
-                                            <Grid className="mb-2" container spacing={2}>
+                                            <Grid container spacing={2}>
                                                 {/* aqui abajo esta el input de mail */}
                                                 <Grid item xs={12} sm={6}>
                                                     <Grid className="mb-4" container spacing={1} alignItems={errors.email ? "center" : "flex-end"} wrap='nowrap'>
@@ -160,7 +160,7 @@ const Register = () => {
                                                 </Grid>
                                                 {/* aqui abajo esta el input del telefono */}
                                                 <Grid item xs={12} sm={6}>
-                                                    <Grid className="mb-2" container spacing={1} alignItems={errors.telefono ? "center" : "flex-end"} wrap='nowrap'>
+                                                    <Grid className="mb-4" container spacing={1} alignItems={errors.telefono ? "center" : "flex-end"} wrap='nowrap'>
                                                         <Grid item>
                                                             <PhoneIcon />
                                                         </Grid>
@@ -181,10 +181,10 @@ const Register = () => {
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
-                                            <Grid className="mb-2" container spacing={2}>
+                                            <Grid container spacing={2}>
                                                 {/* aqui abajo esta el input de contraseña */}
                                                 <Grid item xs={12} sm={6}>
-                                                    <Grid className="mb-2" container spacing={1} alignItems={errors.password ? "center" : "flex-end"} wrap='nowrap'>
+                                                    <Grid className="mb-4" container spacing={1} alignItems={errors.password ? "center" : "flex-end"} wrap='nowrap'>
                                                         <Grid item>
                                                             <LockIcon />
                                                         </Grid>
@@ -217,7 +217,7 @@ const Register = () => {
                                                 </Grid>
                                                 {/* aqui abajo esta el input de confirmar contraseña */}
                                                 <Grid item xs={12} sm={6}>
-                                                    <Grid className="mb-2" container spacing={1} alignItems={errors.password ? "center" : "flex-end"} wrap='nowrap'>
+                                                    <Grid className="mb-4" container spacing={1} alignItems={errors.password ? "center" : "flex-end"} wrap='nowrap'>
                                                         <Grid item>
                                                             <LockIcon />
                                                         </Grid>
@@ -228,7 +228,7 @@ const Register = () => {
                                                                     id="password"
                                                                     type={values.showPassword ? 'text' : 'password'}
                                                                     value={values.password_confirmation}
-                                                                    onChange={handleChange('password')}
+                                                                    onChange={handleChange('password_confirmation')}
                                                                     endAdornment={
                                                                         <InputAdornment position="end">
                                                                             <IconButton
