@@ -46,7 +46,7 @@ const Register = () => {
     const { errors } = usePage().props;
 
     const [values, setValues] = React.useState({
-        _method: 'register',
+        _method: 'post',
         email: '',
         nombre: '',
         telefono: '',
@@ -70,7 +70,7 @@ const Register = () => {
     //manda el forumulario
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.post(route('login'), values,
+        Inertia.post(route('register'), values,
             {
                 onError: () => {
                     // Inertia.reload({ only: ['cursos'], data: { regime: values.regimen } })
@@ -222,7 +222,7 @@ const Register = () => {
                                                             <LockIcon />
                                                         </Grid>
                                                         <Grid item style={{ width: '100%' }}>
-                                                            <FormControl fullWidth error={errors.password_confirmation ? true : false} className={clsx(classes.margin, classes.textField)}>
+                                                            <FormControl fullWidth error={errors.password ? true : false} className={clsx(classes.margin, classes.textField)}>
                                                                 <InputLabel htmlFor="password">Confirmar contraseña</InputLabel>
                                                                 <Input
                                                                     id="password"
@@ -241,8 +241,8 @@ const Register = () => {
                                                                         </InputAdornment>
                                                                     }
                                                                 />
-                                                                {errors.password_confirmation &&
-                                                                    <FormHelperText id="component-error-text">{errors.password_confirmation}</FormHelperText>
+                                                                {errors.password &&
+                                                                    <FormHelperText id="component-error-text">{errors.password}</FormHelperText>
                                                                 }
                                                             </FormControl>
                                                         </Grid>
