@@ -108,7 +108,7 @@ const Login = () => {
                                     </div>
                                     <div className="col-lg-7 mb-lg-5">
                                         <div className="text-no-tienes">
-                                            ¿No tienes una cuenta? <a href={route('register')}>Registrate</a>
+                                            ¿No tienes una cuenta? <InertiaLink href={route('register')}>Registrate</InertiaLink>
                                         </div>
                                         <form onSubmit={handleSubmit}>
                                             <Grid className="mb-4" container spacing={1} alignItems={errors.email ? "center" : "flex-end"} wrap='nowrap'>
