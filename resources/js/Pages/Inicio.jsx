@@ -6,14 +6,16 @@ import Grid from '@material-ui/core/Grid';
 //componentes
 import Libro from '../components/Libro';
 import Club from '../components/Club';
+import Clientes from '../components/Clientes';
 
 //Iconos
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
+import SchoolIcon from '@material-ui/icons/School';
 
-const Inicio = () => {
+const Inicio = ({clientes}) => {
     return (
         <>
             <div style={{ height: 60, backgroundColor: "#000000" }}></div>
@@ -32,8 +34,17 @@ const Inicio = () => {
                 <div className="inicio_rounded">
                     <Libro />
                     <Club />
+                    <Clientes clientes={clientes}/>
                 </div>
-            </Grid>  
+            </Grid>
+            <Grid container justify="center" className="inicio_ayudar" >
+                <Grid item xs={12} className="ayudar_title">¿Cómo te puedo ayudar?</Grid>
+                <div style={{marginTop:30,width:'100%'}} className="moradito">
+                    <Grid item xs={12} sm={4} justify="center" className="rojito">
+                        <SchoolIcon className="ayuda_icons"></SchoolIcon>
+                    </Grid>
+                </div>
+            </Grid>
         </>
     )
 }

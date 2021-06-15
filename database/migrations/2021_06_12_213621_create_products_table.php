@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
 
             $table->string('titulo', 255);
             $table->text('descripcion');
-            $table->string('hojaDescriptiva', 255); //es un link 
+            $table->string('hojaDescriptiva', 255)->nullable(); //es un link 
         });
     }
 

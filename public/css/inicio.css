@@ -16,8 +16,64 @@
     max-width: 1800px;
     padding-top:40px;
     margin-top: -80px;
-    margin-bottom:100px;
+    margin-bottom:41px;
     transition: all 0.3s;
+}
+
+.owl-item{
+    height: 70px !important;
+}
+
+.clientes_title{
+    font-family: Roboto Slab;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    color: #323232;
+    margin-top:50px;
+    text-align: center;
+}
+
+.clientes_item{
+    height: 100%;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.clientes_item img{
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.rojito{
+    background-color: red;
+}
+
+.moradito{
+    background-color: purple;
+}
+
+.inicio_ayudar{
+    background-image: url('/img/portadas/background1.jpg');
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+.ayudar_title{
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    color: #FFFFFF;
+    padding-top:67px;
+    text-align: center;
+}
+
+.ayuda_icons{
+    font-size: 45px !important;
+    color:#FFFFFF;
 }
 
 @media (max-width: 600px){
