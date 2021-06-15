@@ -5,9 +5,6 @@ import Footer from "../components/footer";
 
 import "../../../public/css/layout.css";
 import "../../../public/css/animations.css";
-import "react-perfect-scrollbar/dist/css/styles.css";
-
-import PerfectScrollbar from "react-perfect-scrollbar";
 
 export default function Layout({ title, pageTitle, children }) {
     useEffect(() => {
