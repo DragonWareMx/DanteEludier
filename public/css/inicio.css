@@ -24,6 +24,16 @@
     height: 70px !important;
 }
 
+.clientes_title{
+    font-family: Roboto Slab;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    color: #323232;
+    margin-top:50px;
+    text-align: center;
+}
+
 .clientes_item{
     height: 100%;
     display: flex !important;
