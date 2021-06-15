@@ -12,7 +12,7 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 
-export default function Clientes(){
+export default function Clientes({clientes}){
     const responsive = {
         0: {
             items: 2,
@@ -35,16 +35,12 @@ export default function Clientes(){
             <div className="clientes_title">Nuestros Clientes</div>
             <div className='container' style={{marginTop:30,marginBottom:60}}>            
                 <OwlCarousel responsive={responsive} className="owl-theme" loop dots={false} margin={20} autoplay autoplayTimeout={2000} autoplayHoverPause>
-                    <Tooltip title="Mary Kay" placement="top-start">
-                        <a href="https://www.marykay.com.mx/"  target="_blank" className="item clientes_item"><img src="/img/clientes/5.png"/></a>
-                    </Tooltip>
-                    <div className="item clientes_item"><img src="/img/clientes/2.png"/></div>
-                    <div className="item clientes_item"><img src="/img/clientes/3.png"/></div>
-                    <div className="item clientes_item"><img src="/img/clientes/4-1.png"/></div>
-                    <div className="item clientes_item"><img src="/img/clientes/1.png"/></div>
-                    <div className="item clientes_item"><img src="/img/clientes/6.png"/></div>
-                    <div className="item clientes_item"><img src="/img/clientes/7.png"/></div>
-                    <div className="item clientes_item"><img src="/img/clientes/8.png"/></div>
+                    {clientes && clientes.map((cliente, index)=>(
+                        <Tooltip key={index} title={cliente.nombre} placement="top-start">
+                            <a href={cliente.link}  target="_blank" className="item clientes_item"><img src={"/img/clientes/"+cliente.logo}/></a>
+                        </Tooltip>   
+                        ))
+                    }
                 </OwlCarousel>
             </div> 
         </>
