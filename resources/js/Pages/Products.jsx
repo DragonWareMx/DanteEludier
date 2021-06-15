@@ -14,6 +14,7 @@ import "/css/products.css";
 import '/css/inicio.css';
 
 import { FormControl, makeStyles, InputLabel, Select, MenuItem  } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -64,6 +65,7 @@ const Contacto = () => {
             {/* CARD DE PRODUCTOS */}
             <Grid container justify="center" style={{backgroundColor:'#E5E5E5'}}>
                 <div className="inicio_rounded" style={{zIndex: "2"}}>
+                <Container fixed maxWidth="lg">
                     <Grid container justify="space-between" alignItems="center" className="producto_container producto_titulo">
                         <Grid style={{paddingTop: "26px", fontSize: "36px", width: "fit-content"}}>Encuentra lo que necesitas</Grid>
                         
@@ -93,16 +95,19 @@ const Contacto = () => {
                         </Grid>
                         
                     </Grid>
+                </Container>
 
                     {/* PRODUCTOS */}
-                    <Grid className="producto_container" container direction="row">
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    </Grid>
+                    <Container fixed maxWidth="lg">
+                        <Grid container direction="row" spacing={5}>
+                            <Product />
+                            <Product />
+                            <Product />
+                            <Product />
+                            <Product />
+                            <Product />
+                        </Grid>
+                    </Container>
                 </div>
             </Grid>  
         </>

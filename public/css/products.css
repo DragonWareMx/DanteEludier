@@ -18,15 +18,51 @@
     font-weight: 900;
     font-size: 42px;
     color: #323232;
+
+    margin-bottom: 42px;
 }
 
 .producto_container{
-    margin-left: 55px;
-    margin-right: 55px;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
     width: auto !important;
 }
+
+.productos_container{
+    margin-left: 20px !important;
+    margin-right: 55px !important;
+    width: fit-content !important;
+    justify-content: center;
+    text-align-last: left;
+}
+
 
 .producto_imagen{
     width: 244px;
     height: 289px;
+}
+
+.producto_nombre{
+    font-family: Roboto Slab;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 22px;
+
+    color: #323232;
+    width: 244px;
+}
+
+.producto_precio{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+
+    color: #999999;
+
+    width: 244px;
 }

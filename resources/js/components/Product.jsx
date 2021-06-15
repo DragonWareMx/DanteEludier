@@ -11,11 +11,11 @@ import { withStyles } from "@material-ui/core/styles";
 
 const ColorButton = withStyles((theme) => ({
     root: {
-        color: "#FFFFFF",
-        backgroundColor: "#323232",
+        backgroundColor: "transparent",
+        color: "#717171",
         "&:hover": {
-            backgroundColor: "transparent",
-            color: "#717171",
+            color: "#FFFFFF",
+            backgroundColor: "#323232",
         },
         borderRadius: 20,
         width: "244px",
@@ -24,29 +24,50 @@ const ColorButton = withStyles((theme) => ({
     },
 }))(Button);
 
-export default function Libro(){
+export default function Product(img, name, price){
     return (
         <>
-            <Grid container direction="column" item>
+            {/* <Grid container direction="column" item style={{width: "fit-content", margin: "auto"}}>
+                <Grid item style={{width: "244px"}}>
+                    <img className="producto_imagen" src="img/events/avatarFinanciero.jpg"></img>
+                </Grid>
+                <Grid item className="producto_nombre">
+                    Taller Vivencial Avatar Financiero
+                </Grid>
+                <Grid item className="producto_precio">
+                    Desde $7, 800.00 MXN
+                </Grid>
+                <Grid item style={{width: "244px"}}>
+                    <ColorButton
+                        variant="outlined"
+                        className="mt-4"
+                        disableElevation
+                    >
+                        MÁS INFORMACIÓN
+                    </ColorButton>    
+                </Grid>
+            </Grid> */}
+            <Grid item  xs={12} sm={6} md={4} lg={3}>
+                <div style={{width: "fit-content", margin: "auto"}}>
                 <Grid item>
                     <img className="producto_imagen" src="img/events/avatarFinanciero.jpg"></img>
                 </Grid>
-                <Grid item>
+                <Grid item className="producto_nombre">
                     Taller Vivencial Avatar Financiero
                 </Grid>
-                <Grid item>
+                <Grid item className="producto_precio">
                     Desde $7, 800.00 MXN
                 </Grid>
                 <Grid item>
-                <ColorButton
-                    variant="contained"
-                    color="primary"
-                    className="mt-4"
-                >
-                    MÁS INFORMACIÓN
-                </ColorButton>
-                            
+                    <ColorButton
+                        variant="outlined"
+                        className="mt-4"
+                        disableElevation
+                    >
+                        MÁS INFORMACIÓN
+                    </ColorButton>    
                 </Grid>
+                </div>
             </Grid>
         </>
     );
