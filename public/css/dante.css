@@ -1,0 +1,150 @@
+body{
+    background-color:#E5E5E5;
+}
+.inicio_rounded{
+    margin-bottom:40px !important;
+}
+.portadaContacto img {
+    opacity:1 !important;
+}
+.title-white-card-middle{
+    font-family: Roboto Slab;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 47px;
+    color: #323232;
+    width: 100%;
+    text-align:center;
+}
+.grid-im-dante{
+    padding-bottom:5px !important;
+}
+.grid-im-dante img{
+    width: 206px;
+    height: 206px;
+    filter: drop-shadow(8px 8px 40px rgba(77, 77, 77, 0.35));
+}
+.title-im-dante{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 27px;
+    color: #323232;
+    text-align:center;
+}
+.txt-im-dante{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 21px;
+    text-align: center;
+    color: #999999;
+    text-align:center;
+}
+/* MISION, VISION */
+.box-mision-vision{
+    background-image: url("/img/portadas/background12.PNG");
+    background-color:black;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    font-family: Roboto;
+    font-style: normal;
+    color:white;
+}
+.title-box-m-v{
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 26px;
+    width:100%;
+    text-align:center;
+}
+.txt-box-m-v{
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 21px;
+}
+.divider{
+    border-right:solid 1px rgba(255, 255, 255, 0.274);
+}
+/* Quien es dante */
+.dante-who img{
+    object-fit:cover;
+    width: 100%;
+}
+.div-txt-dante-who{
+    font-style: normal;
+    font-family: Roboto Slab;
+    font-weight: 900;
+    font-size: 42px;
+    line-height: 55px;
+    width:100%;
+}
+.txt-dante-info{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 30px;
+    color: #999999;
+}
+.contact-btn{
+    display:flex !important;
+}
+.sub-dante{
+    width: 100%;
+    text-align:center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #999999;
+}
+.title-comunication{
+    width: 100%;
+    text-align:center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #323232;
+}
+.text-comunication{
+    width: 100%;
+    text-align:center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 21px;
+    color: #999999;
+}
+
+
+@media(max-width:959px){
+    .divider:nth-child(2){
+        border-right:0px;
+    }
+}
+@media(max-width:637px){
+    .inicio_rounded{
+        margin-top: -30px !important;
+    }
+}
+@media(max-width:600px){
+    .divider{
+        border-right:0px;
+        border-bottom:solid 1px rgba(255, 255, 255, 0.274);
+    }
+    .txt-dante-info{
+        margin-top:20px;
+    }
+    .contact-btn{
+        margin-top:25px;
+    }
+}

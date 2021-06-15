@@ -50,7 +50,7 @@
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 15px;
+    font-size: 14px;
     color: #FFFFFF;
     display: flex;
     justify-content: space-evenly;
@@ -73,6 +73,8 @@
     width: 175px;
     margin-left: 13px;
     transition: all 0.3s;
+    color:rgb(202, 202, 202);
+    text-decoration:none;
 }
 
 .libro_img1{

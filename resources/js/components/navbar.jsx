@@ -114,7 +114,7 @@ export default function Navbar() {
                         </Button>
                         <Button
                             style={{ color: "#FFFFFF" }}
-                            href="#contained-buttons"
+                            href={route("Dante")}
                             startIcon={<AddIcon />}
                             className="ml-3 grow"
                         >
