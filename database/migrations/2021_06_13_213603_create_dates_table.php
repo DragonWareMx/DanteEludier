@@ -21,6 +21,7 @@ class CreateDatesTable extends Migration
             $table->foreign('event_id')->references('id')->on('events');
 
             $table->dateTime('fecha');
+            $table->time('horaCierre');
 
         });
     }
