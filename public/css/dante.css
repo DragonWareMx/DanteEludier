@@ -59,6 +59,8 @@ body{
     font-weight: bold;
     font-size: 22px;
     line-height: 26px;
+    width:100%;
+    text-align:center;
 }
 .txt-box-m-v{
     font-weight: normal;
@@ -68,6 +70,61 @@ body{
 .divider{
     border-right:solid 1px rgba(255, 255, 255, 0.274);
 }
+/* Quien es dante */
+.dante-who img{
+    object-fit:cover;
+    width: 100%;
+}
+.div-txt-dante-who{
+    font-style: normal;
+    font-family: Roboto Slab;
+    font-weight: 900;
+    font-size: 42px;
+    line-height: 55px;
+    width:100%;
+}
+.txt-dante-info{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 30px;
+    color: #999999;
+}
+.contact-btn{
+    display:flex !important;
+}
+.sub-dante{
+    width: 100%;
+    text-align:center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #999999;
+}
+.title-comunication{
+    width: 100%;
+    text-align:center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #323232;
+}
+.text-comunication{
+    width: 100%;
+    text-align:center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 21px;
+    color: #999999;
+}
+
 
 @media(max-width:959px){
     .divider:nth-child(2){
@@ -83,5 +140,11 @@ body{
     .divider{
         border-right:0px;
         border-bottom:solid 1px rgba(255, 255, 255, 0.274);
+    }
+    .txt-dante-info{
+        margin-top:20px;
+    }
+    .contact-btn{
+        margin-top:25px;
     }
 }

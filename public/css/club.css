@@ -48,6 +48,13 @@
     align-items: center;
     margin-left: 50px;
     text-decoration: none;
+    transition: all 0.3s;
+}
+.club_registrarse:hover{
+    text-decoration: none;
+    color:rgb(202, 202, 202); 
+    margin-left: 5px;
+    transition: all 0.3s; 
 }
 
 @media(max-width:600px){
