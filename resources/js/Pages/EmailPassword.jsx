@@ -54,12 +54,17 @@ const EmailPassword = () => {
 
     //manda el forumulario
     function handleSubmit(e) {
+        const button = document.getElementById('boton-enviar');
+        button.disabled = true;
         e.preventDefault()
         Inertia.post(route('password.email'), values,
             {
                 onError: () => {
-                    // Inertia.reload({ only: ['cursos'], data: { regime: values.regimen } })
-                }
+                    button.disabled = false;
+                },
+                onSuccess: () => {
+                    button.disabled = false;
+                },
             }
         )
     }
@@ -130,7 +135,7 @@ const EmailPassword = () => {
                                                 Regresar a <a href={route('login')}>Iniciar sesión</a>
                                             </div>
                                             <div className="mb-1" style={{ display: "flex" }}>
-                                                <button className="btn-login" type="submit">ENVIAR</button>
+                                                <button id="boton-enviar" className="btn-login" type="submit">ENVIAR</button>
                                             </div>
                                         </form>
                                     </div>

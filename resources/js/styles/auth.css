@@ -99,6 +99,25 @@
     margin-right: 0px;
 }
 
+.btn-login:disabled{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #ffffff;
+
+    background-color: #525252;
+    border-radius: 50px;
+
+    width: 160px;
+    height: 38px;
+    margin-left: auto;
+    margin-right: 0px;
+    cursor:not-allowed;
+}
+
 .col-izq{
     display: flex;
     flex-wrap: wrap;
