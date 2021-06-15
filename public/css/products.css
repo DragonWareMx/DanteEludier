@@ -1,0 +1,32 @@
+.ordenar_por{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+
+
+    color: #717171;
+
+    width: fit-content !important;
+}
+
+.producto_titulo{
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 42px;
+    color: #323232;
+}
+
+.producto_container{
+    margin-left: 55px;
+    margin-right: 55px;
+    width: auto !important;
+}
+
+.producto_imagen{
+    width: 244px;
+    height: 289px;
+}
