@@ -106,7 +106,7 @@ export default function Navbar() {
                     <div className="align-self-center">
                         <Button
                             style={{ color: "#FFFFFF" }}
-                            href="#contained-buttons"
+                            href={route("inicio")}
                             startIcon={<HomeIcon />}
                             className="grow"
                         >
@@ -122,7 +122,7 @@ export default function Navbar() {
                         </Button>
                         <Button
                             style={{ color: "#FFFFFF" }}
-                            href="#contained-buttons"
+                            href={route("contacto")}
                             startIcon={<RoomIcon />}
                             className="ml-3 grow"
                         >
