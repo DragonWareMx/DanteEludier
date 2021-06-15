@@ -2,25 +2,14 @@ import React from "react";
 import Layout from "../layouts/Layout";
 
 import { withStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+
+import Grid from '@material-ui/core/Grid';
 import Button from "@material-ui/core/Button";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import MessageIcon from "@material-ui/icons/Message";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 
 import "/css/contacto.css";
+import '/css/inicio.css';
+import '/css/dante.css';
 
-const ColorButton = withStyles((theme) => ({
-    root: {
-        color: "#FFFFFF",
-        backgroundColor: "#323232",
-        "&:hover": {
-            backgroundColor: "#1F1F1F",
-        },
-        borderRadius: 20,
-    },
-}))(Button);
 
 const Dante = () => {
     return (
@@ -48,16 +37,35 @@ const Dante = () => {
                     </p>
                 </div>
             </div>
-            {/* WHITE CARD */}
-            <div style={{ backgroundColor: "#E5E5E5", height: "80vh" }}>
+            
+            {/* <Grid container justify="center" style={{ backgroundColor: "red", height:"80vh"}}> */}
+                {/* WHITE CARD */}
                 <div className="contacto_rounded">
+                    {/* Aplicando padding */}
                     <div className="row p-5">
-                        <div className="col-md-12">
-                            <h1>Yo soy Dante Eludier</h1>
-                        </div>
+                        <h1 className="title-white-card-middle">Yo soy Dante Eludier</h1>
+
+                        <Grid container xs={12} alignItems="flex-start" justify="center">
+                            <Grid container item xs={12} sm={6} md={4} spacing={0} justify="center" className="p-5 grid-im-dante">
+                                <img src="/img/amazon.png" />
+                                <Grid container xs={12} justify="center" className="title-im-dante p-3">ESCRITOR BEST SELLER</Grid>
+                                <Grid className="txt-im-dante">El <b>Curso de la Solvencia</b> y <b>Dinero Espiritual</b>, podrás adquirirlos en Amazon o en librerías de prestigio.</Grid>
+                            </Grid>
+                            <Grid container item xs={12} sm={6} md={4} spacing={0} justify="center" className="p-5 grid-im-dante">
+                                <img src="/img/dante.jpg" style={{borderRadius:"150px"}} />
+                                <Grid container xs={12} justify="center" className="title-im-dante p-3">ESCRITOR BEST SELLER</Grid>
+                                <Grid className="txt-im-dante"><b>Fundador y CEO</b> de Axen Capital y Give Fundation. </Grid>
+                            </Grid>
+                            <Grid container item xs={12} sm={6} md={4} spacing={0} justify="center" className="p-5 grid-im-dante">
+                                <img src="/img/coach.png" />
+                                <Grid container xs={12} justify="center" className="title-im-dante p-3">MASTER COACH</Grid>
+                                <Grid className="txt-im-dante"><b>Finanzas, Desarrollo Humano, Emprendimiento y espiritualidad.</b></Grid>
+                            </Grid>
+                            
+                        </Grid>
                     </div>
                 </div>
-            </div>
+            {/* </Grid> */}
         </>
     );
 };
