@@ -20,6 +20,8 @@
     margin-top: -80px;
     margin-bottom: 100px;
     transition: all 0.3s;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 @media (max-width: 600px) {
@@ -30,7 +32,11 @@
 
     .contacto_rounded {
         width: 100%;
+        position: unset;
+        margin-top: unset;
         border-radius: 0px;
         transition: all 0.3s;
+        transform: none;
+        left: unset;
     }
 }
