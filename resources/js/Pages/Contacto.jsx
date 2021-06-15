@@ -8,6 +8,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MessageIcon from "@material-ui/icons/Message";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import PhoneIcon from "@material-ui/icons/Phone";
+import RoomIcon from "@material-ui/icons/Room";
 
 import "/css/contacto.css";
 
@@ -94,13 +96,19 @@ const Contacto = () => {
                         <div className="col-md-5">
                             <h4>DANTE ELUDIER</h4>
                             <div className="pt-5">
-                                <h5>UBICACIÓN</h5>
+                                <div className="d-flex">
+                                    <RoomIcon />
+                                    <h5>UBICACIÓN</h5>
+                                </div>
                                 <p>
                                     Cananea 850, Colonia, 60160 Uruapan, Mich.
                                 </p>
                             </div>
                             <div className="pt-5">
-                                <h5>TELÉFONO</h5>
+                                <div className="d-flex">
+                                    <PhoneIcon />
+                                    <h5>TELÉFONO</h5>
+                                </div>
                                 <p>
                                     +52 452 130-0576
                                     <br />
