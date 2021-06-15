@@ -60,6 +60,11 @@
     text-decoration:none;
 }
 
+.libro_comprar:hover , .libro_comprar2:hover{
+    text-decoration: none;
+    color:#FFFFFF;
+}
+
 .libro_comprar2, .libro_comprar2Grid{
     display: none;
 }
