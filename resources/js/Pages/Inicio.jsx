@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../layouts/Layout';
 import '/css/inicio.css';
+import '/css/dante.css';
 import Grid from '@material-ui/core/Grid';
 
 //componentes
@@ -14,8 +15,10 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import SchoolIcon from '@material-ui/icons/School';
+import WorkIcon from '@material-ui/icons/Work';
+import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 
-const Inicio = ({clientes}) => {
+const Inicio = ({clientes, libro}) => {
     return (
         <>
             <div style={{ height: 60, backgroundColor: "#000000" }}></div>
@@ -32,19 +35,36 @@ const Inicio = ({clientes}) => {
             </div>
             <Grid container justify="center" style={{backgroundColor:'#E5E5E5'}}>
                 <div className="inicio_rounded">
-                    <Libro />
+                    <Libro libro={libro}/>
                     <Club />
                     <Clientes clientes={clientes}/>
                 </div>
             </Grid>
-            <Grid container justify="center" className="inicio_ayudar" >
+
+            {/* MISION, VISION, VALORES */}
+            <Grid container alignItems="stretch" justify="center" className="box-mision-vision p-4">
                 <Grid item xs={12} className="ayudar_title">¿Cómo te puedo ayudar?</Grid>
-                <div style={{marginTop:30,width:'100%'}} className="moradito">
-                    <Grid item xs={12} sm={4} justify="center" className="rojito">
-                        <SchoolIcon className="ayuda_icons"></SchoolIcon>
-                    </Grid>
-                </div>
+                <Grid container item xs={12} sm={6} md={4} spacing={0} justify="center" className="p-5 divider">
+                    <SchoolIcon className="ayuda_icons"></SchoolIcon>
+                    <Grid className="p-4 title-box-m-v">Talleres</Grid>
+                    <Grid className="text-center txt-box-m-v">Asiste y transforma tu vida y tus finanzas.</Grid>
+                </Grid>
+                <Grid container item xs={12} sm={6} md={4} spacing={0} justify="center" className="p-5 divider">
+                    <WorkIcon className="ayuda_icons"></WorkIcon>
+                    <Grid className="p-4 title-box-m-v">Mentoría</Grid>
+                    <Grid className="text-center txt-box-m-v">Descubre el empresario que de verdad eres.</Grid>
+                </Grid>
+                <Grid container item xs={12} sm={6} md={4} spacing={0} justify="center" className="p-5">
+                    <WbIncandescentIcon className="ayuda_icons"></WbIncandescentIcon>
+                    <Grid className="p-4 title-box-m-v">Gestión de talento</Grid>
+                    <Grid className="text-center txt-box-m-v">Formación de equipos de alto rendimiento.</Grid>
+                </Grid>
             </Grid>
+
+            {/* LA ViDA DA CUaNDO MERECES */}
+            <div className="inicio_vida">
+                <img src="/img/portadas/vida.jpg"></img>
+            </div>
         </>
     )
 }

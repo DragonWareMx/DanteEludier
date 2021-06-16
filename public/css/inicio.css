@@ -68,12 +68,24 @@
     font-size: 36px;
     color: #FFFFFF;
     padding-top:67px;
+    padding-bottom:67px;
     text-align: center;
 }
 
 .ayuda_icons{
     font-size: 45px !important;
     color:#FFFFFF;
+}
+
+.inicio_vida{
+    width: 100%;
+}
+
+.inicio_vida img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: all 0.s;
 }
 
 @media (max-width: 600px){
