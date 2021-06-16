@@ -35,6 +35,7 @@ import {
     useTheme,
     ThemeProvider,
 } from "@material-ui/core/styles";
+import route from "ziggy-js";
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -106,7 +107,7 @@ export default function Navbar() {
                     <div className="align-self-center">
                         <Button
                             style={{ color: "#FFFFFF" }}
-                            href="#contained-buttons"
+                            href={route("inicio")}
                             startIcon={<HomeIcon />}
                             className="grow"
                         >
@@ -114,7 +115,7 @@ export default function Navbar() {
                         </Button>
                         <Button
                             style={{ color: "#FFFFFF" }}
-                            href="#contained-buttons"
+                            href={route("Dante")}
                             startIcon={<AddIcon />}
                             className="ml-3 grow"
                         >
@@ -122,7 +123,7 @@ export default function Navbar() {
                         </Button>
                         <Button
                             style={{ color: "#FFFFFF" }}
-                            href="#contained-buttons"
+                            href={route("contacto")}
                             startIcon={<RoomIcon />}
                             className="ml-3 grow"
                         >
@@ -141,6 +142,7 @@ export default function Navbar() {
                             color="primary"
                             startIcon={<SchoolIcon />}
                             className="ml-3"
+                            href={route("products.index")}
                         >
                             PRODUCTOS
                         </ColorButton>
@@ -207,19 +209,34 @@ export default function Navbar() {
                             </div>
                             <Divider />
                             <List>
-                                <ListItem button key="Inicio">
+                                <ListItem
+                                    button
+                                    key="Inicio"
+                                    component="a"
+                                    href={route("inicio")}
+                                >
                                     <ListItemIcon>
                                         <HomeIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Inicio" />
                                 </ListItem>
-                                <ListItem button key="De Dante Eludier">
+                                <ListItem
+                                    button
+                                    key="De Dante Eludier"
+                                    component="a"
+                                    href={route("Dante")}
+                                >
                                     <ListItemIcon>
                                         <AddIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="De Dante Eludier" />
                                 </ListItem>
-                                <ListItem button key="Contacto">
+                                <ListItem
+                                    button
+                                    key="Contacto"
+                                    component="a"
+                                    href={route("contacto")}
+                                >
                                     <ListItemIcon>
                                         <RoomIcon />
                                     </ListItemIcon>
@@ -231,7 +248,12 @@ export default function Navbar() {
                                     </ListItemIcon>
                                     <ListItemText primary="Libros" />
                                 </ListItem>
-                                <ListItem button key="Productos">
+                                <ListItem
+                                    button
+                                    key="Productos"
+                                    component="a"
+                                    href={route("products.index")}
+                                >
                                     <ListItemIcon>
                                         <SchoolIcon />
                                     </ListItemIcon>
