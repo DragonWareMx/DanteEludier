@@ -41,15 +41,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Register = () => {
+const Register = ({ token, email }) => {
     const classes = useStyles();
     const { errors } = usePage().props;
 
     const [values, setValues] = React.useState({
         _method: 'post',
-        email: '',
-        nombre: '',
-        telefono: '',
+        token: token,
+        email: email,
         password: '',
         password_confirmation: '',
         showPassword: false,
@@ -72,7 +71,7 @@ const Register = () => {
         e.preventDefault();
         const button = document.getElementById('boton-enviar');
         button.disabled = true;
-        Inertia.post(route('register'), values,
+        Inertia.post(route('password.update'), values,
             {
                 onError: () => {
                     button.disabled = false;
@@ -91,7 +90,7 @@ const Register = () => {
                     <div className="col">
                         <div className="card mt-5 mb-5 card-login">
                             <div className="card-body">
-                                <div className="card-title">Registrarse</div>
+                                <div className="card-title">Restablecer Contraseña</div>
                                 <div className="row">
                                     <div className="col-lg-5 pr-5 mb-lg-5 col-izq" style={{ marginBottom: "10px" }}>
                                         <div style={{ display: "flex", marginBottom: "10px" }}>
@@ -119,30 +118,9 @@ const Register = () => {
                                     <div className="col-lg-7 mb-lg-5">
 
                                         <form className="mt-4" onSubmit={handleSubmit}>
-                                            {/* aqui abajo esta el input de name */}
-                                            <Grid className="mb-4" container spacing={1} alignItems={errors.nombre ? "center" : "flex-end"} wrap='nowrap'>
-                                                <Grid item>
-                                                    <AccountCircleIcon />
-                                                </Grid>
-                                                <Grid item style={{ width: '100%' }}>
-                                                    <FormControl fullWidth error={errors.nombre ? true : false} className={clsx(classes.margin, classes.textField)}>
-                                                        <InputLabel htmlFor="nombre">Nombre</InputLabel>
-                                                        <Input
-                                                            id="nombre"
-                                                            type={'text'}
-                                                            value={values.nombre}
-                                                            onChange={handleChange('nombre')}
-                                                        />
-                                                        {errors.email &&
-                                                            <FormHelperText id="component-error-text">{errors.nombre}</FormHelperText>
-                                                        }
-                                                    </FormControl>
-                                                </Grid>
-                                            </Grid>
-
                                             <Grid container spacing={2}>
                                                 {/* aqui abajo esta el input de mail */}
-                                                <Grid item xs={12} sm={6}>
+                                                <Grid item xs={12} sm={12}>
                                                     <Grid className="mb-4" container spacing={1} alignItems={errors.email ? "center" : "flex-end"} wrap='nowrap'>
                                                         <Grid item>
                                                             <MailIcon />
@@ -164,27 +142,6 @@ const Register = () => {
                                                     </Grid>
                                                 </Grid>
                                                 {/* aqui abajo esta el input del telefono */}
-                                                <Grid item xs={12} sm={6}>
-                                                    <Grid className="mb-4" container spacing={1} alignItems={errors.telefono ? "center" : "flex-end"} wrap='nowrap'>
-                                                        <Grid item>
-                                                            <PhoneIcon />
-                                                        </Grid>
-                                                        <Grid item style={{ width: '100%' }}>
-                                                            <FormControl fullWidth error={errors.telefono ? true : false} className={clsx(classes.margin, classes.textField)}>
-                                                                <InputLabel htmlFor="telefono">Teléfono</InputLabel>
-                                                                <Input
-                                                                    id="telefono"
-                                                                    type={'tel'}
-                                                                    value={values.telefono}
-                                                                    onChange={handleChange('telefono')}
-                                                                />
-                                                                {errors.telefono &&
-                                                                    <FormHelperText id="component-error-text">{errors.telefono}</FormHelperText>
-                                                                }
-                                                            </FormControl>
-                                                        </Grid>
-                                                    </Grid>
-                                                </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
                                                 {/* aqui abajo esta el input de contraseña */}
@@ -258,7 +215,7 @@ const Register = () => {
                                                 ¿Ya tienes una cuenta? <InertiaLink href={route('login')}>Inicia sesión</InertiaLink>
                                             </div>
                                             <div className="mb-1" style={{ display: "flex" }}>
-                                                <button id='boton-enviar' className="btn-login" type="submit">REGISTRARME</button>
+                                                <button id='boton-enviar' className="btn-login" type="submit">Restablecer Contraseña</button>
                                             </div>
                                         </form>
                                     </div>
