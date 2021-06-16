@@ -69,7 +69,7 @@ export default function Navbar() {
             </div>
             <div className="row justify-content-center m-0 py-3">
                 <div className="col-md-auto text-center pt-3 pt-md-0">
-                    <Link href="#" className="text-white">
+                    <Link href={route('aviso')} className="text-white">
                         AVISO DE PRIVACIDAD
                     </Link>
                 </div>
@@ -79,7 +79,7 @@ export default function Navbar() {
                     </Link>
                 </div>
                 <div className="col-md-auto text-center pt-3 pt-md-0">
-                    <Link href="#" className="text-white">
+                    <Link href={route('terminos')} className="text-white">
                         TÉRMINOS Y CONDICIONES
                     </Link>
                 </div>

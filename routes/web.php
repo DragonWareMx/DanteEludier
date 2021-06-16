@@ -30,6 +30,15 @@ Route::get('/contacto', [App\Http\Controllers\ContactoController::class, 'index'
 Route::get('/Dante', [App\Http\Controllers\DanteController::class, 'index'])->name('Dante');
 Route::get('/productos', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
 
+
+Route::get('/Terminos-y-condiciones', function () {
+    return Inertia::render('Terminos');
+})->name('terminos');
+
+Route::get('/Aviso-de-privacidad', function () {
+    return Inertia::render('Privacidad');
+})->name('aviso');
+
 Route::get('/inertia', function () {
     return Inertia::render('Ejemplo');
 });
