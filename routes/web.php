@@ -30,6 +30,8 @@ Route::get('/contacto', [App\Http\Controllers\ContactoController::class, 'index'
 Route::get('/Dante', [App\Http\Controllers\DanteController::class, 'index'])->name('Dante');
 Route::get('/productos', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
 
+Route::post('/join', [App\Http\Controllers\InicioController::class, 'join'])->name('join');
+
 Route::get('/inertia', function () {
     return Inertia::render('Ejemplo');
 });
