@@ -94,12 +94,13 @@ const Products = ({ products }) => {
                                 <Product key={product.id}
                                     img={(product.images && product.images.length > 0) ? product.images[0].foto : null}
                                     name={product.titulo}
-                                    price={(product.events && product.events.length > 0) ? calcularPrecioMasBajo(product.events) : null} />
+                                    price={(product.events && product.events.length > 0) ? calcularPrecioMasBajo(product.events) : null}
+                                    id={product.id} />
                             )}
                         </Grid>
+                    <Paginacion links={products.links} />
                     </Container>
 
-                    <Paginacion links={products.links} />
                 </div>
             </Grid>
 
