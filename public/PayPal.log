@@ -1,0 +1,5 @@
+[17-06-2021 13:48:55] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[17-06-2021 13:48:55] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[17-06-2021 13:48:55] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payment
+[17-06-2021 13:48:56] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 400
+[17-06-2021 13:48:56] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 400 when accessing https://api.sandbox.paypal.com/v1/payments/payment. {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"43dd17b80c19d","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
