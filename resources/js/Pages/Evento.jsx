@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../layouts/Layout";
 
 import Grid from "@material-ui/core/Grid";
@@ -66,10 +66,27 @@ const RoundedButton = withStyles((theme) => ({
     },
 }))(Button);
 
-const Evento = () => {
+const Evento = ({eventos}) => {
+    
     const classes = useStyles();
     const [orden, setOrden] = React.useState("");
     const [siguiente, setSiguiente] = React.useState(false);
+    const [evento, setEvent] = React.useState('');
+    const [precio, setPrecio] = React.useState('');
+    const [total, setTotal] = React.useState(0);
+
+    const eventChange = (event) =>{
+        setPrecio(event.target.value);      
+    }
+
+    const eventoChange = (event) =>{
+        console.log(event.target.id);
+        setEvent(event.target.id);
+    }
+    
+    const totalChange = (event) =>{
+        setTotal(event.target.value*precio);
+    }
 
     const handleChange = (event) => {
         setOrden(event.target.value);
@@ -137,7 +154,7 @@ const Evento = () => {
                         <div className="row">
                             <div className="col-md">
                                 <h3 className="text-center text-md-left">
-                                    Taller Vicencial Avatar Financiero
+                                    {eventos['0'].product.titulo}
                                 </h3>
                             </div>
                             <div className="col-md-3 d-flex justify-content-center justify-content-md-end">
@@ -167,45 +184,24 @@ const Evento = () => {
                                         size="large"
                                     >
                                         SABER MÁS...
+                                        {/* FALTA QUE AL DARLE CLICK BAJE EL PDF */}
                                     </RoundedButton>
                                 </div>
                             </div>
                             <div className="col-md-8">
-                                <div className="font-weight-normal">
-                                    Xalapa Veracruz, Teatro Centro, 16:00 hrs
-                                </div>
-                                <div className="text-muted">7,800.00 MXN</div>
-                                <div className="pb-3">
-                                    <small>ENTRADAS DISPONIBLES</small>
-                                </div>
-                                <Divider style={{ width: "30%" }} />
-
-                                <div className="font-weight-normal pt-3">
-                                    Xalapa Veracruz, Teatro Centro, 16:00 hrs
-                                </div>
-                                <div className="text-muted">7,800.00 MXN</div>
-                                <div className="pb-3 text-danger">
-                                    <small>ENTRADAS AGOTADAS</small>
-                                </div>
-                                <Divider style={{ width: "30%" }} />
-
-                                <div className="font-weight-normal pt-3">
-                                    Xalapa Veracruz, Teatro Centro, 16:00 hrs
-                                </div>
-                                <div className="text-muted">7,800.00 MXN</div>
-                                <div className="pb-3 text-danger">
-                                    <small>ENTRADAS AGOTADAS</small>
-                                </div>
-                                <Divider style={{ width: "30%" }} />
-
-                                <div className="font-weight-normal pt-3">
-                                    Xalapa Veracruz, Teatro Centro, 16:00 hrs
-                                </div>
-                                <div className="text-muted">7,800.00 MXN</div>
-                                <div className="pb-3 text-danger">
-                                    <small>ENTRADAS AGOTADAS</small>
-                                </div>
-                                <Divider style={{ width: "30%" }} />
+                                {eventos.map((evento) =>
+                                <>    
+                                    <div className="font-weight-normal">
+                                        {evento.ciudad}, {evento.sede}
+                                    </div>
+                                    <div className="text-muted">${evento.precio} MXN</div>
+                                    <div className="pb-3"> 
+                                        <small>ENTRADAS DISPONIBLES</small> 
+                                        {/* FALTAAAAAA */}
+                                    </div>
+                                    <Divider style={{ width: "30%" }} />
+                                </>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -225,16 +221,17 @@ const Evento = () => {
                         <div className="col-4 p-0 d-none d-md-block">
                             <img
                                 src="/img/events/avatarFinanciero.jpg"
+                                
                                 style={{
                                     width: "100%",
                                     height: "500px",
                                 }}
                             />
+                            {/* PONER LA IMAGEN CHIDA */}
                         </div>
                         <div className="p-3">
                             <h3>
-                                Taller Vivencial Avatar Financiero por Dante
-                                Eludier Coach
+                                {eventos['0'].product.titulo}
                             </h3>
                             <img
                                 src="/img/events/avatarFinanciero.jpg"
@@ -253,23 +250,19 @@ const Evento = () => {
                                     >
                                         <Select
                                             labelId="demo-simple-select-outlined-label"
-                                            id="demo-simple-select-outlined"
-                                            // value={}
-                                            // onChange={}
+                                            id="demo-simple-select-outlined1"
+                                            value={precio}
+                                            onChange={eventChange}
+                                            name={evento}
                                         >
                                             <MenuItem value="">
-                                                <em>None</em>
+                                                Selecciona el evento
                                             </MenuItem>
-                                            <MenuItem value={10}>
-                                                Xalapa Veracruz, Teatro Centro
-                                                16:00 hrs
-                                            </MenuItem>
-                                            <MenuItem value={20}>
-                                                Twenty
-                                            </MenuItem>
-                                            <MenuItem value={30}>
-                                                Thirty
-                                            </MenuItem>
+                                            {eventos.map((evento)=>
+                                                <MenuItem key={evento.id} value={evento.precio} id={evento.id} onClick={eventoChange}>
+                                                    {evento.ciudad}, {evento.sede}      
+                                                </MenuItem>
+                                            )}
                                         </Select>
                                     </FormControl>
                                 </div>
@@ -282,34 +275,35 @@ const Evento = () => {
                                         <Select
                                             labelId="demo-simple-select-outlined-label"
                                             id="demo-simple-select-outlined"
-                                            // value={}
-                                            // onChange={}
+                                            value={total}
+                                            onChange={totalChange}
                                         >
                                             <MenuItem value="">
                                                 <em>None</em>
                                             </MenuItem>
-                                            <MenuItem value={10}>
-                                                4 lugar(es)
+                                            <MenuItem value={1}>
+                                                1 lugar
                                             </MenuItem>
-                                            <MenuItem value={20}>
-                                                Twenty
+                                            <MenuItem value={2}>
+                                                2 lugares
                                             </MenuItem>
-                                            <MenuItem value={30}>
-                                                Thirty
+                                            <MenuItem value={3}>
+                                                3 lugares
                                             </MenuItem>
+                                            {/* HAY QUE CAMBIARLO MEJOR POR UN INPUT */}
                                         </Select>
                                     </FormControl>
                                 </div>
                                 <div className="pt-3">
                                     Precio por lugar
                                     <div className="font-weight-bold">
-                                        $7,800.00 MXN
+                                        ${precio} MXN
                                     </div>
                                 </div>
                                 <div className="pt-3">
                                     Total
                                     <div className="font-weight-bold">
-                                        $31,800.00 MXN
+                                        ${total} MXN
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-end">
@@ -337,13 +331,13 @@ const Evento = () => {
                                 <div>
                                     Total
                                     <div className="font-weight-bold">
-                                        $7,800.00 MXN
+                                        ${total} MXN
                                     </div>
                                 </div>
                                 <div className="pt-3">
                                     Subtotal con descuento *
                                     <div className="font-weight-bold">
-                                        $7,800.00 MXN
+                                        ${total*.90} MXN
                                     </div>
                                 </div>
                                 <div className="pt-3">Método de pago</div>

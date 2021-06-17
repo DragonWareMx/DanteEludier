@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const Contacto = () => {
+const Contacto = ({productos}) => {
+
     const classes = useStyles();
     const [orden, setOrden] = React.useState('');
 
@@ -115,7 +116,7 @@ const Contacto = () => {
 };
 
 Contacto.layout = (page) => (
-    <Layout children={page} title="Contacto" pageTitle="Contacto" />
+    <Layout children={page} title="Productos" pageTitle="Productos" />
 );
 
 export default Contacto;

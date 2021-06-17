@@ -30,7 +30,7 @@ Route::get('/contacto', [App\Http\Controllers\ContactoController::class, 'index'
 Route::get('/Dante', [App\Http\Controllers\DanteController::class, 'index'])->name('Dante');
 
 Route::get('/productos', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
-Route::get('/productos/evento', [App\Http\Controllers\EventoController::class, 'index'])->name('evento');
+Route::get('/productos/evento/{id}', [App\Http\Controllers\EventoController::class, 'index'])->name('evento');
 
 
 Route::get('/Terminos-y-condiciones', function () {
