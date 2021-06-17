@@ -15,6 +15,7 @@ import '/css/inicio.css';
 
 import { FormControl, makeStyles, InputLabel, Select, MenuItem  } from "@material-ui/core";
 import { Container } from "@material-ui/core";
+import Paginacion from "../components/common/Paginacion";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -97,8 +98,11 @@ const Products = ({products}) => {
                             )}
                         </Grid>
                     </Container>
+                    
+                    <Paginacion links={products.links} />
                 </div>
             </Grid>  
+
         </>
     );
 };
