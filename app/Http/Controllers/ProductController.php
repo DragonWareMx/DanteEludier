@@ -15,4 +15,8 @@ class ProductController extends Controller
             'products' => Product::with('images:foto,product_id', 'events:precio,product_id')->orderBy('created_at','DESC')->paginate(2)
         ]);
     }
+
+    public function libros(){
+        return Inertia::render('Libros');
+    }
 }

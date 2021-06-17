@@ -90,6 +90,12 @@
     padding-top:55px;
 }
 
+.libro_img3{
+    width:60%;
+    object-fit: contain;
+    margin-left:40px;
+}
+
 @media(max-width:600px){
     .libros_left{
         width: 100%;
