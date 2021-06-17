@@ -22,14 +22,14 @@ export default function Libro(){
                     </Grid>
 
                     {/* Hay dos botones de comprar */}
-                    <Grid item xs={12} style={{marginTop:20,marginLeft:55}}><InertiaLink href="#" className='libro_comprar'><ShoppingCartIcon></ShoppingCartIcon>COMPRAR</InertiaLink></Grid>
+                    <Grid item xs={12} style={{marginTop:20,marginLeft:55}}><a href='https://www.amazon.com.mx/dp/B08LQCYK49/ref=cm_sw_r_tw_dp_CFYAK57DV05TQNMH6BX6' target="_blank" className='libro_comprar'><ShoppingCartIcon></ShoppingCartIcon>COMPRAR</a></Grid>
                 </div>
                 <div className="libros_right">
                     <img src="/img/books/bookSolvencia.jpg" className="libro_img1"></img>
                     <img src="/img/books/img_dante.png" className="libro_img2"></img>
                 </div>
                  {/* Hay dos botones de comprar */}
-                 <Grid className="libro_comprar2Grid" item xs={12}><InertiaLink href="#" className='libro_comprar2'><ShoppingCartIcon style={{marginRight:10}}></ShoppingCartIcon>COMPRAR</InertiaLink></Grid>
+                 <Grid className="libro_comprar2Grid" item xs={12}><a href='https://www.amazon.com.mx/dp/B08LQCYK49/ref=cm_sw_r_tw_dp_CFYAK57DV05TQNMH6BX6' target="_blank" className='libro_comprar2'><ShoppingCartIcon style={{marginRight:10}}></ShoppingCartIcon>COMPRAR</a></Grid>
             </Grid>
         </>
     );

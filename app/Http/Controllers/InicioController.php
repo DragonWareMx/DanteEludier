@@ -36,10 +36,12 @@ class InicioController extends Controller
             $bulletin->email = $data['email'];
             $bulletin->save();
             DB::commit();
-            return \Redirect::back();
+            session()->flash('status', 'Registrado con éxito.');
+            return redirect()->back();
 
         } catch (\Throwable $th) {
             DB::rollBack();
+            return redirect()->back();
         }
     }
 }
