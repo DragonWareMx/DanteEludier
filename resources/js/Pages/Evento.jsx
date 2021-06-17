@@ -114,6 +114,18 @@ const Evento = ({ eventos }) => {
         setOrden(event.target.value);
     };
 
+    function transformaFecha(fecha) {
+        const dob = new Date(fecha);
+        const monthNames = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+            'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+        const day = dob.getDate();
+        const monthIndex = dob.getMonth();
+        const year = dob.getFullYear();
+        return `${day} ${monthNames[monthIndex]}, `;
+    }
+
     const [open, setOpen] = React.useState(false);
 
     const handleDialogOpen = () => {
@@ -222,7 +234,7 @@ const Evento = ({ eventos }) => {
                                     </div>
                                     <div className="font-weight-normal">
                                         {evento.dates.map((date)=>
-                                            date.fecha
+                                            transformaFecha(date.fecha), 
                                         )}
                                     </div>
                                     <div className="text-muted">${evento.precio} MXN</div>
