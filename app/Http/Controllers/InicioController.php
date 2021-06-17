@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Partner;
 use App\Models\book;
+use App\Models\Bulletin;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
 
 class InicioController extends Controller
 {
@@ -18,4 +22,25 @@ class InicioController extends Controller
             'libro' => $libro,
         ]);
     }
+
+    public function join(Request $request){
+        $data = $request->validate([
+            'email' => 'required|unique:bulletins|max:255|email',
+        ]);
+
+
+        DB::beginTransaction();
+        
+        try {
+            $bulletin = new Bulletin();
+            $bulletin->email = $data['email'];
+            $bulletin->save();
+            DB::commit();
+            return \Redirect::back();
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
+    }
 }
+

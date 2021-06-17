@@ -41,6 +41,8 @@ Route::get('/Aviso-de-privacidad', function () {
     return Inertia::render('Privacidad');
 })->name('aviso');
 
+Route::post('/join', [App\Http\Controllers\InicioController::class, 'join'])->name('join');
+
 Route::get('/inertia', function () {
     return Inertia::render('Ejemplo');
 });
