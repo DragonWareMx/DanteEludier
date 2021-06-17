@@ -13,21 +13,21 @@ import "/css/contacto.css";
 import "/css/products.css";
 import '/css/inicio.css';
 
-import { FormControl, makeStyles, InputLabel, Select, MenuItem  } from "@material-ui/core";
+import { FormControl, makeStyles, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { Container } from "@material-ui/core";
 import Paginacion from "../components/common/Paginacion";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
+        margin: theme.spacing(1),
+        minWidth: 120,
     },
     selectEmpty: {
-      marginTop: theme.spacing(1),
+        marginTop: theme.spacing(1),
     },
-  }));
+}));
 
-const Products = ({products}) => {
+const Products = ({ products }) => {
     const classes = useStyles();
     const [orden, setOrden] = React.useState('');
 
@@ -35,15 +35,15 @@ const Products = ({products}) => {
         setOrden(event.target.value);
     };
 
-    function calcularPrecioMasBajo(eventos){
+    function calcularPrecioMasBajo(eventos) {
         let precio = null;
 
         eventos.forEach(evento => {
-            if(!precio){
+            if (!precio) {
                 precio = evento.precio
                 return
             }
-            if(precio > evento.precio)
+            if (precio > evento.precio)
                 precio = evento.precio
         });
         return precio
@@ -78,30 +78,30 @@ const Products = ({products}) => {
 
 
             {/* CARD DE PRODUCTOS */}
-            <Grid container justify="center" style={{backgroundColor:'#E5E5E5'}}>
-                <div className="inicio_rounded" style={{zIndex: "2"}}>
-                <Container fixed maxWidth="lg">
-                    <Grid container justify="space-between" alignItems="center" className="producto_container producto_titulo">
-                        <Grid style={{paddingTop: "26px", fontSize: "36px", width: "fit-content"}}>Encuentra lo que necesitas</Grid>
-                        
-                    </Grid>
-                </Container>
+            <Grid container justify="center" style={{ backgroundColor: '#E5E5E5' }}>
+                <div className="inicio_rounded" style={{ zIndex: "2" }}>
+                    <Container fixed maxWidth="lg">
+                        <Grid container justify="space-between" alignItems="center" className="producto_container producto_titulo">
+                            <Grid style={{ paddingTop: "26px", fontSize: "36px", width: "fit-content" }}>Encuentra lo que necesitas</Grid>
+
+                        </Grid>
+                    </Container>
 
                     {/* PRODUCTOS */}
                     <Container fixed maxWidth="lg">
                         <Grid container direction="row" spacing={5}>
-                            {products && products.data && products.data.length > 0 && products.data.map(product => 
-                                <Product key={product.id} 
-                                img={(product.images && product.images.length > 0) ? product.images[0].foto : null} 
-                                name={product.titulo}
-                                price={(product.events && product.events.length > 0) ? calcularPrecioMasBajo(product.events) : null} />
+                            {products && products.data && products.data.length > 0 && products.data.map(product =>
+                                <Product key={product.id}
+                                    img={(product.images && product.images.length > 0) ? product.images[0].foto : null}
+                                    name={product.titulo}
+                                    price={(product.events && product.events.length > 0) ? calcularPrecioMasBajo(product.events) : null} />
                             )}
                         </Grid>
                     </Container>
-                    
+
                     <Paginacion links={products.links} />
                 </div>
-            </Grid>  
+            </Grid>
 
         </>
     );
