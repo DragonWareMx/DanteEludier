@@ -1,0 +1,17 @@
+.bttm-pos {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1030;
+}
+
+@media (max-width: 600px) {
+    .bttm-pos {
+        right: unset;
+        bottom: unset;
+        left: unset;
+        position: unset;
+        z-index: unset;
+    }
+}
