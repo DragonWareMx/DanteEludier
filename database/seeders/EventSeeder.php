@@ -22,7 +22,8 @@ class EventSeeder extends Seeder
             Fracc. Costa De Oro',
             'precio' => '5049',
             'limite' => '30',
-            'product_id'=> '1'
+            'product_id'=> '1',
+            'descuento'=>'0.10'
         ]);
 
         DB::table('events')->insert([
@@ -31,7 +32,8 @@ class EventSeeder extends Seeder
             'direccion'=>'Perif. Paseo de la República No.3466, Ejidal Ocolusen, 58279 Morelia, Mich. ',
             'precio' => '5049',
             'limite' => '30',
-            'product_id'=> '1'
+            'product_id'=> '1',
+            'descuento'=>'0.10'
         ]);
 
         DB::table('events')->insert([
@@ -40,7 +42,8 @@ class EventSeeder extends Seeder
             'direccion'=>'Blvd. Industrial 1705 Col, Uruapan, 60120',
             'precio' => '5049',
             'limite' => '30',
-            'product_id'=> '1'
+            'product_id'=> '1',
+            'descuento'=>'0.10'
         ]);
         
     }

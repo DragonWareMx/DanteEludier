@@ -67,6 +67,8 @@ const RoundedButton = withStyles((theme) => ({
 }))(Button);
 
 const Evento = ({eventos}) => {
+
+    console.log (eventos['0'].product.images['0'])
     
     const classes = useStyles();
     const [orden, setOrden] = React.useState("");
@@ -74,6 +76,8 @@ const Evento = ({eventos}) => {
     const [evento, setEvent] = React.useState('');
     const [precio, setPrecio] = React.useState('');
     const [total, setTotal] = React.useState(0);
+    const [indice, setIndice] = React.useState(0);
+    var i;
 
     const eventChange = (event) =>{
         setPrecio(event.target.value);      
@@ -108,6 +112,10 @@ const Evento = ({eventos}) => {
 
     const handleRegresar = () => {
         setSiguiente(false);
+    };
+
+    const handleAlert = () => {
+        alert("Selecciona primero el evento y cuántos lugares quieres comprar")
     };
 
     return (
@@ -172,7 +180,7 @@ const Evento = ({eventos}) => {
                         <div className="row pt-5">
                             <div className="col-md-4">
                                 <img
-                                    src="/img/events/avatarFinanciero.jpg"
+                                    src={'/img/events/'+eventos['0'].product.images['0'].foto}
                                     style={{
                                         width: "100%",
                                         maxHeight: "auto",
@@ -193,6 +201,11 @@ const Evento = ({eventos}) => {
                                 <>    
                                     <div className="font-weight-normal">
                                         {evento.ciudad}, {evento.sede}
+                                    </div>
+                                    <div className="font-weight-normal">
+                                        {evento.dates.map((date)=>
+                                            date.fecha
+                                        )}
                                     </div>
                                     <div className="text-muted">${evento.precio} MXN</div>
                                     <div className="pb-3"> 
@@ -220,21 +233,21 @@ const Evento = ({eventos}) => {
                     <div className="d-flex">
                         <div className="col-4 p-0 d-none d-md-block">
                             <img
-                                src="/img/events/avatarFinanciero.jpg"
+                                src={'/img/events/'+eventos['0'].product.images['0'].foto}
                                 
                                 style={{
                                     width: "100%",
                                     height: "500px",
                                 }}
                             />
-                            {/* PONER LA IMAGEN CHIDA */}
+                            
                         </div>
                         <div className="p-3">
                             <h3>
                                 {eventos['0'].product.titulo}
                             </h3>
                             <img
-                                src="/img/events/avatarFinanciero.jpg"
+                                src={'/img/events/'+eventos['0'].product.images['0'].foto}
                                 style={{
                                     width: "100%",
                                     height: "auto",
@@ -258,7 +271,8 @@ const Evento = ({eventos}) => {
                                             <MenuItem value="">
                                                 Selecciona el evento
                                             </MenuItem>
-                                            {eventos.map((evento)=>
+                                            
+                                            {eventos.map((evento)=>    
                                                 <MenuItem key={evento.id} value={evento.precio} id={evento.id} onClick={eventoChange}>
                                                     {evento.ciudad}, {evento.sede}      
                                                 </MenuItem>
@@ -307,16 +321,33 @@ const Evento = ({eventos}) => {
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-end">
+                                    
+                                    { total > 0 ?
+
                                     <ColorButton
                                         variant="contained"
                                         color="primary"
                                         className="mt-4"
                                         startIcon={<ShoppingCartIcon />}
                                         size="large"
+                                        
                                         onClick={handleSiguiente}
                                     >
                                         SIGUIENTE
                                     </ColorButton>
+                                    :
+                                    <ColorButton
+                                        variant="contained"
+                                        color="primary"
+                                        className="mt-4"
+                                        startIcon={<ShoppingCartIcon />}
+                                        size="large"
+                                        
+                                        onClick={handleAlert}
+                                    >
+                                        SIGUIENTE
+                                    </ColorButton>
+                                    }
                                 </div>
                                 <div className="text-right">
                                     <small>
@@ -336,9 +367,12 @@ const Evento = ({eventos}) => {
                                 </div>
                                 <div className="pt-3">
                                     Subtotal con descuento *
+
+                                    {/* FALTA PONER EL DESCUENTO BIEN DESDE LA BD */}
                                     <div className="font-weight-bold">
                                         ${total*.90} MXN
                                     </div>
+                                    
                                 </div>
                                 <div className="pt-3">Método de pago</div>
                                 <div className="row">
