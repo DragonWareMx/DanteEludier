@@ -32,6 +32,8 @@ Route::get('/Dante', [App\Http\Controllers\DanteController::class, 'index'])->na
 Route::get('/productos', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
 Route::get('/productos/evento/{id}', [App\Http\Controllers\EventoController::class, 'index'])->name('evento');
 
+Route::get('/libros', [App\Http\Controllers\ProductController::class, 'index'])->name('libros');
+
 
 Route::get('/Terminos-y-condiciones', function () {
     return Inertia::render('Terminos');

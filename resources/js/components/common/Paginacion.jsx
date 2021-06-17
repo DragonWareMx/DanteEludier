@@ -10,7 +10,7 @@ const Paginacion = ({links}) => {
     if(links.length > 3){
         return (
             <>
-            <ul className="pagination" style={{width: "fit-content", margin: "auto", marginBottom: "20px"}}>
+            <ul className="pagination" style={{width: "fit-content", margin: "auto", marginBottom: "20px", flexWrap: "wrap"}}>
                 {
                     links.map((link, index) => (
                         <li className={link.active ? "page-item active" : link.url ? "page-item" : "page-item disabled"} key={index}>

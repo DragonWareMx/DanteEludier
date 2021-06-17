@@ -98,9 +98,9 @@ const Products = ({ products }) => {
                                     id={product.id} />
                             )}
                         </Grid>
+                    <Paginacion links={products.links} />
                     </Container>
 
-                    <Paginacion links={products.links} />
                 </div>
             </Grid>
 

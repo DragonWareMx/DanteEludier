@@ -28,6 +28,8 @@ import MailIcon from "@material-ui/icons/Mail";
 import { green, purple } from "@material-ui/core/colors";
 import "../../../public/css/navbar.css";
 
+import { InertiaLink } from '@inertiajs/inertia-react'
+
 import {
     createMuiTheme,
     withStyles,
@@ -105,47 +107,57 @@ export default function Navbar() {
                         />
                     </div>
                     <div className="align-self-center">
-                        <Button
-                            style={{ color: "#FFFFFF" }}
-                            href={route("inicio")}
-                            startIcon={<HomeIcon />}
-                            className="grow"
-                        >
-                            HOME
-                        </Button>
-                        <Button
-                            style={{ color: "#FFFFFF" }}
-                            href={route("Dante")}
-                            startIcon={<AddIcon />}
-                            className="ml-3 grow"
-                        >
-                            DE DANTE ELUDIER
-                        </Button>
-                        <Button
-                            style={{ color: "#FFFFFF" }}
-                            href={route("contacto")}
-                            startIcon={<RoomIcon />}
-                            className="ml-3 grow"
-                        >
-                            CONTACTO
-                        </Button>
-                        <Button
-                            style={{ color: "#FFFFFF" }}
-                            href="#contained-buttons"
-                            startIcon={<BookmarkIcon />}
-                            className="ml-3 grow"
-                        >
-                            LIBROS
-                        </Button>
-                        <ColorButton
-                            variant="contained"
-                            color="primary"
-                            startIcon={<SchoolIcon />}
-                            className="ml-3"
-                            href={route("products.index")}
-                        >
-                            PRODUCTOS
-                        </ColorButton>
+                        <InertiaLink href={route("inicio")} style={{textDecoration: "none"}} >
+                            <Button
+                                style={{ color: "#FFFFFF" }}
+                                startIcon={<HomeIcon />}
+                                className="grow"
+                            >
+                                HOME
+                            </Button>
+                        </InertiaLink>
+
+                        <InertiaLink href={route("Dante")} style={{textDecoration: "none"}} >
+                            <Button
+                                style={{ color: "#FFFFFF" }}
+                                startIcon={<AddIcon />}
+                                className="ml-3 grow"
+                            >
+                                DE DANTE ELUDIER
+                            </Button>
+                        </InertiaLink>
+
+                        <InertiaLink href={route("contacto")} style={{textDecoration: "none"}} >
+                            <Button
+                                style={{ color: "#FFFFFF" }}
+                                startIcon={<RoomIcon />}
+                                className="ml-3 grow"
+                            >
+                                CONTACTO
+                            </Button>
+                        </InertiaLink>
+
+                        <InertiaLink href={route("libros")} style={{textDecoration: "none"}} >
+                            <Button
+                                style={{ color: "#FFFFFF" }}
+                                startIcon={<BookmarkIcon />}
+                                className="ml-3 grow"
+                            >
+                                LIBROS
+                            </Button>
+                        </InertiaLink>
+
+                        <InertiaLink href={route("products.index")} style={{textDecoration: "none"}} >
+                            <ColorButton
+                                variant="contained"
+                                color="primary"
+                                startIcon={<SchoolIcon />}
+                                className="ml-3"
+                            >
+                                PRODUCTOS
+                            </ColorButton>
+                        </InertiaLink>
+
                         <FormControl className={classes.formControl}>
                             <Select
                                 labelId="demo-simple-select-label"
