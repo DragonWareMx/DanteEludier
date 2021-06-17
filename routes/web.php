@@ -28,7 +28,9 @@ Route::get('/inicio', [App\Http\Controllers\InicioController::class, 'index'])->
 Route::get('/contacto', [App\Http\Controllers\ContactoController::class, 'index'])->name('contacto');
 
 Route::get('/Dante', [App\Http\Controllers\DanteController::class, 'index'])->name('Dante');
+
 Route::get('/productos', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
+Route::get('/productos/evento', [App\Http\Controllers\EventoController::class, 'index'])->name('evento');
 
 Route::post('/join', [App\Http\Controllers\InicioController::class, 'join'])->name('join');
 
