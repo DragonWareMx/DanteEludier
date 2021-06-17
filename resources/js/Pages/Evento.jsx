@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../layouts/Layout";
+import { Inertia } from '@inertiajs/inertia';
 
 import Grid from "@material-ui/core/Grid";
 
@@ -81,7 +82,9 @@ const Evento = ({ eventos }) => {
         precio: '',
         evento: '',
         total: '',
-        tipo_pago: ''
+        tipo_pago: '',
+        cantidad: 0,
+        descuento: ''
     });
 
     function handleSubmit(e) {
