@@ -34,6 +34,9 @@ Route::get('/productos/evento/{id}', [App\Http\Controllers\EventoController::cla
 
 Route::get('/libros', [App\Http\Controllers\ProductController::class, 'index'])->name('libros');
 
+Route::get('/Stripe', function () {
+    return Inertia::render('Stripe');
+})->name('stripe');
 
 Route::get('/Terminos-y-condiciones', function () {
     return Inertia::render('Terminos');
