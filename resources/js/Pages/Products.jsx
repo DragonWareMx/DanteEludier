@@ -13,27 +13,41 @@ import "/css/contacto.css";
 import "/css/products.css";
 import '/css/inicio.css';
 
-import { FormControl, makeStyles, InputLabel, Select, MenuItem  } from "@material-ui/core";
+import { FormControl, makeStyles, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { Container } from "@material-ui/core";
+import Paginacion from "../components/common/Paginacion";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
+        margin: theme.spacing(1),
+        minWidth: 120,
     },
     selectEmpty: {
-      marginTop: theme.spacing(1),
+        marginTop: theme.spacing(1),
     },
-  }));
+}));
 
-const Contacto = ({productos}) => {
-
+const Products = ({ products }) => {
     const classes = useStyles();
     const [orden, setOrden] = React.useState('');
 
     const handleChange = (event) => {
         setOrden(event.target.value);
     };
+
+    function calcularPrecioMasBajo(eventos) {
+        let precio = null;
+
+        eventos.forEach(evento => {
+            if (!precio) {
+                precio = evento.precio
+                return
+            }
+            if (precio > evento.precio)
+                precio = evento.precio
+        });
+        return precio
+    }
 
     return (
         <>
@@ -64,59 +78,37 @@ const Contacto = ({productos}) => {
 
 
             {/* CARD DE PRODUCTOS */}
-            <Grid container justify="center" style={{backgroundColor:'#E5E5E5'}}>
-                <div className="inicio_rounded" style={{zIndex: "2"}}>
-                <Container fixed maxWidth="lg">
-                    <Grid container justify="space-between" alignItems="center" className="producto_container producto_titulo">
-                        <Grid style={{paddingTop: "26px", fontSize: "36px", width: "fit-content"}}>Encuentra lo que necesitas</Grid>
-                        
-                        <Grid style={{paddingTop: "26px"}} className="ordenar_por" container  justify="flex-end" alignItems="center" item>
-                            <Grid item>
-                                Ordenar por
-                            </Grid>
+            <Grid container justify="center" style={{ backgroundColor: '#E5E5E5' }}>
+                <div className="inicio_rounded" style={{ zIndex: "2" }}>
+                    <Container fixed maxWidth="lg">
+                        <Grid container justify="space-between" alignItems="center" className="producto_container producto_titulo">
+                            <Grid style={{ paddingTop: "26px", fontSize: "36px", width: "fit-content" }}>Encuentra lo que necesitas</Grid>
 
-                            <Grid item>
-                                <FormControl variant="outlined" className={classes.formControl}>
-                                    <Select
-                                    id="demo-simple-select-outlined"
-                                    value={orden}
-                                    onChange={handleChange}
-                                    displayEmpty
-                                    className={classes.selectEmpty}
-                                    >
-                                    <MenuItem value="">
-                                        <em>Más popular</em>
-                                    </MenuItem>
-                                    <MenuItem value={10}>Más popular</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Grid>
                         </Grid>
-                        
-                    </Grid>
-                </Container>
+                    </Container>
 
                     {/* PRODUCTOS */}
                     <Container fixed maxWidth="lg">
                         <Grid container direction="row" spacing={5}>
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
+                            {products && products.data && products.data.length > 0 && products.data.map(product =>
+                                <Product key={product.id}
+                                    img={(product.images && product.images.length > 0) ? product.images[0].foto : null}
+                                    name={product.titulo}
+                                    price={(product.events && product.events.length > 0) ? calcularPrecioMasBajo(product.events) : null} />
+                            )}
                         </Grid>
                     </Container>
+
+                    <Paginacion links={products.links} />
                 </div>
-            </Grid>  
+            </Grid>
+
         </>
     );
 };
 
-Contacto.layout = (page) => (
+Products.layout = (page) => (
     <Layout children={page} title="Productos" pageTitle="Productos" />
 );
 
-export default Contacto;
+export default Products;

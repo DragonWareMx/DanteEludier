@@ -16,6 +16,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "paypal/rest-api-sdk-php": "^1.14",
         "tightenco/ziggy": "^0.9.4"
     },
     "require-dev": {

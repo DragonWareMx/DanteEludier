@@ -66,10 +66,8 @@ const RoundedButton = withStyles((theme) => ({
     },
 }))(Button);
 
-const Evento = ({eventos}) => {
+const Evento = ({ eventos }) => {
 
-    console.log (eventos['0'].product.images['0'])
-    
     const classes = useStyles();
     const [orden, setOrden] = React.useState("");
     const [siguiente, setSiguiente] = React.useState(false);
@@ -79,17 +77,37 @@ const Evento = ({eventos}) => {
     const [indice, setIndice] = React.useState(0);
     var i;
 
-    const eventChange = (event) =>{
-        setPrecio(event.target.value);      
+    const [values, setValues] = React.useState({
+        _method: 'post',
+        orden: '',
+        precio: '',
+        evento: '',
+        total: '',
+        tipo_pago: ''
+    });
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        Inertia.post(route('event.purchase', evento), values,
+            {
+                onError: () => {
+                    // Inertia.reload({ only: ['cursos'], data: { regime: values.regimen } })
+                }
+            }
+        )
     }
 
-    const eventoChange = (event) =>{
+    const eventChange = (event) => {
+        setPrecio(event.target.value);
+    }
+
+    const eventoChange = (event) => {
         console.log(event.target.id);
         setEvent(event.target.id);
     }
-    
-    const totalChange = (event) =>{
-        setTotal(event.target.value*precio);
+
+    const totalChange = (event) => {
+        setTotal(event.target.value * precio);
     }
 
     const handleChange = (event) => {
@@ -274,7 +292,7 @@ const Evento = ({eventos}) => {
                                             
                                             {eventos.map((evento)=>    
                                                 <MenuItem key={evento.id} value={evento.precio} id={evento.id} onClick={eventoChange}>
-                                                    {evento.ciudad}, {evento.sede}      
+                                                    {evento.ciudad}, {evento.sede}
                                                 </MenuItem>
                                             )}
                                         </Select>
@@ -370,7 +388,7 @@ const Evento = ({eventos}) => {
 
                                     {/* FALTA PONER EL DESCUENTO BIEN DESDE LA BD */}
                                     <div className="font-weight-bold">
-                                        ${total*.90} MXN
+                                        ${total * .90} MXN
                                     </div>
                                     
                                 </div>
@@ -445,7 +463,7 @@ const Evento = ({eventos}) => {
                                             color="primary"
                                             startIcon={<ShoppingCartIcon />}
                                             size="large"
-                                            onClick={handleSiguiente}
+                                            onClick={handleSubmit}
                                         >
                                             COMPRAR
                                         </ColorButton>
