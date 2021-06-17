@@ -46,3 +46,5 @@ Route::post('/join', [App\Http\Controllers\InicioController::class, 'join'])->na
 Route::get('/inertia', function () {
     return Inertia::render('Ejemplo');
 });
+
+Route::post('/productos/evento/{id}/comprar', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('event.purchase');

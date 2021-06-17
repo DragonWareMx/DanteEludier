@@ -66,8 +66,8 @@ const RoundedButton = withStyles((theme) => ({
     },
 }))(Button);
 
-const Evento = ({eventos}) => {
-    
+const Evento = ({ eventos }) => {
+
     const classes = useStyles();
     const [orden, setOrden] = React.useState("");
     const [siguiente, setSiguiente] = React.useState(false);
@@ -75,17 +75,36 @@ const Evento = ({eventos}) => {
     const [precio, setPrecio] = React.useState('');
     const [total, setTotal] = React.useState(0);
 
-    const eventChange = (event) =>{
-        setPrecio(event.target.value);      
+    const [values, setValues] = React.useState({
+        _method: 'post',
+        orden: '',
+        precio: '',
+        evento: '',
+        total: '',
+    });
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        Inertia.post(route('event.purchase', evento), values,
+            {
+                onError: () => {
+                    // Inertia.reload({ only: ['cursos'], data: { regime: values.regimen } })
+                }
+            }
+        )
     }
 
-    const eventoChange = (event) =>{
+    const eventChange = (event) => {
+        setPrecio(event.target.value);
+    }
+
+    const eventoChange = (event) => {
         console.log(event.target.id);
         setEvent(event.target.id);
     }
-    
-    const totalChange = (event) =>{
-        setTotal(event.target.value*precio);
+
+    const totalChange = (event) => {
+        setTotal(event.target.value * precio);
     }
 
     const handleChange = (event) => {
@@ -190,17 +209,17 @@ const Evento = ({eventos}) => {
                             </div>
                             <div className="col-md-8">
                                 {eventos.map((evento) =>
-                                <>    
-                                    <div className="font-weight-normal">
-                                        {evento.ciudad}, {evento.sede}
-                                    </div>
-                                    <div className="text-muted">${evento.precio} MXN</div>
-                                    <div className="pb-3"> 
-                                        <small>ENTRADAS DISPONIBLES</small> 
-                                        {/* FALTAAAAAA */}
-                                    </div>
-                                    <Divider style={{ width: "30%" }} />
-                                </>
+                                    <>
+                                        <div className="font-weight-normal">
+                                            {evento.ciudad}, {evento.sede}
+                                        </div>
+                                        <div className="text-muted">${evento.precio} MXN</div>
+                                        <div className="pb-3">
+                                            <small>ENTRADAS DISPONIBLES</small>
+                                            {/* FALTAAAAAA */}
+                                        </div>
+                                        <Divider style={{ width: "30%" }} />
+                                    </>
                                 )}
                             </div>
                         </div>
@@ -221,7 +240,7 @@ const Evento = ({eventos}) => {
                         <div className="col-4 p-0 d-none d-md-block">
                             <img
                                 src="/img/events/avatarFinanciero.jpg"
-                                
+
                                 style={{
                                     width: "100%",
                                     height: "500px",
@@ -258,9 +277,9 @@ const Evento = ({eventos}) => {
                                             <MenuItem value="">
                                                 Selecciona el evento
                                             </MenuItem>
-                                            {eventos.map((evento)=>
+                                            {eventos.map((evento) =>
                                                 <MenuItem key={evento.id} value={evento.precio} id={evento.id} onClick={eventoChange}>
-                                                    {evento.ciudad}, {evento.sede}      
+                                                    {evento.ciudad}, {evento.sede}
                                                 </MenuItem>
                                             )}
                                         </Select>
@@ -337,7 +356,7 @@ const Evento = ({eventos}) => {
                                 <div className="pt-3">
                                     Subtotal con descuento *
                                     <div className="font-weight-bold">
-                                        ${total*.90} MXN
+                                        ${total * .90} MXN
                                     </div>
                                 </div>
                                 <div className="pt-3">Método de pago</div>
