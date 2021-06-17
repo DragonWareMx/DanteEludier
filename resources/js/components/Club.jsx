@@ -7,6 +7,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Input from '@material-ui/core/Input';
 
 //CSS
 import '/css/inicio.css';
@@ -17,7 +18,7 @@ import EmailIcon from '@material-ui/icons/Email';
 
 export default function Libro(){
 
-    const { errors } = usePage().props;
+    const { errors, status } = usePage().props;
 
     const [values, setValues] = React.useState({
         _method: 'post',
@@ -30,12 +31,18 @@ export default function Libro(){
 
     //manda el forumulario
     function handleSubmit(e) {
+        const button = document.getElementById('boton-bulletin');
+        button.disabled = true;
         e.preventDefault()
         Inertia.post(route('join'), values,
             {
                 onError: () => {
-                    // Inertia.reload({ only: ['cursos'], data: { regime: values.regimen } })
-                }
+                    button.disabled = false;
+                },
+                onSuccess: () => {
+                    button.disabled = false;
+                },
+                preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
             }
         )
     }
@@ -48,12 +55,13 @@ export default function Libro(){
                 <Grid className='club_subtitle'>¡Obtén un descuento de 10 % en tu primera compra al inscribirte para recibir nuestro boletín informativo!</Grid>
                 <div className='club_form'>
                     <form onSubmit={handleSubmit}>
-                    <Grid container spacing={1} justify="center" alignItems="flex-end">
+                    <Grid container spacing={1} justify="center" alignItems={errors.email ? "center" : status ? "center" : "flex-end"}>
                         <Grid item>
                             <EmailIcon />
                         </Grid>
                         <Grid item>
-                            <TextField  
+                            <TextField 
+                                error={errors.email ? true : false}
                                 id="email"
                                 type={'email'} 
                                 label="Correo electrónico" 
@@ -61,10 +69,13 @@ export default function Libro(){
                                 onChange={handleChange('email')}
                                 required/>
                                 {errors.email &&
-                                    <FormHelperText id="component-error-text">{errors.email}</FormHelperText>
+                                    <FormHelperText id="component-error-text" style={{color:'red'}}>{errors.email}</FormHelperText>
+                                }
+                                {status &&
+                                    <FormHelperText id="component-text" style={{ color: "green" }}>{status}</FormHelperText>
                                 }
                         </Grid>
-                        <button type='submit' className='club_registrarse'>REGISTRARSE</button>
+                        <button id='boton-bulletin' type='submit' className='club_registrarse'>REGISTRARSE</button>
                     </Grid>
                     </form>
                 </div>

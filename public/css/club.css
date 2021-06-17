@@ -49,7 +49,14 @@
     margin-left: 50px;
     text-decoration: none;
     transition: all 0.3s;
+    border:none;
 }
+
+.club_registrarse:disabled{
+    cursor:wait;
+    background-color: #5e5e5e;
+}
+
 .club_registrarse:hover{
     text-decoration: none;
     color:rgb(202, 202, 202); 
