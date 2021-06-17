@@ -81,6 +81,7 @@ const Evento = ({ eventos }) => {
         precio: '',
         evento: '',
         total: '',
+        tipo_pago: ''
     });
 
     function handleSubmit(e) {
