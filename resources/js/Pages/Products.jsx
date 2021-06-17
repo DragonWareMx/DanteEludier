@@ -26,13 +26,27 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const Contacto = () => {
+const Products = ({products}) => {
     const classes = useStyles();
     const [orden, setOrden] = React.useState('');
 
     const handleChange = (event) => {
         setOrden(event.target.value);
     };
+
+    function calcularPrecioMasBajo(eventos){
+        let precio = null;
+
+        eventos.forEach(evento => {
+            if(!precio){
+                precio = evento.precio
+                return
+            }
+            if(precio > evento.precio)
+                precio = evento.precio
+        });
+        return precio
+    }
 
     return (
         <>
@@ -69,43 +83,18 @@ const Contacto = () => {
                     <Grid container justify="space-between" alignItems="center" className="producto_container producto_titulo">
                         <Grid style={{paddingTop: "26px", fontSize: "36px", width: "fit-content"}}>Encuentra lo que necesitas</Grid>
                         
-                        <Grid style={{paddingTop: "26px"}} className="ordenar_por" container  justify="flex-end" alignItems="center" item>
-                            <Grid item>
-                                Ordenar por
-                            </Grid>
-
-                            <Grid item>
-                                <FormControl variant="outlined" className={classes.formControl}>
-                                    <Select
-                                    id="demo-simple-select-outlined"
-                                    value={orden}
-                                    onChange={handleChange}
-                                    displayEmpty
-                                    className={classes.selectEmpty}
-                                    >
-                                    <MenuItem value="">
-                                        <em>Más popular</em>
-                                    </MenuItem>
-                                    <MenuItem value={10}>Más popular</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Grid>
-                        </Grid>
-                        
                     </Grid>
                 </Container>
 
                     {/* PRODUCTOS */}
                     <Container fixed maxWidth="lg">
                         <Grid container direction="row" spacing={5}>
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
+                            {products && products.data && products.data.length > 0 && products.data.map(product => 
+                                <Product key={product.id} 
+                                img={(product.images && product.images.length > 0) ? product.images[0].foto : null} 
+                                name={product.titulo}
+                                price={(product.events && product.events.length > 0) ? calcularPrecioMasBajo(product.events) : null} />
+                            )}
                         </Grid>
                     </Container>
                 </div>
@@ -114,8 +103,8 @@ const Contacto = () => {
     );
 };
 
-Contacto.layout = (page) => (
-    <Layout children={page} title="Contacto" pageTitle="Contacto" />
+Products.layout = (page) => (
+    <Layout children={page} title="Productos" pageTitle="Productos" />
 );
 
-export default Contacto;
+export default Products;

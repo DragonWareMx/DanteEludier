@@ -3,6 +3,7 @@ import { InertiaLink } from '@inertiajs/inertia-react'
 import Grid from '@material-ui/core/Grid';
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import route from 'ziggy-js';
 
 //CSS
 
@@ -24,49 +25,59 @@ const ColorButton = withStyles((theme) => ({
     },
 }))(Button);
 
-export default function Product(img, name, price){
+export default function Product({img, name, price}){
+    function limitString(string, length){
+        return string.length > length ? 
+                    string.substring(0, length - 3) + "..." : 
+                    string; 
+    }
+
+    function showPrice(precio){
+        return parseFloat(precio).toLocaleString('en-US')
+    }
+
     return (
         <>
-            {/* <Grid container direction="column" item style={{width: "fit-content", margin: "auto"}}>
-                <Grid item style={{width: "244px"}}>
-                    <img className="producto_imagen" src="img/events/avatarFinanciero.jpg"></img>
-                </Grid>
-                <Grid item className="producto_nombre">
-                    Taller Vivencial Avatar Financiero
-                </Grid>
-                <Grid item className="producto_precio">
-                    Desde $7, 800.00 MXN
-                </Grid>
-                <Grid item style={{width: "244px"}}>
-                    <ColorButton
-                        variant="outlined"
-                        className="mt-4"
-                        disableElevation
-                    >
-                        MÁS INFORMACIÓN
-                    </ColorButton>    
-                </Grid>
-            </Grid> */}
             <Grid item  xs={12} sm={6} md={4} lg={3}>
                 <div style={{width: "fit-content", margin: "auto"}}>
-                <Grid item>
-                    <img className="producto_imagen" src="img/events/avatarFinanciero.jpg"></img>
-                </Grid>
-                <Grid item className="producto_nombre">
-                    Taller Vivencial Avatar Financiero
-                </Grid>
-                <Grid item className="producto_precio">
-                    Desde $7, 800.00 MXN
-                </Grid>
-                <Grid item>
-                    <ColorButton
-                        variant="outlined"
-                        className="mt-4"
-                        disableElevation
-                    >
-                        MÁS INFORMACIÓN
-                    </ColorButton>    
-                </Grid>
+                    {/* IMAGEN */}
+                    <Grid item>
+                        <div className="producto_imagen" style={{
+                                backgroundImage: img ? 'url("storage/productos/'+ img +'")' : 'url("storage/productos/default.jpg")',
+                                backgroundRepeat: "no-repeat",
+                                backgroundPosition: "center center",
+                                backgroundSize: "100%"
+                            }}
+                        >
+                        </div>
+                    </Grid>
+
+                    {/* NOMBRE */}
+                    <Grid item className="producto_nombre">
+                        {limitString(name, 60)}
+                    </Grid>
+
+                    {/* PRECIO */}
+                    <Grid item className="producto_precio">
+                        {price ?
+                        "Desde $"+ showPrice(price) +" MXN"
+                        :
+                        "Próximamente"
+                        }
+                    </Grid>
+
+                    {/* BOTON */}
+                    <Grid item>
+                        <InertiaLink href={route('evento')} style={{textDecoration: "none"}}>
+                            <ColorButton
+                                variant="outlined"
+                                className="mt-4"
+                                disableElevation
+                            >
+                                MÁS INFORMACIÓN
+                            </ColorButton>
+                        </InertiaLink>
+                    </Grid>
                 </div>
             </Grid>
         </>
