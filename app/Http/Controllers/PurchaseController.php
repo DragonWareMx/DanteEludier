@@ -24,4 +24,8 @@ class PurchaseController extends Controller
 
         $this->apiContext->setConfig($payPalConfig['settings']);
     }
+
+    public function purchase($idEvento,  Request $request)
+    {
+    }
 }

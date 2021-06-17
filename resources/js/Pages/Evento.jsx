@@ -430,7 +430,7 @@ const Evento = ({ eventos }) => {
                                             color="primary"
                                             startIcon={<ShoppingCartIcon />}
                                             size="large"
-                                            onClick={handleSiguiente}
+                                            onClick={handleSubmit}
                                         >
                                             COMPRAR
                                         </ColorButton>

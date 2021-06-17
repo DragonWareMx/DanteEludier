@@ -47,4 +47,4 @@ Route::get('/inertia', function () {
     return Inertia::render('Ejemplo');
 });
 
-Route::post('/productos/evento/{id}/comprar', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('event.purchase');
+Route::post('/productos/evento/{idEvento}/comprar', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('event.purchase');
