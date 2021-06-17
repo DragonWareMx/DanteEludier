@@ -423,7 +423,7 @@ const Evento = ({ eventos }) => {
                                         </div>
                                     
                                         <div className="col-md-4 ">
-                                            <FormControlLabel value="Stripe" control={<Radio />} label="Paypal"/>
+                                            <FormControlLabel value="Stripe" control={<Radio />} label="Stripe"/>
                                             <img
                                                 src="/img/icons/stripelogo.png"
                                                 alt=""
@@ -443,7 +443,7 @@ const Evento = ({ eventos }) => {
                                 </div>
                                 <div>
                                     <Link
-                                        href="#"
+                                        href=""
                                         color="inherit"
                                         className="font-weight-bold"
                                     >
