@@ -6,7 +6,7 @@
     z-index: 1030;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .bttm-pos {
         right: unset;
         bottom: unset;
