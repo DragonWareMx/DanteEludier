@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('inicio');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/inicio', [App\Http\Controllers\InicioController::class, 'index'])->name('inicio');
 
@@ -31,6 +31,15 @@ Route::get('/Dante', [App\Http\Controllers\DanteController::class, 'index'])->na
 
 Route::get('/productos', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
 Route::get('/productos/evento', [App\Http\Controllers\EventoController::class, 'index'])->name('evento');
+
+
+Route::get('/Terminos-y-condiciones', function () {
+    return Inertia::render('Terminos');
+})->name('terminos');
+
+Route::get('/Aviso-de-privacidad', function () {
+    return Inertia::render('Privacidad');
+})->name('aviso');
 
 Route::post('/join', [App\Http\Controllers\InicioController::class, 'join'])->name('join');
 
