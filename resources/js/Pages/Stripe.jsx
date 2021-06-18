@@ -43,7 +43,7 @@ const Stripe = () => {
                     {/* Aplicando padding */}
                     <div className="p-1">
                         <Grid container className="mb-5">
-                            <Grid item xs={6} className="div-form-container p-4"> 
+                            <Grid item xs={12} sm={6} className="div-form-container p-4"> 
                                 <Grid item xs={12} className="txt-title-tarjeta">Información de la tarjeta</Grid>
                                 <Grid item xs={12}>
                                     <TextField id="outlined-basic" label="Nombre de la tarjeta" variant="outlined" size="small" className="inputs-pago mt-4" />
@@ -52,12 +52,34 @@ const Stripe = () => {
                                     <TextField id="outlined-basic" label="Estado" variant="outlined" size="small" className="inputs-pago mt-4" />
                                     <TextField id="outlined-basic" label="Código Postal" variant="outlined" size="small" className="inputs-pago mt-4" />
                                 </Grid>
-                                <Grid item xs={12} className="mt-4 txt-sub-pago">Tarjeta de crédito  débito</Grid>
+                                <Grid item xs={12} className="mt-2 txt-sub-pago">
+                                    <img src="/img/icons/stripe-pago.png" />
+                                    Tarjeta de crédito  débito
+                                </Grid>
                                 <Grid item xs={12}>
-                                    <TextField id="outlined-basic" label="Número de tarjeta" variant="outlined" size="small" className="inputs-pago mt-2" />
+                                    <TextField id="outlined-basic" label="Número de tarjeta" variant="outlined" size="small" className="inputs-pago" />
                                 </Grid>
                             </Grid>
-                            <Grid item xs={6} className="div-form-container p-4"> 
+                            <Grid item xs={12} sm={6} justify="center" className="p-4"> 
+                                <Grid item xs={12} sm={12} md={10} className="div-detalles p-3 mt-3">
+                                    <Grid item xs={12} className="txt-title-tarjeta" style={{"textAlign":"center"}}>Detalles de la compra</Grid>
+                                    <Grid item xs={12} className="nombre-evento mt-4">Nombre completo del eventeo lorem ipsum dolor sit amet</Grid>
+                                    <Grid item xs={12} className="lugar-evento">Lugar, hora, Xalapa Veracruz, Teatro Centro, 16:00 hrs</Grid>
+                                    <Grid item xs={12} className="entradas-evento mt-1">2 LUGARES</Grid>
+                                    <Grid container className="mt-4">
+                                        <Grid item xs={4} className="entradas-evento font-bigger" style={{"color":"#999999"}}>SUBTOTAL</Grid>
+                                        <Grid item xs={8} className="entradas-evento font-bigger" style={{"textAlign":"right"}}>$200.00 MXN</Grid>
+                                    </Grid>
+                                    <Grid container className="mt-2">
+                                        <Grid item xs={4} className="entradas-evento font-bigger" style={{"color":"#999999"}}>DESCUENTO</Grid>
+                                        <Grid item xs={8} className="entradas-evento font-bigger" style={{"textAlign":"right"}}>-$20.00 MXN</Grid>
+                                    </Grid>
+                                    <Grid container className="mt-2">
+                                        <Grid item xs={4} className="entradas-evento font-bigger" style={{"color":"#999999"}}>TOTAL</Grid>
+                                        <Grid item xs={8} className="entradas-evento font-bigger" style={{"textAlign":"right", "fontSize":"15px"}}><b>$180.00 MXN</b></Grid>
+                                    </Grid>
+                                    <Grid item xs={12}><InertiaLink href="#!" className='pagar-btn mt-5'>PAGAR</InertiaLink></Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
 

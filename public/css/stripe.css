@@ -1,6 +1,6 @@
-.div-form-container{
+/* .div-form-container{
     background-color: pink;
-}
+} */
 .inputs-pago{
     width:100% !important; 
     font-family: Roboto !important;
@@ -13,7 +13,7 @@
     font-family: Roboto Slab;
     font-weight: 900;
     font-size: 20px;
-    line-height: 55px;
+    line-height: 20px;
     color: #323232;
 }
 .txt-sub-pago{
@@ -23,4 +23,65 @@
     font-size: 17px;
     line-height: 30px;
     color: #999999;
+}
+.txt-sub-pago img{
+    width:80px;
+}
+.div-detalles{
+    border-radius: 4px;
+    border: solid 1px #999999;
+    margin-left: auto !important;
+    margin-right:auto !important;
+}
+.nombre-evento{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #323232;
+}
+.lugar-evento{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #999999;
+}
+.entradas-evento{
+    /* text-align: right; */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    color: #323232;
+} 
+.font-bigger{
+    font-size: 13px ;
+}
+.pagar-btn{
+    height: 38px;
+    background: #323232;
+    border:none;
+    border-radius: 4px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration:none;
+    transition: all ease-in-out 0.25s;
+}
+.pagar-btn:hover{
+    color: white;
+    background: #252525;
+    text-decoration:none;
+    transition: all ease-in-out 0.25s;
 }
