@@ -55,53 +55,59 @@ class PurchaseController extends Controller
 
     public function purchase($idEvento,  Request $request)
     {
-        //dd($request);
-        //esta wea de aqui abajo es provisional
-        $request->total = '5049.00';
-        $request->cantidad = 1;
-        $request->tipo_pago = 'paypal';
+        //verificar que estén logeados
+        if (!auth()->user()) {
+            $status = "Necesitas inciar sesión para comprar.";
+            return redirect()->back()->with(compact('status'));
+        }
+        //verificar que si coincidan los ids del evento
+        if ($idEvento != $request->evento['evento']) {
+            return abort(404);
+        }
+        $evento = Event::with('product')->findOrFail($idEvento);
+        //verificar que si haya cupo todavia
+        $cupo = PurchasesEvents::where('event_id', $idEvento)->count();
+        $cupo = $cupo + $request->values['cantidad'];
+        dd($cupo);
+        if ($cupo > $evento->limite) {
+            $status = "Lo sentimos, el evento seleccionado ya no tiene espacios disponibles.";
+            return redirect()->back()->with(compact('status'));
+        }
 
-
+        $total = 0;
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         //parte para crear la lista de items que se van a cobrar
-        $evento = Event::with('product')->findOrFail($idEvento);
         $items = [];
         $items[0] = new Item();
         $items[0]->setName($evento->product->titulo . ' - ' . $evento->sede . ', ' . $evento->ciudad)
             /** item name **/
             ->setCurrency('MXN')
-            ->setQuantity($request->cantidad)
+            ->setQuantity($request->values['cantidad'])
             ->setPrice(number_format($evento->precio, 2, ".", ""));
         //----------------------aqui falta meter el item del descuento :v pero aun no estoy seguro de como funciona
-        $descuento = $evento->descuento * 10;
+        $descuento = $evento->descuento * 100;
         if ($descuento > 0) {
             $items[1] = new Item();
             $items[1]->setName('Descuento del ' . $descuento . ' % ')
                 /** item name **/
                 ->setCurrency('MXN')
                 ->setQuantity('1')
-                ->setPrice(number_format(($evento->precio * $evento->descuento * -1), 2, ".", ""));
+                ->setPrice('-' . number_format(($evento->precio * ($evento->descuento)) *  $request->values['cantidad'], 2, ".", ""));
+            $total = ($evento->precio * (1 - $evento->descuento)) * $request->values['cantidad'];
         }
-
         $item_list = new ItemList();
         $item_list->setItems($items);
 
         //VARIABLES DE SESION
-        // Session::put('email', $request->email);
-        // Session::put('age', $request->age);
-        // Session::put('genero', $request->genero);
-        // Session::put('telefono', $request->tel);
-        // Session::put('envio', $request->envio);
-        // Session::put('referencias', $request->referencias);
-        //Session::put('eventoId', $evento->id);
         session(['eventoId' => $evento->id]);
-        session(['cantidad' => $request->cantidad]);
-        // Session::put('descuento', $request->descuento);
+        session(['productoId' => $evento->product->id]);
+        session(['cantidad' => $request->values['cantidad']]);
+        session(['total' => $total]);
 
         $amount = new Amount();
-        $amount->setTotal($request->total);
+        $amount->setTotal($total);
         $amount->setCurrency('MXN');
 
         $transaction = new Transaction();
@@ -139,7 +145,7 @@ class PurchaseController extends Controller
 
         if (!$paymentId || !$payerId || !$token) {
             $status = "No se pudo proceder con el pago através de PayPal.";
-            return redirect()->route('evento', session('eventoId'))->with(compact('status'));
+            return redirect()->route('evento', session('productoId'))->with(compact('status'));
         }
         $payment = Payment::get($paymentId, $this->apiContext);
 
@@ -154,7 +160,7 @@ class PurchaseController extends Controller
             $mytime = Carbon::now();
             $purchase->fecha = $mytime->toDateString();
             $purchase->user_id = auth()->user()->id;
-            $purchase->total = 0;
+            $purchase->total = session('total');
             $purchase->save();
 
             $evento = Event::findOrFail(session('eventoId'));
@@ -165,16 +171,20 @@ class PurchaseController extends Controller
                 $compra_evento->precio = $evento->precio;
                 $compra_evento->descuento = $evento->descuento;
                 $compra_evento->asistio = 0;
+                $compra_evento->save();
             }
 
             //aqui acaba lo de registrar la venta en la bd
-            //Mail::to(auth()->user()->correo)->send(new SendMailable($purchase->id));
+            //Mail::to(auth()->user()->email)->send(new SendMailable($purchase->id));
+            $productoId = session('productoId');
             session()->forget('eventoId');
             session()->forget('cantidad');
+            session()->forget('productoId');
+            session()->forget('total');
             $status = "Gracias! El pago a través de PayPal se ha procesado correctamente. Se te enviará un correo electrónico con los detalles de tu pedido.";
-            return redirect()->route('evento', session('eventoId'))->with(compact('status'));
+            return redirect()->route('evento', $productoId)->with(compact('status'));
         }
         $status = "Lo sentimos! El pago a través de PayPal no se pudo realizar.";
-        return redirect()->route('evento', session('eventoId'))->with(compact('status'));
+        return redirect()->route('evento', session('productoId'))->with(compact('status'));
     }
 }
