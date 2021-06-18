@@ -161,7 +161,6 @@ const Evento = ({ eventos }) => {
     const handleAlert = () => {
         alert("Selecciona primero el evento y cuántos lugares quieres comprar");
     };
-    console.log(eventos['0'].product);
     return (
         <>
             {/* HEADER */}
