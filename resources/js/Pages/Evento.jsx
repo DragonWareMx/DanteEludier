@@ -265,12 +265,7 @@ const Evento = ({ eventos }) => {
                                             ${evento.precio} MXN
                                         </div>
                                         <div className="pb-3">
-                                            {
-                                                evento.limite-evento.purchases.length > 0 ?
                                                 <small>ENTRADAS DISPONIBLES</small>
-                                                :
-                                                <small style={{color: 'red'}}>ENTRADAS AGOTADAS</small>
-                                            }
                                             {/* FALTAAAAAA */}
                                         </div>
                                         <Divider style={{ width: "30%" }} />
