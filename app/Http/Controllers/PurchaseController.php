@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Config;
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
@@ -15,18 +16,11 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Exception\PayPalConnectionException;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
-use PayPal\Api\Details;
-use App\Book;
-use App\Sell;
-use App\Book_Sell;
 use App\Mail\SendMailable;
 use App\Mail\SendMailableTransfer;
 use App\Models\Event;
 use App\Models\Purchase;
 use App\Models\PurchasesEvents;
-use App\Tipoenvio;
-use App\Promotion;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 
@@ -62,78 +56,92 @@ class PurchaseController extends Controller
         }
         //verificar que si coincidan los ids del evento
         if ($idEvento != $request->evento['evento']) {
-            return abort(404);
-        }
-        $evento = Event::with('product')->findOrFail($idEvento);
-        //verificar que si haya cupo todavia
-        $cupo = PurchasesEvents::where('event_id', $idEvento)->count();
-        $cupo = $cupo + $request->values['cantidad'];
-        if ($cupo > $evento->limite) {
-            $status = "Lo sentimos, el evento seleccionado ya no tiene espacios disponibles.";
+            $status = "Ha ocurrido un error inesperado, intentalo mas tarde.";
             return redirect()->back()->with(compact('status'));
         }
+        $evento = Event::with('product')->findOrFail($idEvento);
+        if ($request->values['tipo_de_pago'] == 'Transferencia') {
+            Mail::to(auth()->user()->email)->send(new SendMailableTransfer($idEvento, auth()->user()->id, $request->values['cantidad']));
+            $status = "Gracias! Se te enviará un correo electrónico con los detalles de tu pedido y los pasos a seguir para completarlo.";
+            return redirect()->back()->with(compact('status'));
+        } else {
+            //verificar que si haya cupo todavia
+            $cupo = PurchasesEvents::where('event_id', $idEvento)->count();
+            $cupo = $cupo + $request->values['cantidad'];
+            if ($cupo > $evento->limite) {
+                $status = "Lo sentimos, el evento seleccionado ya no tiene espacios disponibles.";
+                return redirect()->back()->with(compact('status'));
+            }
+            if ($request->values['tipo_de_pago'] == 'Stripe') {
+            }
 
-        $total = 0;
-        $payer = new Payer();
-        $payer->setPaymentMethod('paypal');
+            if ($request->values['tipo_de_pago'] == 'Paypal') {
+                $total = 0;
+                $payer = new Payer();
+                $payer->setPaymentMethod('paypal');
 
-        //parte para crear la lista de items que se van a cobrar
-        $items = [];
-        $items[0] = new Item();
-        $items[0]->setName($evento->product->titulo . ' - ' . $evento->sede . ', ' . $evento->ciudad)
-            /** item name **/
-            ->setCurrency('MXN')
-            ->setQuantity($request->values['cantidad'])
-            ->setPrice(number_format($evento->precio, 2, ".", ""));
-        //----------------------aqui falta meter el item del descuento :v pero aun no estoy seguro de como funciona
-        $descuento = $evento->descuento * 100;
-        if ($descuento > 0) {
-            $items[1] = new Item();
-            $items[1]->setName('Descuento del ' . $descuento . ' % ')
-                /** item name **/
-                ->setCurrency('MXN')
-                ->setQuantity('1')
-                ->setPrice('-' . number_format(($evento->precio * ($evento->descuento)) *  $request->values['cantidad'], 2, ".", ""));
-            $total = ($evento->precio * (1 - $evento->descuento)) * $request->values['cantidad'];
+                //parte para crear la lista de items que se van a cobrar
+                $items = [];
+                $items[0] = new Item();
+                $items[0]->setName($evento->product->titulo . ' - ' . $evento->sede . ', ' . $evento->ciudad)
+                    /** item name **/
+                    ->setCurrency('MXN')
+                    ->setQuantity($request->values['cantidad'])
+                    ->setPrice(number_format($evento->precio, 2, ".", ""));
+                //----------------------aqui falta meter el item del descuento :v pero aun no estoy seguro de como funciona
+                $descuento = $evento->descuento * 100;
+                if ($descuento > 0) {
+                    $items[1] = new Item();
+                    $items[1]->setName('Descuento del ' . $descuento . ' % ')
+                        /** item name **/
+                        ->setCurrency('MXN')
+                        ->setQuantity('1')
+                        ->setPrice('-' . number_format(($evento->precio * ($evento->descuento)) *  $request->values['cantidad'], 2, ".", ""));
+                    $total = ($evento->precio * (1 - $evento->descuento)) * $request->values['cantidad'];
+                }
+                $item_list = new ItemList();
+                $item_list->setItems($items);
+
+                //VARIABLES DE SESION
+                session(['eventoId' => $evento->id]);
+                session(['productoId' => $evento->product->id]);
+                session(['cantidad' => $request->values['cantidad']]);
+                session(['total' => $total]);
+
+                $amount = new Amount();
+                $amount->setTotal($total);
+                $amount->setCurrency('MXN');
+
+                $transaction = new Transaction();
+                $transaction->setAmount($amount);
+                $transaction->setDescription('Compra en Dante Eludier');
+                $transaction->setItemList($item_list);
+
+                $callbackurl = route('statusPayPal');
+                $redirectUrls = new RedirectUrls();
+                $redirectUrls->setReturnUrl($callbackurl)
+                    ->setCancelUrl($callbackurl);
+
+                $payment = new Payment();
+                $payment->setIntent('sale')
+                    ->setPayer($payer)
+                    ->setTransactions(array($transaction))
+                    ->setRedirectUrls($redirectUrls);
+
+                try {
+                    $payment->create($this->apiContext);
+                    //echo $payment;
+                    return response('', 409)
+                        ->header('X-Inertia-Location', $payment->getApprovalLink());
+                } catch (PayPalConnectionException $ex) {
+
+                    echo $ex->getData();
+                }
+            }
         }
-        $item_list = new ItemList();
-        $item_list->setItems($items);
 
-        //VARIABLES DE SESION
-        session(['eventoId' => $evento->id]);
-        session(['productoId' => $evento->product->id]);
-        session(['cantidad' => $request->values['cantidad']]);
-        session(['total' => $total]);
-
-        $amount = new Amount();
-        $amount->setTotal($total);
-        $amount->setCurrency('MXN');
-
-        $transaction = new Transaction();
-        $transaction->setAmount($amount);
-        $transaction->setDescription('Compra en Dante Eludier');
-        $transaction->setItemList($item_list);
-
-        $callbackurl = route('statusPayPal');
-        $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl($callbackurl)
-            ->setCancelUrl($callbackurl);
-
-        $payment = new Payment();
-        $payment->setIntent('sale')
-            ->setPayer($payer)
-            ->setTransactions(array($transaction))
-            ->setRedirectUrls($redirectUrls);
-
-        try {
-            $payment->create($this->apiContext);
-            //echo $payment;
-            return response('', 409)
-                ->header('X-Inertia-Location', $payment->getApprovalLink());
-        } catch (PayPalConnectionException $ex) {
-
-            echo $ex->getData();
-        }
+        $status = "Ha ocurrido un error inesperado, intentalo mas tarde.";
+        return redirect()->back()->with(compact('status'));
     }
 
     public function statusPayPal(Request $request)
@@ -185,5 +193,10 @@ class PurchaseController extends Controller
         }
         $status = "Lo sentimos! El pago a través de PayPal no se pudo realizar.";
         return redirect()->route('evento', session('productoId'))->with(compact('status'));
+    }
+
+    public function stripeIndex($idEvento)
+    {
+        return Inertia::render('Stripe');
     }
 }
