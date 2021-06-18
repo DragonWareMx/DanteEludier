@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../layouts/Layout";
-import { Inertia } from '@inertiajs/inertia';
 
 import Grid from "@material-ui/core/Grid";
 
@@ -14,6 +13,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Radio from "@material-ui/core/Radio";
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 
 //iconos
 import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
@@ -72,22 +74,19 @@ const Evento = ({ eventos }) => {
     const classes = useStyles();
     const [orden, setOrden] = React.useState("");
     const [siguiente, setSiguiente] = React.useState(false);
-    const [evento, setEvent] = React.useState('');
-    const [precio, setPrecio] = React.useState('');
-    const [total, setTotal] = React.useState(0);
-    const [indice, setIndice] = React.useState(0);
-    var i;
-
-    const [values, setValues] = React.useState({
-        _method: 'post',
-        orden: '',
-        precio: '',
-        evento: '',
-        total: '',
-        tipo_pago: '',
-        cantidad: 0,
-        descuento: ''
+    const [evento, setEvent] = React.useState({evento: ''});
+    
+    const [values, setValues] =React.useState({
+        precio:0,
+        total: 0, 
+        tipo_de_pago: '',
+        cantidad:0,
     });
+
+    function changePay(event){
+        setValues({...values,
+        tipo_de_pago: event.target.value})
+    }
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -101,16 +100,19 @@ const Evento = ({ eventos }) => {
     }
 
     const eventChange = (event) => {
-        setPrecio(event.target.value);
+        setValues({...values,
+            precio: event.target.value});
     }
 
     const eventoChange = (event) => {
-        console.log(event.target.id);
-        setEvent(event.target.id);
+        setEvent({ evento: event.target.id});
     }
 
     const totalChange = (event) => {
-        setTotal(event.target.value * precio);
+        setValues({...values,
+            total: event.target.value*values.precio,
+            cantidad: event.target.value,
+        });
     }
 
     const handleChange = (event) => {
@@ -126,7 +128,7 @@ const Evento = ({ eventos }) => {
         const day = dob.getDate();
         const monthIndex = dob.getMonth();
         const year = dob.getFullYear();
-        return `${day} ${monthNames[monthIndex]}, `;
+        return `${day} ${monthNames[monthIndex]} `;
     }
 
     const [open, setOpen] = React.useState(false);
@@ -237,7 +239,7 @@ const Evento = ({ eventos }) => {
                                     </div>
                                     <div className="font-weight-normal">
                                         {evento.dates.map((date)=>
-                                            transformaFecha(date.fecha), 
+                                            transformaFecha(date.fecha)
                                         )}
                                     </div>
                                     <div className="text-muted">${evento.precio} MXN</div>
@@ -297,7 +299,7 @@ const Evento = ({ eventos }) => {
                                         <Select
                                             labelId="demo-simple-select-outlined-label"
                                             id="demo-simple-select-outlined1"
-                                            value={precio}
+                                            value={values.precio}
                                             onChange={eventChange}
                                             name={evento}
                                         >
@@ -322,7 +324,7 @@ const Evento = ({ eventos }) => {
                                         <Select
                                             labelId="demo-simple-select-outlined-label"
                                             id="demo-simple-select-outlined"
-                                            value={total}
+                                            value={values.total}
                                             onChange={totalChange}
                                         >
                                             <MenuItem value="">
@@ -344,18 +346,18 @@ const Evento = ({ eventos }) => {
                                 <div className="pt-3">
                                     Precio por lugar
                                     <div className="font-weight-bold">
-                                        ${precio} MXN
+                                        ${values.precio} MXN
                                     </div>
                                 </div>
                                 <div className="pt-3">
                                     Total
                                     <div className="font-weight-bold">
-                                        ${total} MXN
+                                        ${values.total} MXN
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-end">
                                     
-                                    { total > 0 ?
+                                    { values.total > 0 ?
 
                                     <ColorButton
                                         variant="contained"
@@ -395,7 +397,7 @@ const Evento = ({ eventos }) => {
                                 <div>
                                     Total
                                     <div className="font-weight-bold">
-                                        ${total} MXN
+                                        ${values.total} MXN
                                     </div>
                                 </div>
                                 <div className="pt-3">
@@ -403,44 +405,35 @@ const Evento = ({ eventos }) => {
 
                                     {/* FALTA PONER EL DESCUENTO BIEN DESDE LA BD */}
                                     <div className="font-weight-bold">
-                                        ${total * .90} MXN
+                                        ${values.total * .90} MXN
                                     </div>
                                     
                                 </div>
                                 <div className="pt-3">Método de pago</div>
-                                <div className="row">
-                                    <div className="col-md-4">
-                                        <Radio
-                                            value="b"
-                                            name="radio-button-demo"
-                                            inputProps={{ "aria-label": "B" }}
-                                        />
-                                        <img
+                                <div className="row" >
+                                    <RadioGroup aria-label="tipoDePago" name="pay" value={values.tipo_de_pago} onChange={changePay}>
+
+                                        <div className="col-md-4">
+                                            <FormControlLabel value="Paypal" control={<Radio />} label="Paypal"/>
+                                            <img
                                             src="/img/icons/paypallogo.png"
                                             alt=""
-                                            style={{ maxHeight: "50px" }}
+                                            style={{ maxHeight: "25px" }}
                                         />
-                                    </div>
-                                    <div className="col-md-4">
-                                        <Radio
-                                            value="b"
-                                            name="radio-button-demo"
-                                            inputProps={{ "aria-label": "B" }}
-                                        />
-                                        <img
-                                            src="/img/icons/stripelogo.png"
-                                            alt=""
-                                            style={{ maxHeight: "50px" }}
-                                        />
-                                    </div>
-                                    <div className="col-md-4">
-                                        <Radio
-                                            value="b"
-                                            name="radio-button-demo"
-                                            inputProps={{ "aria-label": "B" }}
-                                        />
-                                        Transferencia
-                                    </div>
+                                        </div>
+                                    
+                                        <div className="col-md-4 ">
+                                            <FormControlLabel value="Stripe" control={<Radio />} label="Stripe"/>
+                                            <img
+                                                src="/img/icons/stripelogo.png"
+                                                alt=""
+                                                style={{ maxHeight: "25px" }}
+                                            />
+                                        </div>
+                                        <div className="col-md-4">
+                                        <FormControlLabel value="Transferencia" control={<Radio />} label='Transferencia' />
+                                        </div>
+                                        </RadioGroup>
                                 </div>
                                 <div>
                                     <small>
@@ -450,7 +443,7 @@ const Evento = ({ eventos }) => {
                                 </div>
                                 <div>
                                     <Link
-                                        href="#"
+                                        href=""
                                         color="inherit"
                                         className="font-weight-bold"
                                     >
