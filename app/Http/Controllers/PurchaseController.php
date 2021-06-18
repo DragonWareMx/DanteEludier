@@ -68,7 +68,6 @@ class PurchaseController extends Controller
         //verificar que si haya cupo todavia
         $cupo = PurchasesEvents::where('event_id', $idEvento)->count();
         $cupo = $cupo + $request->values['cantidad'];
-        dd($cupo);
         if ($cupo > $evento->limite) {
             $status = "Lo sentimos, el evento seleccionado ya no tiene espacios disponibles.";
             return redirect()->back()->with(compact('status'));
@@ -175,7 +174,7 @@ class PurchaseController extends Controller
             }
 
             //aqui acaba lo de registrar la venta en la bd
-            //Mail::to(auth()->user()->email)->send(new SendMailable($purchase->id));
+            Mail::to(auth()->user()->email)->send(new SendMailable($purchase->id));
             $productoId = session('productoId');
             session()->forget('eventoId');
             session()->forget('cantidad');
