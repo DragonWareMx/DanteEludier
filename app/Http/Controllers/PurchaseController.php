@@ -22,6 +22,8 @@ use App\Book_Sell;
 use App\Mail\SendMailable;
 use App\Mail\SendMailableTransfer;
 use App\Models\Event;
+use App\Models\Purchase;
+use App\Models\PurchasesEvents;
 use App\Tipoenvio;
 use App\Promotion;
 use Illuminate\Support\Facades\Session;
@@ -42,12 +44,13 @@ class PurchaseController extends Controller
             )
         );
 
-        $this->apiContext->setConfig([
-            'mode' => 'sandbox',
-            'log.LogEnabled' => true,
-            'log.FileName' => 'PayPal.log',
-            'log.LogLevel' => 'FINE'
-        ]);
+        // $this->apiContext->setConfig([
+        //     'mode' => 'sandbox',
+        //     'log.LogEnabled' => true,
+        //     'log.FileName' => 'PayPal.log',
+        //     'log.LogLevel' => 'FINE'
+        // ]);
+        $this->apiContext->setConfig($payPalConfig['settings']);
     }
 
     public function purchase($idEvento,  Request $request)
@@ -72,6 +75,16 @@ class PurchaseController extends Controller
             ->setQuantity($request->cantidad)
             ->setPrice(number_format($evento->precio, 2, ".", ""));
         //----------------------aqui falta meter el item del descuento :v pero aun no estoy seguro de como funciona
+        $descuento = $evento->descuento * 10;
+        if ($descuento > 0) {
+            $items[1] = new Item();
+            $items[1]->setName('Descuento del ' . $descuento . ' % ')
+                /** item name **/
+                ->setCurrency('MXN')
+                ->setQuantity('1')
+                ->setPrice(number_format(($evento->precio * $evento->descuento * -1), 2, ".", ""));
+        }
+
         $item_list = new ItemList();
         $item_list->setItems($items);
 
@@ -83,7 +96,8 @@ class PurchaseController extends Controller
         // Session::put('envio', $request->envio);
         // Session::put('referencias', $request->referencias);
         //Session::put('eventoId', $evento->id);
-        $request->session()->put('eventoId', $evento->id);
+        session(['eventoId' => $evento->id]);
+        session(['cantidad' => $request->cantidad]);
         // Session::put('descuento', $request->descuento);
 
         $amount = new Amount();
@@ -125,7 +139,7 @@ class PurchaseController extends Controller
 
         if (!$paymentId || !$payerId || !$token) {
             $status = "No se pudo proceder con el pago através de PayPal.";
-            return redirect()->route('evento', $request->session()->get('key');)->with(compact('status'));
+            return redirect()->route('evento', session('eventoId'))->with(compact('status'));
         }
         $payment = Payment::get($paymentId, $this->apiContext);
 
@@ -135,67 +149,32 @@ class PurchaseController extends Controller
         $result = $payment->execute($execution, $this->apiContext);
 
         if ($result->getState() == 'approved') {
-            //se registra la venta en la BD en la tabla Sell
-            $sell = new Sell();
+            //se registra la venta en la BD en la tabla Purchases
+            $purchase = new Purchase();
             $mytime = Carbon::now();
-            $sell->status = 'completado';
-            $sell->nombreCliente = $result->getPayer()->getPayerInfo()->getShippingAddress()->getRecipientName();
-            $sell->edad = Session::get('age');
-            $sell->pais = $result->getPayer()->getPayerInfo()->getShippingAddress()->getCountryCode();
-            $sell->genero = Session::get('genero');
-            $sell->ciudad = $result->getPayer()->getPayerInfo()->getShippingAddress()->city;
-            $sell->estado = $result->getPayer()->getPayerInfo()->getShippingAddress()->getState();
-            $sell->correo = Session::get('email');
-            $sell->formaPago = "1";
-            $sell->comprobantePago = "1";
-            $sell->telefono = Session::get('telefono');
-            $sell->direccion = $result->getPayer()->getPayerInfo()->getShippingAddress()->getLine1() . " " .
-                $result->getPayer()->getPayerInfo()->getShippingAddress()->getLine2();
-            $sell->fecha = $mytime->toDateString();
-            if (Session::get('envio') != null) {
-                $envio = Tipoenvio::findOrFail(Session::get('envio'));
-                $sell->precio_envio = $envio->costo;
-                $sell->nombre_envio = $envio->nombre . ' - ' . $envio->descripcion;
-                if (Session::get('referencias') != null) {
-                    $sell->direccion = $sell->direccion . ' Referencia: ' . Session::get('referencias');
-                }
-            }
-            if (Session::get('cuponId') != null && Session::get('descuento') != null) {
-                $sell->discount = Session::get('descuento');
-                $sell->promotion_id = Session::get('cuponId');
-            }
-            $sell->save();
+            $purchase->fecha = $mytime->toDateString();
+            $purchase->user_id = auth()->user()->id;
+            $purchase->total = 0;
+            $purchase->save();
 
-            foreach (session('cart') as $id => $details) {
-                $libro = Book::findOrFail($id);
-                if ($details['cantidadFisico'] > 0) {
-                    $compra = new Book_Sell();
-                    $compra->book_id = $libro->id;
-                    $compra->sell_id = $sell->id;
-                    $compra->precio = number_format(($libro->precioFisico - $libro->precioFisico * ($libro->descuentoFisico / 100)) * $details['cantidadFisico'], 2, ".", "");
-                    $compra->digital = "0";
-                    $compra->cantidad = $details['cantidadFisico'];
-                    $compra->save();
-                    $libro->stockFisico = $libro->stockFisico - $details['cantidadFisico'];
-                    $libro->save();
-                }
-                if ($details['cantidadDigital'] > 0) {
-                    $compra = new Book_Sell();
-                    $compra->book_id = $libro->id;
-                    $compra->sell_id = $sell->id;
-                    $compra->precio = number_format(($libro->precioDigital - $libro->precioDigital * ($libro->descuentoDigital / 100)), 2, ".", "");
-                    $compra->digital = "1";
-                    $compra->cantidad = $details['cantidadDigital'];
-                    $compra->save();
-                }
+            $evento = Event::findOrFail(session('eventoId'));
+            for ($i = 0; $i < session('cantidad'); $i++) {
+                $compra_evento = new PurchasesEvents();
+                $compra_evento->purchase_id = $purchase->id;
+                $compra_evento->event_id = $evento->id;
+                $compra_evento->precio = $evento->precio;
+                $compra_evento->descuento = $evento->descuento;
+                $compra_evento->asistio = 0;
             }
+
             //aqui acaba lo de registrar la venta en la bd
-            Mail::to($sell->correo)->send(new SendMailable($sell->id));
-            session()->forget('cart');
+            //Mail::to(auth()->user()->correo)->send(new SendMailable($purchase->id));
+            session()->forget('eventoId');
+            session()->forget('cantidad');
             $status = "Gracias! El pago a través de PayPal se ha procesado correctamente. Se te enviará un correo electrónico con los detalles de tu pedido.";
-            return redirect()->route('tiendaCatalogo')->with(compact('status'));
+            return redirect()->route('evento', session('eventoId'))->with(compact('status'));
         }
         $status = "Lo sentimos! El pago a través de PayPal no se pudo realizar.";
-        return redirect()->route('carrito')->with(compact('status'));
+        return redirect()->route('evento', session('eventoId'))->with(compact('status'));
     }
 }

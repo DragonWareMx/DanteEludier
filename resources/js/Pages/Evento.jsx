@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../layouts/Layout";
+import { Inertia } from '@inertiajs/inertia';
 
 import Grid from "@material-ui/core/Grid";
 
@@ -87,7 +88,7 @@ const Evento = ({ eventos }) => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        Inertia.post(route("event.purchase", evento), values, {
+        Inertia.post(route("event.purchase", evento.evento), values, {
             onError: () => {
                 // Inertia.reload({ only: ['cursos'], data: { regime: values.regimen } })
             },
