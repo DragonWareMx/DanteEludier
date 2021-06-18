@@ -25,7 +25,7 @@ const ColorButton = withStyles((theme) => ({
     },
 }))(Button);
 
-export default function Product({img, name, price, id}){
+export default function Product({img, name, price, id, events}){
     function limitString(string, length){
         return string.length > length ? 
                     string.substring(0, length - 3) + "..." : 
@@ -43,7 +43,7 @@ export default function Product({img, name, price, id}){
                     {/* IMAGEN */}
                     <Grid item>
                         <div className="producto_imagen" style={{
-                                backgroundImage: img ? 'url("storage/productos/'+ img +'")' : 'url("storage/productos/default.jpg")',
+                                backgroundImage: img ? 'url("/img/productos/'+ img +'")' : 'url("storage/productos/default.jpg")',
                                 backgroundRepeat: "no-repeat",
                                 backgroundPosition: "center center",
                                 backgroundSize: "100%"
@@ -65,8 +65,9 @@ export default function Product({img, name, price, id}){
                         "Próximamente"
                         }
                     </Grid>
-
+                        
                     {/* BOTON */}
+                    { events >0 ?
                     <Grid item>
                         <InertiaLink href={route('evento', id)} style={{textDecoration: "none"}}>
                             <ColorButton
@@ -77,7 +78,10 @@ export default function Product({img, name, price, id}){
                                 MÁS INFORMACIÓN
                             </ColorButton>
                         </InertiaLink>
-                    </Grid>
+                    </Grid>:
+                    <>
+                    </>
+                    }
                 </div>
             </Grid>
         </>

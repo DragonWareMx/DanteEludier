@@ -20,7 +20,7 @@
     <meta name="twitter:creator" content="@DANTEELUDIER">
     <meta property="og:title" content="Dante Eludier Master coach">
     <meta property="og:description" content="Liberando el potencial humano para el bien común">
-    <meta property="og:image" content="{}">
+    <meta property="og:image" content="/img/portadas/portada1.jpg">
     <meta property="og:url" content="https://danteeludier.com">
     <meta property="og:type" content="website">
 

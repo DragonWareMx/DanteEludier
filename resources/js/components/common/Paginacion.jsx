@@ -16,9 +16,9 @@ const Paginacion = ({links}) => {
                         <li className={link.active ? "page-item active" : link.url ? "page-item" : "page-item disabled"} key={index}>
                             <InertiaLink href={link.url ?? "#"} className="page-link" style={{backgroundColor: link.active && "black", borderColor: link.active && "black", color: link.active ? "white" : link.url ? "black" : "#6c757d"}} preserveState>{
                             isNaN(link.label) ? 
-                                index == 0 ? "Previous" 
+                                index == 0 ? "Anterior" 
                                 : index != links.length-1 ? "..."
-                                    : "Next"
+                                    : "Siguiente"
                             : link.label}</InertiaLink>
                         </li>
                     ))

@@ -73,11 +73,7 @@ export default function Navbar() {
                         AVISO DE PRIVACIDAD
                     </Link>
                 </div>
-                <div className="col-md-auto text-center pt-3 pt-md-0">
-                    <Link href="#" className="text-white links-ftr">
-                        POLÍTICA DE PRIVACIDAD
-                    </Link>
-                </div>
+                
                 <div className="col-md-auto text-center pt-3 pt-md-0">
                     <Link href={route('terminos')} className="text-white links-ftr">
                         TÉRMINOS Y CONDICIONES

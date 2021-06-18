@@ -37,6 +37,7 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { maxHeight } from "@material-ui/system";
+import route from "ziggy-js";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -160,7 +161,7 @@ const Evento = ({ eventos }) => {
     const handleAlert = () => {
         alert("Selecciona primero el evento y cuántos lugares quieres comprar");
     };
-
+    console.log(eventos['0'].product);
     return (
         <>
             {/* HEADER */}
@@ -199,7 +200,7 @@ const Evento = ({ eventos }) => {
                     style={{ zIndex: "2", paddingTop: "0" }}
                 >
                     <div className="p-5">
-                        <Link href="#" color="inherit">
+                        <Link href={route('products.index')} color="inherit" style={{textDecoration: 'none'}}>
                             <ArrowLeftIcon /> Regresar
                         </Link>
                         {status && !open &&
@@ -238,6 +239,7 @@ const Evento = ({ eventos }) => {
                                     }}
                                 />
                                 <div className="text-center mt-2">
+                                    <Link rel="stylesheet" href={'/documentos/'+eventos['0'].product.hojaDescriptiva} target='_blank' style={{textDecoration: 'none'}}>
                                     <RoundedButton
                                         variant="outlined"
                                         size="large"
@@ -245,6 +247,7 @@ const Evento = ({ eventos }) => {
                                         SABER MÁS...
                                         {/* FALTA QUE AL DARLE CLICK BAJE EL PDF */}
                                     </RoundedButton>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="col-md-8">
@@ -262,7 +265,12 @@ const Evento = ({ eventos }) => {
                                             ${evento.precio} MXN
                                         </div>
                                         <div className="pb-3">
-                                            <small>ENTRADAS DISPONIBLES</small>
+                                            {
+                                                evento.limite-evento.purchases.length > 0 ?
+                                                <small>ENTRADAS DISPONIBLES</small>
+                                                :
+                                                <small style={{color: 'red'}}>ENTRADAS AGOTADAS</small>
+                                            }
                                             {/* FALTAAAAAA */}
                                         </div>
                                         <Divider style={{ width: "30%" }} />
@@ -313,20 +321,19 @@ const Evento = ({ eventos }) => {
                                 <div>
                                     <div>Evento</div>
                                     <FormControl
+                                        id='form1'
                                         variant="outlined"
                                         className="col-md-8"
                                     >
+                                        
                                         <Select
-                                            labelId="demo-simple-select-outlined-label"
+                                            labelId="demo-simple-select-outlined-label1"
                                             id="demo-simple-select-outlined1"
                                             value={values.precio}
                                             onChange={eventChange}
                                             name={evento}
                                         >
-                                            <MenuItem value="">
-                                                Selecciona el evento
-                                            </MenuItem>
-
+                                            
                                             {eventos.map((evento) => (
                                                 <MenuItem
                                                     key={evento.id}
@@ -353,9 +360,6 @@ const Evento = ({ eventos }) => {
                                             value={values.total}
                                             onChange={totalChange}
                                         >
-                                            <MenuItem value="">
-                                                <em>None</em>
-                                            </MenuItem>
                                             <MenuItem value={1}>
                                                 1 lugar
                                             </MenuItem>
@@ -409,7 +413,7 @@ const Evento = ({ eventos }) => {
                                     </div>
                                     <div className="text-right">
                                         <small>
-                                            <Link href="#" color="inherit">
+                                            <Link href={route('contacto')} color="inherit">
                                                 ¿Te interesa este producto para
                                                 tu equipo de trabajo?
                                             </Link>
@@ -424,13 +428,13 @@ const Evento = ({ eventos }) => {
                                     </div>
                                 }
                                 <div>
-                                    Total
+                                    Subtotal
                                     <div className="font-weight-bold">
                                         ${values.total} MXN
                                     </div>
                                 </div>
                                 <div className="pt-3">
-                                    Subtotal con descuento *
+                                    Total con descuento *
                                     {/* FALTA PONER EL DESCUENTO BIEN DESDE LA BD */}
                                     <div className="font-weight-bold">
                                         ${values.total * 0.9} MXN

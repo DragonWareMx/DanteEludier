@@ -165,6 +165,7 @@ const Contacto = () => {
                                 <p className="text-center text-md-left">
                                     Cananea 850, Colonia, 60160 Uruapan, Mich.
                                 </p>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9860.817331318385!2d-102.04956979303141!3d19.397971554628796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842de2f5abcb663f%3A0xbd3b205d27ac781b!2sCananea%20850%2C%20Colonia%2C%2060160%20Uruapan%2C%20Mich.!5e0!3m2!1ses!2smx!4v1624033053982!5m2!1ses!2smx" width="300" height="225" style={{border: '0'}} allowfullscreen="" loading="lazy"></iframe>
                             </div>
                             <div className="pt-5">
                                 <div className="d-flex justify-content-center justify-content-md-start">
