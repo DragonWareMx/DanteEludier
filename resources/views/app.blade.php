@@ -15,6 +15,15 @@
         rel="stylesheet">
     @routes
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DANTEELUDIER">
+    <meta name="twitter:creator" content="@DANTEELUDIER">
+    <meta property="og:title" content="Dante Eludier Master coach">
+    <meta property="og:description" content="Liberando el potencial humano para el bien común">
+    <meta property="og:image" content="{}">
+    <meta property="og:url" content="https://danteeludier.com">
+    <meta property="og:type" content="website">
+
 </head>
 
 <body>
