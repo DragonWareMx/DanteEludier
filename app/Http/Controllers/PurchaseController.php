@@ -52,6 +52,13 @@ class PurchaseController extends Controller
 
     public function purchase($idEvento,  Request $request)
     {
+        //dd($request);
+        //esta wea de aqui abajo es provisional
+        $request->total = '5049.00';
+        $request->cantidad = 1;
+        $request->tipo_pago = 'paypal';
+
+
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
@@ -75,7 +82,8 @@ class PurchaseController extends Controller
         // Session::put('telefono', $request->tel);
         // Session::put('envio', $request->envio);
         // Session::put('referencias', $request->referencias);
-        // Session::put('cuponId', $request->cuponId);
+        //Session::put('eventoId', $evento->id);
+        $request->session()->put('eventoId', $evento->id);
         // Session::put('descuento', $request->descuento);
 
         $amount = new Amount();
@@ -101,14 +109,93 @@ class PurchaseController extends Controller
         try {
             $payment->create($this->apiContext);
             //echo $payment;
-            return redirect()->away($payment->getApprovalLink());
+            return response('', 409)
+                ->header('X-Inertia-Location', $payment->getApprovalLink());
         } catch (PayPalConnectionException $ex) {
 
             echo $ex->getData();
         }
     }
 
-    public function statusPayPal()
+    public function statusPayPal(Request $request)
     {
+        $paymentId = $request->input('paymentId');
+        $payerId = $request->input('PayerID');
+        $token = $request->input('token');
+
+        if (!$paymentId || !$payerId || !$token) {
+            $status = "No se pudo proceder con el pago através de PayPal.";
+            return redirect()->route('evento', $request->session()->get('key');)->with(compact('status'));
+        }
+        $payment = Payment::get($paymentId, $this->apiContext);
+
+        $execution = new PaymentExecution();
+        $execution->setPayerId($payerId);
+
+        $result = $payment->execute($execution, $this->apiContext);
+
+        if ($result->getState() == 'approved') {
+            //se registra la venta en la BD en la tabla Sell
+            $sell = new Sell();
+            $mytime = Carbon::now();
+            $sell->status = 'completado';
+            $sell->nombreCliente = $result->getPayer()->getPayerInfo()->getShippingAddress()->getRecipientName();
+            $sell->edad = Session::get('age');
+            $sell->pais = $result->getPayer()->getPayerInfo()->getShippingAddress()->getCountryCode();
+            $sell->genero = Session::get('genero');
+            $sell->ciudad = $result->getPayer()->getPayerInfo()->getShippingAddress()->city;
+            $sell->estado = $result->getPayer()->getPayerInfo()->getShippingAddress()->getState();
+            $sell->correo = Session::get('email');
+            $sell->formaPago = "1";
+            $sell->comprobantePago = "1";
+            $sell->telefono = Session::get('telefono');
+            $sell->direccion = $result->getPayer()->getPayerInfo()->getShippingAddress()->getLine1() . " " .
+                $result->getPayer()->getPayerInfo()->getShippingAddress()->getLine2();
+            $sell->fecha = $mytime->toDateString();
+            if (Session::get('envio') != null) {
+                $envio = Tipoenvio::findOrFail(Session::get('envio'));
+                $sell->precio_envio = $envio->costo;
+                $sell->nombre_envio = $envio->nombre . ' - ' . $envio->descripcion;
+                if (Session::get('referencias') != null) {
+                    $sell->direccion = $sell->direccion . ' Referencia: ' . Session::get('referencias');
+                }
+            }
+            if (Session::get('cuponId') != null && Session::get('descuento') != null) {
+                $sell->discount = Session::get('descuento');
+                $sell->promotion_id = Session::get('cuponId');
+            }
+            $sell->save();
+
+            foreach (session('cart') as $id => $details) {
+                $libro = Book::findOrFail($id);
+                if ($details['cantidadFisico'] > 0) {
+                    $compra = new Book_Sell();
+                    $compra->book_id = $libro->id;
+                    $compra->sell_id = $sell->id;
+                    $compra->precio = number_format(($libro->precioFisico - $libro->precioFisico * ($libro->descuentoFisico / 100)) * $details['cantidadFisico'], 2, ".", "");
+                    $compra->digital = "0";
+                    $compra->cantidad = $details['cantidadFisico'];
+                    $compra->save();
+                    $libro->stockFisico = $libro->stockFisico - $details['cantidadFisico'];
+                    $libro->save();
+                }
+                if ($details['cantidadDigital'] > 0) {
+                    $compra = new Book_Sell();
+                    $compra->book_id = $libro->id;
+                    $compra->sell_id = $sell->id;
+                    $compra->precio = number_format(($libro->precioDigital - $libro->precioDigital * ($libro->descuentoDigital / 100)), 2, ".", "");
+                    $compra->digital = "1";
+                    $compra->cantidad = $details['cantidadDigital'];
+                    $compra->save();
+                }
+            }
+            //aqui acaba lo de registrar la venta en la bd
+            Mail::to($sell->correo)->send(new SendMailable($sell->id));
+            session()->forget('cart');
+            $status = "Gracias! El pago a través de PayPal se ha procesado correctamente. Se te enviará un correo electrónico con los detalles de tu pedido.";
+            return redirect()->route('tiendaCatalogo')->with(compact('status'));
+        }
+        $status = "Lo sentimos! El pago a través de PayPal no se pudo realizar.";
+        return redirect()->route('carrito')->with(compact('status'));
     }
 }
