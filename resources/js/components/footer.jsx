@@ -22,7 +22,7 @@ export default function Navbar() {
                     alignItems="center"
                 >
                     <a
-                        href=""
+                        href="https://www.facebook.com/YoSoyDanteEludier"
                         target="_blank"
                         style={{ marginLeft: 12, marginRight: 12 }}
                     >
@@ -33,7 +33,7 @@ export default function Navbar() {
                         ></FacebookIcon>
                     </a>
                     <a
-                        href=""
+                        href="https://twitter.com/DANTEELUDIER"
                         target="_blank"
                         style={{ marginLeft: 12, marginRight: 12 }}
                     >
@@ -44,7 +44,7 @@ export default function Navbar() {
                         ></TwitterIcon>
                     </a>
                     <a
-                        href=""
+                        href="https://www.instagram.com/danteeludier/"
                         target="_blank"
                         style={{ marginLeft: 12, marginRight: 12 }}
                     >
@@ -55,7 +55,7 @@ export default function Navbar() {
                         ></InstagramIcon>
                     </a>
                     <a
-                        href=""
+                        href="https://www.youtube.com/channel/UC7XJQ4Vrl5dvv4TPW9KpHwQ"
                         target="_blank"
                         style={{ marginLeft: 12, marginRight: 12 }}
                     >
