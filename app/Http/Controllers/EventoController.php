@@ -11,7 +11,7 @@ class EventoController extends Controller
     public function index($id)
     {
         return Inertia::render('Evento', [
-            'eventos' => Event::where('product_id', $id)->with('dates', 'product')->get()
+            'eventos' => Event::where('product_id', $id)->with('dates', 'product', 'product.images')->get()
         ]);
     }
 }
