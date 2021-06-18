@@ -19,7 +19,7 @@ const Stripe = () => {
             <div style={{ backgroundColor: "#000000" }}>
                 <div className="portadaContacto">
                     <img
-                        src="/img/portadas/cuentas.jpg"
+                        src="/img/portadas/payment.jpg"
                         className="img-fluid"
                     ></img>
                 </div>
