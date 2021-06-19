@@ -23,5 +23,8 @@ class ContactoController extends Controller
         ]);
         Mail::to('oscarwaii@hotmail.com')->send(new contactoMail($request));
         //aidee.vargas86@outlook.com
+
+        $status = "Correo enviado con éxito.";
+        return redirect()->back()->with(compact('status'));
     }
 }

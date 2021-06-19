@@ -29,6 +29,6 @@ class contactoMail extends Mailable
     public function build()
     {
         return $this->subject('Nuevo email desde página de contacto.')
-            ->view('emails.contactomail', ['request' => $request]);
+            ->view('emails.contactomail', ['request' => $this->request]);
     }
 }
