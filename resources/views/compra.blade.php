@@ -27,17 +27,13 @@
 
     <form action="{{route('event.stripe.pay', $evento->id)}}" id="payment-form" method="POST">
         @csrf
+        <div class="compra-header">
+            <a href="{{ route('inicio') }}" class="logo">
+                <img src="{{ asset('img/danteLogoBlanco.png') }}">
+            </a>
+        </div>
+
         <div class="container-fluid">
-            <div class="row">
-                <div class="compra-header">
-                    <div style="width: 100%">
-                        <a href="{{ route('inicio') }}" class="logo">
-                            <img src="{{ asset('img/logos/logo.png') }}">
-                        </a>
-                    </div>
-                    <hr>
-                </div>
-            </div>
             <div class="row">
                 @if(session('status'))
                 <div class="alert alert-danger" role="alert" style="width: 100%">
@@ -60,7 +56,7 @@
                 <div class="compra-table">
                     <div class="compra-cell cell-80">
                         <div class="formulario-container">
-                            <h1 class="row-m">Información de la tarjeta:</h1>
+                            <h1 class="row-m">Información de la tarjeta</h1>
                         </div>
                         <div class="formulario-container">
 
@@ -110,10 +106,9 @@
 
                             {{-- TEL --}}
                             <div class="row row-p" style="display: block">
-                                <label for="card-element">
-                                    <a href="https://stripe.com/mx" target="_blank"><img
-                                            src="{{ asset('img/ico/stripe-payment-logo.png') }}" width="50px"
-                                            height="50px"></a> Tarjeta de crédito o débito
+                                <label for="card-element" class="txt-title-tarjeta">
+                                    <a href="https://stripe.com/mx" target="_blank">
+                                        <img src="{{ asset('img/icons/stripe-pago.png') }}" width="80px"></a> Tarjeta de crédito o débito
                                 </label>
                                 <div id="card-element">
                                     <!-- A Stripe Element will be inserted here. -->
@@ -137,43 +132,23 @@
                             {{-- HEADER TABLA --}}
                             <div class="productos-compra">
                                 <div class="producto-table">
-                                    <div class="producto-row">
-                                        <div class="producto-cell contenido-producto">
-                                            <p><b>Cantidad</b></p>
-                                        </div>
-                                        <div class="producto-cell contenido-producto">
-                                            <p><b>Evento</b></p>
-                                        </div>
-                                        <div class="producto-cell contenido-producto-sm">
-                                            <p><b>Precio</b></p>
-                                        </div>
-                                    </div>
-                                    {{-- PRODUCTOS --}}
-                                    <div class="producto-row">
-                                        <div class="producto-cell contenido-producto">
-                                            <p>{{$cantidad}}</p>
-                                        </div>
-                                        <div class="producto-cell contenido-producto">
-                                            <p>{{$evento->product->titulo . ' - ' . $evento->sede . ' - ' . $evento->ciudad }}</b>
-                                            </p>
-                                        </div>
-                                        <div class="producto-cell contenido-producto-sm">
-                                            <p>${{ number_format( $evento->precio, 2 , ".", "," ) }}</p>
-                                        </div>
-                                    </div>
+                                    <p class="nombre-evento">{{$evento->product->titulo . ' - ' . $evento->sede . ' - ' . $evento->ciudad }}</b></p>
+                                    <p class="entradas-evento">{{$cantidad}} LUGARES</p>
+                                    <p class="entradas-evento">${{ number_format( $evento->precio, 2 , ".", "," ) }}</p>
+                                       
                                 </div>
 
                                 {{-- TOTALES --}}
                                 <div class="producto-table">
                                     <div class="producto-row">
                                         <div class="totales" id="subtotalHTML" style="">
-                                            <p>Subtotal</p>
+                                            <p>SUBTOTAL</p>
                                             <p id="subtotal">
                                                 ${{ number_format($evento->precio * $cantidad, 2 , ".", "," ) }} </p>
                                         </div>
 
                                         <div class="totales" id="cuponHTML" style="">
-                                            <p>Descuento</p>
+                                            <p>DESCUENTO</p>
                                             <p id="cuponDescuento">
                                                 ${{ number_format( ($evento->precio * $cantidad) * $evento->descuento , 2 , ".", "," ) }}
                                             </p>
@@ -181,16 +156,19 @@
                                         @php
                                         $total=$total - (($evento->precio * $cantidad) * $evento->descuento )
                                         @endphp
-                                        <div class="totales">
-                                            <p>Total</p>
+                                        <div class="totales bigger">
+                                            <p>TOTAL</p>
                                             <p id="total">${{ number_format($total, 2 , ".", "," ) }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {{-- <input type="submit" value="Realizar compra" class="shrink"> --}}
-                            <button type="submit" id="complete-order" class="boton_compra shrink"
+                            <button type="submit" id="complete-order" class="pagar-btn shrink"
                                 name="action">Pagar</button>
+
+                            <a href="#!" class="cancelar-btn">Cancelar</a>
+                            <hr>
                         </div>
                     </div>
                 </div>
@@ -199,7 +177,7 @@
 
         <hr>
 
-        <div class="libro-regresar">
+        {{-- <div class="libro-regresar">
             <div class="boton">
                 <button onclick="location.href='{{ route('inicio') }}'" type="button">
                     <div class="row" style="margin-right:0px; margin-left: auto;">
@@ -210,7 +188,7 @@
                     </div>
                 </button>
             </div>
-        </div>
+        </div> --}}
     </form>
 
     <script>

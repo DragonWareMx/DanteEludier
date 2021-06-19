@@ -83,28 +83,6 @@ const Stripe = () => {
                             </Grid>
                         </Grid>
 
-
-                        {/* <h1 className="title-white-card-middle mr-2 ml-2">Yo soy Dante Eludier</h1>
-
-                        <Grid container alignItems="flex-start" justify="center" className="mb-5">
-                            <Grid container item xs={12} sm={6} md={4} spacing={0} justify="center" className="p-5 grid-im-dante">
-                                <img src="/img/amazon.png" />
-                                <Grid container justify="center" className="title-im-dante p-3">ESCRITOR BEST SELLER</Grid>
-                                <Grid className="txt-im-dante">El <b>Curso de la Solvencia</b> y <b>Dinero Espiritual</b>, podrás adquirirlos en Amazon o en librerías de prestigio.</Grid>
-                            </Grid>
-                            <Grid container item xs={12} sm={6} md={4} spacing={0} justify="center" className="p-5 grid-im-dante">
-                                <img src="/img/dante.jpg" style={{borderRadius:"150px"}} />
-                                <Grid container justify="center" className="title-im-dante p-3">EMPRESARIO</Grid>
-                                <Grid className="txt-im-dante"><b>Fundador y CEO</b> de Axen Capital y Give Fundation. </Grid>
-                            </Grid>
-                            <Grid container item xs={12} sm={6} md={4} spacing={0} justify="center" className="p-5 grid-im-dante">
-                                <img src="/img/coach.png" />
-                                <Grid container justify="center" className="title-im-dante p-3">MASTER COACH</Grid>
-                                <Grid className="txt-im-dante"><b>Finanzas, Desarrollo Humano, Emprendimiento y espiritualidad.</b></Grid>
-                            </Grid>
-                            
-                        </Grid> */}
-
                     </div>
                 </div>
             </Grid>
