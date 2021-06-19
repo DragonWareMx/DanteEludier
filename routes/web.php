@@ -34,6 +34,9 @@ Route::get('/productos/evento/{id}', [App\Http\Controllers\EventoController::cla
 
 Route::get('/libros', [App\Http\Controllers\ProductController::class, 'libros'])->name('libros');
 
+Route::get('/Stripe', function () {
+    return Inertia::render('Stripe');
+})->name('stripe');
 
 Route::get('/Terminos-y-condiciones', function () {
     return Inertia::render('Terminos');
@@ -50,4 +53,5 @@ Route::get('/inertia', function () {
 });
 
 Route::post('/productos/evento/{idEvento}/comprar', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('event.purchase');
+Route::get('/productos/evento/{idEvento}/stripe', [App\Http\Controllers\PurchaseController::class, 'stripeIndex'])->name('event.stripe.index');
 Route::get('/paypal/status',  [App\Http\Controllers\PurchaseController::class, 'statusPayPal'])->name('statusPayPal');
