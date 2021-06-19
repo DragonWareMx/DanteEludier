@@ -91,6 +91,10 @@ export default function Navbar() {
         setOpen(false);
     };
 
+    function isUrl(url) {
+        return window.location.href.indexOf(url) > -1
+    }
+
     return (
         <div className="fixed-top">
             {/* NAVBAR >= 992px */}
