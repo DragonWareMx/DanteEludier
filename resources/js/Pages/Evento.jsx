@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../layouts/Layout";
+import { Inertia } from '@inertiajs/inertia';
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 import Grid from "@material-ui/core/Grid";
 
@@ -69,6 +71,7 @@ const RoundedButton = withStyles((theme) => ({
 }))(Button);
 
 const Evento = ({ eventos }) => {
+    const { errors, status } = usePage().props;
     const classes = useStyles();
     const [orden, setOrden] = React.useState("");
     const [siguiente, setSiguiente] = React.useState(false);
@@ -87,7 +90,7 @@ const Evento = ({ eventos }) => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        Inertia.post(route("event.purchase", evento), values, {
+        Inertia.post(route("event.purchase", evento.evento), { values, evento }, {
             onError: () => {
                 // Inertia.reload({ only: ['cursos'], data: { regime: values.regimen } })
             },
@@ -199,6 +202,11 @@ const Evento = ({ eventos }) => {
                         <Link href="#" color="inherit">
                             <ArrowLeftIcon /> Regresar
                         </Link>
+                        {status && !open &&
+                            <div className="alert alert-warning" role="alert">
+                                {status}
+                            </div>
+                        }
                         <div className="row">
                             <div className="col-md">
                                 <h3 className="text-center text-md-left">
@@ -410,6 +418,11 @@ const Evento = ({ eventos }) => {
                                 </div>
                             </div>
                             <div className={siguiente ? "" : "d-none"}>
+                                {status && open &&
+                                    <div className="alert alert-warning" role="alert">
+                                        {status}
+                                    </div>
+                                }
                                 <div>
                                     Total
                                     <div className="font-weight-bold">
@@ -472,21 +485,24 @@ const Evento = ({ eventos }) => {
                                     </small>
                                 </div>
                                 <div>
-                                    <Link
-                                        href=""
-                                        color="inherit"
-                                        className="font-weight-bold"
-                                    >
-                                        Registrate
-                                    </Link>{" "}
+                                    <InertiaLink href="/register">
+                                        <Link
+                                            color="inherit"
+                                            className="font-weight-bold"
+                                        >
+                                            Registrate
+                                        </Link>
+                                    </InertiaLink>
+                                    {" "}
                                     o{" "}
-                                    <Link
-                                        href="#"
-                                        color="inherit"
-                                        className="font-weight-bold"
-                                    >
-                                        Inicia Sesión
-                                    </Link>
+                                    <InertiaLink href="/login">
+                                        <Link
+                                            color="inherit"
+                                            className="font-weight-bold"
+                                        >
+                                            Inicia Sesión
+                                        </Link>
+                                    </InertiaLink>
                                 </div>
                                 <div className="bttm-pos p-3">
                                     <div className="d-flex justify-content-end align-items-center">
