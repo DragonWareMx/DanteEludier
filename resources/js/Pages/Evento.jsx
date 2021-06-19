@@ -73,16 +73,14 @@ const RoundedButton = withStyles((theme) => ({
 
 const Evento = ({ eventos }) => {
     const { errors, status } = usePage().props;
-    const classes = useStyles();
-    const [orden, setOrden] = React.useState("");
     const [siguiente, setSiguiente] = React.useState(false);
-    const [evento, setEvent] = React.useState({ evento: "" });
+    const [evento, setEvento] = React.useState({ evento: "" });
 
     const [values, setValues] = React.useState({
         precio: 0,
         total: 0,
         tipo_de_pago: "",
-        cantidad: 0,
+        cantidad: ''
     });
 
     function changePay(event) {
@@ -98,25 +96,59 @@ const Evento = ({ eventos }) => {
         });
     }
 
-    const eventChange = (event) => {
-        setValues({ ...values, precio: event.target.value });
+    const eventoChange = (e) => {
+        const value = e.target.value
+
+        setEvento(evento => ({
+            ...evento,
+            evento: value,
+        }))
+
+        setPrecio()
     };
 
-    const eventoChange = (event) => {
-        setEvent({ evento: event.target.id });
-    };
+    function lugaresChange(e) {
+        const value = e.target.value
 
-    const totalChange = (event) => {
-        setValues({
+        setValues(values => ({
             ...values,
-            total: event.target.value * values.precio,
-            cantidad: event.target.value,
-        });
-    };
+            cantidad: value,
+        }))
+        
+        setPrecio()
+      }
 
-    const handleChange = (event) => {
-        setOrden(event.target.value);
-    };
+    function setPrecio(){
+        if(evento.evento){
+            var eventoSeleccionado
+            eventos.forEach(eventoI => {
+                if(evento.evento == eventoI.id)
+                    eventoSeleccionado = eventoI
+            });
+
+            if(eventoSeleccionado)
+                setValues(values => ({
+                    ...values,
+                    precio: eventoSeleccionado.precio,
+                }))
+        }
+        
+        if(values.cantidad){
+            if(values.precio)
+            setValues(values => ({
+                ...values,
+                total: values.precio * values.cantidad,
+            }))
+        }
+    }
+
+    function showPrice(precio){
+        return parseFloat(precio).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+    }
+
+    useEffect(() => {
+        setPrecio()
+    }, [evento, values.cantidad]);
 
     function transformaFecha(fecha) {
         const dob = new Date(fecha);
@@ -161,7 +193,7 @@ const Evento = ({ eventos }) => {
     const handleAlert = () => {
         alert("Selecciona primero el evento y cuántos lugares quieres comprar");
     };
-    console.log(eventos['0'].product);
+
     return (
         <>
             {/* HEADER */}
@@ -252,7 +284,7 @@ const Evento = ({ eventos }) => {
                             </div>
                             <div className="col-md-8">
                                 {eventos.map((evento) => (
-                                    <>
+                                    <div key={evento.id}>
                                         <div className="font-weight-normal">
                                             {evento.ciudad}, {evento.sede}
                                         </div>
@@ -269,7 +301,7 @@ const Evento = ({ eventos }) => {
                                             {/* FALTAAAAAA */}
                                         </div>
                                         <Divider style={{ width: "30%" }} />
-                                    </>
+                                    </div>
                                 ))}
                             </div>
                         </div>
@@ -323,18 +355,18 @@ const Evento = ({ eventos }) => {
                                         
                                         <Select
                                             labelId="demo-simple-select-outlined-label1"
-                                            id="demo-simple-select-outlined1"
-                                            value={values.precio}
-                                            onChange={eventChange}
-                                            name={evento}
+                                            id="evento"
+                                            value={evento.evento}
+                                            onChange={eventoChange}
+                                            displayEmpty
                                         >
-                                            
+                                            <MenuItem value="">
+                                                <em>Selecciona un evento</em>
+                                            </MenuItem>
                                             {eventos.map((evento) => (
                                                 <MenuItem
                                                     key={evento.id}
-                                                    value={evento.precio}
-                                                    id={evento.id}
-                                                    onClick={eventoChange}
+                                                    value={evento.id}
                                                 >
                                                     {evento.ciudad},{" "}
                                                     {evento.sede}
@@ -343,6 +375,7 @@ const Evento = ({ eventos }) => {
                                         </Select>
                                     </FormControl>
                                 </div>
+
                                 <div className="pt-2">
                                     <div>Lugares</div>
                                     <FormControl
@@ -351,10 +384,14 @@ const Evento = ({ eventos }) => {
                                     >
                                         <Select
                                             labelId="demo-simple-select-outlined-label"
-                                            id="demo-simple-select-outlined"
-                                            value={values.total}
-                                            onChange={totalChange}
+                                            id="cantidad"
+                                            value={values.cantidad}
+                                            onChange={lugaresChange}
+                                            displayEmpty
                                         >
+                                            <MenuItem value="">
+                                                <em>Selecciona los lugares</em>
+                                            </MenuItem>
                                             <MenuItem value={1}>
                                                 1 lugar
                                             </MenuItem>
@@ -368,16 +405,17 @@ const Evento = ({ eventos }) => {
                                         </Select>
                                     </FormControl>
                                 </div>
+
                                 <div className="pt-3">
                                     Precio por lugar
                                     <div className="font-weight-bold">
-                                        ${values.precio} MXN
+                                        {values.precio ? "$" + showPrice(values.precio) + " MXN" : "Selecciona un evento"}
                                     </div>
                                 </div>
                                 <div className="pt-3">
                                     Total
                                     <div className="font-weight-bold">
-                                        ${values.total} MXN
+                                        {values.total ? "$" + showPrice(values.total) + " MXN" : "Selecciona un evento y la cantidad de lugares"}
                                     </div>
                                 </div>
                                 <div className="bttm-pos p-3">
@@ -425,14 +463,14 @@ const Evento = ({ eventos }) => {
                                 <div>
                                     Subtotal
                                     <div className="font-weight-bold">
-                                        ${values.total} MXN
+                                        ${showPrice(values.total)} MXN
                                     </div>
                                 </div>
                                 <div className="pt-3">
                                     Total con descuento *
                                     {/* FALTA PONER EL DESCUENTO BIEN DESDE LA BD */}
                                     <div className="font-weight-bold">
-                                        ${values.total * 0.9} MXN
+                                        ${showPrice(values.total * 0.9)} MXN
                                     </div>
                                 </div>
                                 <div className="pt-3">Método de pago</div>
