@@ -21,10 +21,15 @@ class ContactoController extends Controller
             'email' => 'required|max:255|email',
             'mensaje' => 'required',
         ]);
-        Mail::to('oscarwaii@hotmail.com')->send(new contactoMail($request));
-        //aidee.vargas86@outlook.com
+        try {
+            Mail::to('aidee.vargas86@outlook.com')->send(new contactoMail($request));
+            //aidee.vargas86@outlook.com
 
-        $status = "Correo enviado con éxito.";
-        return redirect()->back()->with(compact('status'));
+            $status = "Correo enviado con éxito.";
+            return redirect()->back()->with(compact('status'));
+        } catch (\Throwable $th) {
+            $status = "Ha ocurrido un error inesperado, por favor vuelva a intentarlo más tarde.";
+            return redirect()->back()->with(compact('status'));
+        }
     }
 }
