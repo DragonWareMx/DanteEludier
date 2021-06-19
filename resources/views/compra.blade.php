@@ -167,7 +167,7 @@
                             <button type="submit" id="complete-order" class="pagar-btn shrink"
                                 name="action">Pagar</button>
 
-                            <a href="#!" class="cancelar-btn">Cancelar</a>
+                            <a href="javascript:history.back(-1);" class="cancelar-btn">Cancelar</a>
                             <hr>
                         </div>
                     </div>
