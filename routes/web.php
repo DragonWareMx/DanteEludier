@@ -26,6 +26,7 @@ Auth::routes();
 Route::get('/inicio', [App\Http\Controllers\InicioController::class, 'index'])->name('inicio');
 
 Route::get('/contacto', [App\Http\Controllers\ContactoController::class, 'index'])->name('contacto');
+Route::post('/contactoSend', [App\Http\Controllers\ContactoController::class, 'contactoSend'])->name('contactoSend');
 
 Route::get('/Dante', [App\Http\Controllers\DanteController::class, 'index'])->name('Dante');
 
