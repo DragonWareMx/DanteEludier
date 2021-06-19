@@ -310,7 +310,7 @@ const Evento = ({ eventos }) => {
                                             )}
                                         </div>
                                         <div className="text-muted">
-                                            ${evento.precio} MXN
+                                            ${showPrice(evento.precio)} MXN
                                         </div>
                                         <div className="pb-3">
                                                 <small>ENTRADAS DISPONIBLES</small>
