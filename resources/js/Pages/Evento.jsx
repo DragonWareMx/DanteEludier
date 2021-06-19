@@ -487,6 +487,7 @@ const Evento = ({ eventos }) => {
                                         <Link
                                             color="inherit"
                                             className="font-weight-bold"
+                                            target="_blank"
                                         >
                                             Registrate
                                         </Link>
@@ -497,6 +498,7 @@ const Evento = ({ eventos }) => {
                                         <Link
                                             color="inherit"
                                             className="font-weight-bold"
+                                            target="_blank"
                                         >
                                             Inicia Sesión
                                         </Link>
