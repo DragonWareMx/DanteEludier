@@ -12,7 +12,7 @@ class ProductController extends Controller
     {
 
         return Inertia::render('Products', [
-            'products' => Product::with('images:foto,product_id', 'events:precio,product_id')->orderBy('created_at','DESC')->paginate(2)
+            'products' => Product::with('images:foto,product_id', 'events:precio,product_id')->orderBy('created_at','DESC')->paginate(4)
         ]);
     }
 
