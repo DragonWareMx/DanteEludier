@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\contactoMail;
+use Illuminate\Support\Facades\Mail;
 
 class ContactoController extends Controller
 {
@@ -19,5 +21,7 @@ class ContactoController extends Controller
             'email' => 'required|max:255|email',
             'mensaje' => 'required',
         ]);
+        Mail::to('oscarwaii@hotmmail.com')->send(new contactoMail($request));
+        //aidee.vargas86@outlook.com
     }
 }
