@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout";
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 import route from 'ziggy-js';
 import { Inertia } from '@inertiajs/inertia';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import Grid from "@material-ui/core/Grid";
 import { Container } from "@material-ui/core";
@@ -206,6 +207,9 @@ const Contacto = () => {
                                     ENVIAR
                                 </ColorButton>
                             </div>
+                            {status &&
+                                <FormHelperText id="component-text" style={{ color: "green" ,fontSize:16}}>{status}</FormHelperText>
+                            }
                         </form>
                         <div className="col-md-2"></div>
                         <div className="col-md-5">
