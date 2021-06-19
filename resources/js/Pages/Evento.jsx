@@ -126,11 +126,27 @@ const Evento = ({ eventos }) => {
                     eventoSeleccionado = eventoI
             });
 
-            if(eventoSeleccionado)
-                setValues(values => ({
-                    ...values,
-                    precio: eventoSeleccionado.precio,
-                }))
+            if(eventoSeleccionado){
+                if(values.cantidad){
+                    setValues(values => ({
+                        ...values,
+                        precio: eventoSeleccionado.precio,
+                        total: eventoSeleccionado.precio * values.cantidad
+                    }))
+                }
+                else{
+                    setValues(values => ({
+                        ...values,
+                        precio: eventoSeleccionado.precio,
+                    }))
+                }
+            }
+        }
+        else{
+            setValues(values => ({
+                ...values,
+                precio: '',
+            }))
         }
         
         if(values.cantidad){
