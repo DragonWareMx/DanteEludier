@@ -1,5 +1,8 @@
 import React from "react";
 import Layout from "../layouts/Layout";
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
+import route from 'ziggy-js';
+import { Inertia } from '@inertiajs/inertia';
 
 import Grid from "@material-ui/core/Grid";
 import { Container } from "@material-ui/core";
@@ -48,6 +51,37 @@ const useStyles = makeStyles((theme) => ({
 const Contacto = () => {
     const classes = useStyles();
 
+    const { errors, status } = usePage().props;
+
+    const [values, setValues] = React.useState({
+        _method: 'post',
+        nombre: '',
+        email: '',
+        mensaje: '',
+    });
+
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    //manda el forumulario
+    function handleSubmit(e) {
+        const button = document.getElementById('boton-contacto');
+        button.disabled = true;
+        e.preventDefault()
+        Inertia.post(route('contactoSend'), values,
+            {
+                onError: () => {
+                    button.disabled = false;
+                },
+                onSuccess: () => {
+                    button.disabled = false;
+                },
+                preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
+            }
+        )
+    }
+
     return (
         <>
             <div style={{ backgroundColor: "#000000" }}>
@@ -92,7 +126,7 @@ const Contacto = () => {
             >
                 <div className="inicio_rounded" style={{ zIndex: "2" }}>
                     <div className="row p-5">
-                        <div className="col-md-5">
+                        <form className="col-md-5" onSubmit={handleSubmit}>
                             <h1
                                 className="text-center text-md-left"
                                 style={{
@@ -108,11 +142,18 @@ const Contacto = () => {
                                     style={{ color: "#BFBFBF" }}
                                 />
                                 <TextField
+                                    error={errors.nombre ? true : false}
                                     className="ml-2"
                                     id="nombre"
                                     label="Nombre"
                                     fullWidth
+                                    required
+                                    value={values.nombre}
+                                    onChange={handleChange('nombre')}
                                 />
+                                {errors.nombre &&
+                                    <FormHelperText id="component-error-text" style={{color:'red'}}>{errors.nombre}</FormHelperText>
+                                }
                             </div>
                             <div className="d-flex pt-4">
                                 <MailIcon
@@ -120,11 +161,19 @@ const Contacto = () => {
                                     style={{ color: "#BFBFBF" }}
                                 />
                                 <TextField
+                                    error={errors.email ? true : false}
                                     className="ml-2"
-                                    id="correo"
+                                    id="email"
                                     label="Correo electrónico"
                                     fullWidth
+                                    required
+                                    type={'email'} 
+                                    value={values.email}
+                                    onChange={handleChange('email')}
                                 />
+                                {errors.email &&
+                                    <FormHelperText id="component-error-text" style={{color:'red'}}>{errors.email}</FormHelperText>
+                                }
                             </div>
                             <div className="d-flex pt-4">
                                 <MessageIcon
@@ -132,11 +181,18 @@ const Contacto = () => {
                                     style={{ color: "#BFBFBF" }}
                                 />
                                 <TextField
+                                    error={errors.mensaje ? true : false}
                                     className="ml-2"
                                     id="mensaje"
                                     label="Mensaje"
                                     fullWidth
+                                    required
+                                    value={values.mensaje}
+                                    onChange={handleChange('mensaje')}
                                 />
+                                {errors.mensaje &&
+                                    <FormHelperText id="component-error-text" style={{color:'red'}}>{errors.mensaje}</FormHelperText>
+                                }
                             </div>
                             <div className="d-flex justify-content-center justify-content-md-end pb-4 pb-md-0">
                                 <ColorButton
@@ -144,11 +200,13 @@ const Contacto = () => {
                                     color="primary"
                                     className="mt-4"
                                     size="large"
+                                    id='boton-contacto'
+                                    type='submit'
                                 >
                                     ENVIAR
                                 </ColorButton>
                             </div>
-                        </div>
+                        </form>
                         <div className="col-md-2"></div>
                         <div className="col-md-5">
                             <h5
