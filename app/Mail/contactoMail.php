@@ -10,15 +10,15 @@ use Illuminate\Queue\SerializesModels;
 class contactoMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    private $request;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($request)
     {
-        //
+        $this->request = $request;
     }
 
     /**
@@ -28,6 +28,7 @@ class contactoMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject('Nuevo email desde página de contacto.')
+            ->view('emails.contactomail', ['request' => $request]);
     }
 }

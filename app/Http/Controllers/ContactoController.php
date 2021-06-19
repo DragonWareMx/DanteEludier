@@ -21,7 +21,7 @@ class ContactoController extends Controller
             'email' => 'required|max:255|email',
             'mensaje' => 'required',
         ]);
-        Mail::to('oscarwaii@hotmmail.com')->send(new contactoMail($request));
+        Mail::to('oscarwaii@hotmail.com')->send(new contactoMail($request));
         //aidee.vargas86@outlook.com
     }
 }
