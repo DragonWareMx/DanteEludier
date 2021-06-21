@@ -33,7 +33,7 @@ export default function Product({img, name, price, id, events}){
     }
 
     function showPrice(precio){
-        return parseFloat(precio).toLocaleString('en-US')
+        return parseFloat(precio).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
     }
 
     return (
