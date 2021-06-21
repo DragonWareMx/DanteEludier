@@ -110,8 +110,8 @@ const Dante = () => {
                             <div className="title-comunication mb-2">UBICACIÓN</div>
                             <div className="text-comunication mb-4">Cananea 850, Colonia, 60160 Uruapan, Mich.</div>
                             <div className="title-comunication mb-2">TELÉFONO</div>
-                            <div className="text-comunication mb-4">+52 452 130-0576 <br /> +52 443 155-1753</div>
-                            <Grid container item xs={12} justify="center" className="mt-3"><a href="https://api.whatsapp.com/send/?phone=524521300576&text&app_absent=0" target="_blank" className='libro_comprar contact-btn' style={{width:"235px"}}><WhatsAppIcon style={{marginRight:0}}></WhatsAppIcon>ENVÍANOS UN MENSAJE</a></Grid>
+                            <div className="text-comunication mb-4">+52 452 182-0018</div>
+                            <Grid container item xs={12} justify="center" className="mt-3"><a href="https://api.whatsapp.com/send/?phone=524521820018&text&app_absent=0" target="_blank" className='libro_comprar contact-btn' style={{width:"235px"}}><WhatsAppIcon style={{marginRight:0}}></WhatsAppIcon>ENVÍANOS UN MENSAJE</a></Grid>
                         </Grid>
                     </div>
                     <Club />

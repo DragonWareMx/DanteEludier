@@ -293,7 +293,7 @@ const Evento = ({ eventos }) => {
                                         size="large"
                                     >
                                         SABER MÁS...
-                                        {/* FALTA QUE AL DARLE CLICK BAJE EL PDF */}
+                                     
                                     </RoundedButton>
                                     </Link>
                                 </div>
@@ -514,12 +514,12 @@ const Evento = ({ eventos }) => {
                                             <FormControlLabel
                                                 value="Stripe"
                                                 control={<Radio />}
-                                                label="Stripe"
+                                                label="Débito/Crédito"
                                             />
                                             <img
                                                 src="/img/icons/stripelogo.png"
                                                 alt=""
-                                                style={{ maxHeight: "25px" }}
+                                                style={{ maxHeight: "22px" }}
                                             />
                                         </div>
                                         <div className="col-lg-2">
@@ -579,7 +579,7 @@ const Evento = ({ eventos }) => {
                                     </div>
                                     <div className="text-right">
                                         <small>
-                                            <Link href="#" color="inherit">
+                                            <Link href={route('contacto')} color="inherit">
                                                 ¿Te interesa este producto para
                                                 tu equipo de trabajo?
                                             </Link>

@@ -286,7 +286,7 @@
               <h4
                 style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: -1px; line-height: 30px;color: black">
                 Puedes transferir o depositar con los siguientes datos, luego envía tu comprobante al correo:
-                aidee.vargas86@outlook.com y nos pondremos en contacto contigo para confirmar tu asistencia.
+                actividadespublicasdanteeludier@gmail.com y nos pondremos en contacto contigo para confirmar tu asistencia.
               </h4>
               <img src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img/transfer.jpg')))}}"
                 alt="Datos transferencia" border="0" width="400px"

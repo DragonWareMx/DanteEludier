@@ -235,9 +235,7 @@ const Contacto = () => {
                                     <h5>TELÉFONO</h5>
                                 </div>
                                 <p className="text-center text-md-left">
-                                    +52 452 130-0576
-                                    <br />
-                                    +52 443 155-1753
+                                    +52 452 182-0018
                                 </p>
                             </div>
                             <div className="text-center text-md-left">
@@ -247,6 +245,9 @@ const Contacto = () => {
                                     className="mt-4"
                                     startIcon={<WhatsAppIcon />}
                                     size="large"
+                                    href="https://api.whatsapp.com/send/?phone=524521820018&text&app_absent=0"
+                                    target="_blank"
+                                    style={{color: 'white'}}
                                 >
                                     ENVÍANOS UN MENSAJE
                                 </ColorButton>

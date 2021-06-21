@@ -24,6 +24,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 
 import { green, purple } from "@material-ui/core/colors";
 import "../../../public/css/navbar.css";
@@ -105,10 +106,12 @@ export default function Navbar() {
                     }`}
                 >
                     <div className="mr-auto">
+                        <InertiaLink href={route('inicio')}>
                         <img
                             src="/img/danteLogoBlanco.png"
                             style={{ maxHeight: 40 }}
                         />
+                        </InertiaLink>
                     </div>
                     <div className="align-self-center">
                         <InertiaLink href={route("inicio")} style={{textDecoration: "none"}} >
@@ -162,6 +165,16 @@ export default function Navbar() {
                             </ColorButton>
                         </InertiaLink>
 
+                        <InertiaLink href='/logout' method="post" style={{textDecoration: "none"}} >
+                            <Button
+                                style={{ color: "#FFFFFF" }}
+                                startIcon={<MeetingRoomIcon />}
+                                className="ml-3 grow"
+                            >
+                                Cerrar sesión
+                            </Button>
+                        </InertiaLink>
+
                         <FormControl className={classes.formControl}>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -174,6 +187,7 @@ export default function Navbar() {
                                 <MenuItem value={"EN"}>EN</MenuItem>
                             </Select>
                         </FormControl>
+                        
                     </div>
                 </div>
             </div>
