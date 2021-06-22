@@ -45,6 +45,12 @@ class HandleInertiaRequests extends Middleware
             //         'message' => $request->session()->get('message')
             //     ];
             // },
+
+            // Lazily
+            'auth.user' => fn () => $request->user()
+                ? $request->user()->id
+                : null,
+
             'status' => function () use ($request) {
                 return  $request->session()->get('status');
             },

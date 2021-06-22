@@ -29,7 +29,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import { green, purple } from "@material-ui/core/colors";
 import "../../../public/css/navbar.css";
 
-import { InertiaLink } from '@inertiajs/inertia-react'
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 import {
     createMuiTheme,
@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar() {
+    const { auth } = usePage().props;
     const classes = useStyles();
     const theme = useTheme();
     const [colorChange, setColorchange] = React.useState(false);
@@ -101,20 +102,19 @@ export default function Navbar() {
             {/* NAVBAR >= 992px */}
             <div className="d-none d-lg-block">
                 <div
-                    className={`nvbr p-3 d-flex ${
-                        colorChange ? "colorChange" : ""
-                    }`}
+                    className={`nvbr p-3 d-flex ${colorChange ? "colorChange" : ""
+                        }`}
                 >
                     <div className="mr-auto">
                         <InertiaLink href={route('inicio')}>
-                        <img
-                            src="/img/danteLogoBlanco.png"
-                            style={{ maxHeight: 40 }}
-                        />
+                            <img
+                                src="/img/danteLogoBlanco.png"
+                                style={{ maxHeight: 40 }}
+                            />
                         </InertiaLink>
                     </div>
                     <div className="align-self-center">
-                        <InertiaLink href={route("inicio")} style={{textDecoration: "none"}} >
+                        <InertiaLink href={route("inicio")} style={{ textDecoration: "none" }} >
                             <Button
                                 style={{ color: "#FFFFFF" }}
                                 startIcon={<HomeIcon />}
@@ -124,7 +124,7 @@ export default function Navbar() {
                             </Button>
                         </InertiaLink>
 
-                        <InertiaLink href={route("Dante")} style={{textDecoration: "none"}} >
+                        <InertiaLink href={route("Dante")} style={{ textDecoration: "none" }} >
                             <Button
                                 style={{ color: "#FFFFFF" }}
                                 startIcon={<AddIcon />}
@@ -134,7 +134,7 @@ export default function Navbar() {
                             </Button>
                         </InertiaLink>
 
-                        <InertiaLink href={route("contacto")} style={{textDecoration: "none"}} >
+                        <InertiaLink href={route("contacto")} style={{ textDecoration: "none" }} >
                             <Button
                                 style={{ color: "#FFFFFF" }}
                                 startIcon={<RoomIcon />}
@@ -144,7 +144,7 @@ export default function Navbar() {
                             </Button>
                         </InertiaLink>
 
-                        <InertiaLink href={route("libros")} style={{textDecoration: "none"}} >
+                        <InertiaLink href={route("libros")} style={{ textDecoration: "none" }} >
                             <Button
                                 style={{ color: "#FFFFFF" }}
                                 startIcon={<BookmarkIcon />}
@@ -154,7 +154,7 @@ export default function Navbar() {
                             </Button>
                         </InertiaLink>
 
-                        <InertiaLink href={route("products.index")} style={{textDecoration: "none"}} >
+                        <InertiaLink href={route("products.index")} style={{ textDecoration: "none" }} >
                             <ColorButton
                                 variant="contained"
                                 color="primary"
@@ -165,15 +165,17 @@ export default function Navbar() {
                             </ColorButton>
                         </InertiaLink>
 
-                        <InertiaLink href='/logout' method="post" style={{textDecoration: "none"}} >
-                            <Button
-                                style={{ color: "#FFFFFF" }}
-                                startIcon={<MeetingRoomIcon />}
-                                className="ml-3 grow"
-                            >
-                                Cerrar sesión
-                            </Button>
-                        </InertiaLink>
+                        {auth.user &&
+                            <InertiaLink href='/logout' method="post" style={{ textDecoration: "none" }} >
+                                <Button
+                                    style={{ color: "#FFFFFF" }}
+                                    startIcon={<MeetingRoomIcon />}
+                                    className="ml-3 grow"
+                                >
+                                    Cerrar sesión
+                                </Button>
+                            </InertiaLink>
+                        }
 
                         <FormControl className={classes.formControl}>
                             <Select
@@ -187,16 +189,15 @@ export default function Navbar() {
                                 <MenuItem value={"EN"}>EN</MenuItem>
                             </Select>
                         </FormControl>
-                        
+
                     </div>
                 </div>
             </div>
 
             <div className="d-lg-none">
                 <div
-                    className={`nvbr p-3 d-flex ${
-                        colorChange ? "colorChange" : ""
-                    }`}
+                    className={`nvbr p-3 d-flex ${colorChange ? "colorChange" : ""
+                        }`}
                 >
                     <IconButton
                         aria-label="delete"
@@ -273,7 +274,7 @@ export default function Navbar() {
                                     </ListItemIcon>
                                     <ListItemText primary="Contacto" />
                                 </ListItem>
-                                <ListItem button 
+                                <ListItem button
                                     key="Libros"
                                     component='a'
                                     href={route('libros')}>
