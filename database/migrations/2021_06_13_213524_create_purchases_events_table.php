@@ -16,7 +16,7 @@ class CreatePurchasesEventsTable extends Migration
         Schema::create('purchases_events', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
+            $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('purchase_id');
             $table->foreign('purchase_id')->references('id')->on('purchases');
 

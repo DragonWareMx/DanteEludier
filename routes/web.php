@@ -57,3 +57,5 @@ Route::post('/productos/evento/{idEvento}/comprar', [App\Http\Controllers\Purcha
 Route::get('/productos/evento/{idEvento}/stripe', [App\Http\Controllers\PurchaseController::class, 'stripeIndex'])->name('event.stripe.index');
 Route::post('/productos/evento/{idEvento}/stripe/pay', [App\Http\Controllers\PurchaseController::class, 'stripePay'])->name('event.stripe.pay');
 Route::get('/paypal/status',  [App\Http\Controllers\PurchaseController::class, 'statusPayPal'])->name('statusPayPal');
+
+Route::get('/boleto/{uuid}',  [App\Http\Controllers\EventoController::class, 'verBoleto'])->name('boleto.ver');

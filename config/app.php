@@ -175,6 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        App\Providers\ObserverProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+
+
 
 
     ],
@@ -230,6 +234,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'Uuid' => Webpatser\Uuid\Uuid::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
+
 
 
     ],
