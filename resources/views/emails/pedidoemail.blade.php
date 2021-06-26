@@ -289,7 +289,7 @@
         <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%"
           style="max-width: 600px;">
           <tr>
-            <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid #d4dadf">
+            <td align="center" valign="top" style="font-size: 0; ">
               <!--[if (gte mso 9)|(IE)]>
               <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
               <tr>
@@ -341,6 +341,75 @@
       </td>
     </tr>
     <!-- end receipt address block -->
+
+    {{-- Esta cosa la puse yo y es para el qr --}}
+    <tr>
+      <td align="center" bgcolor="#1a1a1a" valign="top" width="100%">
+        <!--[if (gte mso 9)|(IE)]>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+        <tr>
+        <td align="center" valign="top" width="600">
+        <![endif]-->
+        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%"
+          style="max-width: 600px;">
+          <tr>
+            <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid #d4dadf">
+              <!--[if (gte mso 9)|(IE)]>
+              <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+              <tr>
+              <td align="left" valign="top" width="300">
+              <![endif]-->
+              <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px;">
+                  <tr>
+                    <td align="left" valign="top"
+                      style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                      <p><strong>Tus boletos</strong></p>
+                      @foreach ($purchase->purchases_events as $compra_evento)
+                      <p>Boleto #{{ $loop->index + 1}}</p>
+                      <p>
+                        <img
+                          src="{!!$message->embedData(QrCode::format('png')->size(300)->generate(route('boleto.ver', $compra_evento->uuid)), 'QrCode.png', 'image/png')!!}">
+                      </p>
+                      @endforeach
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <!--[if (gte mso 9)|(IE)]>
+              </td>
+              <td align="left" valign="top" width="300">
+              <![endif]-->
+              {{-- ///////////////////////////////////////////////////////////////////////////////////////ESTO ES EL DE DIRECCION DE ENVIO --}}
+              {{-- <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px;">
+                  <tr>
+                    <td align="left" valign="top"
+                      style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                      <p><strong>Dirección de envío</strong></p>
+                      <p>viledruid<br>
+                        Morelia, Michoacan <br>
+                        Mexico</p>
+                    </td>
+                  </tr>
+                </table>
+              </div> --}}
+              {{-- AQUI ACABA --}}
+              <!--[if (gte mso 9)|(IE)]>
+              </td>
+              </tr>
+              </table>
+              <![endif]-->
+            </td>
+          </tr>
+        </table>
+        <!--[if (gte mso 9)|(IE)]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
+      </td>
+    </tr>
 
     <!-- start footer -->
     <tr>

@@ -18,7 +18,9 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "paypal/rest-api-sdk-php": "^1.14",
-        "tightenco/ziggy": "^0.9.4"
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "tightenco/ziggy": "^0.9.4",
+        "webpatser/laravel-uuid": "^4.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
