@@ -366,6 +366,7 @@
                       style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                       <p><strong>Tus boletos</strong></p>
                       @foreach ($purchase->purchases_events as $compra_evento)
+                      <p>Boleto #{{ $loop->index + 1}}</p>
                       <p>
                         <img
                           src="{!!$message->embedData(QrCode::format('png')->size(300)->generate(route('boleto.ver', $compra_evento->uuid)), 'QrCode.png', 'image/png')!!}">
