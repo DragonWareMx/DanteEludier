@@ -22,6 +22,19 @@ class UserSeeder extends Seeder
             'password' => Hash::make('viledruid9000'),
             'phone' => '4432021993',
         ]);
+        DB::table('users')->insert([
+            'name' => 'Checador',
+            'email' =>  'checador@dragonware.com.mx',
+            'password' => Hash::make('viledruid9000'),
+            'phone' => '4432021993',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Cliente',
+            'email' =>  'cliente@dragonware.com.mx',
+            'password' => Hash::make('viledruid9000'),
+            'phone' => '4432021993',
+        ]);
 
     }
 }

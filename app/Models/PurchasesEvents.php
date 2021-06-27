@@ -13,4 +13,8 @@ class PurchasesEvents extends Model
     {
         return $this->belongsTo('App\Models\Event');
     }
+    public function purchase()
+    {
+        return $this->belongsTo('App\Models\Purchase');
+    }
 }

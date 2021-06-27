@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class RegisterController extends Controller
@@ -71,11 +72,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        DB::beginTransaction();
+        
+        // try {
+        //     $newUser = new User;
+        //     $newUser->name =$data['nombre'];
+        //     $newUser->email =$data['email'];
+        //     $newUser->phone =$data['telefono'];
+        //     $newUser->password= Hash::make($data['password']);
+
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        // }
+        
         return User::create([
             'name' => $data['nombre'],
             'email' => $data['email'],
             'phone' => $data['telefono'],
             'password' => Hash::make($data['password']),
-        ]);
+        ])->roles()->sync(3);
     }
 }

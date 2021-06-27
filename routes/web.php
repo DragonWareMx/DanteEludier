@@ -59,3 +59,4 @@ Route::post('/productos/evento/{idEvento}/stripe/pay', [App\Http\Controllers\Pur
 Route::get('/paypal/status',  [App\Http\Controllers\PurchaseController::class, 'statusPayPal'])->name('statusPayPal');
 
 Route::get('/boleto/{uuid}',  [App\Http\Controllers\EventoController::class, 'verBoleto'])->name('boleto.ver');
+Route::get('/boleto/check/{uuid}',  [App\Http\Controllers\EventoController::class, 'check'])->name('check');

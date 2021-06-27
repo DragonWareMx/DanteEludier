@@ -24,7 +24,7 @@ class CreatePurchasesEventsTable extends Migration
             $table->foreign('event_id')->references('id')->on('events');
 
             $table->decimal('precio');
-            $table->decimal('descuento');
+            $table->decimal('descuento')->nullable();
 
             $table->tinyInteger('asistio');
         });
