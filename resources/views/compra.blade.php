@@ -108,7 +108,8 @@
                             <div class="row row-p" style="display: block">
                                 <label for="card-element" class="txt-title-tarjeta">
                                     <a href="https://stripe.com/mx" target="_blank">
-                                        <img src="{{ asset('img/icons/stripe-pago.png') }}" width="80px"></a> Tarjeta de crédito o débito
+                                        <img src="{{ asset('img/icons/stripe-pago.png') }}" width="80px"></a> Tarjeta de
+                                    crédito o débito
                                 </label>
                                 <div id="card-element">
                                     <!-- A Stripe Element will be inserted here. -->
@@ -132,10 +133,12 @@
                             {{-- HEADER TABLA --}}
                             <div class="productos-compra">
                                 <div class="producto-table">
-                                    <p class="nombre-evento">{{$evento->product->titulo . ' - ' . $evento->sede . ' - ' . $evento->ciudad }}</b></p>
+                                    <p class="nombre-evento">
+                                        {{$evento->product->titulo . ' - ' . $evento->sede . ' - ' . $evento->ciudad }}</b>
+                                    </p>
                                     <p class="entradas-evento">{{$cantidad}} LUGARES</p>
                                     <p class="entradas-evento">${{ number_format( $evento->precio, 2 , ".", "," ) }}</p>
-                                       
+
                                 </div>
 
                                 {{-- TOTALES --}}
@@ -174,17 +177,22 @@
                         </div>
                         <div style="margin-top:20px">
                             <p class="nombre-evento" style="text-align: justify, color: #323232;">
-                                Tu pago será procesado con <a href="https://stripe.com/mx" target="_blank">Stripe</a>, una  
-                                pasarela de pagos que permite que realices tu transacción con seguridad y confianza. Si necesitas más Información 
-                                te invitamos a visitar su sitio oficial para conocer más acerca de cómo protegen tu <a href="https://stripe.com/mx/privacy">información</a>
-                                y tus transacciones. 
-                                El sitio danteeludier.com no almacena ningún tipo de información bancaria de los usuarios, la misma es enviada
-                                y administrada por Stripe.   
-                                Recuerda que en cualquier momento puedes leer nuestro <a href={{route('aviso')}} target="_blank">
+                                Tu pago será procesado con <a href="https://stripe.com/mx" target="_blank">Stripe</a>,
+                                una
+                                pasarela de pagos que permite que realices tu transacción con seguridad y confianza. Si
+                                necesitas más Información
+                                te invitamos a visitar su sitio oficial para conocer más acerca de cómo protegen tu <a
+                                    href="https://stripe.com/mx/privacy">información</a>
+                                y tus transacciones.
+                                El sitio danteeludier.com no almacena ningún tipo de información bancaria de los
+                                usuarios, la misma es enviada
+                                y administrada por Stripe.
+                                Recuerda que en cualquier momento puedes leer nuestro <a href={{route('aviso')}}
+                                    target="_blank">
                                     Aviso de privacidad</a> y los <a href={{route('terminos')}} target="_blank">
-                                        Términos y condiciones</a> de este sitio.
+                                    Términos y condiciones</a> de este sitio.
                             </p>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -210,7 +218,7 @@
     <script>
         (function(){
                 // Create a Stripe client.
-                var stripe = Stripe('pk_test_51J1E9eKEMA0vYt5pgqg847YaMmgUFoLWwK7jcY8YmV8tDkjJKjfotT7JlBlvQcHRrB2DA4PPmNu6Hjh1wXWHHIkP00sLR9TGr1');
+                var stripe = Stripe('{{ env('STRIPE_PUBLIC') }}';);
 
                 // Create an instance of Elements.
                 var elements = stripe.elements();
