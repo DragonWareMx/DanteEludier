@@ -24,6 +24,7 @@
     <meta property="og:image" content="/img/portadas/portada1.jpg">
     <meta property="og:url" content="https://danteeludier.com">
     <meta property="og:type" content="website">
+    <meta name=»twitter:image»https://rockcontent.com/es/wp-content/uploads/sites/3/2015/05/Marketing-de-Contenido-620×316.jpg»>
 
 </head>
 
