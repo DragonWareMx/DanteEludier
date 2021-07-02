@@ -48,13 +48,13 @@ const Products = ({ products }) => {
         });
         return precio
     }
-
+    console.log(products);
     return (
         <>
             <InertiaHead>
                 <meta property="og:title" content="Dante Eludier Master coach"/>
                 <meta property="og:description" content="Liberando el potencial humano para el bien común"/>
-                <meta property="og:image" content={"/img/productos/"+products['0'].images['0'].foto}/>
+                <meta property="og:image" content={"/img/productos/"+products.data['0'].images['0'].foto}/>
                 <meta property="og:url" content="https://danteeludier.com/productos"/>
                 <meta property="og:type" content="website"/>
             </InertiaHead>
