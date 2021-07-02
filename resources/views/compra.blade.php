@@ -218,7 +218,7 @@
     <script>
         (function(){
                 // Create a Stripe client.
-                var stripe = Stripe('{{ env('STRIPE_PUBLIC') }}';);
+                var stripe = Stripe('{{ env('STRIPE_PUBLIC') }}');
 
                 // Create an instance of Elements.
                 var elements = stripe.elements();
