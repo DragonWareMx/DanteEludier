@@ -11,11 +11,20 @@ import "/css/contacto.css";
 import Club from '../components/Club';
 import Libro from '../components/Libro';
 import Libro2 from '../components/Libro2';
+import { InertiaHead } from '@inertiajs/inertia-react';
 
 
 const Libros = () => { 
     return (
         <>
+            <InertiaHead>
+                <meta property="og:title" content="Dante Eludier Master coach"/>
+                <meta property="og:description" content="Liberando el potencial humano para el bien común"/>
+                <meta property="og:image" content="/img/books/libro2.png"/>
+                <meta property="og:url" content="https://danteeludier.com/libros"/>
+                <meta property="og:type" content="website"/>
+            </InertiaHead>
+
             <div style={{ backgroundColor: "#000000" }}>
                 <div className="portadaContacto">
                     <img

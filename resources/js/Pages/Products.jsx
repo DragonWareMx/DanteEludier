@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../layouts/Layout";
-
+import { InertiaHead } from '@inertiajs/inertia-react';
 import Grid from '@material-ui/core/Grid';
 
 //componentes
@@ -51,6 +51,14 @@ const Products = ({ products }) => {
 
     return (
         <>
+            <InertiaHead>
+                <meta property="og:title" content="Dante Eludier Master coach"/>
+                <meta property="og:description" content="Liberando el potencial humano para el bien común"/>
+                <meta property="og:image" content={"/img/productos/"+products[0].images[0].foto}/>
+                <meta property="og:url" content="https://danteeludier.com/productos"/>
+                <meta property="og:type" content="website"/>
+            </InertiaHead>
+
             {/* HEADER */}
             <div style={{ backgroundColor: "#000000" }}>
                 <div className="portadaContacto">

@@ -4,6 +4,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 import route from 'ziggy-js';
 import { Inertia } from '@inertiajs/inertia';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { InertiaHead } from '@inertiajs/inertia-react';
 
 import Grid from "@material-ui/core/Grid";
 import { Container } from "@material-ui/core";
@@ -85,6 +86,14 @@ const Contacto = () => {
 
     return (
         <>
+            <InertiaHead>
+                <meta property="og:title" content="Dante Eludier Master coach"/>
+                <meta property="og:description" content="Liberando el potencial humano para el bien común"/>
+                <meta property="og:image" content="/img/portadas/cuentas.jpg"/>
+                <meta property="og:url" content="https://danteeludier.com/contacto"/>
+                <meta property="og:type" content="website"/>
+            </InertiaHead>
+            
             <div style={{ backgroundColor: "#000000" }}>
                 <div className="portadaContacto">
                     <img

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../layouts/Layout";
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
-
+import { InertiaHead } from '@inertiajs/inertia-react'
 import Grid from "@material-ui/core/Grid";
 
 //componentes
@@ -212,6 +212,14 @@ const Evento = ({ eventos }) => {
 
     return (
         <>
+            <InertiaHead>
+                <meta property="og:title" content="Dante Eludier Master coach"/>
+                <meta property="og:description" content="Liberando el potencial humano para el bien común"/>
+                <meta property="og:image" content={"/img/events/" +
+                                        eventos["0"].product.images["0"].foto}/>
+                <meta property="og:url" content={"https://danteeludier.com/productos/evento/"+eventos['0'].product.id}/>
+                <meta property="og:type" content="website"/>
+            </InertiaHead>
             {/* HEADER */}
             <div style={{ backgroundColor: "#000000" }}>
                 <div className="portadaContacto">

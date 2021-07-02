@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout";
 import { InertiaLink } from '@inertiajs/inertia-react'
 import { withStyles } from "@material-ui/core/styles";
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import { InertiaHead } from '@inertiajs/inertia-react';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -18,6 +19,14 @@ import Club from '../components/Club';
 const Dante = () => { 
     return (
         <>
+            <InertiaHead>
+                <meta property="og:title" content="Dante Eludier Master coach"/>
+                <meta property="og:description" content="Liberando el potencial humano para el bien común"/>
+                <meta property="og:image" content="/img/portadas/team21.png"/>
+                <meta property="og:url" content="https://danteeludier.com/Dante"/>
+                <meta property="og:type" content="website"/>
+            </InertiaHead>
+
             <div style={{ backgroundColor: "#000000" }}>
                 <div className="portadaContacto">
                     <img
