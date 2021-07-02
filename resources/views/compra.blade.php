@@ -218,7 +218,7 @@
     <script>
         (function(){
                 // Create a Stripe client.
-                var stripe = Stripe({{ env('STRIPE_PUBLIC') }});
+                var stripe = Stripe('pk_live_51J1E9eKEMA0vYt5pARv2ivrJiI6boEHvHoLNRtN6AnFbhjVtJ8OtniMjMet1lNwq4s4o1ySRqPd0mMUTCBu2vQE800RNFGSk6n');
 
                 // Create an instance of Elements.
                 var elements = stripe.elements();
