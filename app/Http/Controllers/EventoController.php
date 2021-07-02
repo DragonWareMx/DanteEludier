@@ -36,12 +36,13 @@ class EventoController extends Controller
 
     public function verBoleto($uuid)
     {
-        \Gate::authorize('haveaccess', ['client.perm','check.perm']);
-
-
-        $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user')->first();
+        if(Auth::user()){
+        $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
         return Inertia::render('Boleto', ['boleto' => $compra_evento, 'rol' => Auth::user()->roles[0]->name]);
-       
+        }
+        else {
+            return Inertia::render('register');
+        }
     }
     public function check($uuid)
     {
