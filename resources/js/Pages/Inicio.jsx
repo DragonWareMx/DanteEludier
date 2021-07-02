@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout';
 import '/css/inicio.css';
 import '/css/dante.css';
 import Grid from '@material-ui/core/Grid';
+import { InertiaHead } from '@inertiajs/inertia-react'
 
 //componentes
 import Libro from '../components/Libro';
@@ -21,6 +22,17 @@ import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 const Inicio = ({clientes, libro}) => {
     return (
         <>
+            <InertiaHead>
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:site" content="@DANTEELUDIER"/>
+            <meta name="twitter:creator" content="@DANTEELUDIER"/>
+            <meta property="og:title" content="Dante Eludier Master coach"/>
+            <meta property="og:description" content="Liberando el potencial humano para el bien común"/>
+            <meta property="og:image" content="/img/portadas/portada1.jpg"/>
+            <meta property="og:url" content="https://danteeludier.com"/>
+            <meta property="og:type" content="website"/>
+            </InertiaHead>
+            
             <div style={{ height: 60, backgroundColor: "#000000" }}></div>
             <div style={{width:'100%',backgroundColor:'#000000'}}>
                 <div className="portadaInicio">
