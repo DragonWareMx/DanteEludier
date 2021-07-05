@@ -49,6 +49,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const { auth } = usePage().props;
+
 const ColorButton = withStyles((theme) => ({
     root: {
         color: "#FFFFFF",
@@ -545,6 +547,8 @@ const Evento = ({ eventos }) => {
                                         descuento del 10% en tu compra
                                     </small>
                                 </div>
+                                
+                                {!auth.user &&
                                 <div>
                                     <InertiaLink href="/register">
                                         <Link
@@ -567,6 +571,7 @@ const Evento = ({ eventos }) => {
                                         </Link>
                                     </InertiaLink>
                                 </div>
+                                }
                                 <div className="bttm-pos p-3">
                                     <div className="d-flex justify-content-end align-items-center">
                                         <Button

@@ -294,6 +294,19 @@ export default function Navbar() {
                                     </ListItemIcon>
                                     <ListItemText primary="Productos" />
                                 </ListItem>
+                                {auth.user &&
+                                <ListItem
+                                    button
+                                    key="Logout"
+                                    component="a"
+                                    href='/logout'
+                                >
+                                    <ListItemIcon>
+                                        <MeetingRoomIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Cerrar Sesión" />
+                                </ListItem>
+                                }
                             </List>
                             <Divider />
                         </Drawer>
