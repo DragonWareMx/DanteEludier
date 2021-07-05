@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const { auth } = usePage().props;
+
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -75,6 +75,7 @@ const RoundedButton = withStyles((theme) => ({
 
 const Evento = ({ eventos }) => {
     const { errors, status } = usePage().props;
+    const { auth } = usePage().props;
     const [siguiente, setSiguiente] = React.useState(false);
     const [evento, setEvento] = React.useState({ evento: "" });
 
