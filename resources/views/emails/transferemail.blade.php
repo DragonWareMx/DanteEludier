@@ -286,11 +286,18 @@
               <h4
                 style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: -1px; line-height: 30px;color: black">
                 Puedes transferir o depositar con los siguientes datos, luego envía tu comprobante al correo:
-                actividadespublicasdanteeludier@gmail.com y nos pondremos en contacto contigo para confirmar tu asistencia.
+                actividadespublicasdanteeludier@gmail.com y nos pondremos en contacto contigo para confirmar tu
+                asistencia.
               </h4>
               <img src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img/transfer.jpg')))}}"
                 alt="Datos transferencia" border="0" width="400px"
                 style="display: block; width: 400px; max-width: 400px; min-width: 200px; filter: opacity(1)">
+            </td>
+            <td align="left" valign="top"
+              style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+              <p><strong>Cuenta de déposito</strong></p>
+              <p>Banco - Banorte<br>Dante Eludier Vargas Caro<br>Numero de tarjeta: 4915 6630 7419 9986 <br> CLABE:
+                072470011344204290</p>
             </td>
           </tr>
         </table>
