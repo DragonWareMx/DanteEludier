@@ -293,6 +293,8 @@
                 alt="Datos transferencia" border="0" width="400px"
                 style="display: block; width: 400px; max-width: 400px; min-width: 200px; filter: opacity(1)">
             </td>
+          </tr>
+          <tr>
             <td align="left" valign="top"
               style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
               <p><strong>Cuenta de déposito</strong></p>
