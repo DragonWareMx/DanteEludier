@@ -10,6 +10,7 @@ use App\Models\PurchasesEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Permission\Models\Role;
+use PDF;
 
 class EventoController extends Controller
 {
@@ -61,6 +62,28 @@ class EventoController extends Controller
             $status = "El boleto ha sido marcado con éxito";
             return redirect()->back()->with(compact('status'));
         }
+    }
+    public function diploma($uuid)
+    {
+        //después hay que poner que sólo se pueda generar un diploma por boleto
+        \Gate::authorize('haveaccess', 'client.perm');
+        $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
+        return Inertia::render('Diploma', ['boleto' => $compra_evento]);
         
+    }
+    public function getDiploma(Request $request)
+    {
+        $data = [
+            'nombre' =>$request->nombre
+        ];
+
+        $pdf = PDF::loadView('diploma', $data);
+        return $pdf->download('diploma.pdf');
+        // return response()->streamDownload(function () use ($pdf) {
+        // echo $pdf->output();
+        // }, 'invoice.pdf');
+
+        // $pdf = PDF::loadHTML('<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><body>HOLA</>');
+        //     return $pdf->download('pdfview.pdf');
     }
 }

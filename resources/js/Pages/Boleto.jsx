@@ -154,7 +154,7 @@ const Boleto = ({boleto, rol}) => {
                                     </RoundedButton>
                                 </Link>
                                 :
-                                <Link rel="stylesheet" href={'#'} style={{textDecoration: 'none'}}>
+                                <Link rel="stylesheet" href={route('diploma', boleto.uuid)} style={{textDecoration: 'none'}}>
                                     <RoundedButton
                                         variant="outlined"
                                         size="large"
