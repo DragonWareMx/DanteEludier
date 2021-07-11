@@ -61,6 +61,7 @@ class EventoController extends Controller
             return redirect()->back()->with(compact('status'));
         }
     }
+
     public function diploma($uuid)
     {
         //después hay que poner que sólo se pueda generar un diploma por boleto
@@ -68,10 +69,12 @@ class EventoController extends Controller
         $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
         return Inertia::render('Diploma', ['boleto' => $compra_evento]);
     }
+
     public function getDiploma(Request $request)
     {
+        $datos = $request->all();
         $data = [
-            'nombre' => $request->nombre
+            'nombre' => $datos['data']['nombre']
         ];
 
         $pdf = PDF::loadView('diploma', $data);

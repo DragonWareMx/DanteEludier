@@ -18,6 +18,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FileDownload from 'js-file-download';
 
 
 
@@ -92,21 +93,15 @@ const Diploma = ({ boleto }) => {
         //         preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
         //     }
         // )
+        e.preventDefault();
         const button = document.getElementById('boton-diploma');
         button.disabled = true;
         axios.post('/getPdf',
             { data: values },
             { responseType: 'blob' })
             .then(res => {
-                console.log('holas');
-                console.log(res);
                 button.disabled = false;
-                let blob = new Blob([res.data], { type: res.headers['content-type'] });
-                let link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = item.slice(item.lastIndexOf('/') + 1);
-                console.log(link);
-                link.click()
+                FileDownload(res.data, 'report.pdf');
             }).catch(function (error) { console.log(error) })
     }
 
