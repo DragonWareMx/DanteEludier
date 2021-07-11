@@ -105,7 +105,7 @@ const Diploma = ({ boleto }) => {
                 link.download = item.slice(item.lastIndexOf('/') + 1);
                 console.log(link);
                 link.click()
-            }).catch(err => { })
+            }).catch(err => { console.log(err) })
     }
 
     return (
