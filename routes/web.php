@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
-use PDF;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,12 +63,3 @@ Route::get('/boleto/check/{uuid}',  [App\Http\Controllers\EventoController::clas
 Route::get('/diploma/{uuid}', [App\Http\Controllers\EventoController::class, 'diploma'])->name('diploma');
 Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiploma'])->name('getDiploma');
 
-Route::get('/downloadPdf', function () {
-    $data = [
-        'nombre' =>$request->nombre
-    ];
-
-    $pdf = PDF::loadView('diploma', $data);
-    return $pdf->download('diploma.pdf');
-
-});
