@@ -98,6 +98,8 @@ const Diploma = ({ boleto }) => {
             { data: values },
             { responseType: 'blob' })
             .then(res => {
+                console.log('holas');
+                console.log(res);
                 button.disabled = false;
                 let blob = new Blob([res.data], { type: res.headers['content-type'] });
                 let link = document.createElement('a');
@@ -105,7 +107,7 @@ const Diploma = ({ boleto }) => {
                 link.download = item.slice(item.lastIndexOf('/') + 1);
                 console.log(link);
                 link.click()
-            }).catch(err => { console.log(err) })
+            }).catch(function (error) { console.log(error) })
     }
 
     return (
