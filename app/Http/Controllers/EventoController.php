@@ -18,7 +18,7 @@ class EventoController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index($id)
     {
         $eventos =  Event::where('product_id', $id)->with('dates', 'product', 'product.images')->get();
@@ -37,11 +37,10 @@ class EventoController extends Controller
 
     public function verBoleto($uuid)
     {
-        if(Auth::user()){
-        $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
-        return Inertia::render('Boleto', ['boleto' => $compra_evento, 'rol' => Auth::user()->roles[0]->name]);
-        }
-        else {
+        if (Auth::user()) {
+            $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
+            return Inertia::render('Boleto', ['boleto' => $compra_evento, 'rol' => Auth::user()->roles[0]->name]);
+        } else {
             return Inertia::render('register');
         }
     }
@@ -49,13 +48,12 @@ class EventoController extends Controller
     {
         \Gate::authorize('haveaccess', 'check.perm');
         $compra_evento = PurchasesEvents::where('uuid', $uuid)->first();
-        
-        if($compra_evento->asistio){
+
+        if ($compra_evento->asistio) {
             $status = "Este boleto ya fue marcado como usado";
             return redirect()->back()->with(compact('status'));
-        }
-        else {
-            
+        } else {
+
             $compra_evento->asistio = true;
             $compra_evento->save();
 
@@ -69,15 +67,18 @@ class EventoController extends Controller
         \Gate::authorize('haveaccess', 'client.perm');
         $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
         return Inertia::render('Diploma', ['boleto' => $compra_evento]);
-        
     }
     public function getDiploma(Request $request)
     {
         $data = [
-            'nombre' =>$request->nombre
+            'nombre' => $request->nombre
         ];
 
         $pdf = PDF::loadView('diploma', $data);
+        if (Request::inertia()) {
+            return response('', 409)
+                ->header('X-Inertia-Location', url()->current());
+        }
         return $pdf->download('diploma.pdf');
         // return response()->streamDownload(function () use ($pdf) {
         // echo $pdf->output();
