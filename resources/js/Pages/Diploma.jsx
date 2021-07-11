@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout";
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import axios from 'axios';
+
 
 //componentes
 import Link from "@material-ui/core/Link";
@@ -62,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Diploma = ({boleto}) => {
+const Diploma = ({ boleto }) => {
     const { errors, status } = usePage().props;
 
     const [values, setValues] = React.useState({
@@ -76,32 +78,45 @@ const Diploma = ({boleto}) => {
 
     //manda el forumulario
     function handleSubmit(e) {
+        // const button = document.getElementById('boton-diploma');
+        // button.disabled = true;
+        // e.preventDefault()
+        // Inertia.post(route('getDiploma'), values,
+        //     {
+        //         onError: () => {
+        //             button.disabled = false;
+        //         },
+        //         onSuccess: () => {
+        //             button.disabled = false;
+        //         },
+        //         preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
+        //     }
+        // )
         const button = document.getElementById('boton-diploma');
         button.disabled = true;
-        e.preventDefault()
-        Inertia.post(route('getDiploma'), values,
-            {
-                onError: () => {
-                    button.disabled = false;
-                },
-                onSuccess: () => {
-                    button.disabled = false;
-                },
-                preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
-            }
-        )
+        axios.post('/getPdf',
+            { data: values },
+            { responseType: 'blob' })
+            .then(res => {
+                button.disabled = false;
+                let blob = new Blob([res.data], { type: res.headers['content-type'] });
+                let link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = item.slice(item.lastIndexOf('/') + 1);
+                link.click()
+            }).catch(err => { })
     }
-    
+
     return (
         <>
             <div style={{ backgroundColor: "#000000" }}>
-            <div className="portadaContacto">
+                <div className="portadaContacto">
                     <img
                         src="/img/portadas/cuentas.jpg"
                         className="img-fluid"
                     ></img>
-            </div>
-            <div
+                </div>
+                <div
                     className="text-center"
                     style={{
                         color: "#FFFFFF",
@@ -110,7 +125,7 @@ const Diploma = ({boleto}) => {
                         left: "50%",
                         transform: "translate(-50%, -50%)",
                     }}
-            >
+                >
                     <h1
                         className="display-3 font-weight-bold"
                         style={{
@@ -119,7 +134,7 @@ const Diploma = ({boleto}) => {
                     >
                         Diploma
                     </h1>
-            </div>
+                </div>
                 {/* CARD DE PRODUCTOS */}
                 <Grid
                     container
@@ -128,56 +143,56 @@ const Diploma = ({boleto}) => {
                 >
                     <div className="inicio_rounded" style={{ zIndex: "2" }} >
                         <div className="row p-5">
-                        <form className="" onSubmit={handleSubmit}>
+                            <form className="" onSubmit={handleSubmit}>
                                 {status &&
-                                <FormHelperText id="component-text" style={{ color: "green" ,fontSize:16}}>{status}</FormHelperText>
+                                    <FormHelperText id="component-text" style={{ color: "green", fontSize: 16 }}>{status}</FormHelperText>
                                 }
-                            <h3
-                                className="text-center text-md-left"
-                                style={{
-                                    fontFamily: "Roboto Slab",
-                                    fontWeight: "bold",
-                                }}
-                            >
-                                Escribe el nombre que aparecerá en tu diploma
-                            </h3>
-                            <div className="d-flex pt-4">
-                                <AccountCircle
-                                    className="align-self-end"
-                                    style={{ color: "#BFBFBF" }}
-                                />
-                                <TextField
-                                    error={errors.nombre ? true : false}
-                                    className="ml-2"
-                                    id="nombre"
-                                    label="Nombre"
-                                    fullWidth
-                                    required
-                                    value={values.nombre}
-                                    onChange={handleChange('nombre')}
-                                />
-                                {errors.nombre &&
-                                    <FormHelperText id="component-error-text" style={{color:'red'}}>{errors.nombre}</FormHelperText>
-                                }
-                            </div>
-                            <div className="d-flex justify-content-center justify-content-md-end pb-4 pb-md-0">
-                                <ColorButton
-                                    variant="contained"
-                                    color="primary"
-                                    className="mt-4"
-                                    size="large"
-                                    id='boton-diploma'
-                                    type='submit'
+                                <h3
+                                    className="text-center text-md-left"
+                                    style={{
+                                        fontFamily: "Roboto Slab",
+                                        fontWeight: "bold",
+                                    }}
                                 >
-                                    GENERAR DIPLOMA
-                                </ColorButton>
-                            </div>
-                        </form>    
+                                    Escribe el nombre que aparecerá en tu diploma
+                                </h3>
+                                <div className="d-flex pt-4">
+                                    <AccountCircle
+                                        className="align-self-end"
+                                        style={{ color: "#BFBFBF" }}
+                                    />
+                                    <TextField
+                                        error={errors.nombre ? true : false}
+                                        className="ml-2"
+                                        id="nombre"
+                                        label="Nombre"
+                                        fullWidth
+                                        required
+                                        value={values.nombre}
+                                        onChange={handleChange('nombre')}
+                                    />
+                                    {errors.nombre &&
+                                        <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.nombre}</FormHelperText>
+                                    }
+                                </div>
+                                <div className="d-flex justify-content-center justify-content-md-end pb-4 pb-md-0">
+                                    <ColorButton
+                                        variant="contained"
+                                        color="primary"
+                                        className="mt-4"
+                                        size="large"
+                                        id='boton-diploma'
+                                        type='submit'
+                                    >
+                                        GENERAR DIPLOMA
+                                    </ColorButton>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </Grid>
-        </div>
-            
+            </div>
+
         </>
     );
 };

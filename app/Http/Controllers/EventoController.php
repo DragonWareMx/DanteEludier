@@ -75,7 +75,6 @@ class EventoController extends Controller
         ];
 
         $pdf = PDF::loadView('diploma', $data);
-        return Inertia::location($pdf->download('diploma.pdf'));
         return $pdf->download('diploma.pdf');
         // return response()->streamDownload(function () use ($pdf) {
         // echo $pdf->output();
