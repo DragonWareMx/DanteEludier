@@ -35,6 +35,7 @@ const Products = ({ products }) => {
         setOrden(event.target.value);
     };
 
+    //si no hay precios entonces es null
     function calcularPrecioMasBajo(eventos) {
         let precio = null;
 

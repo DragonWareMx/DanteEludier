@@ -15,10 +15,14 @@ class ProductController extends Controller
         $eventos = Event::leftJoin('dates','events.id', '=','dates.event_id')
                         ->where('dates.fecha', '<', \Carbon\Carbon::now()->toDateTimeString())
                         ->select('events.id')
-                        ->groupBy('events.id')->get();
-
+                        ->groupBy('events.id')
+                        ->pluck('id')
+                        ->toArray();
+        
         return Inertia::render('Products', [
-            'products' => Product::with('images:foto,product_id', 'events:precio,product_id')
+            'products' => Product::with(['images:foto,product_id', 'events' => function($query) use ($eventos){
+                                    return $query->whereNotIn('id', $eventos);
+                                }])
                                 ->orderBy('created_at','DESC')
                                 ->paginate(4)
         ]);

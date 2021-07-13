@@ -21,7 +21,19 @@ class EventoController extends Controller
 
     public function index($id)
     {
-        $eventos =  Event::where('product_id', $id)->with('dates', 'product', 'product.images')->get();
+        //regresa los ids de los eventos que tienen al menos una fecha expirada
+        $eventosExpirados = Event::leftJoin('dates','events.id', '=','dates.event_id')
+                        ->where('product_id', $id)
+                        ->where('dates.fecha', '<', \Carbon\Carbon::now()->toDateTimeString())
+                        ->select('events.id')
+                        ->groupBy('events.id')
+                        ->pluck('id')
+                        ->toArray();
+
+        $eventos =  Event::where('product_id', $id)
+                        ->whereNotIn('id', $eventosExpirados)
+                        ->with('dates', 'product', 'product.images')
+                        ->get();
 
         if (!$eventos) {
             return abort(403);
