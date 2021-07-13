@@ -12,8 +12,11 @@ body{
     object-fit:cover;
 }
 .grid-contenido{
-    background-image:url(/img/diploma/marca-agua.png);
+    background-image:url(/img/diploma/fondo.png);
+    background-color:transparent;
+    background-position: center; 
     background-repeat: no-repeat;
+    background-size: cover; 
     display:flex;
     flex-direction:column;
     justify-content:center;
