@@ -8,6 +8,7 @@ use Inertia\Inertia;
 class DiplomaController extends Controller
 {
     public function index(){
-        return Inertia::render('Diploma');
+        // return Inertia::render('Diploma');
+        return view('diploma');
     }
 }
