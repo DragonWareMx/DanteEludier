@@ -19,14 +19,14 @@
         <div style="width:60%" class="container-PDF">
             <div style="width:20%" class="grid-blue">BLUE</div>
             <div style="width:80%" class="grid-contenido">
-                <img src="/img/diploma/happy-money.png" class="img-logo1"></img>
+                <img src="/img/diploma/happy-money.png" class="img-logo1">
                 <p class="txt-otorga">OTORGA EL SIGUIENTE:</p>
                 <p class="txt-diploma">Diploma</p>
-                <div class="txt-name"><p style="color:#d2d3d5">A:&nbsp;</p> Zaira Bethzabel Torres Muñoz</div>
+                <div class="txt-name"><p style="color:#d2d3d5">A:&nbsp;</p>NOMBRE</div>
                 <p class="txt-descripcion">Por haber concluido satisfactoriamente el taller vivencial "AVATAR FINANCIERO" de transformación personal y financiera realizado en la ciudad de Boca del río, Veracruz del 2,3 y 4 de julio de 2021.</p>
                 <p class="txt-name-firma">DANTE ELUDIER VARGAS CARO</p>
                 
-                <img src="/img/diploma/TallerAVATARFINANCIERO.png" class="img-logo-footer"></img>
+                <img src="/img/diploma/TallerAVATARFINANCIERO.png" class="img-logo-footer">
                 
             </div>
         </div>
