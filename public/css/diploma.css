@@ -1,0 +1,101 @@
+body{
+    /* background-color:pink; */
+    padding: 0px 0px 0px 0px !important;
+    margin:0px 0px 0px 0px !important;
+}
+.container-PDF{
+    display:flex;
+    margin-right:auto;
+    margin-left:auto;
+}
+.grid-blue{
+    background-color:#36507d;
+    border-right:solid 10px #edc913;
+}
+.grid-contenido{
+    /* background-image:url(/img/diploma/papers.png); */
+    background-repeat: no-repeat;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.img-logo1{
+    margin-top:20px;
+    margin-right:auto;
+    margin-left:auto;
+    width:50%;
+}
+.txt-otorga{
+    width:100%;
+    margin-top:90px;
+    margin-bottom:0px;
+    text-align:center;
+    color:#39578a;
+    font-family:Montserrat;
+    font-size:17px;
+    font-weight:600;
+    letter-spacing: 5px;
+}
+.txt-diploma{
+    font-family:Yesteryear;
+    font-size:100px;
+    color:#edc913;
+    width:100%;
+    text-align:center; 
+    margin-top:0px;
+    margin-bottom:30px;
+}
+.txt-name{
+    font-family:Roboto;
+    font-size:28px;
+    width: 85%;
+    font-weight:900;
+    color:black;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    text-align:center;
+    border-bottom:solid 2px #d2d3d5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.txt-name p{
+    margin:0px !important;
+}
+.txt-descripcion{
+    font-family:'Noto Sans KR';
+    width: 80%;
+    margin-right:auto;
+    margin-left:auto;
+    text-align:center;
+    color:#1f4e79;
+    font-weight:900;
+    font-size:19px;
+    margin-top:35px;
+    line-height:27px;
+}
+
+.img-logo-footer{
+    width: 20%;
+    object-fit:cover;
+    /* height:130px; */
+    height:auto;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:40px;
+    margin-bottom:20px;
+}
+.txt-name-firma{
+    padding:13px;
+    width:max-content;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:50px;
+    border-top:solid 3px #d2d3d5;
+
+    font-family:'Noto Sans KR';
+    color:#1f4e79;
+    font-weight:900;
+    font-size:14px;
+    letter-spacing: 1px;
+}
