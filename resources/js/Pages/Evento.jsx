@@ -324,8 +324,13 @@ const Evento = ({ eventos }) => {
                                             ${showPrice(evento.precio)} MXN
                                         </div>
                                         <div className="pb-3">
-                                                <small>ENTRADAS DISPONIBLES</small>
-                                            {/* FALTAAAAAA */}
+                                            <small>
+                                                {evento.total < evento.limite ?
+                                                    "ENTRADAS DISPONIBLES"
+                                                :
+                                                    "AGOTADO"
+                                                }
+                                            </small>
                                         </div>
                                         <Divider style={{ width: "30%" }} />
                                     </div>
@@ -391,6 +396,8 @@ const Evento = ({ eventos }) => {
                                                 <em>Selecciona un evento</em>
                                             </MenuItem>
                                             {eventos.map((evento) => (
+                                                [
+                                                evento.total < evento.limite &&
                                                 <MenuItem
                                                     key={evento.id}
                                                     value={evento.id}
@@ -398,6 +405,7 @@ const Evento = ({ eventos }) => {
                                                     {evento.ciudad},{" "}
                                                     {evento.sede}
                                                 </MenuItem>
+                                                ]
                                             ))}
                                         </Select>
                                     </FormControl>

@@ -26,7 +26,6 @@ class Event extends Model
 
     public function purchases()
     {
-        return $this->belongsToMany('App\Models\Purchase')->withPivot('asistio','precio','descuento');
+        return $this->belongsToMany('App\Models\Purchase', 'purchases_events')->withPivot('asistio','precio','descuento');
     }
-
 }
