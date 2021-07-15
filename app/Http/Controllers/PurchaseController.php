@@ -283,7 +283,7 @@ class PurchaseController extends Controller
             } else {
                 $status = 'Error! ' . $e->getMessage();
             }
-            return redirect()->route('compra')->with(compact('status'));
+            return redirect()->route('event.stripe.index', $evento->id)->with(compact('status'));
         }
     }
 }
