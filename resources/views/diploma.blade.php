@@ -13,24 +13,34 @@
     <title>Diploma</title>
 </head>
 <body>
-    {{-- <p>JSJSJSJS</p> --}}
-
-    {{-- <div> --}}
         <div style="width:60%" class="container-PDF">
-            <div style="width:20%" class="grid-blue">BLUE</div>
-            <div style="width:80%" class="grid-contenido">
-                <img src="/img/diploma/happy-money.png" class="img-logo1">
-                <p class="txt-otorga">OTORGA EL SIGUIENTE:</p>
-                <p class="txt-diploma">Diploma</p>
-                <div class="txt-name"><p style="color:#d2d3d5">A:&nbsp;</p>NOMBRE</div>
-                <p class="txt-descripcion">Por haber concluido satisfactoriamente el taller vivencial "AVATAR FINANCIERO" de transformación personal y financiera realizado en la ciudad de Boca del río, Veracruz del 2,3 y 4 de julio de 2021.</p>
-                <p class="txt-name-firma">DANTE ELUDIER VARGAS CARO</p>
+            <img src="/img/diploma/blue.png" style="width:15%" class="grid-blue">
+            <div style="width:85%" class="grid-contenido">
+                <div class="div_logos">
+                    <img src="/img/diploma/happy-money.png" class="img-logo1">
+                    <img src="/img/diploma/TallerAVATARFINANCIERO.png" class="img-logo-footer">
+                </div>
+        
+                <img src="img/diploma/otorga.png" class="txt-otorga">
+                <img src="/img/diploma/diploma.png" class="txt-diploma">
+                <div class="txt-name"><p style="color:#d2d3d5">A:&nbsp;</p> Zaira Bethzabel Torres Muñoz</div>
+                <img src="/img/diploma/desc.png" class="txt-descripcion">
+                <img src="/img/diploma/nameFirma.png" class="txt-name-firma">
+                <img src="/img/diploma/firma.png" class="firma">
                 
-                <img src="/img/diploma/TallerAVATARFINANCIERO.png" class="img-logo-footer">
+                <div class="div-datos">
+                    <div>
+                        <img src="/img/diploma/lugar.png">
+                        <p>Ciudad boca del rio, veracruz</p>
+                    </div>
+                    <div>
+                        <img src="/img/diploma/fecha.png">
+                        <p>2, 3 y 4 de julio de 2021 </p>
+                    </div>
+                </div>
                 
             </div>
         </div>
-    {{-- </div> --}}
 
 
 </body>

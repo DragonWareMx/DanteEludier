@@ -1,5 +1,4 @@
 body{
-    /* background-color:pink; */
     padding: 0px 0px 0px 0px !important;
     margin:0px 0px 0px 0px !important;
 }
@@ -7,43 +6,50 @@ body{
     display:flex;
     margin-right:auto;
     margin-left:auto;
+    align-items:stretch;
 }
 .grid-blue{
-    background-color:#36507d;
-    border-right:solid 10px #edc913;
+    object-fit:cover;
 }
 .grid-contenido{
-    /* background-image:url(/img/diploma/papers.png); */
+    background-image:url(/img/diploma/fondo.png);
+    background-color:transparent;
+    background-position: center; 
     background-repeat: no-repeat;
+    background-size: cover; 
     display:flex;
     flex-direction:column;
     justify-content:center;
 }
+.div_logos{
+    display:flex;
+    width: 100%;
+    padding:20px;
+    align-items:baseline;
+}
 .img-logo1{
-    margin-top:20px;
-    margin-right:auto;
-    margin-left:auto;
-    width:50%;
+    width:320px;
+    margin-right:130px;
+}
+.img-logo-footer{
+    width: 27%;
+    margin-top:40px;
+    margin-bottom:20px;
 }
 .txt-otorga{
-    width:100%;
-    margin-top:90px;
+    width:50%;
+    margin-top:70px;
     margin-bottom:0px;
-    text-align:center;
-    color:#39578a;
-    font-family:Montserrat;
-    font-size:17px;
-    font-weight:600;
-    letter-spacing: 5px;
+    margin-left:auto;
+    margin-right:auto;
 }
 .txt-diploma{
-    font-family:Yesteryear;
-    font-size:100px;
-    color:#edc913;
-    width:100%;
-    text-align:center; 
-    margin-top:0px;
-    margin-bottom:30px;
+    width:50%;
+    object-fit:cover;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:20px;
+    margin-bottom:50px;
 }
 .txt-name{
     font-family:Roboto;
@@ -54,7 +60,7 @@ body{
     margin-left:auto !important;
     margin-right:auto !important;
     text-align:center;
-    border-bottom:solid 2px #d2d3d5;
+    border-bottom:solid 3px #d2d3d5;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -63,39 +69,52 @@ body{
     margin:0px !important;
 }
 .txt-descripcion{
-    font-family:'Noto Sans KR';
-    width: 80%;
+    width: 60%;
     margin-right:auto;
     margin-left:auto;
-    text-align:center;
-    color:#1f4e79;
-    font-weight:900;
-    font-size:19px;
     margin-top:35px;
-    line-height:27px;
-}
-
-.img-logo-footer{
-    width: 20%;
-    object-fit:cover;
-    /* height:130px; */
-    height:auto;
-    margin-right:auto;
-    margin-left:auto;
-    margin-top:40px;
-    margin-bottom:20px;
 }
 .txt-name-firma{
-    padding:13px;
-    width:max-content;
+    width:40%;
     margin-right:auto;
     margin-left:auto;
-    margin-top:50px;
-    border-top:solid 3px #d2d3d5;
+    margin-top:140px;
+}
+.firma{
+    z-index:999;
+    position:absolute;
+    width:12%;
+    margin-left:270px !important;
+    margin-top:260px;
+}
+.div-datos{
+    width:100%;
+    padding:20px;
+    display:flex;
+    flex-wrap:wrap;
+    margin-top:70px;
+    align-items:center;
+    margin-bottom:10px;
 
-    font-family:'Noto Sans KR';
-    color:#1f4e79;
-    font-weight:900;
-    font-size:14px;
-    letter-spacing: 1px;
+}
+.div-datos div{
+    display:flex;
+    align-items:center;
+    width:max-content !important;
+    margin-top:10px;
+}
+.div-datos img{
+    width:65px;
+}
+.div-datos p{
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-right:15px;
+    padding-left:5px;
+    padding-right:5px;
+    border-bottom:solid 3px #d2d3d5;
+    font-family:Roboto;
+    font-size:20px;
+    font-weight:800;
+    color:black;
 }
