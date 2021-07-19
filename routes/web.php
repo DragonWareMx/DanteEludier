@@ -62,6 +62,3 @@ Route::get('/boleto/{uuid}',  [App\Http\Controllers\EventoController::class, 've
 Route::get('/boleto/check/{uuid}',  [App\Http\Controllers\EventoController::class, 'check'])->name('check');
 Route::get('/diploma/{uuid}', [App\Http\Controllers\EventoController::class, 'diploma'])->name('diploma');
 Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiploma'])->name('getDiploma');
-
-
-Route::get('/diploma', [App\Http\Controllers\DiplomaController::class, 'index'])->name('diplomaTest');

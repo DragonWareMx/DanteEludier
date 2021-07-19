@@ -71,6 +71,7 @@ const Diploma = ({ boleto }) => {
     const [values, setValues] = React.useState({
         _method: 'post',
         nombre: '',
+        uuid: boleto.uuid
     });
 
     const handleChange = (prop) => (event) => {
@@ -101,7 +102,7 @@ const Diploma = ({ boleto }) => {
             { responseType: 'blob' })
             .then(res => {
                 button.disabled = false;
-                FileDownload(res.data, 'report.pdf');
+                FileDownload(res.data, 'diploma.pdf');
             }).catch(function (error) { console.log(error) })
     }
 

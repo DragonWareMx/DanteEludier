@@ -1,6 +1,8 @@
 body{
     padding: 0px 0px 0px 0px !important;
     margin:0px 0px 0px 0px !important;
+    width: 8.5in;
+    height: 11in;
 }
 .container-PDF{
     display:flex;
@@ -10,99 +12,118 @@ body{
 }
 .grid-blue{
     object-fit:cover;
+    height: 11in;
+    width: 1.3in;
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 .grid-contenido{
-    background-image:url(/img/diploma/fondo.png);
     background-color:transparent;
-    background-position: center; 
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
     display:flex;
     flex-direction:column;
     justify-content:center;
+    margin-left: auto;
+    margin-right: 0px;
 }
 .div_logos{
     display:flex;
     width: 100%;
     padding:20px;
     align-items:baseline;
+    flex-wrap: nowrap;
 }
 .img-logo1{
-    width:320px;
-    margin-right:130px;
+    width:270px;
+    margin-right:0px;
+    top: 0.9cm;
+    left: 4.5cm;
+    position: absolute;
 }
 .img-logo-footer{
+    position: absolute;
+    top: 1.6cm;
+    right: 1.198cm;
     width: 27%;
-    margin-top:40px;
-    margin-bottom:20px;
 }
 .txt-otorga{
     width:50%;
-    margin-top:70px;
+    margin-top:8cm;
     margin-bottom:0px;
     margin-left:auto;
     margin-right:auto;
+    margin-left: 5cm;
 }
 .txt-diploma{
     width:50%;
     object-fit:cover;
     margin-left:auto;
     margin-right:auto;
-    margin-top:20px;
-    margin-bottom:50px;
+    margin-top:9cm;
+    margin-left: 5cm;
 }
 .txt-name{
     font-family:Roboto;
     font-size:28px;
-    width: 85%;
+    width: 75%;
     font-weight:900;
     color:black;
     margin-left:auto !important;
     margin-right:auto !important;
     text-align:center;
     border-bottom:solid 3px #d2d3d5;
-    display:flex;
     justify-content:center;
     align-items:center;
+    margin-top: 15cm;
 }
 .txt-name p{
     margin:0px !important;
+    width: 10%;
 }
+
+.txt-name .nombre{
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    text-align: center;
+}
+
 .txt-descripcion{
     width: 60%;
     margin-right:auto;
-    margin-left:auto;
-    margin-top:35px;
+    margin-left:4cm;
+    margin-top:17cm;
 }
 .txt-name-firma{
     width:40%;
     margin-right:auto;
     margin-left:auto;
-    margin-top:140px;
+    margin-top:23cm;
+    margin-left: 6cm;
 }
 .firma{
     z-index:999;
     position:absolute;
-    width:12%;
-    margin-left:270px !important;
-    margin-top:260px;
+    width:24%;
+    margin-left:7.8cm !important;
+    margin-top:20.8cm;
 }
-.div-datos{
-    width:100%;
+/* .div-datos{
+
     padding:20px;
-    display:flex;
-    flex-wrap:wrap;
     margin-top:70px;
     align-items:center;
-    margin-bottom:10px;
-
-}
-.div-datos div{
+    margin-top:25cm;
+} */
+/* .div-datos div{
     display:flex;
     align-items:center;
     width:max-content !important;
     margin-top:10px;
-}
+} */
 .div-datos img{
     width:65px;
 }
@@ -117,4 +138,32 @@ body{
     font-size:20px;
     font-weight:800;
     color:black;
+}
+
+.div-datos .left{
+    width: 8cm;
+    position: absolute;
+    bottom: 0.5cm;
+    left: 4cm;
+}
+
+.div-datos .right{
+    width: 8cm;
+    position: absolute;
+    bottom: 0.5cm;
+    right: 5px;
+}
+
+.div-datos .d1{
+    position: absolute;
+    top: 25cm;
+    left: 0px;
+    background-color: aqua;
+}
+
+.div-datos .d2{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background-color: black;
 }

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Permission\Models\Role;
 use PDF;
+use Illuminate\Support\Carbon;
 
 class EventoController extends Controller
 {
@@ -73,11 +74,31 @@ class EventoController extends Controller
     public function getDiploma(Request $request)
     {
         $datos = $request->all();
+        $compra_evento = PurchasesEvents::where('uuid', $datos['data']['uuid'])->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images', 'event.dates')->first();
+
+        $fechaS = "";
+
+        $cant = count($compra_evento->event->dates) - 1;
+        $dia = Carbon::now();
+        foreach ($compra_evento->event->dates as $key => $date) {
+            $dia = Carbon::parse($date->fecha);
+            if ($key == 0) {
+                $fechaS = $fechaS .  $dia->day;
+            } else if ($cant == $key) {
+                $fechaS = $fechaS . ' y ' .  $dia->day;
+            } else {
+                $fechaS = $fechaS . ', ' .  $dia->day;
+            }
+        };
+        $fechaS = $fechaS . ' de ' . $dia->monthName . ' de ' . $dia->year;
+
         $data = [
-            'nombre' => $datos['data']['nombre']
+            'nombre' => $datos['data']['nombre'],
+            'ciudad' => $compra_evento->event->ciudad,
+            'fechas' => $fechaS
         ];
 
-        $pdf = PDF::loadView('diploma', $data);
+        $pdf = PDF::loadView('diploma', $data)->setPaper('letter');
         return $pdf->download('diploma.pdf');
         // return response()->streamDownload(function () use ($pdf) {
         // echo $pdf->output();
