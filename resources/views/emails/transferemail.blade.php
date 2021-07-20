@@ -130,10 +130,8 @@
           <tr>
             <td align="center" valign="top" style="padding: 36px 24px;">
               <a href="https://danteeludier.com/" target="_blank" style="display: inline-block;">
-                <img
-                  src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img/danteLogoBlanco.png')))}}"
-                  alt="Logo" border="0" width="250px"
-                  style="display: block; width: 250px; max-width: 250px; min-width: 48px; filter: opacity(1)">
+                <img src="{{ $message->embed(public_path('img/danteLogoBlanco.png')) }}"
+                style="display: block; width: 250px; max-width: 250px; min-width: 48px; filter: opacity(1)">
               </a>
             </td>
           </tr>
@@ -287,8 +285,7 @@
                 asistencia.
               </h4>
               <br>
-              <img src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img/transfer.jpg')))}}"
-                alt="Datos transferencia" border="0" width="400px"
+              <img src="{{ $message->embed(public_path('img/transfer.jpg')) }}"
                 style="display: block; width: 400px; max-width: 400px; min-width: 200px; filter: opacity(1);">
             </td>
           </tr>
@@ -331,7 +328,7 @@
       <table align="center" bgcolor="#fafafa" border="0" cellpadding="0" cellspacing="0" width="100%"
         style="max-width: 600px;">
         <tr>
-          <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid #d4dadf">
+          <td align="center" valign="top" style="font-size: 0;">
             <!--[if (gte mso 9)|(IE)]>
               <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
               <tr>
@@ -365,17 +362,6 @@
                       {{$evento->sede}}
                       <br>
                       {{$evento->ciudad}}
-                      <br>
-                      <br>
-                      <strong>Fechas<br></strong>
-                      @foreach ($evento->dates as $date)
-                        <hr>
-                          @php
-                              $fecha = date('d/m/y g:ia', strtotime($date->fecha));
-                              $hora = date('g:ia', strtotime($date->horaCierre));
-                          @endphp
-                          {{$fecha}} - {{$hora}}
-                      @endforeach
                     </p>
                   </td>
                 </tr>
@@ -390,11 +376,34 @@
           </td>
         </tr>
       </table>
-      <!--[if (gte mso 9)|(IE)]>
-        </td>
+
+      <table align="center" bgcolor="#fafafa" border="0" cellpadding="0" cellspacing="0" width="100%"
+        style="max-width: 600px;">
+        <tr>
+          <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid #d4dadf">
+            <div style="display: inline-block; width: 80%; min-width: 240px; vertical-align: top;">
+              <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                <tr>
+                  <td align="center" valign="top"
+                    style="padding-bottom: 15px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    <p>
+                      <strong>Fechas<br></strong>
+                      @foreach ($evento->dates as $date)
+                        <hr>
+                          @php
+                              $fecha = \Carbon\Carbon::parse($date->fecha);
+                              $hora = date('g:i a', strtotime($date->horaCierre));
+                          @endphp
+                          {{$fecha->day}} de {{$fecha->monthName}} de {{$fecha->year}} de {{$fecha->format('g:i a')}} a {{$hora}}
+                      @endforeach
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
         </tr>
-        </table>
-        <![endif]-->
+      </table>
     </td>
   </tr>
   <!-- end receipt address block -->
