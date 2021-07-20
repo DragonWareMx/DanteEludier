@@ -206,10 +206,10 @@
                     style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                     <strong>&nbsp;</strong></td>
                   <td align="left" bgcolor="#1a1a1a" width="70%"
-                    style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;color:#FFFFFF;">
                     <strong>Orden #</strong></td>
                   <td align="left" bgcolor="#1a1a1a" width="20%"
-                    style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;color:#FFFFFF;">
                     <strong>{{ str_pad($purchase->id,6,'0',STR_PAD_LEFT) }}</strong></td>
                 </tr>
                 @foreach ($purchase->purchases_events as $compras)
@@ -310,20 +310,35 @@
               </td>
               <td align="left" valign="top" width="300">
               <![endif]-->
-              {{-- ///////////////////////////////////////////////////////////////////////////////////////ESTO ES EL DE DIRECCION DE ENVIO --}}
-              {{-- <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
+              {{-- ///////////////////////////////////////////////////////////////////////////////////////DATOS DEL PRODUCTO --}}
+              <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px;">
                   <tr>
                     <td align="left" valign="top"
                       style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                      <p><strong>Dirección de envío</strong></p>
-                      <p>viledruid<br>
-                        Morelia, Michoacan <br>
-                        Mexico</p>
+                      <p><strong>Datos del evento</strong></p>
+                      <p>
+                        {{$purchase->purchases_events[0]->event->product->titulo}}
+                        <br>
+                        {{$purchase->purchases_events[0]->event->sede}}
+                        <br>
+                        {{$purchase->purchases_events[0]->event->ciudad}}
+                        <br>
+                        <br>
+                        <strong>Fechas<br></strong>
+                        @foreach ($purchase->purchases_events[0]->event->dates as $date)
+                          <hr>
+                            @php
+                                $fecha = date('d/m/y g:ia', strtotime($date->fecha));
+                                $hora = date('g:ia', strtotime($date->horaCierre));
+                            @endphp
+                            {{$fecha}} - {{$hora}}
+                        @endforeach
+                      </p>
                     </td>
                   </tr>
                 </table>
-              </div> --}}
+              </div>
               {{-- AQUI ACABA --}}
               <!--[if (gte mso 9)|(IE)]>
               </td>
@@ -368,8 +383,8 @@
                       @foreach ($purchase->purchases_events as $compra_evento)
                       <p>Boleto #{{ $loop->index + 1}}</p>
                       <p>
-                        <img
-                          src="{!!$message->embedData(QrCode::format('png')->size(300)->generate(route('boleto.ver', $compra_evento->uuid)), 'QrCode.png', 'image/png')!!}">
+                        {{-- <img
+                          src="{!!$message->embedData(QrCode::format('png')->size(300)->generate(route('boleto.ver', $compra_evento->uuid)), 'QrCode.png', 'image/png')!!}"> --}}
                       </p>
                       @endforeach
                     </td>
