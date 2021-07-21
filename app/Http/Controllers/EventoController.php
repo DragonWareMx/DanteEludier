@@ -35,7 +35,7 @@ class EventoController extends Controller
                         ->whereNotIn('events.id', $eventosExpirados)
                         ->with('dates', 'product', 'product.images')
                         ->leftJoin('purchases_events','events.id', '=','purchases_events.event_id')
-                        ->selectRaw('events.*, COUNT(`purchases_events`.`event_id`) AS total')
+                        ->selectRaw('"events".*, COUNT("purchases_events"."event_id") AS total')
                         ->groupBy('events.id','events.created_at','events.updated_at','events.ciudad','events.direccion','events.sede','events.precio','events.limite','events.descuento','events.product_id')
                         ->get();
 
