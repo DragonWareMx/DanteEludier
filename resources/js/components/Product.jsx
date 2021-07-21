@@ -58,7 +58,7 @@ export default function Product({img, name, price, id, events}){
                     </Grid>
 
                     {/* PRECIO */}
-                    <Grid item className="producto_precio">
+                    <Grid item className="producto_precio" style={{marginBottom: price ? 0 : 76}}>
                         {price ?
                         "Desde $"+ showPrice(price) +" MXN"
                         :
@@ -78,7 +78,8 @@ export default function Product({img, name, price, id, events}){
                                 MÁS INFORMACIÓN
                             </ColorButton>
                         </InertiaLink>
-                    </Grid>:
+                    </Grid>
+                    :
                     <>
                     </>
                     }

@@ -22,7 +22,22 @@ class EventoController extends Controller
 
     public function index($id)
     {
-        $eventos =  Event::where('product_id', $id)->with('dates', 'product', 'product.images')->get();
+        //regresa los ids de los eventos que tienen al menos una fecha expirada
+        $eventosExpirados = Event::leftJoin('dates','events.id', '=','dates.event_id')
+                        ->where('product_id', $id)
+                        ->where('dates.fecha', '<', \Carbon\Carbon::now()->toDateTimeString())
+                        ->select('events.id')
+                        ->groupBy('events.id')
+                        ->pluck('id')
+                        ->toArray();
+
+        $eventos =  Event::where('product_id', $id)
+                        ->whereNotIn('events.id', $eventosExpirados)
+                        ->with('dates', 'product', 'product.images')
+                        ->leftJoin('purchases_events','events.id', '=','purchases_events.event_id')
+                        ->selectRaw('events.*, COUNT(`purchases_events`.`event_id`) AS total')
+                        ->groupBy('events.id','events.created_at','events.updated_at','events.ciudad','events.direccion','events.sede','events.precio','events.limite','events.descuento','events.product_id')
+                        ->get();
 
         if (!$eventos) {
             return abort(403);
@@ -102,11 +117,5 @@ class EventoController extends Controller
 
         $pdf = PDF::loadView('diploma', $data)->setPaper('letter');
         return $pdf->download('diploma.pdf');
-        // return response()->streamDownload(function () use ($pdf) {
-        // echo $pdf->output();
-        // }, 'invoice.pdf');
-
-        // $pdf = PDF::loadHTML('<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><body>HOLA</>');
-        //     return $pdf->download('pdfview.pdf');
     }
 }

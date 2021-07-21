@@ -30,7 +30,7 @@ const Dante = () => {
             <div style={{ backgroundColor: "#000000" }}>
                 <div className="portadaContacto">
                     <img
-                        src="/img/portadas/team21.png"
+                        src="/img/portadas/team21.jpg"
                         className="img-fluid"
                     ></img>
                 </div>
