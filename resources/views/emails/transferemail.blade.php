@@ -130,10 +130,8 @@
           <tr>
             <td align="center" valign="top" style="padding: 36px 24px;">
               <a href="https://danteeludier.com/" target="_blank" style="display: inline-block;">
-                <img
-                  src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img/danteLogoBlanco.png')))}}"
-                  alt="Logo" border="0" width="250px"
-                  style="display: block; width: 250px; max-width: 250px; min-width: 48px; filter: opacity(1)">
+                <img src="{{ $message->embed(public_path('img/danteLogoBlanco.png')) }}"
+                style="display: block; width: 250px; max-width: 250px; min-width: 48px; filter: opacity(1)">
               </a>
             </td>
           </tr>
@@ -199,7 +197,7 @@
           @endphp
           <!-- start receipt table -->
           <tr>
-            <td align="left" bgcolor="#ffffff"
+            <td align="left" bgcolor="#fafafa"
               style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
               <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
@@ -207,8 +205,8 @@
                     style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                     <strong>&nbsp;</strong></td>
                   <td align="left" bgcolor="#1a1a1a" width="70%"
-                    style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                    <strong></strong></td>
+                    style="color:#FFFFFF; padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    <strong>Pedido</strong></td>
                   <td align="left" bgcolor="#1a1a1a" width="20%"
                     style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                     <strong></strong></td>
@@ -270,7 +268,7 @@
       </td>
     </tr>
     <tr>
-      <td align="center" bgcolor="#1a1a1a">
+      <td align="center" bgcolor="#FAFAFA">
         <!--[if (gte mso 9)|(IE)] 83D7B5>
         <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
         <tr>
@@ -278,23 +276,20 @@
         <![endif]-->
         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
           <tr>
-            <td align="left" bgcolor="#FAFAFA"
-              style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #000000;">
-              <h1
-                style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;color: black">
-                ¡GRACIAS!</h1>
+            <td align="center" bgcolor="#FAFAFA"
+              style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;">
               <h4
-                style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: -1px; line-height: 30px;color: black">
+                style="margin: 0; font-size: 18px; font-weight: 400; letter-spacing: -1px; line-height: 30px;color: black; text-align: justify;">
                 Puedes transferir o depositar con los siguientes datos, luego envía tu comprobante al correo:
                 actividadespublicasdanteeludier@gmail.com y nos pondremos en contacto contigo para confirmar tu
                 asistencia.
               </h4>
-              <img src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img/transfer.jpg')))}}"
-                alt="Datos transferencia" border="0" width="400px"
-                style="display: block; width: 400px; max-width: 400px; min-width: 200px; filter: opacity(1)">
+              <br>
+              <img src="{{ $message->embed(public_path('img/transfer.jpg')) }}"
+                style="display: block; width: 400px; max-width: 400px; min-width: 200px; filter: opacity(1);">
             </td>
           </tr>
-          <tr>
+          <tr style='background-color: #FAFAFA'>
             <td align="left" valign="top"
               style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
               <p><strong>Cuenta de déposito</strong></p>
@@ -330,10 +325,10 @@
         <tr>
         <td align="center" valign="top" width="600">
         <![endif]-->
-      <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%"
+      <table align="center" bgcolor="#fafafa" border="0" cellpadding="0" cellspacing="0" width="100%"
         style="max-width: 600px;">
         <tr>
-          <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid #d4dadf">
+          <td align="center" valign="top" style="font-size: 0;">
             <!--[if (gte mso 9)|(IE)]>
               <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
               <tr>
@@ -355,19 +350,23 @@
               <td align="left" valign="top" width="300">
               <![endif]-->
             {{-- ///////////////////////////////////////////////////////////////////////////////////////ESTO ES EL DE DIRECCION DE ENVIO --}}
-            {{-- <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
-                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px;">
-                  <tr>
-                    <td align="left" valign="top"
-                      style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                      <p><strong>Dirección de envío</strong></p>
-                      <p>viledruid<br>
-                        Morelia, Michoacan <br>
-                        Mexico</p>
-                    </td>
-                  </tr>
-                </table>
-              </div> --}}
+            <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
+              <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px;">
+                <tr>
+                  <td align="left" valign="top"
+                    style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    <p><strong>Datos del evento</strong></p>
+                    <p>
+                      {{$evento->product->titulo}}
+                      <br>
+                      {{$evento->sede}}
+                      <br>
+                      {{$evento->ciudad}}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </div>
             {{-- AQUI ACABA --}}
             <!--[if (gte mso 9)|(IE)]>
               </td>
@@ -377,11 +376,34 @@
           </td>
         </tr>
       </table>
-      <!--[if (gte mso 9)|(IE)]>
-        </td>
+
+      <table align="center" bgcolor="#fafafa" border="0" cellpadding="0" cellspacing="0" width="100%"
+        style="max-width: 600px;">
+        <tr>
+          <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid #d4dadf">
+            <div style="display: inline-block; width: 80%; min-width: 240px; vertical-align: top;">
+              <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                <tr>
+                  <td align="center" valign="top"
+                    style="padding-bottom: 15px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    <p>
+                      <strong>Fechas<br></strong>
+                      @foreach ($evento->dates as $date)
+                        <hr>
+                          @php
+                              $fecha = \Carbon\Carbon::parse($date->fecha);
+                              $hora = date('g:i a', strtotime($date->horaCierre));
+                          @endphp
+                          {{$fecha->day}} de {{$fecha->monthName}} de {{$fecha->year}} de {{$fecha->format('g:i a')}} a {{$hora}}
+                      @endforeach
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
         </tr>
-        </table>
-        <![endif]-->
+      </table>
     </td>
   </tr>
   <!-- end receipt address block -->

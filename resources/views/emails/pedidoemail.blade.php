@@ -130,9 +130,7 @@
           <tr>
             <td align="center" valign="top" style="padding: 36px 24px;">
               <a href="https://danteeludier.com/" target="_blank" style="display: inline-block;">
-                <img
-                  src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img/danteLogoBlanco.png')))}}"
-                  alt="Logo" border="0" width="250px"
+                  <img src="{{ $message->embed(public_path('img/danteLogoBlanco.png')) }}"
                   style="display: block; width: 250px; max-width: 250px; min-width: 48px; filter: opacity(1)">
               </a>
             </td>
@@ -206,10 +204,10 @@
                     style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                     <strong>&nbsp;</strong></td>
                   <td align="left" bgcolor="#1a1a1a" width="70%"
-                    style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;color:#FFFFFF;">
                     <strong>Orden #</strong></td>
                   <td align="left" bgcolor="#1a1a1a" width="20%"
-                    style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;color:#FFFFFF;">
                     <strong>{{ str_pad($purchase->id,6,'0',STR_PAD_LEFT) }}</strong></td>
                 </tr>
                 @foreach ($purchase->purchases_events as $compras)
@@ -310,20 +308,24 @@
               </td>
               <td align="left" valign="top" width="300">
               <![endif]-->
-              {{-- ///////////////////////////////////////////////////////////////////////////////////////ESTO ES EL DE DIRECCION DE ENVIO --}}
-              {{-- <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
+              {{-- ///////////////////////////////////////////////////////////////////////////////////////DATOS DEL PRODUCTO --}}
+              <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px;">
                   <tr>
                     <td align="left" valign="top"
                       style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                      <p><strong>Dirección de envío</strong></p>
-                      <p>viledruid<br>
-                        Morelia, Michoacan <br>
-                        Mexico</p>
+                      <p><strong>Datos del evento</strong></p>
+                      <p>
+                        {{$purchase->purchases_events[0]->event->product->titulo}}
+                        <br>
+                        {{$purchase->purchases_events[0]->event->sede}}
+                        <br>
+                        {{$purchase->purchases_events[0]->event->ciudad}}
+                      </p>
                     </td>
                   </tr>
                 </table>
-              </div> --}}
+              </div>
               {{-- AQUI ACABA --}}
               <!--[if (gte mso 9)|(IE)]>
               </td>
@@ -333,6 +335,40 @@
             </td>
           </tr>
         </table>
+
+        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%"
+            style="max-width: 600px;">
+            <tr>
+              <td align="center" valign="top" style="font-size: 0;">
+                <div style="display: inline-block; width: 80%; min-width: 240px; vertical-align: top;">
+                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                    <tr style='width:100%'>
+                      <td align="center" valign="top"
+                        style="padding-bottom: 15px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; width:80%;">
+                        <p>
+                          <strong>Fechas<br></strong>
+                          @foreach ($purchase->purchases_events[0]->event->dates as $date)
+                            <hr>
+                              @php
+                                  $fecha = \Carbon\Carbon::parse($date->fecha);
+                                  $hora = date('g:i a', strtotime($date->horaCierre));
+                              @endphp
+                              {{$fecha->day}} de {{$fecha->monthName}} de {{$fecha->year}} de {{$fecha->format('g:i a')}} a {{$hora}}
+                          @endforeach
+                          {{-- IMPORTANTEEEE DESCOMENTAR --}}
+                          {{-- <br>
+                          <br>
+                          <span style='font-size:30px'>¡Importante!</span>
+                          <br>
+                          Debes leer, imprimir, y firmar el siguiente <a href='https://www.google.com' target='_blank'>documento</a> para llevarlo contigo el primer día del evento. --}}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </table>
         <!--[if (gte mso 9)|(IE)]>
         </td>
         </tr>
@@ -359,11 +395,11 @@
               <tr>
               <td align="left" valign="top" width="300">
               <![endif]-->
-              <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
-                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px;">
-                  <tr>
-                    <td align="left" valign="top"
-                      style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+              <div style="display: inline-block; width: 80%; min-width: 240px; vertical-align: top;">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                  <tr style='width:100%'>
+                    <td align="center" valign="top"
+                      style="padding-bottom: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                       <p><strong>Tus boletos</strong></p>
                       @foreach ($purchase->purchases_events as $compra_evento)
                       <p>Boleto #{{ $loop->index + 1}}</p>
