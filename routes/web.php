@@ -68,9 +68,9 @@ Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiplom
 
 //MANDACORREO BORRAAAR!!
 Route::get('/correoski2', function () {
-    Mail::to(auth()->user()->email)->send(new SendMailable(2));
+    Mail::to(auth()->user()->email)->send(new SendMailable(1));
 })->name('terminos');
 
 Route::get('/correoski3', function () {
-    Mail::to(auth()->user()->email)->send(new SendMailableTransfer(1, auth()->user()->id, 2));
+    Mail::to(auth()->user()->email)->send(new SendMailableTransfer(1, auth()->user()->id, 1));
 })->name('terminos');
