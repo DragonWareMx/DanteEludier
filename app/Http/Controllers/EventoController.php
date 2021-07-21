@@ -15,10 +15,10 @@ use Illuminate\Support\Carbon;
 
 class EventoController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function index($id)
     {
@@ -73,6 +73,8 @@ class EventoController extends Controller
 
     public function getDiploma(Request $request)
     {
+        \Gate::authorize('haveaccess', 'client.perm');
+        
         $datos = $request->all();
         $compra_evento = PurchasesEvents::where('uuid', $datos['data']['uuid'])->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images', 'event.dates')->first();
 
