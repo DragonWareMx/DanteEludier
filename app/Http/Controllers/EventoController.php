@@ -15,10 +15,10 @@ use Illuminate\Support\Carbon;
 
 class EventoController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function index($id)
     {
@@ -88,6 +88,8 @@ class EventoController extends Controller
 
     public function getDiploma(Request $request)
     {
+        \Gate::authorize('haveaccess', 'client.perm');
+        
         $datos = $request->all();
         $compra_evento = PurchasesEvents::where('uuid', $datos['data']['uuid'])->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images', 'event.dates')->first();
 
@@ -115,11 +117,5 @@ class EventoController extends Controller
 
         $pdf = PDF::loadView('diploma', $data)->setPaper('letter');
         return $pdf->download('diploma.pdf');
-        // return response()->streamDownload(function () use ($pdf) {
-        // echo $pdf->output();
-        // }, 'invoice.pdf');
-
-        // $pdf = PDF::loadHTML('<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><body>HOLA</>');
-        //     return $pdf->download('pdfview.pdf');
     }
 }
