@@ -52,19 +52,19 @@ class DateSeeder extends Seeder
         ]);
 
         DB::table('dates')->insert([
-            'fecha' => '2021-07-13 15:30:00',
+            'fecha' => '2021-08-13 15:30:00',
             'event_id' => '3',
             'horaCierre'=>'20:00:00'
         ]);
 
         DB::table('dates')->insert([
-            'fecha' => '2021-07-14 08:00:00',
+            'fecha' => '2021-08-14 08:00:00',
             'event_id' => '3',
             'horaCierre'=>'20:00:00'
         ]);
 
         DB::table('dates')->insert([
-            'fecha' => '2021-07-15 09:00:00',
+            'fecha' => '2021-08-15 09:00:00',
             'event_id' => '3',
             'horaCierre'=>'14:00:00'
         ]);

@@ -52,14 +52,22 @@ class EventoController extends Controller
     }
 
     public function verBoleto($uuid)
-    {
-        if (Auth::user()) {
-            $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
+    {  
+        $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
+    
+        if (Auth::user()->roles[0]->name == "CheckTicket"){
             return Inertia::render('Boleto', ['boleto' => $compra_evento, 'rol' => Auth::user()->roles[0]->name]);
-        } else {
-            return Inertia::render('register');
+        }
+        else if (Auth::user()->roles[0]->name == "Cliente") {
+            if (Auth::user()->id == $compra_evento->purchase->user->id ) 
+                return Inertia::render('Boleto', ['boleto' => $compra_evento, 'rol' => Auth::user()->roles[0]->name]);
+            else return abort(403);
+        }
+        else {
+            return abort(403);
         }
     }
+
     public function check($uuid)
     {
         \Gate::authorize('haveaccess', 'check.perm');
@@ -80,10 +88,19 @@ class EventoController extends Controller
 
     public function diploma($uuid)
     {
-        //después hay que poner que sólo se pueda generar un diploma por boleto
+        //AGREGAR Y MODIFICAR CUANDO SE TENGA EL ATRIBUTO DE LA BASE DE DATOS PARA QUE SÓLO SE PUEDA SOLICITAR UNO POR BOLETO        
         \Gate::authorize('haveaccess', 'client.perm');
         $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
-        return Inertia::render('Diploma', ['boleto' => $compra_evento]);
+        
+        if (Auth::user()->id == $compra_evento->purchase->user->id){
+            if($compra_evento->asistio)
+                return Inertia::render('Diploma', ['boleto' => $compra_evento]);  
+            else {
+                $status = "No puedes solicitar tu diploma si no has acudido al taller. Tu boleto no ha sido usado";
+                return redirect()->back()->with(compact('status'));
+            }
+        } 
+        else return abort(403);
     }
 
     public function getDiploma(Request $request)
