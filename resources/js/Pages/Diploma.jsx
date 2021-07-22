@@ -142,6 +142,7 @@ const Diploma = ({ boleto }) => {
                 >
                     <div className="inicio_rounded" style={{ zIndex: "2" }} >
                         <div className="row p-5">
+                            {/* en lugar de salir este form que salga "este diploma ya fue generado anteriormente a nombre de : boleto.nombre" */}
                             <form className="" onSubmit={handleSubmit}>
                                 {status &&
                                     <FormHelperText id="component-text" style={{ color: "green", fontSize: 16 }}>{status}</FormHelperText>
@@ -153,8 +154,9 @@ const Diploma = ({ boleto }) => {
                                         fontWeight: "bold",
                                     }}
                                 >
-                                    Escribe el nombre que aparecerá en tu diploma
+                                    Escribe el nombre que aparecerá en tu diploma.
                                 </h3>
+                                <strong style={{color:'#58ad6f'}}>Escribe tu nombre correctamente ya que una vez generado el diploma no podrá ser modificado.</strong>
                                 <div className="d-flex pt-4">
                                     <AccountCircle
                                         className="align-self-end"
