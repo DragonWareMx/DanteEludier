@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use App\Mail\SendMailableTransfer;
 
@@ -61,16 +60,8 @@ Route::get('/productos/evento/{idEvento}/stripe', [App\Http\Controllers\Purchase
 Route::post('/productos/evento/{idEvento}/stripe/pay', [App\Http\Controllers\PurchaseController::class, 'stripePay'])->name('event.stripe.pay');
 Route::get('/paypal/status',  [App\Http\Controllers\PurchaseController::class, 'statusPayPal'])->name('statusPayPal');
 
-Route::get('/boleto/{uuid}',  [App\Http\Controllers\EventoController::class, 'verBoleto'])->name('boleto.ver');
-Route::get('/boleto/check/{uuid}',  [App\Http\Controllers\EventoController::class, 'check'])->name('check');
-Route::get('/diploma/{uuid}', [App\Http\Controllers\EventoController::class, 'diploma'])->name('diploma');
+Route::get('/boleto/{uuid}',  [App\Http\Controllers\EventoController::class, 'verBoleto'])->name('boleto.ver')->middleware('auth');
+Route::get('/boleto/check/{uuid}',  [App\Http\Controllers\EventoController::class, 'check'])->name('check')->middleware('auth');
+Route::get('/diploma/{uuid}', [App\Http\Controllers\EventoController::class, 'diploma'])->name('diploma')->middleware('auth');
 Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiploma'])->name('getDiploma');
 
-//MANDACORREO BORRAAAR!!
-Route::get('/correoski2', function () {
-    Mail::to(auth()->user()->email)->send(new SendMailable(1));
-})->name('terminos');
-
-Route::get('/correoski3', function () {
-    Mail::to(auth()->user()->email)->send(new SendMailableTransfer(1, auth()->user()->id, 1));
-})->name('terminos');
