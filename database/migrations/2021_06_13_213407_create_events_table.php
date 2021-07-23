@@ -18,7 +18,7 @@ class CreateEventsTable extends Migration
             $table->timestamps();
 
             //documento para cada evento
-            $table->string('documento');
+            $table->string('documento')->nullable();
 
             $table->string('ciudad',255);
             $table->string('direccion',255);
