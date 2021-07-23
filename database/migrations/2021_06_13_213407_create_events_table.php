@@ -16,6 +16,10 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            //documento para cada evento
+            $table->string('documento');
+
             $table->string('ciudad',255);
             $table->string('direccion',255);
             $table->string('sede', 255);
