@@ -17,6 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->timestamps();
 
+            //el boletin del producto
+            $table->string('documento');
+
             $table->string('titulo', 255);
             $table->text('descripcion');
             $table->string('hojaDescriptiva', 255)->nullable(); //es un link 
