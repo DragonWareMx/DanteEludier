@@ -104,6 +104,7 @@ const Diploma = ({ boleto }) => {
                 button.disabled = false;
                 FileDownload(res.data, 'diploma.pdf');
             }).catch(function (error) { console.log(error) })
+        Inertia.reload()
     }
 
     return (
