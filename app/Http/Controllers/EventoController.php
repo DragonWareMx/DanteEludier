@@ -106,10 +106,19 @@ class EventoController extends Controller
     public function getDiploma(Request $request)
     {
         \Gate::authorize('haveaccess', 'client.perm');
-        
         $datos = $request->all();
         $compra_evento = PurchasesEvents::where('uuid', $datos['data']['uuid'])->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images', 'event.dates')->first();
-
+        
+        //Si ya tiene nombre en la base de datos si llega otro diferente de todos modos se pone en el diploma el de la base de datos
+        //Si no hay nombre en la base de datos se guarda entonces el que llega del formulario.
+        
+        if($compra_evento->nombre){
+            $datos['data']['nombre']=$compra_evento->nombre;
+        }
+        else{
+            $compra_evento->nombre=$datos['data']['nombre'];
+            $compra_evento->save();
+        }
         $fechaS = "";
 
         $cant = count($compra_evento->event->dates) - 1;

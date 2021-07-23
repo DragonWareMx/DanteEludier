@@ -70,7 +70,7 @@ const Diploma = ({ boleto }) => {
 
     const [values, setValues] = React.useState({
         _method: 'post',
-        nombre: '',
+        nombre: boleto.nombre || '',
         uuid: boleto.uuid
     });
 
@@ -142,53 +142,86 @@ const Diploma = ({ boleto }) => {
                 >
                     <div className="inicio_rounded" style={{ zIndex: "2" }} >
                         <div className="row p-5">
-                            {/* en lugar de salir este form que salga "este diploma ya fue generado anteriormente a nombre de : boleto.nombre" */}
-                            <form className="" onSubmit={handleSubmit}>
-                                {status &&
-                                    <FormHelperText id="component-text" style={{ color: "green", fontSize: 16 }}>{status}</FormHelperText>
-                                }
-                                <h3
-                                    className="text-center text-md-left"
-                                    style={{
-                                        fontFamily: "Roboto Slab",
-                                        fontWeight: "bold",
-                                    }}
-                                >
-                                    Escribe el nombre que aparecerá en tu diploma.
-                                </h3>
-                                <strong style={{color:'#58ad6f'}}>Escribe tu nombre correctamente ya que una vez generado el diploma no podrá ser modificado.</strong>
-                                <div className="d-flex pt-4">
-                                    <AccountCircle
-                                        className="align-self-end"
-                                        style={{ color: "#BFBFBF" }}
-                                    />
-                                    <TextField
-                                        error={errors.nombre ? true : false}
-                                        className="ml-2"
-                                        id="nombre"
-                                        label="Nombre"
-                                        fullWidth
-                                        required
-                                        value={values.nombre}
-                                        onChange={handleChange('nombre')}
-                                    />
-                                    {errors.nombre &&
-                                        <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.nombre}</FormHelperText>
+                            {/* En caso de que el diploma NO tenga un nombre */}
+                            {!boleto.nombre &&
+                                <form className="" onSubmit={handleSubmit}>
+                                    {status &&
+                                        <FormHelperText id="component-text" style={{ color: "green", fontSize: 16 }}>{status}</FormHelperText>
                                     }
-                                </div>
-                                <div className="d-flex justify-content-center justify-content-md-end pb-4 pb-md-0">
-                                    <ColorButton
-                                        variant="contained"
-                                        color="primary"
-                                        className="mt-4"
-                                        size="large"
-                                        id='boton-diploma'
-                                        type='submit'
+                                    <h3
+                                        className="text-center text-md-left"
+                                        style={{
+                                            fontFamily: "Roboto Slab",
+                                            fontWeight: "bold",
+                                        }}
                                     >
-                                        GENERAR DIPLOMA
-                                    </ColorButton>
-                                </div>
-                            </form>
+                                        Escribe el nombre que aparecerá en tu diploma.
+                                    </h3>
+                                    <strong style={{color:'#58ad6f'}}>Escribe tu nombre correctamente ya que una vez generado el diploma no podrá ser modificado.</strong>
+                                    <div className="d-flex pt-4">
+                                        <AccountCircle
+                                            className="align-self-end"
+                                            style={{ color: "#BFBFBF" }}
+                                        />
+                                        <TextField
+                                            error={errors.nombre ? true : false}
+                                            className="ml-2"
+                                            id="nombre"
+                                            label="Nombre"
+                                            fullWidth
+                                            required
+                                            value={values.nombre}
+                                            onChange={handleChange('nombre')}
+                                        />
+                                        {errors.nombre &&
+                                            <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.nombre}</FormHelperText>
+                                        }
+                                    </div>
+                                    <div className="d-flex justify-content-center justify-content-md-end pb-4 pb-md-0">
+                                        <ColorButton
+                                            variant="contained"
+                                            color="primary"
+                                            className="mt-4"
+                                            size="large"
+                                            id='boton-diploma'
+                                            type='submit'
+                                        >
+                                            GENERAR DIPLOMA
+                                        </ColorButton>
+                                    </div>
+                                </form>
+                            }
+
+                            {/* En caso de que ya tenga nombre el diploma */}
+                            {boleto.nombre && boleto.nombre!='' &&
+                                <form className="" onSubmit={handleSubmit}>
+                                    {status &&
+                                        <FormHelperText id="component-text" style={{ color: "green", fontSize: 16 }}>{status}</FormHelperText>
+                                    }
+                                    <h3
+                                        className="text-center text-md-left"
+                                        style={{
+                                            fontFamily: "Roboto Slab",
+                                            fontWeight: "bold",
+                                        }}
+                                    >
+                                        Este diploma ya fue generado anteriormente a nombre de :
+                                    </h3>
+                                    <h3><strong style={{color:'#58ad6f'}}>{boleto.nombre}.</strong></h3>
+                                    <div className="d-flex justify-content-center justify-content-md-end pb-4 pb-md-0">
+                                        <ColorButton
+                                            variant="contained"
+                                            color="primary"
+                                            className="mt-4"
+                                            size="large"
+                                            id='boton-diploma'
+                                            type='submit'
+                                        >
+                                            DESCARGAR DIPLOMA
+                                        </ColorButton>
+                                    </div>
+                                </form>
+                            }
                         </div>
                     </div>
                 </Grid>

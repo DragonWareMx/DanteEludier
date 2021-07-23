@@ -46,18 +46,20 @@ class EventSeeder extends Seeder
             'descuento'=>'0.10'
         ]);
 
-        // DB::table('purchases_events')->insert([
-        //     'purchase_id' => '1',
-        //     'event_id' =>'1',
-        //     'precio' =>'5000',
-        //     'asistio' =>'0',
-        // ]);
-        
-        // DB::table('purchases')->insert([
-        //     'total' => '5000',
-        //     'fecha' =>'2021-07-02',
-        //     'user_id' =>'3',
-        // ]);
+        DB::table('purchases')->insert([
+            'total' => '5000',
+            'fecha' =>'2021-07-02',
+            'user_id' =>'3',
+        ]);
+
+        DB::table('purchases_events')->insert([
+            'purchase_id' => '1',
+            'event_id' =>'3',
+            'precio' =>'5000',
+            'asistio' =>'0',
+            'descuento'=>'0.10',
+            'uuid'=>'a1b10515-9f5a-4f36-b4c3-e97280e57b6c',
+        ]);
  
     }
 }
