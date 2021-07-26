@@ -113,10 +113,7 @@ export default function Producto({producto, precio, disponible, totalEventos, to
                             <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS VENDIDOS</div>
                             <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{totalBoletos} Boleto(s)</div>
                         </Grid>
-                        <Grid style={{marginRight:34}}>
-                            <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS DISPONIBLES</div>
-                            <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>40 Boleto(s)</div>
-                        </Grid>
+                        
                     </Grid>
                 </Grid>
             </Grid>
