@@ -31,4 +31,15 @@ class ProductController extends Controller
     public function libros(){
         return Inertia::render('Libros');
     }
+
+    public function productos(){
+        $this->middleware('auth');
+        \Gate::authorize('haveaccess', 'admin.perm');
+
+        $productos=Product::with('images:foto,product_id')->get();
+
+        return Inertia::render('Productos/Productos',[
+            'productos'=>$productos,
+        ]);
+    }
 }
