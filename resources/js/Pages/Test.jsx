@@ -1,9 +1,14 @@
 import React from 'react';
+import LayoutAdmin from "../layouts/LayoutAdmin";
 
-const HomePage = () => {
+const Test = () => {
     return (
         <p>Hola soi el miki</p>
     )
 }
 
-export default HomePage;
+Test.layout = (page) => (
+    <LayoutAdmin children={page} title="Términos y condiciones" pageTitle="Título que quería el oscar" />
+);
+
+export default Test;

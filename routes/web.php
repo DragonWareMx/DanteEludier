@@ -52,7 +52,7 @@ Route::get('/Aviso-de-privacidad', function () {
 Route::post('/join', [App\Http\Controllers\InicioController::class, 'join'])->name('join');
 
 Route::get('/inertia', function () {
-    return Inertia::render('Ejemplo');
+    return Inertia::render('Test');
 });
 
 Route::post('/productos/evento/{idEvento}/comprar', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('event.purchase');
@@ -64,4 +64,3 @@ Route::get('/boleto/{uuid}',  [App\Http\Controllers\EventoController::class, 've
 Route::get('/boleto/check/{uuid}',  [App\Http\Controllers\EventoController::class, 'check'])->name('check')->middleware('auth');
 Route::get('/diploma/{uuid}', [App\Http\Controllers\EventoController::class, 'diploma'])->name('diploma')->middleware('auth');
 Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiploma'])->name('getDiploma');
-
