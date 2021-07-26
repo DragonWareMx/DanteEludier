@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Header({ toggle }) {
+export default function Header({ toggle, handleCompact }) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -71,7 +71,7 @@ export default function Header({ toggle }) {
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
-                    onClick={handleMenu}
+                    onClick={handleCompact}
                     color="inherit"
                 >
                     <MenuIcon style={{ color: 'white' }} />
@@ -111,6 +111,7 @@ export default function Header({ toggle }) {
                     <MenuItem onClick={handleClose}>My account</MenuItem>
                 </Menu>
             </div>
+            {/* <div style={{ borderBottom: "1px solid #323232", width: "90%", position: 'absolute', bottom: '0px' }}></div> */}
         </Grid>
     )
 }

@@ -14,6 +14,10 @@ const Backdrop = styled.div`
         opacity: 1;
         pointer-events: all;
     ` }
+    @media(min-width: 990px){
+        opacity: 0;
+        pointer-events: none;
+    }
 `;
 
 export default Backdrop;

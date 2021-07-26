@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const Grid = styled.div`
     display: grid;
-    grid-template: "nav header" min-content
+    grid: "nav header" min-content
                           "nav main" 1fr / min-content 1fr;
     min-height: 100vh;
 `;
@@ -22,6 +22,7 @@ const GridHeader = styled.div`
 
 const GridMain = styled.div`
     grid-area: main;
+    background-color: #121212;
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +39,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LayoutAdmin({ title, pageTitle, children }) {
     const [showNav, setShowNav] = useState(0);
-    const toggle = () => setShowNav(Number(!showNav));
+    const toggle = () => {
+        setShowNav(Number(!showNav));
+        setCompact(0);
+    };
+    const [compact, setCompact] = React.useState(0);
+    const handleCompact = () => setCompact(Number(!compact));
+
     const classes = useStyles();
     useEffect(() => {
         document.title = title;
@@ -50,10 +57,10 @@ export default function LayoutAdmin({ title, pageTitle, children }) {
             {/* contenido */}
             <Grid>
                 <GridNav>
-                    <Navbar visible={showNav} close={toggle} />
+                    <Navbar visible={showNav} close={toggle} compact={compact} />
                 </GridNav>
                 <GridHeader>
-                    <Header toggle={toggle} />
+                    <Header toggle={toggle} handleCompact={handleCompact} />
                 </GridHeader>
                 <GridMain>
                     {pageTitle}
