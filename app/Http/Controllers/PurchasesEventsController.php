@@ -10,8 +10,8 @@ class PurchasesEventsController extends Controller
 {
     public function index(Request $request)
     {
-        $tickets = PurchasesEvents::get();
-        
+        $tickets = PurchasesEvents::select('id', 'confirmed', 'metodo_pago')->paginate(15);
+
         return Inertia::render('Admin/Boletos/Boletos', [
             'tickets' => $tickets,
         ]);
