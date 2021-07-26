@@ -65,3 +65,5 @@ Route::get('/boleto/check/{uuid}',  [App\Http\Controllers\EventoController::clas
 Route::get('/diploma/{uuid}', [App\Http\Controllers\EventoController::class, 'diploma'])->name('diploma')->middleware('auth');
 Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiploma'])->name('getDiploma');
 
+///////// DASHBOARD ////////
+Route::get('/dashboard/productos',  [App\Http\Controllers\ProductController::class, 'productos'])->name('dashboard.productos')->middleware('auth');
