@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import Header from './parts/Header';
 import { Navbar } from "./parts/Navbar";
 import styled from 'styled-components';
@@ -35,6 +36,16 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    titulo: {
+        fontFamily: 'Montserrat',
+        fontStyle: 'normal',
+        fontWeight: '500',
+        fontSize: '18px',
+        lineHeight: '22px',
+        color: 'white',
+        marginTop: '25px',
+        textTransform: 'uppercase'
+    }
 }));
 
 export default function LayoutAdmin({ title, pageTitle, children }) {
@@ -63,8 +74,12 @@ export default function LayoutAdmin({ title, pageTitle, children }) {
                     <Header toggle={toggle} handleCompact={handleCompact} />
                 </GridHeader>
                 <GridMain>
-                    {pageTitle}
-                    {children}
+                    <Container fixed>
+                        <div className={classes.titulo}>
+                            {pageTitle}
+                        </div>
+                        {children}
+                    </Container>
                 </GridMain>
             </Grid>
         </React.Fragment>

@@ -12,6 +12,7 @@ const Grid = styled.div`
     justify-content: space-between;
     height: 60px;
     background-color: #121212;
+    border-bottom: 1px solid #323232;
 `;
 
 const MBurger = styled.div`
