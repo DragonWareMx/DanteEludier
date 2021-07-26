@@ -18,6 +18,12 @@ class CreatePurchasesTable extends Migration
             $table->timestamps();
             $table->string('total', 45);
             $table->date('fecha');
+
+            //metodo de pago para comprar el boleto
+            $table->enum('metodo_pago', ['paypal', 'stripe', 'transferencia'])->nullable();
+            //si es transferencia, sera true cuando se confirme la transferencia
+            $table->boolean('confirmed')->default(false)->nullable();
+            
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });

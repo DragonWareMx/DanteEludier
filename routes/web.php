@@ -64,3 +64,14 @@ Route::get('/boleto/{uuid}',  [App\Http\Controllers\EventoController::class, 've
 Route::get('/boleto/check/{uuid}',  [App\Http\Controllers\EventoController::class, 'check'])->name('check')->middleware('auth');
 Route::get('/diploma/{uuid}', [App\Http\Controllers\EventoController::class, 'diploma'])->name('diploma')->middleware('auth');
 Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiploma'])->name('getDiploma');
+
+///////// DASHBOARD ////////
+Route::get('/dashboard/productos',  [App\Http\Controllers\ProductController::class, 'productos'])->name('dashboard.productos')->middleware('auth');
+
+Route::name('ticket.')->group(function () {
+    //agrega al carrito
+    Route::get('/dashboard/boletos', [App\Http\Controllers\PurchasesEventsController::class, 'index'])->name('index');
+    Route::get('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
+    Route::patch('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
+});
+
