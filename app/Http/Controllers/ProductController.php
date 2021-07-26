@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
+
 
 class ProductController extends Controller
 {
@@ -41,5 +43,23 @@ class ProductController extends Controller
         return Inertia::render('Productos/Productos',[
             'productos'=>$productos,
         ]);
+    }
+
+    public function delete($id){
+        \Gate::authorize('haveaccess', 'admin.perm');
+
+        DB::beginTransaction();
+        try {
+            $producto = Product::find($id);
+            $producto->delete();
+            DB::commit();
+            $status = "Producto eliminado con éxito";
+            return redirect()->route('dashboard.productos')->with(compact('status'));
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th);
+            $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
+            return redirect()->route('dashboard.productos')->with(compact('status'));
+        }
     }
 }

@@ -23,6 +23,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import route from 'ziggy-js';
 
 
 //Cosas del modal de eliminar
@@ -135,7 +136,7 @@ export default function Producto({producto, precio, disponible, totalEventos, to
                     <Button onClick={modalClose} style={{color:'black'}}>
                         Cancelar
                     </Button>
-                    <InertiaLink href='#' style={{color:'red',fontSize:19,marginRight:10,marginTop:'-5px',textDecoration:'none'}}>
+                    <InertiaLink onClick={modalClose} href={route('delete.producto', producto.id)} method="delete" style={{color:'red',fontSize:19,marginRight:10,marginTop:'-5px',textDecoration:'none'}}>
                         Eliminar
                     </InertiaLink>
                 </DialogActions>

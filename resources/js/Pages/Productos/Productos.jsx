@@ -1,6 +1,6 @@
 import React from "react";
-// import Layout from "../../layouts/Layout";
-// import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
+import FormHelperText from '@material-ui/core/FormHelperText'
 
 //Material UI
 
@@ -16,7 +16,8 @@ import Producto from '../../components/Productos/Producto';
 import { toInteger } from "lodash";
 
 const Productos = ({productos}) => {
-    console.log(productos);
+    
+    const {status } = usePage().props;
     const [state, setState] = React.useState({
         orden: '',
       });
@@ -83,6 +84,9 @@ const Productos = ({productos}) => {
     return (
         <>
             <Grid container >
+            {status &&
+                <FormHelperText id="component-text" style={{ color: "green", fontSize: 16 }}>{status}</FormHelperText>
+            }
                 <Grid item xs={12}>
                     <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
                         <Grid container alignItems='center' style={{justifyContent:'flex-end'}}>
