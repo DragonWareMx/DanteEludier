@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export default function Producto({producto}){
+export default function Producto({producto, precio, disponible, totalEventos, totalBoletos}){
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -56,8 +56,16 @@ export default function Producto({producto}){
                             </Menu>
                         </Grid>
                     </Grid>
-                    <Grid alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>DISPONIBLE <EventAvailableIcon style={{marginTop:'-5px'}}></EventAvailableIcon> /  NO DISPONIBLE <DateRangeIcon style={{marginTop:'-5px'}}></DateRangeIcon></Grid>
-                    <Grid style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Desde $99999.99 MXN</Grid>
+                    { disponible == true ?
+                    <Grid alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
+                        DISPONIBLE <EventAvailableIcon style={{marginTop:'-5px'}}></EventAvailableIcon> 
+                    </Grid>
+                    :
+                    <Grid alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
+                    NO DISPONIBLE <DateRangeIcon style={{marginTop:'-5px'}}></DateRangeIcon>
+                    </Grid>
+                    }
+                    <Grid style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Desde ${precio} MXN</Grid>
                 </Grid>
             </Grid>
         </>

@@ -36,7 +36,7 @@ class ProductController extends Controller
         $this->middleware('auth');
         \Gate::authorize('haveaccess', 'admin.perm');
 
-        $productos=Product::with('images:foto,product_id')->get();
+        $productos=Product::with('images:foto,product_id', 'events', 'events.dates', 'events.purchases')->orderBy('created_at','DESC')->get();
 
         return Inertia::render('Productos/Productos',[
             'productos'=>$productos,
