@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
 
             //el boletin del producto
-            $table->string('documento');
+            $table->string('documento')->nullable();
 
             $table->string('titulo', 255);
             $table->text('descripcion');
