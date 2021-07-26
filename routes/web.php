@@ -52,7 +52,7 @@ Route::get('/Aviso-de-privacidad', function () {
 Route::post('/join', [App\Http\Controllers\InicioController::class, 'join'])->name('join');
 
 Route::get('/inertia', function () {
-    return Inertia::render('Ejemplo');
+    return Inertia::render('Test');
 });
 
 Route::post('/productos/evento/{idEvento}/comprar', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('event.purchase');
@@ -74,3 +74,4 @@ Route::name('ticket.')->group(function () {
     Route::get('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
     Route::patch('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
 });
+
