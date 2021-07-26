@@ -1,7 +1,10 @@
 import { Grid, Paper, FormControl, Select, MenuItem, TableHead, TableCell, TableRow, TableSortLabel, TableContainer, Table, TableBody } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
+import { filter } from 'lodash';
 import SearchBar from 'material-ui-search-bar'
 import React from 'react'
+import Paginacion from '../../../components/common/Paginacion';
+import PaginacionAdmin from '../../../components/common/PaginacionAdmin';
 import Layout from '../../../layouts/Layout'
 
 const headCells = [
@@ -188,6 +191,37 @@ const Boletos = ({ tickets }) => {
         // })
     }
 
+    //filtra los eventos repetidos
+    function filterEvent(events){
+        var ids = {}
+        var eventsJson = []
+
+        events.forEach(event => {
+            if(!(event.id in ids)){
+                eventsJson.push(event)
+                ids[event.id] = true
+            }
+        });
+
+        return eventsJson
+    }
+
+    //filtra los eventos y productos repetidos
+    function filterProduct(events){
+        var productIds = {}
+        var filteredEvents = filterEvent(events)
+        var filteredProducts = []
+
+        filteredEvents.forEach(event => {
+            if(!(event.product.id in productIds)){
+                filteredProducts.push(event.product)
+                productIds[event.product.id] = true
+            }
+        });
+
+        return filteredProducts
+    }
+
     return (
     <>
         <Paper className={classes.paper}>
@@ -213,6 +247,7 @@ const Boletos = ({ tickets }) => {
                             onChange={(newValue) => setState({ search: newValue })}
                             //onRequestSearch={() => doSomethingWith(this.state.value)}
                             placeholder="Buscar"
+                            style={{borderRadius: 50}}
                             >
                         </SearchBar>
                     </Grid>
@@ -266,62 +301,74 @@ const Boletos = ({ tickets }) => {
                                         // onClick={(event) => handleClick(event, row.name)}
                                     >
                                         <TableCell style={{borderTopLeftRadius: 5, borderBottomLeftRadius: 5}}>
-                                            PRODUCTO
+                                            {ticket.events.length > 0 ?
+                                                filterProduct(ticket.events).map((product) => (
+                                                    <div key={product.id + "producto"}>
+                                                        {product.titulo}
+                                                    </div>
+                                                ))
+                                            :
+                                                "Sin productos"
+                                            }
                                         </TableCell>
                                         <TableCell>
-                                            EVENTO
+                                            {ticket.events.length > 0 ?
+                                                filterEvent(ticket.events).map((event) => (
+                                                    <div key={event.id + "evento"}>
+                                                        {event.ciudad}, {event.sede}
+                                                    </div>
+                                                ))
+                                            :
+                                                "Sin eventos"
+                                            }
                                         </TableCell>
                                         <TableCell>
-                                            USUARIO
+                                            {ticket.user ?
+                                                <>
+                                                    {ticket.user.name} {ticket.user.apellido_p} {ticket.user.apellido_m}
+                                                </>
+                                            :
+                                                "Sin usuario"
+                                            }
                                         </TableCell>
                                         <TableCell>
-                                            TELEFONO
+                                            {ticket.user ?
+                                                <>
+                                                    {ticket.user.phone}
+                                                </>
+                                            :
+                                                "Sin teléfono"
+                                            }
                                         </TableCell>
                                         <TableCell>
-                                            BOLETOS
+                                            {ticket.events_count}
                                         </TableCell>
                                         <TableCell>
-                                            TIPO DE PAGO
+                                            {ticket.metodo_pago ?
+                                            ticket.metodo_pago
+                                            :
+                                            "No registrado"
+                                            }
                                         </TableCell>
                                         <TableCell style={{borderTopRightRadius: 5, borderBottomRightRadius: 5}}>
-                                            ESTATUS
+                                            {ticket.confirmed ?
+                                            "Pagado"
+                                            :
+                                            "Pendiente"
+                                            }
                                         </TableCell>
                                     </TableRow>
                                 )
-                            })
-
-                            }
-                                <TableRow
-                                    hover
-                                    role="checkbox" tabIndex={-1}
-                                    // onClick={(event) => handleClick(event, row.name)}
-                                >
-                                    <TableCell>
-                                        PRODUCTO
-                                    </TableCell>
-                                    <TableCell>
-                                        EVENTO
-                                    </TableCell>
-                                    <TableCell>
-                                        USUARIO
-                                    </TableCell>
-                                    <TableCell>
-                                        TELEFONO
-                                    </TableCell>
-                                    <TableCell>
-                                        BOLETOS
-                                    </TableCell>
-                                    <TableCell>
-                                        TIPO DE PAGO
-                                    </TableCell>
-                                    <TableCell>
-                                        ESTATUS
-                                    </TableCell>
-                                </TableRow>
+                            })}
                             </TableBody>
                         </Table>
                     </TableContainer>
                 </Grid>
+            </Grid>
+
+            {/* PAGINACION */}
+            <Grid item style={{marginTop: 25}}>
+                <PaginacionAdmin links={tickets.links} />
             </Grid>
         </Paper>
     </>

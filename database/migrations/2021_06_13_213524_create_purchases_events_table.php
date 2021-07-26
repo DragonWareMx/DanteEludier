@@ -23,11 +23,6 @@ class CreatePurchasesEventsTable extends Migration
             //nombre de la persona que asistio
             $table->string('nombre', 355)->nullable();
 
-            //metodo de pago para comprar el boleto
-            $table->enum('metodo_pago', ['paypal', 'stripe', 'transferencia'])->nullable();
-            //si es transferencia, sera true cuando se confirme la transferencia
-            $table->boolean('confirmed')->default(false)->nullable();
-
             $table->unsignedBigInteger('event_id');
             $table->foreign('event_id')->references('id')->on('events');
 
