@@ -72,8 +72,8 @@ Route::delete('/dashboard/productos/delete/{id}', [App\Http\Controllers\ProductC
 Route::name('ticket.')->group(function () {
     //agrega al carrito
     Route::get('/dashboard/boletos', [App\Http\Controllers\PurchasesEventsController::class, 'index'])->name('index');
-    Route::get('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
-    Route::patch('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
+    Route::get('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
+    Route::patch('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
 });
 
 Route::get('/dashboard/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.inicio');
