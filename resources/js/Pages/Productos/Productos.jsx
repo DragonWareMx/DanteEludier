@@ -1,6 +1,7 @@
 import React from "react";
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import Layout from '../../layouts/LayoutAdmin';
 
 //Material UI
 
@@ -83,7 +84,7 @@ const Productos = ({productos}) => {
 
     return (
         <>
-            <Grid container >
+            <Grid container style={{marginTop:21,marginBottom:21}}>
             {status &&
                 <FormHelperText id="component-text" style={{ color: "green", fontSize: 16 }}>{status}</FormHelperText>
             }
@@ -122,8 +123,8 @@ const Productos = ({productos}) => {
     );
 };
 
-// Productos.layout = (page) => (
-//     <Layout children={page} title="Dashboard - Productos" pageTitle="Productos" />
-// );
+Productos.layout = (page) => (
+    <Layout children={page} title="Dashboard - Productos" pageTitle="Productos" />
+);
 
 export default Productos;

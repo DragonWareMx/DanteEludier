@@ -45,6 +45,10 @@ class ProductController extends Controller
         ]);
     }
 
+    public function verProducto($id){
+        dd('que buen producto , es el ',$id);
+    }
+
     public function delete($id){
         \Gate::authorize('haveaccess', 'admin.perm');
 
