@@ -159,7 +159,7 @@ export function Navbar(props) {
                         <InertiaLink href="#" as="button" type="button" className={classes.inertiaLink}>
                             <EventIcon style={{ color: 'white' }} />
                         </InertiaLink>
-                        <InertiaLink href="#" as="button" type="button" className={classes.inertiaLink}>
+                        <InertiaLink href={route('ticket.index')} as="button" type="button" className={classes.inertiaLink}>
                             <ConfirmationNumberIcon style={{ color: 'white' }} />
                         </InertiaLink>
                         <div className={classes.separador}></div>
