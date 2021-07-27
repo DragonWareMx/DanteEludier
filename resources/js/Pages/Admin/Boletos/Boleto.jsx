@@ -71,7 +71,7 @@ const Boleto = ({compra}) => {
                             <Grid item xs={12} className="grid-boleto-info" style={{paddingBottom:15, borderBottom:'0.5px solid #535353'}}>
                                 <div className="item-info-b">
                                     <Grid item xs={12} className="title-info">FECHA DE COMPRA</Grid>
-                                    <Grid item xs={12} className="txt-info">{compra.create_at}</Grid>
+                                    <Grid item xs={12} className="txt-info">{compra.fecha}</Grid>
                                 </div>
 
                                 <div className="item-info-b">
