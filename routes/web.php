@@ -66,14 +66,21 @@ Route::get('/diploma/{uuid}', [App\Http\Controllers\EventoController::class, 'di
 Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiploma'])->name('getDiploma');
 
 ///////// DASHBOARD ////////
+// Productos
 Route::get('/dashboard/productos',  [App\Http\Controllers\ProductController::class, 'productos'])->name('dashboard.productos')->middleware('admin');
 Route::get('/dashboard/productos/{id}',  [App\Http\Controllers\ProductController::class, 'verProducto'])->name('dashboard.producto')->middleware('admin');
 Route::delete('/dashboard/productos/delete/{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('delete.producto')->middleware('admin');
+
+// Eventos
+Route::get('/dashboard/eventos', [App\Http\Controllers\EventController::class, 'index'])->name('dashboard.events');
+Route::get('/dashboard/eventos/{id}', [App\Http\Controllers\EventController::class, 'show'])->name('dashboard.event');
+
+// Boletos
 Route::name('ticket.')->group(function () {
     //agrega al carrito
     Route::get('/dashboard/boletos', [App\Http\Controllers\PurchasesEventsController::class, 'index'])->name('index');
-    Route::get('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
-    Route::patch('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
+    Route::get('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
+    Route::patch('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
 });
 
 Route::get('/dashboard/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.inicio');

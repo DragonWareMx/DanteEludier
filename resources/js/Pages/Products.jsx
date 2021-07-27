@@ -49,7 +49,7 @@ const Products = ({ products }) => {
         });
         return precio
     }
-    console.log(products);
+    
     return (
         <>
             <InertiaHead>

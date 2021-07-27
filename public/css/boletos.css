@@ -1,0 +1,83 @@
+.txt-orden-id{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    margin-bottom: 22px !important;
+}
+.grid-boleto{
+    border: 1px solid #535353;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+.grid-sub-boleto{
+    padding:15px;
+}
+.grid-boleto-info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.item-info-b{
+    width:120px !important;
+    margin-bottom: 10px;
+}
+.total-price{
+    text-align: right;
+    border-top:1px dashed #535353;
+    border-bottom:1px dashed #535353;
+    padding:15px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.title-info{
+    font-size: 12px;
+    line-height: 15px;
+    color: #9C9C9C;
+    margin-bottom: 5px !important;
+}
+.txt-info{
+    font-size: 14px;
+    line-height: 18px;
+}
+.grid-boleto-compra{
+    background: #323232;
+    border-radius: 4px;
+    padding:15px;
+}
+.btn-action{
+    background: #FFFFFF !important;
+    border-radius: 50px !important;
+    text-transform: initial !important;
+    color: #323232 !important;
+    font-family: Oxygen !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    line-height: 15px !important;
+    padding:12px 16px !important;
+    margin-top: 15px !important;
+}
+
+@media(max-width:960px){
+    .grid-boleto-compra{
+        margin-top: 25px !important;
+    }
+}
+@media(max-width:600px){
+    .img-product{
+        max-height: 200px;
+    }
+}
+
+/* Comentar esto!!! */
+@media(min-width:600px){
+    .MuiContainer-fixed {
+        max-width: none !important;
+    }
+}
