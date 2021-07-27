@@ -3,6 +3,7 @@ import { InertiaLink } from '@inertiajs/inertia-react'
 
 //CSS
 import '/css/producto.css';
+import '/css/eventos.css';
 
 //iconos
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -49,14 +50,14 @@ export default function evento(){
 
     return (
         <>
-         <Grid container className='producto_card'>
+        <Grid container className='evento_card'>
             <Grid item xs={12} sm={2} md={3}>
-                <InertiaLink href="#!"><img src="/img/productos/avatar.jpg" className="producto_img"/> </InertiaLink>
+                <InertiaLink href="#!"><img src="/img/productos/avatar.jpg" className="evento_img"/> </InertiaLink>
             </Grid>
             <Grid item xs={12} sm={10} md={9} className="producto_info"> 
-                <Grid container alignItems='center' style={{justifyContent:'space-between'}}>
-                    <InertiaLink  href="#!" style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>Taller Vivencial Avatar Financiero</InertiaLink>
-                    <Grid>
+                <Grid container alignItems='center' style={{flexWrap:'wrap-reverse'}}>
+                    <Grid item xs={11}><InertiaLink  href="#!" style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>Taller Vivencial Avatar Financiero Lorem ipsum dolor sit amet</InertiaLink></Grid>
+                    <Grid item xs={1} style={{display:'flex',justifyContent:'flex-end'}}>
                         <Button aria-controls={"menu-"+1} aria-haspopup="true" onClick={handleClick}>
                             <MoreVertIcon style={{color:'#FFFFFF'}}></MoreVertIcon>
                         </Button>
@@ -83,19 +84,18 @@ export default function evento(){
                 <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Precio $5004.90 MXN</Grid>
                 
                 <Grid container direction='row' style={{marginTop:32}}>
-                    <Grid style={{marginRight:34}}>
+                    <Grid style={{marginRight:34, marginBottom:10}}>
                             <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>% DESCUENTO</div>
                             <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>10% c/u</div>
                     </Grid>
-                    <Grid style={{marginRight:34}}>
+                    <Grid style={{marginRight:34, marginBottom:10}}>
                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS VENDIDOS</div>
                         <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>4 Boleto(s)</div>
                     </Grid>
-                    <Grid style={{marginRight:34}}>
+                    <Grid style={{marginRight:34, marginBottom:10}}>
                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS DISPONIBLES</div>
                         <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>10 Boleto(s)</div>
                     </Grid>
-                    
                 </Grid>
 
             </Grid>

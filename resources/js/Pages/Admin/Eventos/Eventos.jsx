@@ -102,6 +102,8 @@ const Eventos = () => {
                     </Grid>
                     {/* Items eventos */}
                     <Evento />
+                    <Evento />
+                    <Evento />
 
                     
                 </Paper>
