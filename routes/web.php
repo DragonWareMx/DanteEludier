@@ -67,6 +67,7 @@ Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiplom
 
 ///////// DASHBOARD ////////
 Route::get('/dashboard/productos',  [App\Http\Controllers\ProductController::class, 'productos'])->name('dashboard.productos')->middleware('auth');
+Route::get('/dashboard/productos/{id}',  [App\Http\Controllers\ProductController::class, 'verProducto'])->name('dashboard.producto')->middleware('auth');
 Route::delete('/dashboard/productos/delete/{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('delete.producto')->middleware('auth');
 Route::name('ticket.')->group(function () {
     //agrega al carrito
