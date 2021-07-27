@@ -25,6 +25,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import { green, purple } from "@material-ui/core/colors";
 import "../../../public/css/navbar.css";
@@ -177,6 +178,18 @@ export default function Navbar() {
                             </InertiaLink>
                         }
 
+                        {!auth.user &&
+                            <InertiaLink href='/login' style={{ textDecoration: "none" }} >
+                                <Button
+                                    style={{ color: "#FFFFFF" }}
+                                    startIcon={<AccountCircleIcon />}
+                                    className="ml-3 grow"
+                                >
+                                    Iniciar sesión
+                                </Button>
+                            </InertiaLink>
+                        }
+
                         <FormControl className={classes.formControl}>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -305,6 +318,19 @@ export default function Navbar() {
                                         <MeetingRoomIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Cerrar Sesión" />
+                                </ListItem>
+                                }
+                                {!auth.user &&
+                                <ListItem
+                                    button
+                                    key="Login"
+                                    component="a"
+                                    href='/login'
+                                >
+                                    <ListItemIcon>
+                                        <AccountCircleIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Iniciar Sesión" />
                                 </ListItem>
                                 }
                             </List>
