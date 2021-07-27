@@ -24,6 +24,8 @@ const StyledNav = styled.nav`
     height: 100vh;
     width: ${p => p.compact ? '60px' : '226px'};
     position: sticky;
+    top: 0px;
+    left: 0px;
     z-index: 1;
     padding: 35px 10px;
     transition: width 0.2s cubic-bezier( 0.4, 0, 1, 1);
