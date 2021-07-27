@@ -5,7 +5,7 @@ import SearchBar from 'material-ui-search-bar'
 import React from 'react'
 import Paginacion from '../../../components/common/Paginacion';
 import PaginacionAdmin from '../../../components/common/PaginacionAdmin';
-import Layout from '../../../layouts/Layout'
+import LayoutAdmin from "../../../layouts/LayoutAdmin";
 
 const headCells = [
     { id: 'producto', disablePadding: false, label: 'PRODUCTO' },
@@ -374,7 +374,8 @@ const Boletos = ({ tickets }) => {
     </>
     )
 }
-
-// Boletos.layout = page => <Layout children={page} title="Boletos" />
+Boletos.layout = (page) => (
+    <LayoutAdmin children={page} title="Boletos" pageTitle="Boletos" />
+)
 
 export default Boletos
