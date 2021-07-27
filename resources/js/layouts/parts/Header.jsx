@@ -6,6 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import styled from 'styled-components';
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
+
 
 const Grid = styled.div`
     display: flex;
@@ -13,6 +15,7 @@ const Grid = styled.div`
     height: 60px;
     background-color: #121212;
     border-bottom: 1px solid #323232;
+    padding: 0px 1%;
 `;
 
 const MBurger = styled.div`
@@ -36,11 +39,18 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#323232;",
         borderRadius: '4px',
         color: 'white',
-        marginTop: '30px'
+        marginTop: '35px',
+    },
+    inertiaLink: {
+        color: 'white',
+        textDecoration: 'none',
+        border: 'none',
+        backgroundColor: 'transparent',
     }
 }));
 
 export default function Header({ toggle, handleCompact }) {
+    const { auth } = usePage().props;
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -88,7 +98,7 @@ export default function Header({ toggle, handleCompact }) {
                     color="inherit"
                 >
                     <AccountCircle style={{ color: 'white' }} />
-                    <div style={{ color: 'white', fontFamily: 'Oxygen', fontSize: '13px', fontStyle: 'normal', fontWeigh: 'bold', marginLeft: '2px' }}>Administrador
+                    <div style={{ color: 'white', fontFamily: 'Oxygen', fontSize: '13px', fontStyle: 'normal', fontWeigh: 'bold', marginLeft: '7px', marginRight: '4px' }}> {auth.user.name}
                     </div>
                     <div style={{ color: 'white' }}> &#x25BE;</div>
                 </IconButton>
@@ -96,23 +106,17 @@ export default function Header({ toggle, handleCompact }) {
                     id="simple-menu"
                     classes={{ paper: classes.menuPaper }}
                     anchorEl={anchorEl}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                    }}
+
                     keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
+
                     open={open}
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                    <InertiaLink href="/logout" method='post' as='button' className={classes.inertiaLink}>
+                        <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
+                    </InertiaLink>
                 </Menu>
             </div>
-            {/* <div style={{ borderBottom: "1px solid #323232", width: "90%", position: 'absolute', bottom: '0px' }}></div> */}
         </Grid>
     )
 }

@@ -2,7 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import Backdrop from "./Backdrop";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Link } from '@inertiajs/inertia-react'
+import { InertiaLink } from '@inertiajs/inertia-react';
+import route from "ziggy-js";
 
 import List from '@material-ui/core/List';
 import MuiListItem from "@material-ui/core/ListItem";
@@ -16,6 +17,7 @@ import SchoolIcon from '@material-ui/icons/School';
 import EventIcon from '@material-ui/icons/Event';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { findLastIndex } from 'lodash';
 
 const StyledNav = styled.nav`
@@ -24,6 +26,8 @@ const StyledNav = styled.nav`
     height: 100vh;
     width: ${p => p.compact ? '60px' : '226px'};
     position: sticky;
+    top: 0px;
+    left: 0px;
     z-index: 1;
     padding: 35px 10px;
     transition: width 0.2s cubic-bezier( 0.4, 0, 1, 1);
@@ -47,7 +51,7 @@ const StyledNav = styled.nav`
 const Logo = styled.img`
     width: 100%;
     height:  ${p => p.compact ? '0px' : '40px'};
-    margin-botom: ${p => p.compact ? '0px' : '60px'} !important;
+    margin-bottom: ${p => p.compact ? '0px' : '60px'} !important;
     padding: 0px 15px;
     transition: height 0.2s cubic-bezier( 0.4, 0, 1, 1);
 `;
@@ -55,23 +59,13 @@ const Logo = styled.img`
 const MLogo = styled.img`
     width: 40px;
     height:  ${p => p.compact ? '40px' : '0px'};
-    margin-botom: ${p => p.compact ? '45px' : '0px'} !important;
+    margin-top: -20px;
+    margin-bottom: ${p => p.compact ? '45px' : '0px'} !important;
     padding: 0px 0px;
-    transition: width 0.2s cubic-bezier( 0.4, 0, 1, 1);
+    transition: height 0.2s cubic-bezier( 0.4, 0, 1, 1);
 `;
 
 const useStyles = makeStyles((theme) => ({
-    logo: {
-        width: '100%',
-        marginBottom: '60px',
-        padding: '0px 15px',
-    },
-    logo2: {
-        width: '40px',
-        height: '40px',
-        marginBottom: '45px',
-        padding: '0px 0px',
-    },
     root: {
         width: '100%',
         maxWidth: 360,
@@ -107,6 +101,13 @@ const useStyles = makeStyles((theme) => ({
             color: "white",
             borderRadius: '4px',
         }
+    },
+    inertiaLink2: {
+        backgroundColor: 'transparent',
+        border: 'none',
+        width: '100%',
+        color: 'white',
+        textDecoration: 'none'
     }
 }));
 
@@ -149,34 +150,36 @@ export function Navbar(props) {
                 <MLogo src="/img/DE.png" alt="Logo" className={classes.logo2}   {...props} />
                 {props.compact ?
                     <div id="lista-con-compact" >
-                        <Link href="#" as="button" type="button" className={classes.inertiaLink}>
+                        <InertiaLink href={route('dashboard.inicio')} as="button" type="button" className={classes.inertiaLink}>
                             <HomeIcon style={{ color: 'white' }} />
-                        </Link>
-                        <Link href="#" as="button" type="button" className={classes.inertiaLink}>
-                            <SchoolIcon style={{ color: 'white' }} />
-                        </Link>
-                        <Link href="#" as="button" type="button" className={classes.inertiaLink}>
+                        </InertiaLink>
+                        <InertiaLink href={route('dashboard.productos')} as="button" type="button" className={classes.inertiaLink}>
+                            <ShoppingBasketIcon style={{ color: 'white' }} />
+                        </InertiaLink>
+                        <InertiaLink href="#" as="button" type="button" className={classes.inertiaLink}>
                             <EventIcon style={{ color: 'white' }} />
-                        </Link>
-                        <Link href="#" as="button" type="button" className={classes.inertiaLink}>
+                        </InertiaLink>
+                        <InertiaLink href={route('ticket.index')} as="button" type="button" className={classes.inertiaLink}>
                             <ConfirmationNumberIcon style={{ color: 'white' }} />
-                        </Link>
+                        </InertiaLink>
                         <div className={classes.separador}></div>
-                        <Link href="#" as="button" type="button" className={classes.inertiaLink}>
+                        <InertiaLink href="#" as="button" type="button" className={classes.inertiaLink}>
                             <AddCircleIcon style={{ color: 'white' }} />
-                        </Link>
+                        </InertiaLink>
                     </div> :
                     <div id="lista-sin-compact" >
                         <List
                             component="nav"
                             className={classes.root}
                         >
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <HomeIcon style={{ color: 'white' }} />
-                                </ListItemIcon>
-                                <ListItemText primary="Inicio" classes={{ primary: classes.texto }} />
-                            </ListItem>
+                            <InertiaLink href={route('dashboard.inicio')} className={classes.inertiaLink2}>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <HomeIcon style={{ color: 'white' }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Inicio" classes={{ primary: classes.texto }} />
+                                </ListItem>
+                            </InertiaLink>
                             <ListItem button onClick={handleClick}>
                                 <ListItemIcon>
                                     <SchoolIcon style={{ color: 'white' }} />
@@ -186,6 +189,13 @@ export function Navbar(props) {
                             </ListItem>
                             <Collapse in={open} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
+
+                                    <ListItem button className={classes.nested}>
+                                        <ListItemIcon>
+                                            <ShoppingBasketIcon style={{ color: 'white' }} />
+                                        </ListItemIcon>
+                                        <ListItemText primary="Productos" classes={{ primary: classes.texto }} />
+                                    </ListItem>
                                     <ListItem button className={classes.nested}>
                                         <ListItemIcon>
                                             <EventIcon style={{ color: 'white' }} />

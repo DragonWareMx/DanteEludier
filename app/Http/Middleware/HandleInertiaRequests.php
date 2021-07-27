@@ -48,7 +48,7 @@ class HandleInertiaRequests extends Middleware
 
             // Lazily
             'auth.user' => fn () => $request->user()
-                ? $request->user()->id
+                ? $request->user()
                 : null,
 
             'status' => function () use ($request) {
