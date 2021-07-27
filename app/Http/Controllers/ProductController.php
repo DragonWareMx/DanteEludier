@@ -35,9 +35,6 @@ class ProductController extends Controller
     }
 
     public function productos(){
-        $this->middleware('auth');
-        \Gate::authorize('haveaccess', 'admin.perm');
-
         $productos=Product::with('images:foto,product_id', 'events', 'events.dates', 'events.purchases')->orderBy('created_at','DESC')->get();
 
         return Inertia::render('Productos/Productos',[
@@ -45,9 +42,14 @@ class ProductController extends Controller
         ]);
     }
 
-    public function delete($id){
-        \Gate::authorize('haveaccess', 'admin.perm');
+    public function verProducto($id){
+        $producto=Product::with('images:foto,product_id')->findOrFail($id);
+        return Inertia::render('Productos/Producto',[
+            'producto'=>$producto,
+        ]);
+    }
 
+    public function delete($id){
         DB::beginTransaction();
         try {
             $producto = Product::find($id);

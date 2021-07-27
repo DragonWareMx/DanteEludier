@@ -17,6 +17,36 @@
     padding:17px;
 }
 
+.verproducto_img{
+    width:100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.verproducto_info{
+    padding-left: 15px;
+}
+
+.verproducto_pdf{
+    margin-top:20px;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 50px;
+    width: 117px;
+    height: 34px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.verproducto_pdf:hover{
+    color: white;
+    text-decoration: none;
+}
+
 
 @media(max-width:645px){
     .producto_card{
@@ -33,5 +63,14 @@
     }
     .producto_img{
         height:150px !important;
+    }
+
+    .verproducto_img{
+        height:220px !important;
+    }
+
+    .verproducto_info{
+        padding:0px;
+        padding-top: 15px;
     }
 }

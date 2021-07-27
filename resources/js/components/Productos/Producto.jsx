@@ -62,19 +62,17 @@ export default function Producto({producto, precio, disponible, totalEventos, to
         setOpen(false);
     };
     
-
-    
     const classes = useStyles();
 
     return (
         <>
             <Grid container className='producto_card'>
                 <Grid item xs={12} sm={2} md={3}>
-                    <img src={producto.images[0] && "/img/productos/"+producto.images[0].foto} className="producto_img"/> 
+                    <InertiaLink href={route('dashboard.producto',producto.id)}><img src={producto.images[0] && "/img/productos/"+producto.images[0].foto} className="producto_img"/> </InertiaLink>
                 </Grid>
                 <Grid item xs={12} sm={10} md={9} className="producto_info"> 
                     <Grid container alignItems='center' style={{justifyContent:'space-between'}}>
-                        <Grid style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold'}}>{producto.titulo}</Grid>
+                        <InertiaLink  href={route('dashboard.producto',producto.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{producto.titulo}</InertiaLink>
                         <Grid>
                             <Button aria-controls={"menu-"+producto.id} aria-haspopup="true" onClick={handleClick}>
                                 <MoreVertIcon style={{color:'#FFFFFF'}}></MoreVertIcon>
@@ -96,12 +94,12 @@ export default function Producto({producto, precio, disponible, totalEventos, to
                         </Grid>
                     </Grid>
                     { disponible == true ?
-                    <Grid alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
-                        DISPONIBLE <EventAvailableIcon style={{marginTop:'-5px'}}></EventAvailableIcon> 
+                    <Grid container alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
+                        DISPONIBLE <EventAvailableIcon></EventAvailableIcon> 
                     </Grid>
                     :
-                    <Grid alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
-                    NO DISPONIBLE <DateRangeIcon style={{marginTop:'-5px'}}></DateRangeIcon>
+                    <Grid container alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
+                    NO DISPONIBLE <DateRangeIcon></DateRangeIcon>
                     </Grid>
                     }
                     <Grid style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Desde ${precio} MXN</Grid>
