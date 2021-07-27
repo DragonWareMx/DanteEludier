@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Backdrop from "./Backdrop";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, Link } from '@inertiajs/inertia-react';
 import route from "ziggy-js";
 
 import List from '@material-ui/core/List';
@@ -18,7 +18,7 @@ import EventIcon from '@material-ui/icons/Event';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import { findLastIndex } from 'lodash';
+
 
 const StyledNav = styled.nav`
     background-color:  #000000;
@@ -108,6 +108,14 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         color: 'white',
         textDecoration: 'none'
+    },
+    inertiaLinkNested: {
+        backgroundColor: 'transparent',
+        border: 'none',
+        width: '100%',
+        color: 'white',
+        textDecoration: 'none',
+        padding: '0px',
     }
 }));
 
@@ -188,36 +196,45 @@ export function Navbar(props) {
                                 {open ? <ExpandLess /> : <ExpandMore />}
                             </ListItem>
                             <Collapse in={open} timeout="auto" unmountOnExit>
-                                <List component="div" disablePadding>
+                                <List component='nav' disablePadding>
+                                    <InertiaLink href={route('dashboard.productos')} as="button" type="button" className={classes.inertiaLinkNested}>
+                                        <ListItem button className={classes.nested}>
+                                            <ListItemIcon>
+                                                <ShoppingBasketIcon style={{ color: 'white' }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary="Productos" classes={{ primary: classes.texto }} />
+                                        </ListItem>
+                                    </InertiaLink>
 
-                                    <ListItem button className={classes.nested}>
-                                        <ListItemIcon>
-                                            <ShoppingBasketIcon style={{ color: 'white' }} />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Productos" classes={{ primary: classes.texto }} />
-                                    </ListItem>
-                                    <ListItem button className={classes.nested}>
-                                        <ListItemIcon>
-                                            <EventIcon style={{ color: 'white' }} />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Eventos" classes={{ primary: classes.texto }} />
-                                    </ListItem>
-                                    <ListItem button className={classes.nested}>
-                                        <ListItemIcon>
-                                            <ConfirmationNumberIcon style={{ color: 'white' }} />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Boletos" classes={{ primary: classes.texto }} />
-                                    </ListItem>
+                                    <InertiaLink href="#" as="button" type="button" className={classes.inertiaLinkNested}>
+                                        <ListItem button className={classes.nested}>
+                                            <ListItemIcon>
+                                                <EventIcon style={{ color: 'white' }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary="Eventos" classes={{ primary: classes.texto }} />
+                                        </ListItem>
+                                    </InertiaLink>
+
+                                    <InertiaLink href={route('ticket.index')} as="button" type="button" className={classes.inertiaLinkNested}>
+                                        <ListItem button className={classes.nested}>
+                                            <ListItemIcon>
+                                                <ConfirmationNumberIcon style={{ color: 'white' }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary="Boletos" classes={{ primary: classes.texto }} />
+                                        </ListItem>
+                                    </InertiaLink>
                                 </List>
                             </Collapse>
                         </List>
                         <div className={classes.separador}></div>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <AddCircleIcon style={{ color: 'white' }} />
-                            </ListItemIcon>
-                            <ListItemText primary="Agregar producto" classes={{ primary: classes.texto }} />
-                        </ListItem>
+                        <InertiaLink href={route('dashboard.inicio')} className={classes.inertiaLink2}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <AddCircleIcon style={{ color: 'white' }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Agregar producto" classes={{ primary: classes.texto }} />
+                            </ListItem>
+                        </InertiaLink>
                     </div>
                 }
             </StyledNav>

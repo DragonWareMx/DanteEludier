@@ -74,7 +74,7 @@ export default function LayoutAdmin({ title, pageTitle, children }) {
                     <Header toggle={toggle} handleCompact={handleCompact} />
                 </GridHeader>
                 <GridMain>
-                    <Container fixed>
+                    <Container maxWidth={'lg'}>
                         <div className={classes.titulo}>
                             {pageTitle}
                         </div>
