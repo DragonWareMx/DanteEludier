@@ -11,4 +11,4 @@ Inicio.layout = (page) => (
     <LayoutAdmin children={page} title="Inicio" pageTitle="inicio" />
 );
 
-export default Test;
+export default Inicio;

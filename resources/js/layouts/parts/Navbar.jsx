@@ -26,7 +26,8 @@ const StyledNav = styled.nav`
     position: sticky;
     z-index: 1;
     padding: 35px 10px;
-    border: none,
+    transition: width 0.2s cubic-bezier( 0.4, 0, 1, 1);
+    border: none;
     &::before{
         content: "",
         background-color: rgba(0,0,0, .2);
@@ -38,8 +39,25 @@ const StyledNav = styled.nav`
     @media(max-width: 990px){
         position: fixed;
         transform: translate3d( ${p => p.visible ? 0 : "-230px"}, 0,0);
+        transition:  transform .3s ${p => p.visible ? "cubic-bezier( 0.4, 0, 1, 1)" : "cubic-bezier( 0, 0, 0.2, 1)"} !important;
     };
-    transition:  transform .3s ${p => p.visible ? "cubic-bezier( 0.4, 0, 1, 1)" : "cubic-bezier( 0, 0, 0.2, 1)"} !important;
+
+`;
+
+const Logo = styled.img`
+    width: 100%;
+    height:  ${p => p.compact ? '0px' : '40px'};
+    margin-botom: ${p => p.compact ? '0px' : '60px'} !important;
+    padding: 0px 15px;
+    transition: height 0.2s cubic-bezier( 0.4, 0, 1, 1);
+`;
+
+const MLogo = styled.img`
+    width: 40px;
+    height:  ${p => p.compact ? '40px' : '0px'};
+    margin-botom: ${p => p.compact ? '45px' : '0px'} !important;
+    padding: 0px 0px;
+    transition: width 0.2s cubic-bezier( 0.4, 0, 1, 1);
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -123,10 +141,12 @@ export function Navbar(props) {
         <>
             <Backdrop visible={props.visible} onClick={props.close} />
             <StyledNav {...props}>
-                {props.compact ?
+                {/* {props.compact ?
                     <img src="/img/DE.png" alt="Logo" className={classes.logo2} /> :
                     <img src="/img/danteLogoBlanco.png" alt="Logo" className={classes.logo} />
-                }
+                } */}
+                <Logo src="/img/danteLogoBlanco.png" alt="Logo" className={classes.logo}  {...props} />
+                <MLogo src="/img/DE.png" alt="Logo" className={classes.logo2}   {...props} />
                 {props.compact ?
                     <div id="lista-con-compact" >
                         <Link href="#" as="button" type="button" className={classes.inertiaLink}>
