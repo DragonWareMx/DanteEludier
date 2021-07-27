@@ -29,7 +29,7 @@ const Boleto = ({compra}) => {
                         <Grid item xs={12} md={8} className="grid-boleto">
                             {/* Imagen del producto */}
                             <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
-                                <img src="/img/productos/avatar.jpg" className="img-product" style={{width:'100%',height:'100%', objectFit:'cover', borderTopLeftRadius:4, borderBottomLeftRadius:4}}></img>
+                                <img src={compra.events[0].product.images[0] && "/img/productos/"+compra.events[0].product.images[0].foto} className="img-product" style={{width:'100%',height:'100%', objectFit:'cover', borderTopLeftRadius:4, borderBottomLeftRadius:4}}></img>
                             </Grid>
                             <Grid item xs={12} sm={9} lg={9} xl={9} md={9} className="grid-sub-boleto">
                                 <Grid item xs={12} className="grid-boleto-info">

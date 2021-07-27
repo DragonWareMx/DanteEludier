@@ -28,7 +28,7 @@ class PurchasesEventsController extends Controller
     public function show(Request $request, $id)
     {
         
-        $compra = Purchase::with('user', 'events', 'events.product')->find($id);
+        $compra = Purchase::with('user', 'events', 'events.product', 'events.product.images')->find($id);
         return Inertia::render('Admin/Boletos/Boleto', ['compra'=> $compra]);
     }
 
