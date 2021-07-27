@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import styled from 'styled-components';
-import { Link } from '@inertiajs/inertia-react'
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 
 const Grid = styled.div`
@@ -15,6 +15,7 @@ const Grid = styled.div`
     height: 60px;
     background-color: #121212;
     border-bottom: 1px solid #323232;
+    padding: 0px 1%;
 `;
 
 const MBurger = styled.div`
@@ -39,15 +40,17 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         color: 'white',
         marginTop: '35px',
-        marginLeft: '15px'
     },
     inertiaLink: {
         color: 'white',
-        textDecoration: 'none'
+        textDecoration: 'none',
+        border: 'none',
+        backgroundColor: 'transparent',
     }
 }));
 
 export default function Header({ toggle, handleCompact }) {
+    const { auth } = usePage().props;
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -95,7 +98,7 @@ export default function Header({ toggle, handleCompact }) {
                     color="inherit"
                 >
                     <AccountCircle style={{ color: 'white' }} />
-                    <div style={{ color: 'white', fontFamily: 'Oxygen', fontSize: '13px', fontStyle: 'normal', fontWeigh: 'bold', marginLeft: '2px' }}>Administrador
+                    <div style={{ color: 'white', fontFamily: 'Oxygen', fontSize: '13px', fontStyle: 'normal', fontWeigh: 'bold', marginLeft: '7px', marginRight: '4px' }}> {auth.user.name}
                     </div>
                     <div style={{ color: 'white' }}> &#x25BE;</div>
                 </IconButton>
@@ -109,9 +112,9 @@ export default function Header({ toggle, handleCompact }) {
                     open={open}
                     onClose={handleClose}
                 >
-                    <Link href="/logout" method='post' className={classes.inertiaLink}>
+                    <InertiaLink href="/logout" method='post' as='button' className={classes.inertiaLink}>
                         <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
-                    </Link>
+                    </InertiaLink>
                 </Menu>
             </div>
         </Grid>

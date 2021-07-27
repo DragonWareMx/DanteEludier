@@ -76,4 +76,4 @@ Route::name('ticket.')->group(function () {
     Route::patch('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
 });
 
-Route::get('/dashboard/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
+Route::get('/dashboard/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.inicio');
