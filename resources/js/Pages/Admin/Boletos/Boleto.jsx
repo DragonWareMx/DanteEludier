@@ -9,7 +9,7 @@ import "/css/boletos.css";
 
 const Boleto = () => {
     return (
-        <Grid container style={{marginTop:20, marginBottom:40}} >
+        <Grid container style={{marginTop:21, marginBottom:40}} >
             <Grid item xs={12}>
                 <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
                     <Grid item xs={12} className="txt-orden-id">ORDEN #0014</Grid>
