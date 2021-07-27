@@ -81,7 +81,10 @@ const Boleto = ({compra}) => {
 
                                 <div className="item-info-b">
                                     <Grid item xs={12} className="title-info">ESTATUS</Grid>
-                                    <Grid item xs={12} className="txt-info">Pagado, sin usar</Grid>
+                                    { compra.confirmed ?
+                                        <Grid item xs={12} className="txt-info">Pagado</Grid> :
+                                        <Grid item xs={12} className="txt-info">Sin pagar</Grid>
+                                    }
                                 </div>
                             </Grid>
 
