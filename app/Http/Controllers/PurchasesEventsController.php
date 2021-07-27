@@ -27,7 +27,8 @@ class PurchasesEventsController extends Controller
 
     public function show(Request $request, $id)
     {
-        //
+        //Mostrar un solo boleto
+        return Inertia::render('Admin/Boletos/Boleto');
     }
 
     public function update(Request $request, $id)
