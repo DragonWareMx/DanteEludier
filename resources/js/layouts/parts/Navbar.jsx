@@ -47,7 +47,7 @@ const StyledNav = styled.nav`
 const Logo = styled.img`
     width: 100%;
     height:  ${p => p.compact ? '0px' : '40px'};
-    margin-botom: ${p => p.compact ? '0px' : '60px'} !important;
+    margin-bottom: ${p => p.compact ? '0px' : '60px'} !important;
     padding: 0px 15px;
     transition: height 0.2s cubic-bezier( 0.4, 0, 1, 1);
 `;
@@ -55,23 +55,13 @@ const Logo = styled.img`
 const MLogo = styled.img`
     width: 40px;
     height:  ${p => p.compact ? '40px' : '0px'};
-    margin-botom: ${p => p.compact ? '45px' : '0px'} !important;
+    margin-top: -20px;
+    margin-bottom: ${p => p.compact ? '45px' : '0px'} !important;
     padding: 0px 0px;
-    transition: width 0.2s cubic-bezier( 0.4, 0, 1, 1);
+    transition: height 0.2s cubic-bezier( 0.4, 0, 1, 1);
 `;
 
 const useStyles = makeStyles((theme) => ({
-    logo: {
-        width: '100%',
-        marginBottom: '60px',
-        padding: '0px 15px',
-    },
-    logo2: {
-        width: '40px',
-        height: '40px',
-        marginBottom: '45px',
-        padding: '0px 0px',
-    },
     root: {
         width: '100%',
         maxWidth: 360,

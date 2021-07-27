@@ -6,6 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import styled from 'styled-components';
+import { Link } from '@inertiajs/inertia-react'
+
 
 const Grid = styled.div`
     display: flex;
@@ -36,7 +38,12 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#323232;",
         borderRadius: '4px',
         color: 'white',
-        marginTop: '30px'
+        marginTop: '35px',
+        marginLeft: '15px'
+    },
+    inertiaLink: {
+        color: 'white',
+        textDecoration: 'none'
     }
 }));
 
@@ -96,23 +103,17 @@ export default function Header({ toggle, handleCompact }) {
                     id="simple-menu"
                     classes={{ paper: classes.menuPaper }}
                     anchorEl={anchorEl}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                    }}
+
                     keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
+
                     open={open}
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                    <Link href="/logout" method='post' className={classes.inertiaLink}>
+                        <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
+                    </Link>
                 </Menu>
             </div>
-            {/* <div style={{ borderBottom: "1px solid #323232", width: "90%", position: 'absolute', bottom: '0px' }}></div> */}
         </Grid>
     )
 }
