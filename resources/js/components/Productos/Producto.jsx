@@ -62,8 +62,6 @@ export default function Producto({producto, precio, disponible, totalEventos, to
         setOpen(false);
     };
     
-
-    
     const classes = useStyles();
 
     return (
