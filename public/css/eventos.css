@@ -11,12 +11,9 @@
     border-top-left-radius:4px;
     border-bottom-left-radius:4px;
 }
-.MuiButton-root{
+/* .MuiButton-root{
     min-width: 10px !important;
-}
-.MuiButton-text{
-    padding-left: 0px !important;
-}
+} */
 
 @media(max-width:660px){
     .evento_img{

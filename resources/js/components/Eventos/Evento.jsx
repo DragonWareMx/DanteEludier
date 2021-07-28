@@ -9,8 +9,7 @@ import '/css/eventos.css';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import TuneIcon from '@material-ui/icons/Tune';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EventAvailableIcon from '@material-ui/icons/EventAvailable';
-import DateRangeIcon from '@material-ui/icons/DateRange';
+import EventIcon from '@material-ui/icons/Event';
 
 //Material ui
 import Grid from '@material-ui/core/Grid';
@@ -79,7 +78,7 @@ export default function evento({evento}){
                 </Grid>
                 {/* INFO EVENTO */}
                 <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:15,fontWeight:'bold',color:'white',marginTop:5}}>{evento.ciudad}, {evento.sede}</Grid>
-                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'white',marginTop:9}}>3 Septiembre 4 Septiembre 5 Septiembre</Grid>
+                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'white',marginTop:9}}>3 Septiembre 4 Septiembre 5 Septiembre <EventIcon></EventIcon></Grid>
                 <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Precio ${evento.precio} MXN</Grid>
                 
                 <Grid container direction='row' style={{marginTop:32}}>

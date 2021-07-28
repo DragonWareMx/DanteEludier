@@ -102,15 +102,16 @@ const Eventos = ({eventos}) => {
                         </Grid>
                     </Grid>
                     {/* Items eventos */}
-                    {eventos && eventos.map((evento,index)=>(
+                    {eventos && eventos.data && eventos.data.length > 0 && eventos.data.map((evento,index)=>(
                         <Evento key={index}
                         evento={evento}
                          />
                     ))}
 
                     <Grid item style={{marginTop: 25}}>
-                        {/* <PaginacionAdmin links={tickets.links} /> */}
+                        <PaginacionAdmin links={eventos.links} />
                     </Grid>
+
                 </Paper>
                 
             </Grid>
