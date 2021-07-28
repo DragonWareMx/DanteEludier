@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Header from './parts/Header';
+import Footer from './parts/Footer';
 import { Navbar } from "./parts/Navbar";
 import styled from 'styled-components';
 
@@ -24,6 +25,7 @@ const GridHeader = styled.div`
 const GridMain = styled.div`
     grid-area: main;
     background-color: #121212;
+    position: relative;
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -74,12 +76,13 @@ export default function LayoutAdmin({ title, pageTitle, children }) {
                     <Header toggle={toggle} handleCompact={handleCompact} />
                 </GridHeader>
                 <GridMain>
-                    <Container fixed>
+                    <Container maxWidth={'lg'}>
                         <div className={classes.titulo}>
                             {pageTitle}
                         </div>
                         {children}
                     </Container>
+                    <Footer />
                 </GridMain>
             </Grid>
         </React.Fragment>
