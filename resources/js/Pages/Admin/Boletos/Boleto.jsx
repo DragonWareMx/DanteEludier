@@ -1,14 +1,48 @@
 import React from 'react';
 import LayoutAdmin from "../../../layouts/LayoutAdmin";
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import { makeStyles } from '@material-ui/core/styles';
 
 import "/css/boletos.css";
 import { toInteger } from 'lodash';
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+
 const Boleto = ({compra}) => {
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const modalClose = () => {
+        setOpen(false);
+    };
+
+    const useStyles = makeStyles((theme) => ({
+        menuPaper: {
+            backgroundColor: "#323232;",
+            borderRadius: '4px',
+            color: 'white',
+        }
+    }));
+
+    const classes = useStyles();
+
     
     function subTotal(boletos){
         let subtotal = 0;
@@ -20,6 +54,7 @@ const Boleto = ({compra}) => {
         return subtotal;
     }
     return (
+        <>
         <Grid container style={{marginTop:21, marginBottom:40}} >
             <Grid item xs={12}>
                 <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
@@ -102,7 +137,7 @@ const Boleto = ({compra}) => {
                             </Grid>
 
                             <Grid item xs={12} style={{display:'flex',justifyContent:'flex-end'}}>
-                                <Button variant="contained" className="btn-action">Marcar como pagado</Button>
+                                <Button variant="contained" onClick={handleClickOpen} className="btn-action">Marcar como pagado</Button>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -110,7 +145,30 @@ const Boleto = ({compra}) => {
                 </Paper>
             </Grid>
         </Grid>
-        
+        <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={modalClose}
+            aria-labelledby={"modal-titulo"+compra.id}
+            aria-describedby={"modal-descripcion"+compra.id}
+        >
+            <DialogTitle id={"modal-titulo"+compra.id} style={{color:'red'}}>{"¿Seguro que deseas marcar la compra de "+compra.user.name+" como pagada?"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id={"modal-descripcion"+compra.id}>
+                    Una vez se haya marcado, la acción no se podrá deshacer. El usuario recibirá su(s) boleto(s) al correo {compra.user.email}
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={modalClose} style={{color:'black'}}>
+                    Cancelar
+                </Button>
+                <InertiaLink onClick={modalClose} href={route('ticket.update', compra.id)} method="patch" style={{color:'red',fontSize:19,marginRight:10,marginTop:'-5px',textDecoration:'none'}}>
+                    Marcar
+                </InertiaLink>
+            </DialogActions>
+        </Dialog>
+        </>  
     )
 }
 

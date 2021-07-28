@@ -150,7 +150,7 @@ class PurchasesEventsController extends Controller
             $purchase->save();
             
             //Se envía mail con boletos
-            Mail::to(auth()->user()->email)->send(new SendMailable($purchase->id));
+            Mail::to($purchase->user->email)->send(new SendMailable($purchase->id));
 
             $status = "El estatus de la compra se ha actualizado con éxito";
             return redirect()->route('ticket.index')->with(compact('status'));
