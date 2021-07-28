@@ -53,11 +53,33 @@ class PurchasesEventsController extends Controller
                                             ->orWhere('name', 'LIKE', '%'.$search.'%');
                                         });
                                         break;
+                                    case 'telefono':
+                                        return $query->whereHas('user', function ($queryUser) use ($search) {
+                                            return $queryUser->where('phone', 'LIKE', '%'.$search.'%');
+                                        });
+                                        break;
                                     case 'pago':
-                                        # code...
+                                        //si no se busca la palabra no
+                                        if(stripos($search, 'no') === FALSE){
+                                            //boletos que tienen metodo de pago
+                                            return $query->where('metodo_pago', 'LIKE', '%'.$search.'%');
+                                        }
+                                        else{
+                                            //boletos que no tienen metodo de pago
+                                            return $query->where('metodo_pago', null);
+                                        }
                                         break;
                                     case 'estatus':
-                                        # code...
+                                        //si no se busca la palabra pagado
+                                        if(stripos($search, 'pagado') === FALSE){
+                                            //boletos con el pago sin confirmar
+                                            return $query->where('confirmed', false)
+                                                        ->orWhere('confirmed', null);
+                                        }
+                                        else{
+                                            //boletos con el pago confirmado
+                                            return $query->where('confirmed', true);
+                                        }
                                         break;
                                     default:
                                         //si no se busca la palabra sin
@@ -96,7 +118,7 @@ class PurchasesEventsController extends Controller
                                     })->doesntHave('events', 'or');
                                 }
                             })
-                            ->paginate(1)
+                            ->paginate(15)
                             ->withQueryString();
 
         return Inertia::render('Admin/Boletos/Boletos', [

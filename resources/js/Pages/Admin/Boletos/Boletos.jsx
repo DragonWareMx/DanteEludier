@@ -203,11 +203,7 @@ const Boletos = ({ tickets, request }) => {
     }
 
     useEffect(() => {
-        Inertia.reload
-        ({
-            only: ['tickets'], 
-            data: state
-        })
+        Inertia.replace(route('ticket.index'), { data: state })
     }, [state])
 
     const cancelSearch = () => {
@@ -271,6 +267,7 @@ const Boletos = ({ tickets, request }) => {
 
                                     <MenuItem value="evento">Evento</MenuItem>
                                     <MenuItem value="usuario">Usuario</MenuItem>
+                                    <MenuItem value="telefono">Teléfono</MenuItem>
                                     <MenuItem value="pago">Tipo de pago</MenuItem>
                                     <MenuItem value="estatus">Estatus</MenuItem>
                                 </Select>
