@@ -2,6 +2,7 @@ import React from 'react';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import LayoutAdmin from "../../../layouts/LayoutAdmin";
+import PaginacionAdmin from '../../../components/common/PaginacionAdmin';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -105,8 +106,11 @@ const Eventos = () => {
                     <Evento />
                     <Evento />
 
-                    
+                    <Grid item style={{marginTop: 25}}>
+                        {/* <PaginacionAdmin links={tickets.links} /> */}
+                    </Grid>
                 </Paper>
+                
             </Grid>
         </Grid>
         
