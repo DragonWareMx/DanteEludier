@@ -123,8 +123,10 @@ const Producto = ({producto}) => {
                                     </Grid>  
                                 </Grid>
                                 <br></br>
-                                <a href={'/documentos/'+producto.hojaDescriptiva} className='verproducto_pdf' target='_blank'><PictureAsPdfIcon style={{fontSize:18,marginRight:6}}></PictureAsPdfIcon> PDF</a>
-                            </Grid>
+                                {producto.hojaDescriptiva &&
+                                    <a href={'/documentos/'+producto.hojaDescriptiva} className='verproducto_pdf' target='_blank'><PictureAsPdfIcon style={{fontSize:18,marginRight:6}}></PictureAsPdfIcon> PDF</a>
+                                }
+                                </Grid>
                         </Grid>
                     </Paper>
                 </Grid>
