@@ -164,7 +164,7 @@ export function Navbar(props) {
                         <InertiaLink href={route('dashboard.productos')} as="button" type="button" className={classes.inertiaLink}>
                             <ShoppingBasketIcon style={{ color: 'white' }} />
                         </InertiaLink>
-                        <InertiaLink href="#" as="button" type="button" className={classes.inertiaLink}>
+                        <InertiaLink href={route('dashboard.events')} as="button" type="button" className={classes.inertiaLink}>
                             <EventIcon style={{ color: 'white' }} />
                         </InertiaLink>
                         <InertiaLink href={route('ticket.index')} as="button" type="button" className={classes.inertiaLink}>
@@ -206,7 +206,7 @@ export function Navbar(props) {
                                         </ListItem>
                                     </InertiaLink>
 
-                                    <InertiaLink href="#" as="button" type="button" className={classes.inertiaLinkNested}>
+                                    <InertiaLink href={route('dashboard.events')} as="button" type="button" className={classes.inertiaLinkNested}>
                                         <ListItem button className={classes.nested}>
                                             <ListItemIcon>
                                                 <EventIcon style={{ color: 'white' }} />

@@ -103,7 +103,7 @@ const Inicio = ({ num_products, num_events, num_vendidos, num_pendientes }) => {
                         </InertiaLink>
                     </Grid>
                     <Grid item xs={12} sm={4} md={3}>
-                        <InertiaLink href="#" as="button" type="button" className={classes.inertiaLink}>
+                        <InertiaLink href={route('dashboard.events')} as="button" type="button" className={classes.inertiaLink}>
                             <Paper className={classes.paper}>
                                 <EventIcon style={{ color: 'white', margin: '0px 5px' }} fontSize='large' />
                                 <div className={classes.text}>{num_events} eventos registrados</div>
@@ -111,7 +111,7 @@ const Inicio = ({ num_products, num_events, num_vendidos, num_pendientes }) => {
                         </InertiaLink>
                     </Grid>
                     <Grid item xs={12} sm={4} md={3}>
-                        <InertiaLink href="#" as="button" type="button" className={classes.inertiaLink}>
+                        <InertiaLink href={route('ticket.index')} as="button" type="button" className={classes.inertiaLink}>
                             <Paper className={classes.paper}>
                                 <ConfirmationNumberIcon style={{ color: 'white', margin: '0px 5px' }} fontSize='large' />
                                 <div className={classes.text}>{num_vendidos} boletos vendidos</div>
