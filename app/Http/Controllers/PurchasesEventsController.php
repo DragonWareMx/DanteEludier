@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Purchase;
+use App\Mail\SendMailable;
+use App\Mail\SendMailableTransfer;
+use Illuminate\Support\Facades\Mail;
+
 
 class PurchasesEventsController extends Controller
 {
@@ -129,13 +133,31 @@ class PurchasesEventsController extends Controller
 
     public function show(Request $request, $id)
     {
-        
+        \Gate::authorize('haveaccess', 'admin.perm');
         $compra = Purchase::with('user', 'events', 'events.product', 'events.product.images')->find($id);
         return Inertia::render('Admin/Boletos/Boleto', ['compra'=> $compra]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        
+        \Gate::authorize('haveaccess', 'admin.perm');
+
+        DB::beginTransaction();
+        try {
+            $purchase = Purchase::find($id);
+            $purchase->confirmed = true;
+            $purchase->save();
+            
+            //Se envía mail con boletos
+            Mail::to(auth()->user()->email)->send(new SendMailable($purchase->id));
+
+            $status = "El estatus de la compra se ha actualizado con éxito";
+            return redirect()->route('ticket.index')->with(compact('status'));
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
+            return redirect()->route('ticket.index')->with(compact('status'));
+        }
     }
 }

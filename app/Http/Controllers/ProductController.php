@@ -35,6 +35,8 @@ class ProductController extends Controller
     }
 
     public function productos(){
+
+        \Gate::authorize('haveaccess', 'admin.perm');
         $productos=Product::with('images:foto,product_id', 'events', 'events.dates', 'events.purchases')->orderBy('created_at','DESC')->get();
 
         return Inertia::render('Productos/Productos',[
@@ -54,6 +56,7 @@ class ProductController extends Controller
     }
 
     public function delete($id){
+        \Gate::authorize('haveaccess', 'admin.perm');
         DB::beginTransaction();
         try {
             $producto = Product::find($id);
@@ -63,7 +66,6 @@ class ProductController extends Controller
             return redirect()->route('dashboard.productos')->with(compact('status'));
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
             return redirect()->route('dashboard.productos')->with(compact('status'));
         }
