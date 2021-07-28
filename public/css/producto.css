@@ -24,7 +24,7 @@
 }
 
 .verproducto_info{
-    padding-left: 15px;
+    padding-left: 25px;
 }
 
 .verproducto_pdf{
@@ -47,6 +47,100 @@
     text-decoration: none;
 }
 
+.crearProducto_img{
+    border: 1px solid #535353;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.crearProducto_upload{
+    width: 165px;
+    height: 34px;
+    border: 1px solid #FFFFFF !important;
+    box-sizing: border-box;
+    border-radius: 50px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Oxygen;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    color: #FFFFFF;
+    cursor: pointer;
+    background-color: transparent !important;
+}
+
+.crearProducto_form{
+    width: 100%;
+    display: flex;
+}
+
+.crearProducto_buttons{
+    justify-content: flex-end;
+    margin-top: 150px;
+}
+
+.crearProducto_guardar{
+    width: 135px;
+    height: 34px;
+    background-color: #FFFFFF !important;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 50px !important;
+    color: #323232;
+    font-size: 12px;
+    transition: ease-in 0.3s !important;
+}
+
+.crearProducto_guardar:hover{
+    background-color: #000000 !important;
+    color: #FFFFFF;
+    transition: ease-in-out 0.3s;
+}
+
+.MuiInputBase-input{
+    color: #9C9C9C !important;
+    border-bottom: 1px solid #9C9C9C !important;
+    font-size: 16px !important;
+    font-family: 'Oxygen' !important;
+}
+
+.MuiFormLabel-root{
+    color: #9C9C9C !important;
+    font-family: 'Oxygen' !important;
+}
+
+@media(max-width:1279px){
+    .crearProducto_img{
+        height: 320px;
+    }
+    .crearProducto_buttons{
+        margin-top: 70px;
+    }
+}
+
+@media(max-width:1100px){
+    .crearProducto_img{
+        height: 260px;
+    }
+    .crearProducto_buttons{
+        margin-top: 20px;
+    }
+    .crearProducto_upload{
+        width: 150px;
+    }
+}
+
+@media(max-width:959px){
+    .verproducto_info{
+        padding-left: 0px;
+    }
+}
 
 @media(max-width:645px){
     .producto_card{
