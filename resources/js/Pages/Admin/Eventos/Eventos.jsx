@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Eventos = () => {
+const Eventos = ({eventos}) => {
     const classes = useStyles();
 
     return (
@@ -102,9 +102,11 @@ const Eventos = () => {
                         </Grid>
                     </Grid>
                     {/* Items eventos */}
-                    <Evento />
-                    <Evento />
-                    <Evento />
+                    {eventos && eventos.map((evento,index)=>(
+                        <Evento key={index}
+                        evento={evento}
+                         />
+                    ))}
 
                     <Grid item style={{marginTop: 25}}>
                         {/* <PaginacionAdmin links={tickets.links} /> */}
