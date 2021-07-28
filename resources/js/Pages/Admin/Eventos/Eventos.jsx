@@ -106,6 +106,8 @@ const Eventos = ({eventos}) => {
                         <Evento key={index}
                         evento={evento}
                          />
+                        //  {evento.dates.map((date) =>transformaFecha(date.fecha)
+                        // )}
                     ))}
 
                     <Grid item style={{marginTop: 25}}>
