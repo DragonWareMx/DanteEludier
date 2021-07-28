@@ -6,6 +6,8 @@ import React from 'react'
 import Paginacion from '../../../components/common/Paginacion';
 import PaginacionAdmin from '../../../components/common/PaginacionAdmin';
 import LayoutAdmin from "../../../layouts/LayoutAdmin";
+import { Inertia } from '@inertiajs/inertia'
+import { useEffect } from 'react';
 
 const headCells = [
     { id: 'producto', disablePadding: false, label: 'PRODUCTO' },
@@ -141,54 +143,32 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Boletos = ({ tickets }) => {
+const Boletos = ({ tickets, request }) => {
     const classes = useStyles();
     
     const [state, setState] = React.useState({
-        search: "",
-        filter: ""
+        search: request ? request.search ? request.search : "" : "",
+        filter: request ? request.filter ? request.filter : "" : ""
     });
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
 
+    //evento para ordenar las columnas de la tabla
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);
     };
 
-    // function handleChange(event){
-    //     const name = event.target.name;
-    //     setState({
-    //         ...state,
-    //         [name]: event.target.value,
-    //     });
-    // }
-
-    //onChange del select para ordenar los resultados
-    const handleChange = (event) => {
-        setState({ search: newValue })
-        // setOrder(event.target.value);
-        // Inertia.reload
-        // ({
-        //     only: ['products','request','categories'], 
-        //     data: {
-        //         order: event.target.value
-        //     },
-        //     onFinish: () => { setOrder((request.order == 'ascp' || request.order == 'descp' || request.order == 'ascn' || request.order == 'descn') ? request.order : '') },
-        // })
-    }
-
     //onChange del select para filtrar los resultados
     const handleChangeFilter = (event) => {
-        // setFilter(event.target.value);
-        // Inertia.reload
-        // ({
-        //     only: ['products','request','categories'], 
-        //     data: {
-        //         filter: event.target.value
-        //     },
-        // })
+        const value = event.target.value
+
+        //se cambia el state del filtro y la búsqueda
+        setState(state => ({
+            ...state,
+            filter: value
+        }))
     }
 
     //filtra los eventos repetidos
@@ -222,6 +202,21 @@ const Boletos = ({ tickets }) => {
         return filteredProducts
     }
 
+    useEffect(() => {
+        Inertia.reload
+        ({
+            only: ['tickets'], 
+            data: state
+        })
+    }, [state])
+
+    const cancelSearch = () => {
+        setState(state => ({
+            ...state,
+            search: ""
+        }))
+    };
+
     return (
     <>
         <Paper className={classes.paper}>
@@ -244,7 +239,11 @@ const Boletos = ({ tickets }) => {
                     <Grid item xs={12} sm={8}>
                         <SearchBar
                             value={state.search}
-                            onChange={(newValue) => setState({ search: newValue })}
+                            onChange={(newValue) => setState(state => ({
+                                ...state,
+                                search: newValue
+                            }))}
+                            onCancelSearch={cancelSearch}
                             //onRequestSearch={() => doSomethingWith(this.state.value)}
                             placeholder="Buscar"
                             style={{borderRadius: 50}}
