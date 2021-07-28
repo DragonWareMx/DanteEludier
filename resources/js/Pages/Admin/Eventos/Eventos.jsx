@@ -2,6 +2,7 @@ import React from 'react';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import LayoutAdmin from "../../../layouts/LayoutAdmin";
+import PaginacionAdmin from '../../../components/common/PaginacionAdmin';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -72,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Eventos = () => {
+const Eventos = ({eventos}) => {
     const classes = useStyles();
 
     return (
@@ -101,12 +102,20 @@ const Eventos = () => {
                         </Grid>
                     </Grid>
                     {/* Items eventos */}
-                    <Evento />
-                    <Evento />
-                    <Evento />
+                    {eventos && eventos.data && eventos.data.length > 0 && eventos.data.map((evento,index)=>(
+                        <Evento key={index}
+                        evento={evento}
+                         />
+                        //  {evento.dates.map((date) =>transformaFecha(date.fecha)
+                        // )}
+                    ))}
 
-                    
+                    <Grid item style={{marginTop: 25}}>
+                        <PaginacionAdmin links={eventos.links} />
+                    </Grid>
+
                 </Paper>
+                
             </Grid>
         </Grid>
         

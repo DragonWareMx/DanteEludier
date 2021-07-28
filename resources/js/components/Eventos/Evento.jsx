@@ -9,8 +9,7 @@ import '/css/eventos.css';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import TuneIcon from '@material-ui/icons/Tune';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EventAvailableIcon from '@material-ui/icons/EventAvailable';
-import DateRangeIcon from '@material-ui/icons/DateRange';
+import EventIcon from '@material-ui/icons/Event';
 
 //Material ui
 import Grid from '@material-ui/core/Grid';
@@ -26,7 +25,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import route from 'ziggy-js';
 
-export default function evento(){
+export default function evento({evento}){
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -52,18 +51,17 @@ export default function evento(){
         <>
         <Grid container className='evento_card'>
             <Grid item xs={12} sm={2} md={3}>
-                <InertiaLink href="#!"><img src="/img/productos/avatar.jpg" className="evento_img"/> </InertiaLink>
+                <InertiaLink href="#!"><img src={evento.foto && "/img/productos/"+evento.foto} className="evento_img"/> </InertiaLink>
             </Grid>
             <Grid item xs={12} sm={10} md={9} className="producto_info"> 
                 <Grid container alignItems='center' style={{flexWrap:'wrap-reverse'}}>
-                    <Grid item xs={11}><InertiaLink  href="#!" style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>Taller Vivencial Avatar Financiero Lorem ipsum dolor sit amet</InertiaLink></Grid>
+                    <Grid item xs={11}><InertiaLink  href="#!" style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{evento.titulo}</InertiaLink></Grid>
                     <Grid item xs={1} style={{display:'flex',justifyContent:'flex-end'}}>
-                        <Button aria-controls={"menu-"+1} aria-haspopup="true" onClick={handleClick}>
+                        <Button aria-controls={"menu-"+evento.id} aria-haspopup="true" onClick={handleClick}>
                             <MoreVertIcon style={{color:'#FFFFFF'}}></MoreVertIcon>
                         </Button>
                         <Menu
-                            // id={"menu-"+producto.id}
-                            id={"menu-"+1}
+                            id={"menu-"+evento.id}
                             anchorEl={anchorEl}
                             keepMounted
                             open={Boolean(anchorEl)}
@@ -79,22 +77,22 @@ export default function evento(){
                     </Grid>
                 </Grid>
                 {/* INFO EVENTO */}
-                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:15,fontWeight:'bold',color:'white',marginTop:5}}>Uruapan, Holliday Uruapan</Grid>
-                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'white',marginTop:9}}>3 Septiembre 4 Septiembre 5 Septiembre</Grid>
-                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Precio $5004.90 MXN</Grid>
+                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:15,fontWeight:'bold',color:'white',marginTop:5}}>{evento.ciudad}, {evento.sede}</Grid>
+                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'white',marginTop:9}}>3 Septiembre 4 Septiembre 5 Septiembre <EventIcon></EventIcon></Grid>
+                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Precio ${evento.precio} MXN</Grid>
                 
                 <Grid container direction='row' style={{marginTop:32}}>
                     <Grid style={{marginRight:34, marginBottom:10}}>
                             <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>% DESCUENTO</div>
-                            <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>10% c/u</div>
+                            <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{evento.descuento *100}% c/u</div>
                     </Grid>
                     <Grid style={{marginRight:34, marginBottom:10}}>
                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS VENDIDOS</div>
-                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>4 Boleto(s)</div>
+                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>- Boleto(s)</div>
                     </Grid>
                     <Grid style={{marginRight:34, marginBottom:10}}>
-                        <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS DISPONIBLES</div>
-                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>10 Boleto(s)</div>
+                        <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>LIMITE DE BOLETOS</div>
+                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{evento.limite} Boleto(s)</div>
                     </Grid>
                 </Grid>
 
