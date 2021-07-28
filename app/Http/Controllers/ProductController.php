@@ -49,6 +49,10 @@ class ProductController extends Controller
         ]);
     }
 
+    public function crearProducto(){
+        return Inertia::render('Productos/Crear');
+    }
+
     public function delete($id){
         DB::beginTransaction();
         try {
