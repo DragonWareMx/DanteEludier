@@ -23,26 +23,38 @@ class EventController extends Controller
 
     public function index(){
         // Enlistar todos los eventos
+
+        // Checar las comillas de count al subir al server
         $eventos=Event::join('products', 'events.product_id', 'products.id')
                         ->join('product_images','products.id','product_images.product_id')
                         ->with('dates')
-                        ->select('product_images.foto','products.titulo','events.ciudad','events.sede','events.precio','events.descuento','events.id','events.limite')
+                        ->leftJoin('purchases_events','events.id', '=','purchases_events.event_id')
+                        ->leftJoin('purchases','purchases_events.purchase_id', '=','purchases.id')
+                        ->selectRaw('product_images.foto ,products.titulo,events.ciudad,events.sede,
+                        events.precio,events.descuento,events.id,events.limite, 
+                        COUNT(purchases_events.event_id) AS total')
+                        ->groupBy('product_images.foto','products.titulo','events.ciudad','events.sede','events.precio','events.descuento','events.id','events.limite')
+                        // ->where('purchases.confirmed','=',1)
                         ->paginate(4);
-
-
-        // $eventos =  Event::where('product_id', $id)
-        // ->whereNotIn('events.id', $eventosExpirados)
-        // ->with('dates', 'product', 'product.images')
-        // ->leftJoin('purchases_events','events.id', '=','purchases_events.event_id')
-        // ->selectRaw('events.*, COUNT("purchases_events"."event_id") AS total')
-        // ->groupBy('events.id','events.created_at','events.updated_at','events.ciudad','events.direccion','events.sede','events.precio','events.limite','events.descuento','events.product_id')
-        // ->get();
  
         // dd($eventos);
         return Inertia::render('Admin/Eventos/Eventos',['eventos' => $eventos]);
     }
 
     public function show($id){ 
+        $evento=Event::join('products', 'events.product_id', 'products.id')
+                        ->join('product_images','products.id','product_images.product_id')
+                        ->with('dates')
+                        ->select('product_images.foto', 'products.titulo', 'events.ciudad', 'events.sede',
+                        'events.precio', 'events.descuento', 'events.id', 'events.limite')
+                        ->findOrFail($id);
+        // dd($evento);
+
+        return Inertia::render('Admin/Eventos/Evento',['evento' => $evento]);
+    }
+
+    public function add(){ 
+        
         return Inertia::render('Admin/Eventos/Evento');
     }
 }

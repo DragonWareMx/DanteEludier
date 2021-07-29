@@ -45,17 +45,45 @@ export default function evento({evento}){
         }
     }));
 
+    function yearFecha(fecha){
+        const dob = new Date(fecha);
+        const year = dob.getFullYear();
+        return `${year} `;
+    }
+
+    function transformaFecha(fecha) {
+        const dob = new Date(fecha);
+        const monthNames = [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+        ];
+        const day = dob.getDate();
+        const monthIndex = dob.getMonth();
+        const year = dob.getFullYear();
+        return `${day} ${monthNames[monthIndex]}, `;
+    }
+
     const classes = useStyles();
 
     return (
         <>
         <Grid container className='evento_card'>
             <Grid item xs={12} sm={2} md={3}>
-                <InertiaLink href="#!"><img src={evento.foto && "/img/productos/"+evento.foto} className="evento_img"/> </InertiaLink>
+                <InertiaLink href={route('dashboard.event',evento.id)}><img src={evento.foto && "/img/productos/"+evento.foto} className="evento_img"/> </InertiaLink>
             </Grid>
             <Grid item xs={12} sm={10} md={9} className="producto_info"> 
                 <Grid container alignItems='center' style={{flexWrap:'wrap-reverse'}}>
-                    <Grid item xs={11}><InertiaLink  href="#!" style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{evento.titulo}</InertiaLink></Grid>
+                    <Grid item xs={11}><InertiaLink  href={route('dashboard.event',evento.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{evento.titulo}</InertiaLink></Grid>
                     <Grid item xs={1} style={{display:'flex',justifyContent:'flex-end'}}>
                         <Button aria-controls={"menu-"+evento.id} aria-haspopup="true" onClick={handleClick}>
                             <MoreVertIcon style={{color:'#FFFFFF'}}></MoreVertIcon>
@@ -78,7 +106,15 @@ export default function evento({evento}){
                 </Grid>
                 {/* INFO EVENTO */}
                 <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:15,fontWeight:'bold',color:'white',marginTop:5}}>{evento.ciudad}, {evento.sede}</Grid>
-                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'white',marginTop:9}}>3 Septiembre 4 Septiembre 5 Septiembre <EventIcon></EventIcon></Grid>
+                <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'white',marginTop:9}}>
+                    
+                    {evento.dates.map((date) =>
+                        transformaFecha(date.fecha)
+                    )}
+
+                    {yearFecha(evento.dates[0].fecha)} 
+                    <EventIcon />
+                </Grid>
                 <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Precio ${evento.precio} MXN</Grid>
                 
                 <Grid container direction='row' style={{marginTop:32}}>
@@ -87,8 +123,9 @@ export default function evento({evento}){
                             <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{evento.descuento *100}% c/u</div>
                     </Grid>
                     <Grid style={{marginRight:34, marginBottom:10}}>
+                        {/* No se revisa que los boletos vendidos esten confirmados */}
                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS VENDIDOS</div>
-                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>- Boleto(s)</div>
+                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{evento.limite - evento.total} Boleto(s)</div>
                     </Grid>
                     <Grid style={{marginRight:34, marginBottom:10}}>
                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>LIMITE DE BOLETOS</div>
