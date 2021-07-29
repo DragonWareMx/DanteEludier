@@ -15,14 +15,17 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            //uuid
+            $table->uuid('uuid')->unique();
 
+            
             //el boletin del producto
             $table->string('documento')->nullable();
-
+            
             $table->string('titulo', 255);
             $table->text('descripcion');
             $table->string('hojaDescriptiva', 255)->nullable(); //es un link 
+            $table->timestamps();
         });
     }
 

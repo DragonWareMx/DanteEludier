@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class ProductSeeder extends Seeder
     {
         //
         DB::table('products')->insert([
+            'uuid' => Str::uuid(),
             'titulo' => 'Taller Vivencial Avatar Financiero',
             'descripcion' => 'Este taller te permite
             mejorar como ser humano.
@@ -29,11 +31,13 @@ class ProductSeeder extends Seeder
         ]);
 
         DB::table('products')->insert([
+            'uuid' => Str::uuid(),
             'titulo' => 'Prosperity, inmersión total',
             'descripcion' => 'Proximamente más información',
         ]);
         
         DB::table('products')->insert([
+            'uuid' => Str::uuid(),
             'titulo' => 'Cumbre financiera',
             'descripcion' => 'Proximamente. El evento VIP más esperado del año',
         ]);

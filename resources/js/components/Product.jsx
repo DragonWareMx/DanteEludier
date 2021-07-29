@@ -25,7 +25,7 @@ const ColorButton = withStyles((theme) => ({
     },
 }))(Button);
 
-export default function Product({img, name, price, id, events}){
+export default function Product({img, name, price, uuid, events}){
     function limitString(string, length){
         return string.length > length ? 
                     string.substring(0, length - 3) + "..." : 
@@ -69,7 +69,7 @@ export default function Product({img, name, price, id, events}){
                     {/* BOTON */}
                     { events >0 ?
                     <Grid item>
-                        <InertiaLink href={route('evento', id)} style={{textDecoration: "none"}}>
+                        <InertiaLink href={route('evento', uuid)} style={{textDecoration: "none"}}>
                             <ColorButton
                                 variant="outlined"
                                 className="mt-4"
