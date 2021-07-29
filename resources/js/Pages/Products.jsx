@@ -105,7 +105,7 @@ const Products = ({ products }) => {
                                     name={product.titulo}
                                     price={(product.events && product.events.length > 0) ? calcularPrecioMasBajo(product.events) : null}
                                     events={product.events.length}
-                                    id={product.id} />
+                                    uuid={product.uuid} />
                             )}
                         </Grid>
                     <Paginacion links={products.links} />
