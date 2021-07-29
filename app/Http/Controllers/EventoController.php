@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Event;
 use App\Models\User;
+use App\Models\Product;
 use App\Models\PurchasesEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -20,18 +21,20 @@ class EventoController extends Controller
     //     $this->middleware('auth');
     // }
 
-    public function index($id)
+    public function index($uuid)
     {
+        $product = Product::where('uuid', '=', $uuid)->firstOrFail();
+
         //regresa los ids de los eventos que tienen al menos una fecha expirada
         $eventosExpirados = Event::leftJoin('dates', 'events.id', '=', 'dates.event_id')
-            ->where('product_id', $id)
+            ->where('product_id', $product->id)
             ->where('dates.fecha', '<', \Carbon\Carbon::now()->toDateTimeString())
             ->select('events.id')
             ->groupBy('events.id')
             ->pluck('id')
             ->toArray();
 
-        $eventos =  Event::where('product_id', $id)
+        $eventos =  Event::where('product_id', $product->id)
             ->whereNotIn('events.id', $eventosExpirados)
             ->with('dates', 'product', 'product.images')
             ->leftJoin('purchases_events', 'events.id', '=', 'purchases_events.event_id')

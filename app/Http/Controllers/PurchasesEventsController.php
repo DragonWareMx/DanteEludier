@@ -19,7 +19,7 @@ class PurchasesEventsController extends Controller
 
     public function index(Request $request)
     {
-        $tickets = Purchase::select('id', 'confirmed', 'metodo_pago', 'user_id')
+        $tickets = Purchase::select('purchases.id', 'confirmed', 'metodo_pago', 'user_id')
                             ->with('events:ciudad,sede,id,product_id','events.product:titulo,id','user:name,apellido_p,apellido_m,phone,id')
                             ->withCount('events')
                             ->when($request->search, function ($query, $search) use ($request) {
@@ -122,6 +122,63 @@ class PurchasesEventsController extends Controller
                                     })->doesntHave('events', 'or');
                                 }
                             })
+                            ->leftJoin('purchases_events', 'purchases_events.purchase_id', '=', 'purchases.id')
+                            ->leftJoin('events', 'purchases_events.event_id', '=', 'events.id')
+                            ->leftJoin('products', 'products.id', '=', 'events.product_id')
+                            ->join('users', 'users.id', '=', 'purchases.user_id')
+                            ->distinct()
+                            ->when($request->orderby, function ($query, $orderby) use ($request) {
+                                switch ($orderby) {
+                                    case 'producto':
+                                        if($request->order && $request->order == 'desc')
+                                            return $query->orderByRaw('ISNULL(products.titulo), products.titulo DESC');
+                                        else
+                                            return $query->orderByRaw('ISNULL(products.titulo), products.titulo ASC');
+                                        break;
+                                    case 'evento':
+                                        if($request->order && $request->order == 'desc')
+                                            return $query->orderByRaw('ISNULL(events.ciudad), events.ciudad DESC');
+                                        else
+                                            return $query->orderByRaw('ISNULL(events.ciudad), events.ciudad ASC');
+                                        break;
+                                    case 'usuario':
+                                        if($request->order && $request->order == 'desc')
+                                            return $query->orderByRaw('ISNULL(users.name), users.name DESC');
+                                        else
+                                            return $query->orderByRaw('ISNULL(users.name), users.name ASC');
+                                        break;
+                                    case 'telefono':
+                                        if($request->order && $request->order == 'desc')
+                                            return $query->orderByRaw('ISNULL(users.phone), users.phone DESC');
+                                        else
+                                            return $query->orderByRaw('ISNULL(users.phone), users.phone ASC');
+                                        break;
+                                    case 'boletos':
+                                        if($request->order && $request->order == 'desc')
+                                            return $query->orderBy('events_count', 'ASC');
+                                        else
+                                            return $query->orderBy('events_count', 'DESC');
+                                        break;
+                                    case 'pago':
+                                        if($request->order && $request->order == 'desc')
+                                            return $query->orderByRaw('ISNULL(metodo_pago), metodo_pago DESC');
+                                        else
+                                            return $query->orderByRaw('ISNULL(metodo_pago), metodo_pago ASC');
+                                        break;
+                                    case 'estatus':
+                                        if($request->order && $request->order == 'desc')
+                                            return $query->orderBy('confirmed', 'ASC');
+                                        else
+                                            return $query->orderBy('confirmed', 'DESC');
+                                        break;
+                                    
+                                    default:
+                                        return $query->orderByRaw('ISNULL(products.titulo), products.titulo ASC');
+                                        break;
+                                }
+                            }, function ($query) {
+                                return $query->orderByRaw('ISNULL(products.titulo), products.titulo ASC');
+                            })
                             ->paginate(15)
                             ->withQueryString();
 
@@ -143,19 +200,23 @@ class PurchasesEventsController extends Controller
         
         \Gate::authorize('haveaccess', 'admin.perm');
 
-        DB::beginTransaction();
+        \DB::beginTransaction();
         try {
-            $purchase = Purchase::find($id);
-            $purchase->confirmed = true;
+            $purchase = Purchase::findOrFail($id);
+            
+            $purchase->confirmed = 1;
             $purchase->save();
             
+
             //Se envía mail con boletos
             Mail::to($purchase->user->email)->send(new SendMailable($purchase->id));
-
+            \DB::commit();
             $status = "El estatus de la compra se ha actualizado con éxito";
             return redirect()->route('ticket.index')->with(compact('status'));
         } catch (\Throwable $th) {
-            DB::rollBack();
+           
+            \DB::rollBack();
+           
             $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
             return redirect()->route('ticket.index')->with(compact('status'));
         }
