@@ -61,6 +61,8 @@ const useStyles = makeStyles((theme) => ({
       padding: 25,
       backgroundColor:'#282828',
       color:'#FFFFFF',
+      marginBottom: "40px",
+      marginTop: "21px"
     },
     formControl: {
         margin: theme.spacing(1),
@@ -151,7 +153,7 @@ const Boletos = ({ tickets, request }) => {
         filter: ""
     });
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('calories');
+    const [orderBy, setOrderBy] = React.useState('');
 
     //evento para ordenar las columnas de la tabla
     const handleRequestSort = (event, property) => {
@@ -211,9 +213,24 @@ const Boletos = ({ tickets, request }) => {
         return filteredProducts
     }
 
+    //se activa cada vez que se cambia el filtro o la busqueda
+    //recarga los datos filtrados
     useEffect(() => {
         Inertia.replace(route('ticket.index'), { data: state })
     }, [state])
+
+    //se activa cada vez que se da click a uno de los haeders de la tabla
+    //recarga los datos reordenados
+    useEffect(() => {
+        Inertia.replace(route('ticket.index'), {
+            data: {
+                orderby: orderBy,
+                order: order,
+                search: state.search,
+                filter: state.filter
+            } 
+        })
+    }, [orderBy, order])
 
     const cancelSearch = () => {
         setState(state => ({
