@@ -35,7 +35,7 @@ class EventController extends Controller
                         events.precio,events.descuento,events.id,events.limite, 
                         COUNT(purchases_events.event_id) AS total')
                         ->groupBy('product_images.foto','products.titulo','events.ciudad','events.sede','events.precio','events.descuento','events.id','events.limite')
-                        // ->where('purchases.confirmed','=',1)
+                        ->OrderBy('products.titulo')
                         ->paginate(4);
  
         // dd($eventos);
@@ -54,12 +54,12 @@ class EventController extends Controller
         return Inertia::render('Admin/Eventos/Evento',['evento' => $evento]);
     }
 
-    public function add($id){ 
-        // id del producto
-        $producto=Product::join('product_images','products.id','product_images.product_id')
-                            ->select('product_images.foto', 'products.titulo')
-                            ->findOrFail($id);
-        // dd($producto);
-        return Inertia::render('Admin/Eventos/Evento',['producto' => $producto]);
-    }
+    // public function add($id){ 
+    //     // id del producto
+    //     $producto=Product::join('product_images','products.id','product_images.product_id')
+    //                         ->select('product_images.foto', 'products.titulo')
+    //                         ->findOrFail($id);
+    //     // dd($producto);
+    //     return Inertia::render('Admin/Eventos/Evento',['producto' => $producto]);
+    // }
 }

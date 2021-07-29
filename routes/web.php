@@ -76,7 +76,7 @@ Route::delete('/dashboard/productos/delete/{id}', [App\Http\Controllers\ProductC
 // Eventos
 Route::get('/dashboard/eventos', [App\Http\Controllers\EventController::class, 'index'])->name('dashboard.events');
 Route::get('/dashboard/eventos/{id}', [App\Http\Controllers\EventController::class, 'show'])->name('dashboard.event');
-Route::get('/dashboard/agregarEvento/{id}', [App\Http\Controllers\EventController::class, 'add'])->name('dashboard.eventAdd');
+// Route::get('/dashboard/agregarEvento/{id}', [App\Http\Controllers\EventController::class, 'add'])->name('dashboard.eventAdd');
 
 // Boletos
 Route::name('ticket.')->group(function () {
@@ -84,6 +84,6 @@ Route::name('ticket.')->group(function () {
     Route::get('/dashboard/boletos', [App\Http\Controllers\PurchasesEventsController::class, 'index'])->name('index');
     Route::get('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
     Route::patch('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
-})->middleware('admin');
+});
 
 Route::get('/dashboard/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.inicio');

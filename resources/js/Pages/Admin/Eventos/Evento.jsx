@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Evento = ({evento,producto}) => {
+const Evento = ({evento}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -82,11 +82,6 @@ const Evento = ({evento,producto}) => {
                                 </Menu>
                             </Grid>
                         </Grid>
-
-                        {evento 
-                            ? <p> editar</p>
-                            : <p> agregar</p>
-                        }
 
                         {/* { disponible == true ? */}
                         <Grid container alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
