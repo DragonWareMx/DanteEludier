@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia; 
 use App\Models\Event;
+use App\Models\Product;
 use App\Models\PurchasesEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -53,8 +54,12 @@ class EventController extends Controller
         return Inertia::render('Admin/Eventos/Evento',['evento' => $evento]);
     }
 
-    public function add(){ 
-        
-        return Inertia::render('Admin/Eventos/Evento');
+    public function add($id){ 
+        // id del producto
+        $producto=Product::join('product_images','products.id','product_images.product_id')
+                            ->select('product_images.foto', 'products.titulo')
+                            ->findOrFail($id);
+        // dd($producto);
+        return Inertia::render('Admin/Eventos/Evento',['producto' => $producto]);
     }
 }

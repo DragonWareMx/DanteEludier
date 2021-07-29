@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Evento = ({evento}) => {
+const Evento = ({evento,producto}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -62,7 +62,7 @@ const Evento = ({evento}) => {
                     <Grid item xs={12} sm={8} className="producto_info evento-edit-info">
                         
                         <Grid container alignItems='center' style={{flexWrap:'wrap-reverse'}}>
-                            <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',evento.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{evento.titulo}</InertiaLink></Grid>
+                            {/* <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',evento.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>dsfsd</InertiaLink></Grid> */}
                             <Grid item xs={1} style={{display:'flex',justifyContent:'flex-end'}}>
                                 <Button aria-controls={"menu-"+1} aria-haspopup="true" onClick={handleClick}>
                                     <MoreVertIcon style={{color:'#FFFFFF'}}></MoreVertIcon>
@@ -83,11 +83,10 @@ const Evento = ({evento}) => {
                             </Grid>
                         </Grid>
 
-                        {evento
+                        {evento 
                             ? <p> editar</p>
                             : <p> agregar</p>
                         }
-
 
                         {/* { disponible == true ? */}
                         <Grid container alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
