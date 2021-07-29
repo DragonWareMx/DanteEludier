@@ -70,6 +70,7 @@ Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiplom
 Route::get('/dashboard/productos',  [App\Http\Controllers\ProductController::class, 'productos'])->name('dashboard.productos')->middleware('admin');
 Route::get('/dashboard/productos/{id}',  [App\Http\Controllers\ProductController::class, 'verProducto'])->name('dashboard.producto')->middleware('admin');
 Route::get('/dashboard/crearproducto',  [App\Http\Controllers\ProductController::class, 'crearProducto'])->name('crear.producto')->middleware('admin');
+Route::post('/dashboard/storeProducto',  [App\Http\Controllers\ProductController::class, 'storeProducto'])->name('store.producto')->middleware('admin');
 Route::delete('/dashboard/productos/delete/{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('delete.producto')->middleware('admin');
 
 // Eventos
