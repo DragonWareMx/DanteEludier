@@ -135,10 +135,11 @@ const Boleto = ({compra}) => {
                                 <Grid item xs={12} className="title-info">TELÉFONO</Grid>
                                 <Grid item xs={12} className="txt-info">{compra.user.phone}</Grid>
                             </Grid>
-
+                            {!compra.confirmed &&            
                             <Grid item xs={12} style={{display:'flex',justifyContent:'flex-end'}}>
                                 <Button variant="contained" onClick={handleClickOpen} className="btn-action">Marcar como pagado</Button>
                             </Grid>
+                            }
                         </Grid>
                     </Grid>
                     
