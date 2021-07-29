@@ -12,7 +12,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { Grid, Paper, FormControl, Select, MenuItem} from '@material-ui/core'
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import TuneIcon from '@material-ui/icons/Tune';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EventIcon from '@material-ui/icons/Event';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
@@ -129,28 +128,10 @@ const Evento = ({evento}) => {
                         </Grid>
                         <hr className="hr-div" align="left" />
                         <Grid item xs={12} style={{display:'flex', flexWrap:'wrap', marginBottom:15}}>
-                            <Grid item xs={12} sm={4}><TextField id="fecha" type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                            <Grid item xs={12} sm={4}><TextField id="inicio" type="date" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                            <Grid item xs={12} sm={4}><TextField id="cierre" type="date" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                            <Grid item xs={12} sm={4}><TextField required id="fecha" type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                            <Grid item xs={12} sm={4}><TextField required id="inicio" type="date" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                            <Grid item xs={12} sm={4}><TextField required id="cierre" type="date" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
                         </Grid>
-
-                        {/* ITEM FECHA------------- */}
-                        {/* Contenedor de icono remove */}
-                        <Grid className="icon-remove" style={{display:'flex', justifyContent:'flex-end', marginBottom:15}}>
-                            <Tooltip title="Eliminar" placement="top">
-                            <IconButton aria-label="remove" style={{padding:5}}>
-                                <RemoveCircleIcon style={{color:'white', fontSize:20}} />
-                            </IconButton>
-                            </Tooltip>
-                        </Grid>
-                        <hr className="hr-div" align="left" />
-                        <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
-                            <Grid item xs={12} sm={4}><TextField id="fecha" type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                            <Grid item xs={12} sm={4}><TextField id="inicio" type="date" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                            <Grid item xs={12} sm={4}><TextField id="cierre" type="date" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                        </Grid>
-
-                        
 
 
                     </Grid>
