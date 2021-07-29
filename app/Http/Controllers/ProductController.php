@@ -57,6 +57,10 @@ class ProductController extends Controller
 
     public function storeProducto(Request $request){
 
+        $data = $request->validate([
+            'titulo' => 'required',
+            'descripcion' => 'required',
+        ]);
         dd('buena suerte amigo kkstin',$request);
     }
 

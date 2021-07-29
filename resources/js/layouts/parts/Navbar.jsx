@@ -171,7 +171,7 @@ export function Navbar(props) {
                             <ConfirmationNumberIcon style={{ color: 'white' }} />
                         </InertiaLink>
                         <div className={classes.separador}></div>
-                        <InertiaLink href="#" as="button" type="button" className={classes.inertiaLink}>
+                        <InertiaLink href={route('crear.producto')} as="button" type="button" className={classes.inertiaLink}>
                             <AddCircleIcon style={{ color: 'white' }} />
                         </InertiaLink>
                     </div> :
@@ -227,7 +227,7 @@ export function Navbar(props) {
                             </Collapse>
                         </List>
                         <div className={classes.separador}></div>
-                        <InertiaLink href={route('dashboard.inicio')} className={classes.inertiaLink2}>
+                        <InertiaLink href={route('crear.producto')} className={classes.inertiaLink2}>
                             <ListItem button>
                                 <ListItemIcon>
                                     <AddCircleIcon style={{ color: 'white' }} />

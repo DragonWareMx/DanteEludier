@@ -47,11 +47,14 @@ const DivBoton = styled.div`
 
 const Crear = () => {
 
+    const { errors } = usePage().props
+
     const [values, setValues] = React.useState({
         titulo: '',
         descripcion: '',
         productoImagen: null,
         productoPdf: null,
+        error:false,
     });
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -96,9 +99,15 @@ const Crear = () => {
         e.preventDefault()
         Inertia.post('/dashboard/storeProducto', values,
             {
-                // onError: () => {
-                //     Inertia.reload({ only: ['units'], data: { regime: values.regimen } })
-                // }
+                onSuccess: () => {
+                    //algo
+                },
+                onError: () => {
+                    setValues(values => ({
+                        ...values,
+                        error: true
+                    }));
+                }
             }
         )
     }
@@ -131,21 +140,24 @@ const Crear = () => {
                                     </DivBoton>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={9} className='verproducto_info'>
-                                    <TextField id="producto-titulo" label="Título del producto" style={{width:'100%'}} onChange={handleChange('titulo')} value={values.titulo}/>
-                                    <TextField id="producto-descripcion" label="Descripción del producto" style={{width:'100%',marginTop:25}} onChange={handleChange('descripcion')} value={values.descripcion}/>
-                                    {/* <input type='file' style={{marginTop:35}}></input> */}
-                                    {/* <input
-                                        accept="image/*"
-                                        style={{ display: 'none' }}
-                                        id="raised-button-file"
-                                        multiple
-                                        type="file"
+                                    <TextField 
+                                        id="producto-titulo" 
+                                        label="Título del producto" 
+                                        style={{width:'100%'}} 
+                                        onChange={handleChange('titulo')} 
+                                        value={values.titulo}
+                                        error={errors.titulo && values.error == true && true}
+                                        helperText={values.error == true && errors.titulo}
                                     />
-                                    <label htmlFor="raised-button-file">
-                                        <Button variant="raised" component="span">
-                                            Upload
-                                        </Button>
-                                    </label> */}
+                                    <TextField 
+                                        id="producto-descripcion" 
+                                        label="Descripción del producto" 
+                                        style={{width:'100%',marginTop:25}} 
+                                        onChange={handleChange('descripcion')} 
+                                        value={values.descripcion}
+                                        error={errors.descripcion && values.error == true && true}
+                                        helperText={values.error == true && errors.descripcion}    
+                                    />
                                     <div style={{marginTop:42,color:'#9C9C9C',fontSize:16, fontFamily:'Oxygen',marginBottom:5}}>PDF de información</div>
                                     {/* /////////////INPUT DEL PDF/////////////////// */}
                                     <Button
