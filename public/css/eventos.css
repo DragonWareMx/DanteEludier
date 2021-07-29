@@ -14,6 +14,26 @@
 /* .MuiButton-root{
     min-width: 10px !important;
 } */
+.evento-edit-info{
+    padding:0px 0px 0px 16px !important;
+}
+.input-edit-event{
+    width:90%;
+    margin-bottom: 5px !important;
+    margin-top:5px !important;
+}
+.hr-div{
+    width:95%;
+    border-top:1px dashed #535353;
+    margin-top: 3px;
+}
+.MuiIconButton-root{
+    color:rgba(255, 255, 255, 0.486) !important;
+}
+.icon-remove{
+    width:95%;
+    cursor: pointer;
+}
 
 @media(max-width:660px){
     .evento_img{
@@ -23,5 +43,15 @@
 @media(max-width:600px){
     .evento_img{
         max-height: 200px !important;
+    }
+    .evento-edit-info{
+        padding-top: 16px !important;
+        padding-left: 0px !important;
+    }
+    .input-edit-event{
+        width:100% !important;
+    }
+    .hr-div, .icon-remove{
+        width:100%
     }
 }

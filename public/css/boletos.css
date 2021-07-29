@@ -70,8 +70,8 @@
     }
 }
 @media(max-width:600px){
-    .img-product{
-        max-height: 200px;
+    .img-product, .img-producto-edit{
+        max-height: 200px !important;
     }
 }
 
