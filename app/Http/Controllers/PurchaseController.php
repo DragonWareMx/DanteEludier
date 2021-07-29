@@ -64,12 +64,37 @@ class PurchaseController extends Controller
         }
         $evento = Event::with('product')->findOrFail($idEvento);
         if ($request->values['tipo_de_pago'] == 'Transferencia') {
+            //se registra la venta en la BD en la tabla Purchases
+
+            $total = ($evento->precio * $request->values['cantidad']) * (1 - ($evento->descuento));
+
+            $purchase = new Purchase();
+            $mytime = Carbon::now();
+            $purchase->fecha = $mytime->toDateString();
+            $purchase->user_id = auth()->user()->id;
+            $purchase->total = $total;
+            $purchase->metodo_pago = 'transferencia';
+            $purchase->confirmed = 0;
+            $purchase->save();
+
+            for ($i = 0; $i < $request->values['cantidad']; $i++) {
+                $compra_evento = new PurchasesEvents();
+                $compra_evento->purchase_id = $purchase->id;
+                $compra_evento->event_id = $evento->id;
+                $compra_evento->precio = $evento->precio;
+                $compra_evento->descuento = $evento->descuento;
+                $compra_evento->asistio = 0;
+                $compra_evento->save();
+            }
+
             Mail::to(auth()->user()->email)->send(new SendMailableTransfer($idEvento, auth()->user()->id, $request->values['cantidad']));
             $status = "Gracias! Se te enviará un correo electrónico con los detalles de tu pedido y los pasos a seguir para completarlo.";
             return redirect()->back()->with(compact('status'));
         } else {
             //verificar que si haya cupo todavia
-            $cupo = PurchasesEvents::where('event_id', $idEvento)->count();
+            $cupo = PurchasesEvents::whereHas('purchase', function ($query) {
+                return $query->where('confirmed', '=', 1);
+            })->where('event_id', $idEvento)->count();
             $cupo = $cupo + $request->values['cantidad'];
             if ($cupo > $evento->limite) {
                 $status = "Lo sentimos, el evento seleccionado ya no tiene espacios disponibles.";
@@ -175,6 +200,8 @@ class PurchaseController extends Controller
             $purchase->fecha = $mytime->toDateString();
             $purchase->user_id = auth()->user()->id;
             $purchase->total = session('total');
+            $purchase->metodo_pago = 'paypal';
+            $purchase->confirmed = 1;
             $purchase->save();
 
             $evento = Event::findOrFail(session('eventoId'));
@@ -249,6 +276,8 @@ class PurchaseController extends Controller
             $purchase->fecha = $mytime->toDateString();
             $purchase->user_id = auth()->user()->id;
             $purchase->total = $total;
+            $purchase->metodo_pago = 'stripe';
+            $purchase->confirmed = 1;
             $purchase->save();
 
             for ($i = 0; $i < $request->cantidad; $i++) {
