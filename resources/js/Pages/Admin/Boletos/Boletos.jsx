@@ -147,8 +147,8 @@ const Boletos = ({ tickets, request }) => {
     const classes = useStyles();
     
     const [state, setState] = React.useState({
-        search: request ? request.search ? request.search : "" : "",
-        filter: request ? request.filter ? request.filter : "" : ""
+        search: "",
+        filter: ""
     });
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
@@ -165,10 +165,19 @@ const Boletos = ({ tickets, request }) => {
         const value = event.target.value
 
         //se cambia el state del filtro y la búsqueda
-        setState(state => ({
-            ...state,
-            filter: value
-        }))
+        if(value == 'evento' || value == 'usuario' || value == 'telefono' || value == 'pago' || value == 'estatus'){
+            setState(state => ({
+                ...state,
+                filter: value
+            }))
+        }
+        else{
+            setState(state => ({
+                ...state,
+                filter: ""
+            }))
+        }
+
     }
 
     //filtra los eventos repetidos
