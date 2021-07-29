@@ -23,21 +23,21 @@ class EventoController extends Controller
     public function index($id)
     {
         //regresa los ids de los eventos que tienen al menos una fecha expirada
-        $eventosExpirados = Event::leftJoin('dates','events.id', '=','dates.event_id')
-                        ->where('product_id', $id)
-                        ->where('dates.fecha', '<', \Carbon\Carbon::now()->toDateTimeString())
-                        ->select('events.id')
-                        ->groupBy('events.id')
-                        ->pluck('id')
-                        ->toArray();
+        $eventosExpirados = Event::leftJoin('dates', 'events.id', '=', 'dates.event_id')
+            ->where('product_id', $id)
+            ->where('dates.fecha', '<', \Carbon\Carbon::now()->toDateTimeString())
+            ->select('events.id')
+            ->groupBy('events.id')
+            ->pluck('id')
+            ->toArray();
 
         $eventos =  Event::where('product_id', $id)
-                        ->whereNotIn('events.id', $eventosExpirados)
-                        ->with('dates', 'product', 'product.images')
-                        ->leftJoin('purchases_events','events.id', '=','purchases_events.event_id')
-                        ->selectRaw('events.*, COUNT("purchases_events"."event_id") AS total')
-                        ->groupBy('events.id','events.created_at','events.updated_at','events.ciudad','events.direccion','events.sede','events.precio','events.limite','events.descuento','events.product_id')
-                        ->get();
+            ->whereNotIn('events.id', $eventosExpirados)
+            ->with('dates', 'product', 'product.images')
+            ->leftJoin('purchases_events', 'events.id', '=', 'purchases_events.event_id')
+            ->selectRaw('events.*, COUNT(purchases_events.event_id) AS total')
+            ->groupBy('events.id', 'events.created_at', 'events.updated_at', 'events.ciudad', 'events.direccion', 'events.sede', 'events.precio', 'events.limite', 'events.descuento', 'events.product_id', 'events.documento')
+            ->get();
 
         if (!$eventos) {
             return abort(403);
@@ -52,18 +52,16 @@ class EventoController extends Controller
     }
 
     public function verBoleto($uuid)
-    {  
+    {
         $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
-    
-        if (Auth::user()->roles[0]->name == "CheckTicket"){
+
+        if (Auth::user()->roles[0]->name == "CheckTicket") {
             return Inertia::render('Boleto', ['boleto' => $compra_evento, 'rol' => Auth::user()->roles[0]->name]);
-        }
-        else if (Auth::user()->roles[0]->name == "Cliente") {
-            if (Auth::user()->id == $compra_evento->purchase->user->id ) 
+        } else if (Auth::user()->roles[0]->name == "Cliente") {
+            if (Auth::user()->id == $compra_evento->purchase->user->id)
                 return Inertia::render('Boleto', ['boleto' => $compra_evento, 'rol' => Auth::user()->roles[0]->name]);
             else return abort(403);
-        }
-        else {
+        } else {
             return abort(403);
         }
     }
@@ -88,19 +86,18 @@ class EventoController extends Controller
 
     public function diploma($uuid)
     {
-        //AGREGAR Y MODIFICAR CUANDO SE TENGA EL ATRIBUTO DE LA BASE DE DATOS PARA QUE SÓLO SE PUEDA SOLICITAR UNO POR BOLETO        
+        //AGREGAR Y MODIFICAR CUANDO SE TENGA EL ATRIBUTO DE LA BASE DE DATOS PARA QUE SÓLO SE PUEDA SOLICITAR UNO POR BOLETO
         \Gate::authorize('haveaccess', 'client.perm');
         $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
-        
-        if (Auth::user()->id == $compra_evento->purchase->user->id){
-            if($compra_evento->asistio)
-                return Inertia::render('Diploma', ['boleto' => $compra_evento]);  
+
+        if (Auth::user()->id == $compra_evento->purchase->user->id) {
+            if ($compra_evento->asistio)
+                return Inertia::render('Diploma', ['boleto' => $compra_evento]);
             else {
                 $status = "No puedes solicitar tu diploma si no has acudido al taller. Tu boleto no ha sido usado";
                 return redirect()->back()->with(compact('status'));
             }
-        } 
-        else return abort(403);
+        } else return abort(403);
     }
 
     public function getDiploma(Request $request)
@@ -108,15 +105,14 @@ class EventoController extends Controller
         \Gate::authorize('haveaccess', 'client.perm');
         $datos = $request->all();
         $compra_evento = PurchasesEvents::where('uuid', $datos['data']['uuid'])->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images', 'event.dates')->first();
-        
+
         //Si ya tiene nombre en la base de datos si llega otro diferente de todos modos se pone en el diploma el de la base de datos
         //Si no hay nombre en la base de datos se guarda entonces el que llega del formulario.
-        
-        if($compra_evento->nombre){
-            $datos['data']['nombre']=$compra_evento->nombre;
-        }
-        else{
-            $compra_evento->nombre=$datos['data']['nombre'];
+
+        if ($compra_evento->nombre) {
+            $datos['data']['nombre'] = $compra_evento->nombre;
+        } else {
+            $compra_evento->nombre = $datos['data']['nombre'];
             $compra_evento->save();
         }
         $fechaS = "";
