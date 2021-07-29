@@ -55,6 +55,15 @@ class ProductController extends Controller
         return Inertia::render('Productos/Crear');
     }
 
+    public function storeProducto(Request $request){
+
+        $data = $request->validate([
+            'titulo' => 'required',
+            'descripcion' => 'required',
+        ]);
+        dd('buena suerte amigo kkstin',$request);
+    }
+
     public function delete($id){
         \Gate::authorize('haveaccess', 'admin.perm');
         DB::beginTransaction();
