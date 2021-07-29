@@ -76,6 +76,7 @@ Route::delete('/dashboard/productos/delete/{id}', [App\Http\Controllers\ProductC
 // Eventos
 Route::get('/dashboard/eventos', [App\Http\Controllers\EventController::class, 'index'])->name('dashboard.events');
 Route::get('/dashboard/eventos/{id}', [App\Http\Controllers\EventController::class, 'show'])->name('dashboard.event');
+Route::get('/dashboard/eventos/agregar', [App\Http\Controllers\EventController::class, 'add'])->name('dashboard.eventAdd');
 
 // Boletos
 Route::name('ticket.')->group(function () {

@@ -23,6 +23,8 @@ class EventController extends Controller
 
     public function index(){
         // Enlistar todos los eventos
+
+        // Checar las comillas de count al subir al server
         $eventos=Event::join('products', 'events.product_id', 'products.id')
                         ->join('product_images','products.id','product_images.product_id')
                         ->with('dates')
@@ -40,6 +42,19 @@ class EventController extends Controller
     }
 
     public function show($id){ 
+        $evento=Event::join('products', 'events.product_id', 'products.id')
+                        ->join('product_images','products.id','product_images.product_id')
+                        ->with('dates')
+                        ->select('product_images.foto', 'products.titulo', 'events.ciudad', 'events.sede',
+                        'events.precio', 'events.descuento', 'events.id', 'events.limite')
+                        ->findOrFail($id);
+        // dd($evento);
+
+        return Inertia::render('Admin/Eventos/Evento',['evento' => $evento]);
+    }
+
+    public function add(){ 
+        
         return Inertia::render('Admin/Eventos/Evento');
     }
 }

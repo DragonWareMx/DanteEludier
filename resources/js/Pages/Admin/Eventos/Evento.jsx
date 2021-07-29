@@ -18,6 +18,7 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import route from 'ziggy-js';
 
 import "/css/eventos.css";
 import "/css/boletos.css";
@@ -61,7 +62,7 @@ const Evento = ({evento}) => {
                     <Grid item xs={12} sm={8} className="producto_info evento-edit-info">
                         
                         <Grid container alignItems='center' style={{flexWrap:'wrap-reverse'}}>
-                            <Grid item xs={11}><InertiaLink  href="#!" style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>Taller Vivencial Avatar Financiero</InertiaLink></Grid>
+                            <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',evento.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{evento.titulo}</InertiaLink></Grid>
                             <Grid item xs={1} style={{display:'flex',justifyContent:'flex-end'}}>
                                 <Button aria-controls={"menu-"+1} aria-haspopup="true" onClick={handleClick}>
                                     <MoreVertIcon style={{color:'#FFFFFF'}}></MoreVertIcon>
@@ -81,6 +82,13 @@ const Evento = ({evento}) => {
                                 </Menu>
                             </Grid>
                         </Grid>
+
+                        {evento
+                            ? <p> editar</p>
+                            : <p> agregar</p>
+                        }
+
+
                         {/* { disponible == true ? */}
                         <Grid container alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
                             DISPONIBLE &nbsp;<EventAvailableIcon style={{fontSize:17}}></EventAvailableIcon> 
@@ -90,49 +98,55 @@ const Evento = ({evento}) => {
                         NO DISPONIBLE <DateRangeIcon></DateRangeIcon>
                         </Grid> */}
                         {/* } */}
+                        <form className='crearProducto_form' noValidate autoComplete="off" style={{display:'flex', flexWrap:'wrap'}}>
+                            <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
+                                <Grid item xs={12} sm={6}><TextField color="primary" required id="ciudad" label="Ciudad" className="input-edit-event"  /></Grid>
+                                <Grid item xs={12} sm={6}><TextField required id="sede" label="Sede" className="input-edit-event"  /></Grid>
+                            </Grid>
 
-                        <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
-                            <Grid item xs={12} sm={6}><TextField color="primary" required id="ciudad" label="Ciudad" className="input-edit-event"  /></Grid>
-                            <Grid item xs={12} sm={6}><TextField required id="sede" label="Sede" className="input-edit-event"  /></Grid>
-                        </Grid>
+                            <Grid item xs={12}>
+                                <TextField required id="direccion" label="Dirección" className="input-edit-event" style={{width:'95%'}} />
+                            </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField required id="direccion" label="Dirección" className="input-edit-event" style={{width:'95%'}} />
-                        </Grid>
+                            <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
+                                <Grid item xs={12} sm={6}><TextField required id="precio" type="number" label="Precio por boleto" className="input-edit-event"  /></Grid>
+                                <Grid item xs={12} sm={6}><TextField required id="limite" type="number" label="Limite de boletos" className="input-edit-event"  /></Grid>
+                            </Grid>
 
-                        <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
-                            <Grid item xs={12} sm={6}><TextField required id="precio" type="number" label="Precio por boleto" className="input-edit-event"  /></Grid>
-                            <Grid item xs={12} sm={6}><TextField required id="limite" type="number" label="Limite de boletos" className="input-edit-event"  /></Grid>
-                        </Grid>
+                            <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
+                                <TextField required id="descuento" type="number" min="0" label="Descuento por boleto" className="input-edit-event" style={{width:'95%'}} />
+                            </Grid>
 
-                        <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
-                            <TextField required id="descuento" type="number" min="0" label="Descuento por boleto" className="input-edit-event" style={{width:'95%'}} />
-                        </Grid>
+                            <Grid style={{fontSize:12,fontFamily:'Oxygen',marginTop:9, marginTop:30, marginBottom:0}}>FECHAS DE EVENTO
+                            <Tooltip title="Agregar" placement="top">
+                                <IconButton aria-label="add" style={{padding:5}}>
+                                    <AddCircleIcon style={{color:'white', fontSize:20}} />
+                                </IconButton>
+                                </Tooltip>
+                            </Grid>
+                            
+                            {/* ITEM FECHA------------- */}
+                            {/* Contenedor de icono remove */}
+                            <Grid className="icon-remove" style={{display:'flex', justifyContent:'flex-end'}}>
+                                <Tooltip title="Eliminar" placement="top">
+                                <IconButton aria-label="remove" style={{padding:5}}>
+                                    <RemoveCircleIcon style={{color:'white', fontSize:20}} />
+                                </IconButton>
+                                </Tooltip>
+                            </Grid>
+                            <hr className="hr-div" align="left" />
+                            <Grid item xs={12} style={{display:'flex', flexWrap:'wrap', marginBottom:15}}>
+                                <Grid item xs={12} sm={4}><TextField required id="fecha" type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                                <Grid item xs={12} sm={4}><TextField required id="inicio" type="date" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                                <Grid item xs={12} sm={4}><TextField required id="cierre" type="date" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                            </Grid>
 
-                        <Grid style={{fontSize:12,fontFamily:'Oxygen',marginTop:9, marginTop:30, marginBottom:0}}>FECHAS DE EVENTO
-                        <Tooltip title="Agregar" placement="top">
-                            <IconButton aria-label="add" style={{padding:5}}>
-                                <AddCircleIcon style={{color:'white', fontSize:20}} />
-                            </IconButton>
-                            </Tooltip>
-                        </Grid>
+                            <Grid style={{display:'flex',justifyContent:'flex-end', alignItems:'center',marginTop:10}} className="grid-btns-event-edit">
+                                <InertiaLink href={route('dashboard.events')} className="btn-cancelar">Cancelar</InertiaLink>
+                                <Button variant="contained" type="submit" className="btn-action">Guardar evento</Button>
+                            </Grid>
                         
-                        {/* ITEM FECHA------------- */}
-                        {/* Contenedor de icono remove */}
-                        <Grid className="icon-remove" style={{display:'flex', justifyContent:'flex-end'}}>
-                            <Tooltip title="Eliminar" placement="top">
-                            <IconButton aria-label="remove" style={{padding:5}}>
-                                <RemoveCircleIcon style={{color:'white', fontSize:20}} />
-                            </IconButton>
-                            </Tooltip>
-                        </Grid>
-                        <hr className="hr-div" align="left" />
-                        <Grid item xs={12} style={{display:'flex', flexWrap:'wrap', marginBottom:15}}>
-                            <Grid item xs={12} sm={4}><TextField required id="fecha" type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                            <Grid item xs={12} sm={4}><TextField required id="inicio" type="date" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                            <Grid item xs={12} sm={4}><TextField required id="cierre" type="date" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                        </Grid>
-
+                        </form>
 
                     </Grid>
                 </Paper>
