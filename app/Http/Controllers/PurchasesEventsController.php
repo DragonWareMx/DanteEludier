@@ -126,7 +126,7 @@ class PurchasesEventsController extends Controller
                             ->leftJoin('events', 'purchases_events.event_id', '=', 'events.id')
                             ->leftJoin('products', 'products.id', '=', 'events.product_id')
                             ->join('users', 'users.id', '=', 'purchases.user_id')
-                            ->distinct()
+                            //->distinct()
                             ->when($request->orderby, function ($query, $orderby) use ($request) {
                                 switch ($orderby) {
                                     case 'id':
@@ -137,27 +137,27 @@ class PurchasesEventsController extends Controller
                                         break;
                                     case 'producto':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(products.titulo), products.titulo DESC');
+                                            return $query->orderByRaw('coalesce(products.titulo), products.titulo DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(products.titulo), products.titulo ASC');
+                                            return $query->orderByRaw('coalesce(products.titulo), products.titulo ASC');
                                         break;
                                     case 'evento':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(events.ciudad), events.ciudad DESC');
+                                            return $query->orderByRaw('coalesce(events.ciudad), events.ciudad DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(events.ciudad), events.ciudad ASC');
+                                            return $query->orderByRaw('coalesce(events.ciudad), events.ciudad ASC');
                                         break;
                                     case 'usuario':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(users.name), users.name DESC');
+                                            return $query->orderByRaw('coalesce(users.name), users.name DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(users.name), users.name ASC');
+                                            return $query->orderByRaw('coalesce(users.name), users.name ASC');
                                         break;
                                     case 'telefono':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(users.phone), users.phone DESC');
+                                            return $query->orderByRaw('coalesce(users.phone), users.phone DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(users.phone), users.phone ASC');
+                                            return $query->orderByRaw('coalesce(users.phone), users.phone ASC');
                                         break;
                                     case 'boletos':
                                         if($request->order && $request->order == 'desc')
@@ -167,9 +167,9 @@ class PurchasesEventsController extends Controller
                                         break;
                                     case 'pago':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(metodo_pago), metodo_pago DESC');
+                                            return $query->orderByRaw('coalesce(metodo_pago), metodo_pago DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(metodo_pago), metodo_pago ASC');
+                                            return $query->orderByRaw('coalesce(metodo_pago), metodo_pago ASC');
                                         break;
                                     case 'estatus':
                                         if($request->order && $request->order == 'desc')
