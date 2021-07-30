@@ -49,6 +49,7 @@ class EventController extends Controller
                         ->join('product_images','products.id','product_images.product_id')
                         ->with('dates')
                         ->select('product_images.foto', 'products.titulo', 'events.ciudad', 'events.sede',
+                        'products.uuid',
                         'events.direccion','events.precio', 'events.descuento', 'events.id', 'events.limite')
                         ->findOrFail($id);
         // dd($evento);

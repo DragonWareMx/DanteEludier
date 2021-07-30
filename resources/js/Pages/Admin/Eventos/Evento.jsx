@@ -185,7 +185,7 @@ const Evento = ({evento}) => {
                     <Grid item xs={12} sm={8} className="producto_info evento-edit-info">
                         
                         <Grid container alignItems='center' style={{flexWrap:'wrap-reverse'}}>
-                            <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',evento.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{evento.titulo}</InertiaLink></Grid>
+                            <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',evento.uuid)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{evento.titulo}</InertiaLink></Grid>
                             <Grid item xs={1} style={{display:'flex',justifyContent:'flex-end'}}>
                                 <Button aria-controls={"menu-"+1} aria-haspopup="true" onClick={handleClick}>
                                     <MoreVertIcon style={{color:'#FFFFFF'}}></MoreVertIcon>
