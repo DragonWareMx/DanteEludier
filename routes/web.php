@@ -79,9 +79,8 @@ Route::get('/dashboard/eventos/{id}', [App\Http\Controllers\EventController::cla
 
 // Boletos
 Route::name('ticket.')->group(function () {
-    //agrega al carrito
     Route::get('/dashboard/boletos', [App\Http\Controllers\PurchasesEventsController::class, 'index'])->name('index');
-    Route::get('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
+    Route::get('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
     Route::patch('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
 });
 
