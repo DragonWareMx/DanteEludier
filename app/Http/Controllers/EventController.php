@@ -37,8 +37,7 @@ class EventController extends Controller
                         ->groupBy('product_images.foto','products.titulo','events.ciudad','events.sede','events.precio','events.descuento','events.id','events.limite')
                         ->OrderBy('products.titulo')
                         ->paginate(4);
- 
-        // dd($eventos);
+
         return Inertia::render('Admin/Eventos/Eventos',['eventos' => $eventos]);
     }
 
@@ -47,7 +46,7 @@ class EventController extends Controller
                         ->join('product_images','products.id','product_images.product_id')
                         ->with('dates')
                         ->select('product_images.foto', 'products.titulo', 'events.ciudad', 'events.sede',
-                        'events.precio', 'events.descuento', 'events.id', 'events.limite')
+                        'events.direccion','events.precio', 'events.descuento', 'events.id', 'events.limite')
                         ->findOrFail($id);
         // dd($evento);
 
