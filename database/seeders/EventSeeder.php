@@ -67,118 +67,118 @@ class EventSeeder extends Seeder
         ]);
 
         //eventos extra para paginacion
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
-        DB::table('purchases')->insert([
-            'total' => '5000',
-            'fecha' =>'2021-05-02',
-            'user_id' =>'3',
-            'metodo_pago' => 'paypal',
-            'confirmed' => true,
-        ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
+        // DB::table('purchases')->insert([
+        //     'total' => '5000',
+        //     'fecha' =>'2021-05-02',
+        //     'user_id' =>'3',
+        //     'metodo_pago' => 'paypal',
+        //     'confirmed' => true,
+        // ]);
 
         DB::table('purchases_events')->insert([
             'purchase_id' => '2',

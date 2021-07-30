@@ -129,6 +129,12 @@ class PurchasesEventsController extends Controller
                             ->distinct()
                             ->when($request->orderby, function ($query, $orderby) use ($request) {
                                 switch ($orderby) {
+                                    case 'id':
+                                        if($request->order && $request->order == 'desc')
+                                            return $query->orderBy('purchases.id', 'DESC');
+                                        else
+                                            return $query->orderBy('purchases.id', 'ASC');
+                                        break;
                                     case 'producto':
                                         if($request->order && $request->order == 'desc')
                                             return $query->orderByRaw('ISNULL(products.titulo), products.titulo DESC');
@@ -173,11 +179,11 @@ class PurchasesEventsController extends Controller
                                         break;
                                     
                                     default:
-                                        return $query->orderByRaw('ISNULL(products.titulo), products.titulo ASC');
+                                    return $query->orderBy('purchases.id', 'DESC');
                                         break;
                                 }
                             }, function ($query) {
-                                return $query->orderByRaw('ISNULL(products.titulo), products.titulo ASC');
+                                return $query->orderBy('purchases.id', 'DESC');
                             })
                             ->paginate(15)
                             ->withQueryString();
