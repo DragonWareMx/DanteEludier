@@ -131,15 +131,15 @@ class EventController extends Controller
             $evento->save();
 
             // FALTAN GUARDAR FECHAS
-            $date = new Date;
-            $date->event_id=$evento->id;
-            // esto es temporal y fake
-            $date->fecha='2021-01-01 12:01:01';
-            $date->horaCierre='13:01:01';
+            // $date = new Date;
+            // $date->event_id=$evento->id;
+            // // esto es temporal y fake
+            // $date->fecha='2021-01-01 12:01:01';
+            // $date->horaCierre='13:01:01';
 
-            $date->save();
+            // $date->save();
 
-            dd($date);
+            // dd($date);
 
             //SE HACE COMMIT
             DB::commit();
