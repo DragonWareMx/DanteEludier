@@ -218,6 +218,10 @@ const Boletos = ({ tickets, request }) => {
         Inertia.get(route('ticket.show', uuid))
     }
 
+    function capitalize(word) {
+        return word[0].toUpperCase() + word.slice(1).toLowerCase();
+    }
+
     //se activa cada vez que se cambia el filtro o la busqueda
     //recarga los datos filtrados
     useEffect(() => {
@@ -375,7 +379,7 @@ const Boletos = ({ tickets, request }) => {
                                         </TableCell>
                                         <TableCell>
                                             {ticket.metodo_pago ?
-                                            ticket.metodo_pago
+                                            capitalize(ticket.metodo_pago)
                                             :
                                             "No registrado"
                                             }
