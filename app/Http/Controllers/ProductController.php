@@ -44,9 +44,9 @@ class ProductController extends Controller
         ]);
     }
 
-    public function verProducto($id){
-        $producto=Product::with('images:foto,product_id','events','events.dates','events.purchases')->findOrFail($id);
-        $eventos=Event::where('events.product_id',$id)
+    public function verProducto($uuid){
+        $producto=Product::with('images:foto,product_id','events','events.dates','events.purchases')->where('uuid', '=', $uuid)->firstOrFail();
+        $eventos=Event::where('events.product_id',$producto->id)
                         ->join('products', 'events.product_id', 'products.id')
                         ->join('product_images','products.id','product_images.product_id')
                         ->with('dates')
@@ -58,7 +58,7 @@ class ProductController extends Controller
                         ->groupBy('product_images.foto','products.titulo','events.ciudad','events.sede','events.precio','events.descuento','events.id','events.limite')
                         // ->where('purchases.confirmed','=',1)
                         ->get();
-
+                        
         return Inertia::render('Productos/Producto',[
             'producto'=>$producto,
             'events'=>$eventos,
@@ -78,8 +78,8 @@ class ProductController extends Controller
         dd('BACKEND DE CREAR',$request);
     }
 
-    public function editarProducto($id){
-        $producto=Product::with('images:foto,product_id')->findOrFail($id);
+    public function editarProducto($uuid){
+        $producto=Product::with('images:foto,product_id')->where('uuid','=',$uuid)->firstOrFail();
         return Inertia::render('Productos/Editar',[
             'producto'=>$producto,
         ]);

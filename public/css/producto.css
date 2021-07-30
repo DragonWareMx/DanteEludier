@@ -128,18 +128,6 @@
     display: none;
 }
 
-.MuiInputBase-input{
-    color: white !important;
-    border-bottom: 1px solid #9C9C9C !important;
-    font-size: 15px !important;
-    font-family: 'Oxygen' !important;
-}
-
-.MuiFormLabel-root{
-    color: #9C9C9C !important;
-    font-family: 'Oxygen' !important;
-}
-
 @media(max-width:1279px){
     .crearProducto_img{
         height: 320px;

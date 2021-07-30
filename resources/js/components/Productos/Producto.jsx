@@ -68,11 +68,11 @@ export default function Producto({producto, precio, disponible, totalEventos, to
         <>
             <Grid container className='producto_card'>
                 <Grid item xs={12} sm={2} md={3}>
-                    <InertiaLink href={route('dashboard.producto',producto.id)}><img src={producto.images[0] && "/img/productos/"+producto.images[0].foto} className="producto_img"/> </InertiaLink>
+                    <InertiaLink href={route('dashboard.producto',producto.uuid)}><img src={producto.images[0] && "/img/productos/"+producto.images[0].foto} className="producto_img"/> </InertiaLink>
                 </Grid>
                 <Grid item xs={12} sm={10} md={9} className="producto_info"> 
                     <Grid container alignItems='center' style={{justifyContent:'space-between'}}>
-                        <InertiaLink  href={route('dashboard.producto',producto.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{producto.titulo}</InertiaLink>
+                        <InertiaLink  href={route('dashboard.producto',producto.uuid)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{producto.titulo}</InertiaLink>
                         <Grid>
                             <Button aria-controls={"menu-"+producto.id} aria-haspopup="true" onClick={handleClick}>
                                 <MoreVertIcon style={{color:'#FFFFFF'}}></MoreVertIcon>
@@ -88,7 +88,7 @@ export default function Producto({producto, precio, disponible, totalEventos, to
                                 elevation={0}
                                 classes={{ paper: classes.menuPaper }}
                             >
-                                <MenuItem style={{justifyContent:'space-between'}}><InertiaLink href={route('editar.producto',producto.id)} style={{display:'flex',textDecoration:'none', color:'white'}}><div style={{marginRight:15}}>Editar</div><EditIcon></EditIcon></InertiaLink></MenuItem>
+                                <MenuItem style={{justifyContent:'space-between'}}><InertiaLink href={route('editar.producto',producto.uuid)} style={{display:'flex',textDecoration:'none', color:'white'}}><div style={{marginRight:15}}>Editar</div><EditIcon></EditIcon></InertiaLink></MenuItem>
                                 <MenuItem onClick={handleClickOpen} style={{justifyContent:'space-between'}}><div style={{marginRight:15}}>Eliminar</div><DeleteIcon></DeleteIcon></MenuItem>
                             </Menu>
                         </Grid>
