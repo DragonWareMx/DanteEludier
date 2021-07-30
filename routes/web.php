@@ -70,7 +70,9 @@ Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiplom
 Route::get('/dashboard/productos',  [App\Http\Controllers\ProductController::class, 'productos'])->name('dashboard.productos')->middleware('admin');
 Route::get('/dashboard/productos/{id}',  [App\Http\Controllers\ProductController::class, 'verProducto'])->name('dashboard.producto')->middleware('admin');
 Route::get('/dashboard/crearproducto',  [App\Http\Controllers\ProductController::class, 'crearProducto'])->name('crear.producto')->middleware('admin');
-Route::post('/dashboard/storeProducto',  [App\Http\Controllers\ProductController::class, 'storeProducto'])->name('store.producto')->middleware('admin');
+Route::post('/dashboard/storeproducto',  [App\Http\Controllers\ProductController::class, 'storeProducto'])->name('store.producto')->middleware('admin');
+Route::get('/dashboard/editarproducto/{id}',  [App\Http\Controllers\ProductController::class, 'editarProducto'])->name('editar.producto')->middleware('admin');
+Route::patch('/dashboard/patchproducto/{id}',  [App\Http\Controllers\ProductController::class, 'patchProducto'])->name('patch.producto')->middleware('admin');
 Route::delete('/dashboard/productos/delete/{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('delete.producto')->middleware('admin');
 
 // Eventos
@@ -81,9 +83,9 @@ Route::get('/dashboard/eventos/{id}', [App\Http\Controllers\EventController::cla
 // Boletos
 Route::name('ticket.')->group(function () {
     //agrega al carrito
-    Route::get('/dashboard/boletos', [App\Http\Controllers\PurchasesEventsController::class, 'index'])->name('index');
-    Route::get('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show');
-    Route::patch('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update');
+    Route::get('/dashboard/boletos', [App\Http\Controllers\PurchasesEventsController::class, 'index'])->name('index')->middleware('admin');
+    Route::get('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show')->middleware('admin');
+    Route::patch('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update')->middleware('admin');
 });
 
 Route::get('/dashboard/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.inicio');

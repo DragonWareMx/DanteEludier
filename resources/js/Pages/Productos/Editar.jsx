@@ -45,17 +45,18 @@ const DivBoton = styled.div`
     }
 `;
 
-const Crear = () => {
+const Editar = ({producto}) => {
 
     const { errors } = usePage().props
 
     
     const [values, setValues] = React.useState({
-        titulo: '',
-        descripcion: '',
+        titulo: producto.titulo || '',
+        descripcion: producto.descripcion || '',
         productoImagen: null,
         productoPdf: null,
-        error:false,
+        error: false,
+        _method: 'patch',
     });
 
     const handleChange = (prop) => (event) => {
@@ -87,7 +88,7 @@ const Crear = () => {
                 productoPdf: input.files[0],
             }))
             var div=document.getElementById('pdfName');
-            div.innerHTML = '&nbsp;'+input.files[0].name;
+            div.innerHTML = '&nbsp;-&nbsp;'+input.files[0].name;
         }
     }
 
@@ -99,7 +100,7 @@ const Crear = () => {
     //manda el forumulario
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.post('/dashboard/storeproducto', values,
+        Inertia.post('/dashboard/patchproducto/'+producto.id, values,
             {
                 onSuccess: () => {
                     //algo
@@ -121,7 +122,7 @@ const Crear = () => {
                     <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
                         <form className='crearProducto_form' noValidate autoComplete="off" onSubmit={handleSubmit}>
                             <Grid container>
-                                <Grid item xs={12} sm={12} md={3} className='crearProducto_img' id='imgContainer'>
+                                <Grid item xs={12} sm={12} md={3} className='crearProducto_img' id='imgContainer' style={{backgroundImage:'url(/img/productos/'+producto.images[0].foto+')'}}>
                                     <DivBoton onClick={clickImagen}>
                                         <Button
                                             className='crearProducto_upload'
@@ -130,7 +131,7 @@ const Crear = () => {
                                             style={{borderRadius: '4px',color: '#FFFFFF',fontSize:12,textTransform: 'capitalize',fontWeight:'normal',fontFamily:'Oxygen'}}
                                         >
                                             <PublishIcon style={{marginRight:9,fontSize:17,marginTop:'-2px'}}></PublishIcon>
-                                            {values.productoImagen === null ? 'Subir imagen' : 'Cambiar imagen'} 
+                                            Cambiar imagen
                                         </Button>
                                         <input
                                                 id='productoImagen'
@@ -167,7 +168,7 @@ const Crear = () => {
                                         component="label"
                                         style={{background: '#323232',borderRadius: '4px',color: '#FFFFFF',fontSize:12,textTransform: 'capitalize',fontWeight:'normal',fontFamily:'Oxygen'}}
                                     >
-                                        {values.productoPdf === null ? 'Subir archivo' : 'Cambiar archivo - '}
+                                        Cambiar archivo
                                         <input
                                             id='productoPdf'
                                             type="file"
@@ -176,7 +177,7 @@ const Crear = () => {
                                             onChange={mostrarNombre}
                                         />
                                         
-                                    <Grid id='pdfName'></Grid>
+                                    <Grid id='pdfName'>&nbsp;{producto && producto.hojaDescriptiva && '- '+producto.hojaDescriptiva}</Grid>
                                     </Button>
                                     <Grid container alignItems='center' className='crearProducto_buttons'>
                                         <InertiaLink href={route('dashboard.productos')} style={{fontFamily:'Oxygen',fontSize:12,fontWeight:'Bold',marginRight:25,color:'#FFFFFF',textDecoration:'none'}}>
@@ -196,8 +197,8 @@ const Crear = () => {
     );
 };
 
-Crear.layout = (page) => (
+Editar.layout = (page) => (
     <Layout children={page} title="Dashboard - Productos" pageTitle="Productos" />
 );
 
-export default Crear;
+export default Editar;
