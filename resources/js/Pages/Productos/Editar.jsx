@@ -120,6 +120,7 @@ const Editar = ({producto}) => {
             <Grid container style={{marginTop:21,marginBottom:21}}>
                 <Grid item xs={12}>
                     <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
+                        {errors.productoImagen && <div style={{color:'red',fontSize:14,fontFamily:'Oxygen', marginBottom:15, marginLeft:15}}>{errors.productoImagen}</div>}
                         <form className='crearProducto_form' noValidate autoComplete="off" onSubmit={handleSubmit}>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={3} className='crearProducto_img' id='imgContainer' style={{backgroundImage:'url(/img/productos/'+producto.images[0].foto+')'}}>
@@ -151,6 +152,7 @@ const Editar = ({producto}) => {
                                         value={values.titulo}
                                         error={errors.titulo && values.error == true && true}
                                         helperText={values.error == true && errors.titulo}
+                                        required
                                     />
                                     <TextField 
                                         id="producto-descripcion" 
@@ -159,7 +161,8 @@ const Editar = ({producto}) => {
                                         onChange={handleChange('descripcion')} 
                                         value={values.descripcion}
                                         error={errors.descripcion && values.error == true && true}
-                                        helperText={values.error == true && errors.descripcion}    
+                                        helperText={values.error == true && errors.descripcion}   
+                                        required 
                                     />
                                     <div style={{marginTop:42,color:'#9C9C9C',fontSize:16, fontFamily:'Oxygen',marginBottom:5}}>PDF de información</div>
                                     {/* /////////////INPUT DEL PDF/////////////////// */}
@@ -177,8 +180,9 @@ const Editar = ({producto}) => {
                                             onChange={mostrarNombre}
                                         />
                                         
-                                    <Grid id='pdfName'>&nbsp;{producto && producto.hojaDescriptiva && '- '+producto.hojaDescriptiva}</Grid>
+                                        <Grid id='pdfName'>&nbsp;{producto && producto.hojaDescriptiva && '- '+producto.hojaDescriptiva}</Grid>
                                     </Button>
+                                    {errors.productoPdf && <div style={{color:'red',fontSize:14,fontFamily:'Oxygen', marginBottom:15}}>{errors.productoPdf}</div>}
                                     <Grid container alignItems='center' className='crearProducto_buttons'>
                                         <InertiaLink href={route('dashboard.productos')} style={{fontFamily:'Oxygen',fontSize:12,fontWeight:'Bold',marginRight:25,color:'#FFFFFF',textDecoration:'none'}}>
                                             CANCELAR

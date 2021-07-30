@@ -77,6 +77,7 @@ const Producto = ({producto, events}) => {
         const fecha = new Date();
         let disp = false;
         eventos.forEach(evento => {
+           if(evento.dates[0]){
             let fec = evento.dates[0].fecha;
             var splitDate = fec.split(" ");
             var splitDate2 = splitDate[0].split("-");
@@ -92,6 +93,7 @@ const Producto = ({producto, events}) => {
                     disp = true;
                 }
             }
+           }
         });
         return disp;
     }

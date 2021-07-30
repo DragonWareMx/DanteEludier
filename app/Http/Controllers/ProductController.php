@@ -71,12 +71,13 @@ class ProductController extends Controller
 
     public function storeProducto(Request $request){
 
-        $data = $request->validate([
+        $request->validate([
             'titulo' => 'required',
             'descripcion' => 'required',
-
+            'productoImagen' => 'required|image',
+            'productoPdf' => 'required|mimes:pdf'
         ]);
-        
+        dd($request);
 
     }
 

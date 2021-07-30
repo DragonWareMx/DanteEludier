@@ -51,19 +51,21 @@ const Productos = ({productos}) => {
         const fecha = new Date();
         let disp = false;
         eventos.forEach(evento => {
-            let fec = evento.dates[0].fecha;
-            var splitDate = fec.split(" ");
-            var splitDate2 = splitDate[0].split("-");
+            if(evento.dates[0]){
+                let fec = evento.dates[0].fecha;
+                var splitDate = fec.split(" ");
+                var splitDate2 = splitDate[0].split("-");
 
-            if (splitDate2[0] > fecha.getFullYear())
-                disp = true;
-            else if(splitDate2[0] == fecha.getFullYear()){
-                if(toInteger(splitDate2[1]) > (fecha.getMonth()+1)) {
+                if (splitDate2[0] > fecha.getFullYear())
                     disp = true;
-                }
-                else if(toInteger(splitDate2[1]) == (fecha.getMonth()+1)){
-                    if(toInteger(splitDate2[2])> fecha.getDate())
-                    disp = true;
+                else if(splitDate2[0] == fecha.getFullYear()){
+                    if(toInteger(splitDate2[1]) > (fecha.getMonth()+1)) {
+                        disp = true;
+                    }
+                    else if(toInteger(splitDate2[1]) == (fecha.getMonth()+1)){
+                        if(toInteger(splitDate2[2])> fecha.getDate())
+                        disp = true;
+                    }
                 }
             }
         });
