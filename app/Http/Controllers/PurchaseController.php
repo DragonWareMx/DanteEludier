@@ -23,9 +23,10 @@ use App\Models\Purchase;
 use App\Models\PurchasesEvents;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Str;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Cartalyst\Stripe\Exception\CardErrorException;
+
 
 class PurchaseController extends Controller
 {
@@ -75,6 +76,7 @@ class PurchaseController extends Controller
             $purchase->total = $total;
             $purchase->metodo_pago = 'transferencia';
             $purchase->confirmed = 0;
+            $purchase->uuid = Str::uuid();
             $purchase->save();
 
             for ($i = 0; $i < $request->values['cantidad']; $i++) {
@@ -202,6 +204,7 @@ class PurchaseController extends Controller
             $purchase->total = session('total');
             $purchase->metodo_pago = 'paypal';
             $purchase->confirmed = 1;
+            $purchase->uuid = Str::uuid();
             $purchase->save();
 
             $evento = Event::findOrFail(session('eventoId'));
@@ -278,6 +281,7 @@ class PurchaseController extends Controller
             $purchase->total = $total;
             $purchase->metodo_pago = 'stripe';
             $purchase->confirmed = 1;
+            $purchase->uuid = Str::uuid();
             $purchase->save();
 
             for ($i = 0; $i < $request->cantidad; $i++) {
