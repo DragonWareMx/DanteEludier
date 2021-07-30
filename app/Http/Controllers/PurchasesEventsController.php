@@ -140,13 +140,11 @@ class PurchasesEventsController extends Controller
                                         break;
                                     case 'evento':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->with(['events' => function($queryE) {
-                                                return $queryE->orderBy('ciudad', 'DESC');
-                                            }]);
+                                            return $query->leftJoin('purchases_events', 'purchases_events.purchase_id', '=', 'purchases.id')
+                                            ->leftJoin('events', 'purchases_events.event_id', '=', 'events.id')->orderBy('ciudad', 'DESC');
                                         else
-                                        return $query->with(['events' => function($queryE) {
-                                            return $queryE->orderBy('ciudad', 'ASC');
-                                        }]);
+                                        return $query->leftJoin('purchases_events', 'purchases_events.purchase_id', '=', 'purchases.id')
+                                            ->leftJoin('events', 'purchases_events.event_id', '=', 'events.id')->orderBy('ciudad', 'ASC');
                                         break;
                                     case 'usuario':
                                         if($request->order && $request->order == 'desc')
