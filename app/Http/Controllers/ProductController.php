@@ -45,7 +45,7 @@ class ProductController extends Controller
     }
 
     public function verProducto($id){
-        $producto=Product::with('images:foto,product_id')->findOrFail($id);
+        $producto=Product::with('images:foto,product_id','events','events.dates','events.purchases')->findOrFail($id);
         return Inertia::render('Productos/Producto',[
             'producto'=>$producto,
         ]);
@@ -61,7 +61,18 @@ class ProductController extends Controller
             'titulo' => 'required',
             'descripcion' => 'required',
         ]);
-        dd('buena suerte amigo kkstin',$request);
+        dd('BACKEND DE CREAR',$request);
+    }
+
+    public function editarProducto($id){
+        $producto=Product::with('images:foto,product_id')->findOrFail($id);
+        return Inertia::render('Productos/Editar',[
+            'producto'=>$producto,
+        ]);
+    }
+
+    public function patchProducto(Request $request,$id){
+        dd('BACKEND DE EDITAR',$request, $id);
     }
 
     public function delete($id){

@@ -59,7 +59,6 @@ const Productos = ({productos}) => {
                 disp = true;
             else if(splitDate2[0] == fecha.getFullYear()){
                 if(toInteger(splitDate2[1]) > (fecha.getMonth()+1)) {
-                    console.log("hola");
                     disp = true;
                 }
                 else if(toInteger(splitDate2[1]) == (fecha.getMonth()+1)){
@@ -113,8 +112,8 @@ const Productos = ({productos}) => {
                                 <Producto key={index} producto={producto} 
                                 precio={(producto.events && producto.events.length > 0) ? calcularPrecioMasBajo(producto.events) : null}
                                 disponible={(producto.events && producto.events.length > 0) ? disponibilidad(producto.events) : false}
-                                totalEventos = {producto.events.length}
-                                totalBoletos = {contarBoletos(producto.events)}/>
+                                totalEventos = {producto && producto.events && producto.events.length}
+                                totalBoletos = {producto && producto.events && contarBoletos(producto.events)}/>
                             ))}
                     </Paper>
                 </Grid>

@@ -30,6 +30,7 @@ import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import '/css/producto.css';
 
 //componentes
+import { toInteger } from "lodash";
 
 //Cosas del modal de eliminar
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -70,6 +71,55 @@ const Producto = ({producto}) => {
 
     const classes = useStyles();
 
+    //REVISA LA DISPONIBILIDAD
+    function disponibilidad(eventos) {
+        const fecha = new Date();
+        let disp = false;
+        eventos.forEach(evento => {
+            let fec = evento.dates[0].fecha;
+            var splitDate = fec.split(" ");
+            var splitDate2 = splitDate[0].split("-");
+
+            if (splitDate2[0] > fecha.getFullYear())
+                disp = true;
+            else if(splitDate2[0] == fecha.getFullYear()){
+                if(toInteger(splitDate2[1]) > (fecha.getMonth()+1)) {
+                    disp = true;
+                }
+                else if(toInteger(splitDate2[1]) == (fecha.getMonth()+1)){
+                    if(toInteger(splitDate2[2])> fecha.getDate())
+                    disp = true;
+                }
+            }
+        });
+        return disp;
+    }
+
+    //si no hay precios entonces es null
+    function calcularPrecioMasBajo(eventos) {
+        let precio = null;
+
+        eventos.forEach(evento => {
+            if (!precio) {
+                precio = evento.precio
+                return
+            }
+            if (precio > evento.precio)
+                precio = evento.precio
+        });
+        return precio
+    }
+
+    //contar boletos
+    function contarBoletos(eventos) {
+        let total = 0;
+
+        eventos.forEach(evento => {
+            total+= evento.purchases.length;
+        });
+        return total
+    }
+
     return (
         <>
             <Grid container style={{marginTop:21,marginBottom:21}}>
@@ -102,7 +152,7 @@ const Producto = ({producto}) => {
                                         </Menu>
                                     </Grid>
                                 </Grid>
-                                { /*disponible*/ true == true ?
+                                { (producto.events && producto.events.length > 0) && disponibilidad(producto.events) ?
                                 <Grid container alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
                                     DISPONIBLE <EventAvailableIcon></EventAvailableIcon> 
                                 </Grid>
@@ -111,15 +161,15 @@ const Producto = ({producto}) => {
                                 NO DISPONIBLE <DateRangeIcon></DateRangeIcon>
                                 </Grid>
                                 }
-                                <Grid style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Desde $ 9999.99{/*precio*/} MXN</Grid>
+                                <Grid style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Desde $ {(producto.events && producto.events.length > 0) && calcularPrecioMasBajo(producto.events) } MXN</Grid>
                                 <Grid container direction='row' style={{marginTop:32}}>
                                     <Grid style={{marginRight:34}}>
                                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>TOTAL DE EVENTOS</div>
-                                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>99{/*totalEventos*/} Evento(s)</div>
+                                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{producto && producto.events && producto.events.length} Evento(s)</div>
                                     </Grid>
                                     <Grid style={{marginRight:34}}>
                                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS VENDIDOS</div>
-                                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>99{/*totalBoletos*/} Boleto(s)</div>
+                                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{producto && producto.events && contarBoletos(producto.events)} Boleto(s)</div>
                                     </Grid>  
                                 </Grid>
                                 <br></br>
