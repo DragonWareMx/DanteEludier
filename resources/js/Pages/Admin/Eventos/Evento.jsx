@@ -65,10 +65,31 @@ const Evento = ({evento}) => {
             "11",
             "12",
         ];
-        const day = dob.getDate();
+
+        // // Checking if date is < 10 and pre-prending 0 if not to adjust for date input.
+        const day = dob.getDate().toString().length < 2 
+        ? `0${dob.getDate()}`
+        : dob.getDate();
+        
         const monthIndex = dob.getMonth();
         const year = dob.getFullYear();
-        return `${day}/${monthNames[monthIndex]}/${year}`;
+        return `${year}-${monthNames[monthIndex]}-${day}`;
+    }
+
+    function makeTwoDigits (time) {
+        const timeString = `${time}`;
+        if (timeString.length === 2) return time
+        return `0${time}`
+      }
+
+    function transformaHora(hora) {
+        const dob = new Date(hora);
+        const horas = dob.getHours();
+        
+        const minutos = dob.getMinutes();
+        const segundos = dob.getSeconds();
+        // alert(horas+':'+minutos+':'+segundos);
+        return `${makeTwoDigits(horas)}:${makeTwoDigits(minutos)}:${makeTwoDigits(segundos)}`;
     }
 
     const classes = useStyles();
@@ -143,9 +164,9 @@ const Evento = ({evento}) => {
                                     </Grid>
                                     <hr className="hr-div" align="left" />
                                     <Grid item xs={12} style={{display:'flex', flexWrap:'wrap', marginBottom:15}}>
-                                        <Grid item xs={12} sm={4}><TextField required id="fecha" type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                                        <Grid item xs={12} sm={4}><TextField required id="inicio" type="date" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                                        <Grid item xs={12} sm={4}><TextField required id="cierre" type="date" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                                        <Grid item xs={12} sm={4}><TextField required id="fecha" defaultValue={transformaFecha(date.fecha)} type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                                        <Grid item xs={12} sm={4}><TextField required id="inicio" defaultValue={transformaHora(date.fecha)} type="time" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                                        <Grid item xs={12} sm={4}><TextField required id="cierre" defaultValue={transformaHora('2021-01-01 '+date.horaCierre)} type="time" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
                                     </Grid>
                                 </Grid>
                             )}
