@@ -46,8 +46,22 @@ class ProductController extends Controller
 
     public function verProducto($id){
         $producto=Product::with('images:foto,product_id','events','events.dates','events.purchases')->findOrFail($id);
+        $eventos=Event::where('events.product_id',$id)
+                        ->join('products', 'events.product_id', 'products.id')
+                        ->join('product_images','products.id','product_images.product_id')
+                        ->with('dates')
+                        ->leftJoin('purchases_events','events.id', '=','purchases_events.event_id')
+                        ->leftJoin('purchases','purchases_events.purchase_id', '=','purchases.id')
+                        ->selectRaw('product_images.foto ,products.titulo,events.ciudad,events.sede,
+                        events.precio,events.descuento,events.id,events.limite, 
+                        COUNT(purchases_events.event_id) AS total')
+                        ->groupBy('product_images.foto','products.titulo','events.ciudad','events.sede','events.precio','events.descuento','events.id','events.limite')
+                        // ->where('purchases.confirmed','=',1)
+                        ->get();
+
         return Inertia::render('Productos/Producto',[
             'producto'=>$producto,
+            'events'=>$eventos,
         ]);
     }
 
