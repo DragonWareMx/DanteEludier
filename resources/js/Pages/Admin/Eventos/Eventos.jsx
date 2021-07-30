@@ -80,34 +80,11 @@ const Eventos = ({eventos}) => {
         <Grid container style={{marginTop:21, marginBottom:40}} >
             <Grid item xs={12}>
                 <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
-                    {/* Filtro para ordenar rows */}
-                    <Grid container alignItems='center' style={{justifyContent:'flex-end'}}>
-                        <Grid item className={classes.orderText} >
-                            Ordenar por
-                        </Grid>
-                        <Grid item>
-                            <FormControl variant="outlined" className={classes.formControl}>
-                                <Select
-                                    // value={state.filter}
-                                    // onChange={handleChangeFilter}
-                                    // displayEmpty
-                                    classes={{ root: classes.select, select: classes.selectFocus }}
-                                >
-                                    <MenuItem value="">
-                                        Producto
-                                    </MenuItem>
-                                    <MenuItem value="fecha">Fecha</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                    </Grid>
                     {/* Items eventos */}
                     {eventos && eventos.data && eventos.data.length > 0 && eventos.data.map((evento,index)=>(
                         <Evento key={index}
                         evento={evento}
                          />
-                        //  {evento.dates.map((date) =>transformaFecha(date.fecha)
-                        // )}
                     ))}
 
                     <Grid item style={{marginTop: 25}}>

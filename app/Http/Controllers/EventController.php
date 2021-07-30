@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia; 
 use App\Models\Event;
+use App\Models\Product;
 use App\Models\PurchasesEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -34,10 +35,9 @@ class EventController extends Controller
                         events.precio,events.descuento,events.id,events.limite, 
                         COUNT(purchases_events.event_id) AS total')
                         ->groupBy('product_images.foto','products.titulo','events.ciudad','events.sede','events.precio','events.descuento','events.id','events.limite')
-                        // ->where('purchases.confirmed','=',1)
+                        ->OrderBy('products.titulo')
                         ->paginate(4);
- 
-        // dd($eventos);
+
         return Inertia::render('Admin/Eventos/Eventos',['eventos' => $eventos]);
     }
 
@@ -46,15 +46,19 @@ class EventController extends Controller
                         ->join('product_images','products.id','product_images.product_id')
                         ->with('dates')
                         ->select('product_images.foto', 'products.titulo', 'events.ciudad', 'events.sede',
-                        'events.precio', 'events.descuento', 'events.id', 'events.limite')
+                        'events.direccion','events.precio', 'events.descuento', 'events.id', 'events.limite')
                         ->findOrFail($id);
         // dd($evento);
 
         return Inertia::render('Admin/Eventos/Evento',['evento' => $evento]);
     }
 
-    public function add(){ 
-        
-        return Inertia::render('Admin/Eventos/Evento');
-    }
+    // public function add($id){ 
+    //     // id del producto
+    //     $producto=Product::join('product_images','products.id','product_images.product_id')
+    //                         ->select('product_images.foto', 'products.titulo')
+    //                         ->findOrFail($id);
+    //     // dd($producto);
+    //     return Inertia::render('Admin/Eventos/Evento',['producto' => $producto]);
+    // }
 }
