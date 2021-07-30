@@ -203,6 +203,7 @@ const Crear = () => {
                                                     root: classes.formTextLabel
                                                 }
                                             }}
+                                            required
                                         />
                                         <TextField 
                                             id="producto-descripcion" 
@@ -217,7 +218,8 @@ const Crear = () => {
                                                 classes: {
                                                     root: classes.formTextLabel
                                                 }
-                                            }}    
+                                            }}
+                                            required    
                                         />
                                     </MuiThemeProvider>
                                     <div style={{marginTop:42,color:'#9C9C9C',fontSize:16, fontFamily:'Oxygen',marginBottom:5}}>PDF de información</div>

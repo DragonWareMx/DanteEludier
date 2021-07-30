@@ -74,8 +74,10 @@ class ProductController extends Controller
         $data = $request->validate([
             'titulo' => 'required',
             'descripcion' => 'required',
+
         ]);
-        dd('BACKEND DE CREAR',$request);
+        
+
     }
 
     public function editarProducto($uuid){
