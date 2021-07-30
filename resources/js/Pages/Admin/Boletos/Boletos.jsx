@@ -10,6 +10,7 @@ import { Inertia } from '@inertiajs/inertia'
 import { useEffect } from 'react';
 
 const headCells = [
+    { id: 'id', disablePadding: false, label: 'ID' },
     { id: 'producto', disablePadding: false, label: 'PRODUCTO' },
     { id: 'evento', disablePadding: false, label: 'EVENTO' },
     { id: 'usuario', disablePadding: false, label: 'USUARIO' },
@@ -322,6 +323,9 @@ const Boletos = ({ tickets, request }) => {
                                         role="checkbox" tabIndex={-1} key={ticket.id}
                                         // onClick={(event) => handleClick(event, row.name)}
                                     >
+                                        <TableCell style={{borderTopLeftRadius: 5, borderBottomLeftRadius: 5}}>
+                                            {ticket.id}
+                                        </TableCell>
                                         <TableCell style={{borderTopLeftRadius: 5, borderBottomLeftRadius: 5}}>
                                             {ticket.events.length > 0 ?
                                                 filterProduct(ticket.events).map((product) => (
