@@ -99,7 +99,7 @@ export default function evento({evento}){
                             elevation={0}
                             classes={{ paper: classes.menuPaper }}
                         >
-                            <MenuItem onClick={handleClose} style={{justifyContent:'space-between'}}><div style={{marginRight:15}}>Editar</div><TuneIcon></TuneIcon></MenuItem>
+                            <InertiaLink href={route('dashboard.event',evento.id)} style={{display:'flex',textDecoration:'none', color:'white'}}><MenuItem style={{justifyContent:'space-between',width:'100%'}}><div style={{marginRight:15}}>Editar</div><TuneIcon></TuneIcon></MenuItem></InertiaLink>
                             <MenuItem style={{justifyContent:'space-between'}}><div style={{marginRight:15}}>Eliminar</div><DeleteIcon></DeleteIcon></MenuItem>
                         </Menu>
                     </Grid>

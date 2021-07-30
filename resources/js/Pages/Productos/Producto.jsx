@@ -180,7 +180,7 @@ const Producto = ({producto, events}) => {
                                     <a href={'/documentos/'+producto.hojaDescriptiva} className='verproducto_pdf' target='_blank'><PictureAsPdfIcon style={{fontSize:18,marginRight:6}}></PictureAsPdfIcon> PDF</a>
                                 }
                                 <Grid container style={{justifyContent:'flex-end',marginBottom:12}}>
-                                    <InertiaLink href={'#'} style={{marginTop:31,color:'white',fontSize:14,fontFamily:'Oxygen'}}><AddCircleIcon style={{marginRight:15}}></AddCircleIcon>Agregar evento</InertiaLink>
+                                    <InertiaLink href={route('dashboard.eventAdd',producto.id)} style={{marginTop:31,color:'white',fontSize:14,fontFamily:'Oxygen'}}><AddCircleIcon style={{marginRight:15}}></AddCircleIcon>Agregar evento</InertiaLink>
                                 </Grid>
                                 <hr style={{backgroundColor:'#535353'}}></hr>
 
