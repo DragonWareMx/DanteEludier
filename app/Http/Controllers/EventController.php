@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia; 
 use App\Models\Event;
+use App\Models\Date;
 use App\Models\Product;
 use App\Models\PurchasesEvents;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +38,8 @@ class EventController extends Controller
                         ->groupBy('product_images.foto','products.titulo','events.ciudad','events.sede','events.precio','events.descuento','events.id','events.limite')
                         ->OrderBy('products.titulo')
                         ->paginate(4);
+        
+                        // dd($eventos);
 
         return Inertia::render('Admin/Eventos/Eventos',['eventos' => $eventos]);
     }
@@ -53,12 +56,101 @@ class EventController extends Controller
         return Inertia::render('Admin/Eventos/Evento',['evento' => $evento]);
     }
 
-    // public function add($id){ 
-    //     // id del producto
-    //     $producto=Product::join('product_images','products.id','product_images.product_id')
-    //                         ->select('product_images.foto', 'products.titulo')
-    //                         ->findOrFail($id);
-    //     // dd($producto);
-    //     return Inertia::render('Admin/Eventos/Evento',['producto' => $producto]);
-    // }
+    public function patchEvento(Request $request,$id){
+        $data = $request->validate([
+            'ciudad' => 'required|max:255',
+            'direccion' => 'required|max:255',
+            'sede' => 'required|max:255',
+            'precio' => 'required|min:0',
+            'limite' => 'required|min:0',
+            'descuento' => 'required|min:0|max:100',
+        ]);
+        //COMIENZA LA TRANSACCION
+        DB::beginTransaction();
+
+        try {
+            $evento=Event::findOrfail($id);
+
+            $evento->ciudad = $request->ciudad;
+            $evento->direccion = $request->direccion;
+            $evento->sede = $request->sede;
+            $evento->precio = $request->precio;
+            $evento->limite = $request->limite;
+            $descDeci = $request->descuento / 100;
+            $evento->descuento = $descDeci;
+
+            $evento->save();
+
+            //SE HACE COMMIT
+            DB::commit();
+            
+            //REDIRECCIONA A LA VISTA DE USUARIOS
+            return \Redirect::route('dashboard.events')->with('success','El evento ha sido actualizado con éxito!');
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return \Redirect::back()->with('error','Ha ocurrido un error al intentar editar el evento, inténtelo más tarde.');
+        }
+        // dd('BACKEND DE EDITAR',$request, $id);
+    }
+
+    public function add($id){ 
+        // id del producto
+        $producto=Product::join('product_images','products.id','product_images.product_id')
+                            ->select('product_images.foto', 'products.titulo','products.id')
+                            ->findOrFail($id);
+        // dd($producto);
+        return Inertia::render('Admin/Eventos/AgregarEvento',['producto' => $producto]);
+    }
+
+    public function newEvento(Request $request,$id){
+        $data = $request->validate([
+            'ciudad' => 'required|max:255',
+            'direccion' => 'required|max:255',
+            'sede' => 'required|max:255',
+            'precio' => 'required|min:0',
+            'limite' => 'required|min:0',
+            'descuento' => 'required|min:0|max:100',
+        ]);
+        //COMIENZA LA TRANSACCION
+        DB::beginTransaction();
+
+        try {
+            $evento=new Event;
+
+            $evento->ciudad = $request->ciudad;
+            $evento->direccion = $request->direccion;
+            $evento->sede = $request->sede;
+            $evento->precio = $request->precio;
+            $evento->limite = $request->limite;
+            $evento->product_id = $id;
+            $descDeci = $request->descuento / 100;
+            $evento->descuento = $descDeci;
+
+            $evento->save();
+
+            // FALTAN GUARDAR FECHAS
+            // $date = new Date;
+            // $date->event_id=$evento->id;
+            // // esto es temporal y fake
+            // $date->fecha='2021-01-01 12:01:01';
+            // $date->horaCierre='13:01:01';
+
+            // $date->save();
+
+            // dd($date);
+
+            //SE HACE COMMIT
+            DB::commit();
+            
+            //REDIRECCIONA A LA VISTA DE USUARIOS
+            return \Redirect::route('dashboard.events')->with('success','El evento ha sido creado con éxito!');
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return \Redirect::back()->with('error','Ha ocurrido un error al intentar crear el evento, inténtelo más tarde.');
+        }
+    }
 }

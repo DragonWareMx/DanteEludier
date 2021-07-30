@@ -40,18 +40,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Evento = ({evento}) => {
+const AgregarEvento = ({producto}) => {
     const { errors } = usePage().props
 
     const [values, setValues] = React.useState({
-        ciudad: evento.ciudad || '',
-        sede: evento.sede || '',
-        direccion: evento.direccion || '',
-        precio: evento.precio || 0,
-        limite: evento.limite || 0,
-        descuento: evento.descuento || 0,
+        ciudad: '',
+        sede: '',
+        direccion: '',
+        precio: 0,
+        limite: 0,
+        descuento: 0,
         error: false,
-        _method: 'patch', 
     });
 
     const handleChange = (prop) => (event) => {
@@ -61,7 +60,7 @@ const Evento = ({evento}) => {
 
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.post('/dashboard/patchevento/'+evento.id, values,
+        Inertia.post('/dashboard/agregarEvento/'+producto.id, values,
             {
                 onSuccess: () => {
                     //algo
@@ -86,48 +85,6 @@ const Evento = ({evento}) => {
         setAnchorEl(null);
     };
 
-    function transformaFecha(fecha) {
-        const dob = new Date(fecha);
-        const monthNames = [
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10",
-            "11",
-            "12",
-        ];
-
-        // // Checking if date is < 10 and pre-prending 0 if not to adjust for date input.
-        const day = dob.getDate().toString().length < 2 
-        ? `0${dob.getDate()}`
-        : dob.getDate();
-        
-        const monthIndex = dob.getMonth();
-        const year = dob.getFullYear();
-        return `${year}-${monthNames[monthIndex]}-${day}`;
-    }
-
-    function makeTwoDigits (time) {
-        const timeString = `${time}`;
-        if (timeString.length === 2) return time
-        return `0${time}`
-      }
-
-    function transformaHora(hora) {
-        const dob = new Date(hora);
-        const horas = dob.getHours();
-        
-        const minutos = dob.getMinutes();
-        const segundos = dob.getSeconds();
-        return `${makeTwoDigits(horas)}:${makeTwoDigits(minutos)}:${makeTwoDigits(segundos)}`;
-    }
-
     const classes = useStyles();
 
     return (
@@ -141,31 +98,13 @@ const Evento = ({evento}) => {
                     </Grid> */}
                     
                     <Grid item xs={12} sm={4}>
-                        <img src={evento.foto && "/img/productos/"+evento.foto} className="img-producto-edit" style={{width:'100%',height:'100%',maxHeight:446, objectFit:'cover', borderTopLeftRadius:4, borderBottomLeftRadius:4}}></img>
+                        <img src={producto.foto && "/img/productos/"+producto.foto} className="img-producto-edit" style={{width:'100%',height:'100%',maxHeight:446, objectFit:'cover', borderTopLeftRadius:4, borderBottomLeftRadius:4}}></img>
                     </Grid>
 
                     <Grid item xs={12} sm={8} className="producto_info evento-edit-info">
                         
                         <Grid container alignItems='center' style={{flexWrap:'wrap-reverse'}}>
-                            <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',evento.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{evento.titulo}</InertiaLink></Grid>
-                            <Grid item xs={1} style={{display:'flex',justifyContent:'flex-end'}}>
-                                <Button aria-controls={"menu-"+1} aria-haspopup="true" onClick={handleClick}>
-                                    <MoreVertIcon style={{color:'#FFFFFF'}}></MoreVertIcon>
-                                </Button>
-                                <Menu
-                                    id={"menu-"+1}
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleClose}
-                                    anchorOrigin={{vertical:'center',horizontal:'left'}}
-                                    transformOrigin={{vertical:'top',horizontal:'right'}}
-                                    elevation={0}
-                                    classes={{ paper: classes.menuPaper }}
-                                >
-                                    <MenuItem style={{justifyContent:'space-between'}}><div style={{marginRight:15}}>Eliminar</div><DeleteIcon></DeleteIcon></MenuItem>
-                                </Menu>
-                            </Grid>
+                            <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',producto.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{producto.titulo}</InertiaLink></Grid>
                         </Grid>
 
                         <form className='crearProducto_form' noValidate autoComplete="off" onSubmit={handleSubmit} style={{display:'flex', flexWrap:'wrap'}}>
@@ -175,8 +114,7 @@ const Evento = ({evento}) => {
                                                                 required 
                                                                 id="ciudad" 
                                                                 onChange={handleChange('ciudad')}
-                                                                label={"Ciudad"} 
-                                                                defaultValue={evento.ciudad} 
+                                                                label={"Ciudad"}  
                                                                 className="input-edit-event"
                                                                 error={errors.ciudad && values.error == true && true}
                                                                 helperText={values.error == true && errors.ciudad}  
@@ -187,7 +125,6 @@ const Evento = ({evento}) => {
                                                                 id="sede" 
                                                                 onChange={handleChange('sede')}
                                                                 label="Sede" 
-                                                                defaultValue={evento.sede} 
                                                                 className="input-edit-event"
                                                                 error={errors.sede && values.error == true && true}
                                                                 helperText={values.error == true && errors.sede}  
@@ -201,7 +138,6 @@ const Evento = ({evento}) => {
                                     id="direccion" 
                                     onChange={handleChange('direccion')}
                                     label="Dirección" 
-                                    defaultValue={evento.direccion} 
                                     className="input-edit-event" 
                                     style={{width:'95%'}} 
                                     error={errors.direccion && values.error == true && true}
@@ -214,7 +150,6 @@ const Evento = ({evento}) => {
                                                                 required 
                                                                 id="precio" 
                                                                 onChange={handleChange('precio')}
-                                                                defaultValue={evento.precio} 
                                                                 type="number" 
                                                                 label="Precio por boleto" 
                                                                 className="input-edit-event"  
@@ -226,7 +161,6 @@ const Evento = ({evento}) => {
                                                                 required 
                                                                 id="limite" 
                                                                 onChange={handleChange('limite')}
-                                                                defaultValue={evento.limite} 
                                                                 type="number" 
                                                                 label="Limite de boletos" 
                                                                 className="input-edit-event"  
@@ -242,7 +176,6 @@ const Evento = ({evento}) => {
                                 id="descuento" 
                                 onChange={handleChange('descuento')}
                                 type="number" 
-                                defaultValue={evento.descuento * 100} 
                                 min="0" 
                                 max="100"
                                 label="Descuento por boleto (%)" 
@@ -261,8 +194,8 @@ const Evento = ({evento}) => {
                                 </Tooltip>
                             </Grid>
 
-                            {evento.dates.map((date,index) =>
-                                <Grid item xs={12} key={index}>
+                            {/* {evento.dates.map((date,index) => */}
+                                <Grid item xs={12}>
                                     <Grid className="icon-remove" style={{display:'flex', justifyContent:'flex-end'}}>
                                         <Tooltip title="Eliminar" placement="top">
                                         <IconButton aria-label="remove" style={{padding:5}}>
@@ -272,15 +205,15 @@ const Evento = ({evento}) => {
                                     </Grid>
                                     <hr className="hr-div" align="left" />
                                     <Grid item xs={12} style={{display:'flex', flexWrap:'wrap', marginBottom:15}}>
-                                        <Grid item xs={12} sm={4}><TextField required id="fecha" defaultValue={transformaFecha(date.fecha)} type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                                        <Grid item xs={12} sm={4}><TextField required id="inicio" defaultValue={transformaHora(date.fecha)} type="time" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                                        <Grid item xs={12} sm={4}><TextField required id="cierre" defaultValue={transformaHora('2021-01-01 '+date.horaCierre)} type="time" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                                        <Grid item xs={12} sm={4}><TextField required id="fecha"  type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                                        <Grid item xs={12} sm={4}><TextField required id="inicio"  type="time" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                                        <Grid item xs={12} sm={4}><TextField required id="cierre"  type="time" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
                                     </Grid>
                                 </Grid>
-                            )}
+                            {/* )} */}
 
                             <Grid style={{display:'flex',justifyContent:'flex-end', alignItems:'center',marginTop:10}} className="grid-btns-event-edit">
-                                <InertiaLink href={route('dashboard.events')} className="btn-cancelar">Cancelar</InertiaLink>
+                                <InertiaLink href={route('dashboard.producto',producto.id)} className="btn-cancelar">Cancelar</InertiaLink>
                                 <Button variant="contained" type="submit" className="btn-action">Guardar evento</Button>
                             </Grid>
                         
@@ -295,6 +228,6 @@ const Evento = ({evento}) => {
     )
 }
 
-Evento.layout = (page) => (<LayoutAdmin children={page} title="Eventos" pageTitle="Eventos" />);
+AgregarEvento.layout = (page) => (<LayoutAdmin children={page} title="Eventos" pageTitle="Eventos" />);
 
-export default Evento;
+export default AgregarEvento;
