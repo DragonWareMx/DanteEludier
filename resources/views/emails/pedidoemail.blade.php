@@ -404,8 +404,8 @@
                       @foreach ($purchase->purchases_events as $compra_evento)
                       <p>Boleto #{{ $loop->index + 1}}</p>
                       <p>
-                        {{-- <img
-                          src="{!!$message->embedData(QrCode::format('png')->size(300)->generate(route('boleto.ver', $compra_evento->uuid)), 'QrCode.png', 'image/png')!!}"> --}}
+                        <img
+                          src="{!!$message->embedData(QrCode::format('png')->size(300)->generate(route('boleto.ver', $compra_evento->uuid)), 'QrCode.png', 'image/png')!!}">
                       </p>
                       @endforeach
                     </td>

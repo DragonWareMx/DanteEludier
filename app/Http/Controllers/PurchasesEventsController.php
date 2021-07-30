@@ -120,11 +120,6 @@ class PurchasesEventsController extends Controller
                                     })->doesntHave('events', 'or');
                                 }
                             })
-                            ->leftJoin('purchases_events', 'purchases_events.purchase_id', '=', 'purchases.id')
-                            ->leftJoin('events', 'purchases_events.event_id', '=', 'events.id')
-                            ->leftJoin('products', 'products.id', '=', 'events.product_id')
-                            ->join('users', 'users.id', '=', 'purchases.user_id')
-                            ->distinct()
                             ->when($request->orderby, function ($query, $orderby) use ($request) {
                                 switch ($orderby) {
                                     case 'id':
@@ -135,27 +130,33 @@ class PurchasesEventsController extends Controller
                                         break;
                                     case 'producto':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('coalesce(products.titulo), products.titulo DESC');
+                                            return $query->leftJoin('purchases_events', 'purchases_events.purchase_id', '=', 'purchases.id')
+                                            ->leftJoin('events', 'purchases_events.event_id', '=', 'events.id')
+                                            ->leftJoin('products', 'products.id', '=', 'events.product_id')->distinct()->selectRaw('titulo')->orderBy('titulo', 'DESC');
                                         else
-                                            return $query->orderByRaw('coalesce(products.titulo), products.titulo ASC');
+                                            return $query->leftJoin('purchases_events', 'purchases_events.purchase_id', '=', 'purchases.id')
+                                            ->leftJoin('events', 'purchases_events.event_id', '=', 'events.id')
+                                            ->leftJoin('products', 'products.id', '=', 'events.product_id')->distinct()->selectRaw('titulo')->orderBy('titulo', 'ASC');
                                         break;
                                     case 'evento':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('coalesce(events.ciudad), events.ciudad DESC');
+                                            return $query->leftJoin('purchases_events', 'purchases_events.purchase_id', '=', 'purchases.id')
+                                            ->leftJoin('events', 'purchases_events.event_id', '=', 'events.id')->orderBy('ciudad', 'DESC');
                                         else
-                                            return $query->orderByRaw('coalesce(events.ciudad), events.ciudad ASC');
+                                        return $query->leftJoin('purchases_events', 'purchases_events.purchase_id', '=', 'purchases.id')
+                                            ->leftJoin('events', 'purchases_events.event_id', '=', 'events.id')->orderBy('ciudad', 'ASC');
                                         break;
                                     case 'usuario':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('coalesce(users.name), users.name DESC');
+                                            return $query->join('users', 'users.id', '=', 'purchases.user_id')->orderByRaw('users.name DESC');
                                         else
-                                            return $query->orderByRaw('coalesce(users.name), users.name ASC');
+                                            return $query->join('users', 'users.id', '=', 'purchases.user_id')->orderByRaw('users.name ASC');
                                         break;
                                     case 'telefono':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('coalesce(users.phone), users.phone DESC');
+                                            return $query->join('users', 'users.id', '=', 'purchases.user_id')->orderByRaw('users.phone DESC');
                                         else
-                                            return $query->orderByRaw('coalesce(users.phone), users.phone ASC');
+                                            return $query->join('users', 'users.id', '=', 'purchases.user_id')->orderByRaw('users.phone ASC');
                                         break;
                                     case 'boletos':
                                         if($request->order && $request->order == 'desc')

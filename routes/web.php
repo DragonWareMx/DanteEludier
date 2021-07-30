@@ -51,9 +51,9 @@ Route::get('/Aviso-de-privacidad', function () {
 
 Route::post('/join', [App\Http\Controllers\InicioController::class, 'join'])->name('join');
 
-Route::get('/inertia', function () {
-    return Inertia::render('Test');
-});
+// Route::get('/inertia', function () {
+//     return Inertia::render('Test');
+// });
 
 Route::post('/productos/evento/{idEvento}/comprar', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('event.purchase');
 Route::get('/productos/evento/{idEvento}/stripe', [App\Http\Controllers\PurchaseController::class, 'stripeIndex'])->name('event.stripe.index');
