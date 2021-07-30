@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 class ProductController extends Controller
@@ -77,7 +79,33 @@ class ProductController extends Controller
             'productoImagen' => 'required|image',
             'productoPdf' => 'required|mimes:pdf'
         ]);
-        dd($request);
+        try {
+            \DB::beginTransaction();
+            $producto=new Product();
+            $producto->titulo=$request->titulo;
+            $producto->descripcion=$request->descripcion;
+            $producto->uuid=Str::uuid();
+
+            //guardar archivo del producto
+
+            //Guardar el producto para poder asignar una imagen después
+            $producto->save();
+
+            //guardar imagen del producto
+            $imagen= new ProductImage();
+            $imagen->product_id=$producto->id;
+            $file=$request->file('productoImagen');
+            $file->store('public/img/productos');
+            $imagen->foto=$file->hashName();
+            $imagen->save();
+
+            \DB::commit();
+            dd('todo bien todo correcto');
+            
+        } catch (\Throwable $th) {
+            \DB::rollback();
+            dd($th);
+        }
 
     }
 
