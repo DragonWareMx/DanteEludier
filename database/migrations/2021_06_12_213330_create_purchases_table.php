@@ -15,14 +15,19 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            //uuid
+            $table->uuid('uuid')->unique();
+            
             $table->string('total', 45);
             $table->date('fecha');
-
+            
             //metodo de pago para comprar el boleto
             $table->enum('metodo_pago', ['paypal', 'stripe', 'transferencia'])->nullable();
             //si es transferencia, sera true cuando se confirme la transferencia
             $table->boolean('confirmed')->default(false)->nullable();
+            
+            $table->timestamps();
             
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

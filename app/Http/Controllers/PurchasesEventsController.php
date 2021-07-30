@@ -19,7 +19,7 @@ class PurchasesEventsController extends Controller
 
     public function index(Request $request)
     {
-        $tickets = Purchase::select('purchases.id', 'confirmed', 'metodo_pago', 'user_id')
+        $tickets = Purchase::select('purchases.id','purchases.uuid', 'confirmed', 'metodo_pago', 'user_id')
                             ->with('events:ciudad,sede,id,product_id','events.product:titulo,id','user:name,apellido_p,apellido_m,phone,id')
                             ->withCount('events')
                             ->when($request->search, function ($query, $search) use ($request) {
@@ -28,45 +28,43 @@ class PurchasesEventsController extends Controller
                                         //si no se busca la palabra sin
                                         if(stripos($search, 'sin') === FALSE){
                                             return $query->whereHas('events', function ($queryEvents) use ($search) {
-                                                return $queryEvents->where('ciudad', 'LIKE', '%'.$search.'%')
-                                                                ->orWhere('sede', 'LIKE', '%'.$search.'%')
+                                                return $queryEvents->whereRaw('unaccent("ciudad"::text) ILIKE unaccent(\'%'.$search.'%\')')
+                                                                ->orWhereRaw('unaccent("sede"::text) ILIKE unaccent(\'%'.$search.'%\')')
                                                                 ->orWhereRaw(
-                                                                    "concat(ciudad, ', ', sede) LIKE '%" . $search . "%'"
+                                                                    'unaccent(concat(ciudad, \', \', sede)) ILIKE unaccent(\'%'.$search.'%\')'
                                                                 );
                                             });
                                         }
                                         else{
                                             //si se busca la palabra sin quiere decir que puede buscar boletos sin evento
                                             return $query->whereHas('events', function ($queryEvents) use ($search) {
-                                                return $queryEvents->where('ciudad', 'LIKE', '%'.$search.'%')
-                                                                ->orWhere('sede', 'LIKE', '%'.$search.'%')
+                                                return $queryEvents->whereRaw('unaccent("ciudad"::text) ILIKE unaccent(\'%'.$search.'%\')')
+                                                                ->orWhereRaw('unaccent("sede"::text) ILIKE unaccent(\'%'.$search.'%\')')
                                                                 ->orWhereRaw(
-                                                                    "concat(ciudad, ', ', sede) LIKE '%" . $search . "%'"
+                                                                    'unaccent(concat(ciudad, \', \', sede)) ILIKE unaccent(\'%'.$search.'%\')'
                                                                 );
                                             })->doesntHave('events', 'or');
                                         }
                                         break;
                                     case 'usuario':
                                         return $query->whereHas('user', function ($queryUser) use ($search) {
-                                            return $queryUser->whereRaw(
-                                                "concat(name, ' ', apellido_p, ' ', apellido_m) LIKE '%" . $search . "%'"
-                                            )
+                                            return $queryUser->whereRaw('unaccent(concat(name, \' \', apellido_p, \' \', apellido_m)) ILIKE unaccent(\'%'.$search.'%\')')
                                             ->orWhereRaw(
-                                                "concat(name, ' ', apellido_p) LIKE '%" . $search . "%' "
+                                                'unaccent(concat(name, \' \', apellido_p)) ILIKE unaccent(\'%'.$search.'%\')'
                                             )
-                                            ->orWhere('name', 'LIKE', '%'.$search.'%');
+                                            ->orWhereRaw('unaccent("name"::text) ILIKE unaccent(\'%'.$search.'%\')');
                                         });
                                         break;
                                     case 'telefono':
                                         return $query->whereHas('user', function ($queryUser) use ($search) {
-                                            return $queryUser->where('phone', 'LIKE', '%'.$search.'%');
+                                            return $queryUser->where('phone', 'ILIKE', '%'.$search.'%');
                                         });
                                         break;
                                     case 'pago':
                                         //si no se busca la palabra no
                                         if(stripos($search, 'no') === FALSE){
                                             //boletos que tienen metodo de pago
-                                            return $query->where('metodo_pago', 'LIKE', '%'.$search.'%');
+                                            return $query->where('metodo_pago', 'ILIKE', '%'.$search.'%');
                                         }
                                         else{
                                             //boletos que no tienen metodo de pago
@@ -90,7 +88,7 @@ class PurchasesEventsController extends Controller
                                         if(stripos($search, 'sin') === FALSE){
                                             return $query->whereHas('events', function ($queryEvents) use ($search) {
                                                 return $queryEvents->whereHas('product', function ($queryProduct) use ($search) {
-                                                    return $queryProduct->where('titulo', 'LIKE', '%'.$search.'%');
+                                                    return $queryProduct->whereRaw('unaccent("titulo"::text) ILIKE unaccent(\'%'.$search.'%\')');
                                                 });
                                             });
                                         }
@@ -98,7 +96,7 @@ class PurchasesEventsController extends Controller
                                             //si se busca la palabra sin quiere decir que puede buscar boletos sin productos
                                             return $query->whereHas('events', function ($queryEvents) use ($search) {
                                                 return $queryEvents->whereHas('product', function ($queryProduct) use ($search) {
-                                                    return $queryProduct->where('titulo', 'LIKE', '%'.$search.'%');
+                                                    return $queryProduct->whereRaw('unaccent("titulo"::text) ILIKE unaccent(\'%'.$search.'%\')');
                                                 });
                                             })->doesntHave('events', 'or');
                                         }
@@ -109,7 +107,7 @@ class PurchasesEventsController extends Controller
                                 if(stripos($search, 'sin') === FALSE){
                                     return $query->whereHas('events', function ($queryEvents) use ($search) {
                                         return $queryEvents->whereHas('product', function ($queryProduct) use ($search) {
-                                            return $queryProduct->where('titulo', 'LIKE', '%'.$search.'%');
+                                            return $queryProduct->whereRaw('unaccent("titulo"::text) ILIKE unaccent(\'%'.$search.'%\')');
                                         });
                                     });
                                 }
@@ -117,7 +115,7 @@ class PurchasesEventsController extends Controller
                                     //si se busca la palabra sin quiere decir que puede buscar boletos sin productos
                                     return $query->whereHas('events', function ($queryEvents) use ($search) {
                                         return $queryEvents->whereHas('product', function ($queryProduct) use ($search) {
-                                            return $queryProduct->where('titulo', 'LIKE', '%'.$search.'%');
+                                            return $queryProduct->whereRaw('unaccent("titulo"::text) ILIKE unaccent(\'%'.$search.'%\')');
                                         });
                                     })->doesntHave('events', 'or');
                                 }
@@ -137,27 +135,27 @@ class PurchasesEventsController extends Controller
                                         break;
                                     case 'producto':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(products.titulo), products.titulo DESC');
+                                            return $query->orderByRaw('coalesce(products.titulo), products.titulo DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(products.titulo), products.titulo ASC');
+                                            return $query->orderByRaw('coalesce(products.titulo), products.titulo ASC');
                                         break;
                                     case 'evento':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(events.ciudad), events.ciudad DESC');
+                                            return $query->orderByRaw('coalesce(events.ciudad), events.ciudad DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(events.ciudad), events.ciudad ASC');
+                                            return $query->orderByRaw('coalesce(events.ciudad), events.ciudad ASC');
                                         break;
                                     case 'usuario':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(users.name), users.name DESC');
+                                            return $query->orderByRaw('coalesce(users.name), users.name DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(users.name), users.name ASC');
+                                            return $query->orderByRaw('coalesce(users.name), users.name ASC');
                                         break;
                                     case 'telefono':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(users.phone), users.phone DESC');
+                                            return $query->orderByRaw('coalesce(users.phone), users.phone DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(users.phone), users.phone ASC');
+                                            return $query->orderByRaw('coalesce(users.phone), users.phone ASC');
                                         break;
                                     case 'boletos':
                                         if($request->order && $request->order == 'desc')
@@ -167,9 +165,9 @@ class PurchasesEventsController extends Controller
                                         break;
                                     case 'pago':
                                         if($request->order && $request->order == 'desc')
-                                            return $query->orderByRaw('ISNULL(metodo_pago), metodo_pago DESC');
+                                            return $query->orderByRaw('coalesce(metodo_pago), metodo_pago DESC');
                                         else
-                                            return $query->orderByRaw('ISNULL(metodo_pago), metodo_pago ASC');
+                                            return $query->orderByRaw('coalesce(metodo_pago), metodo_pago ASC');
                                         break;
                                     case 'estatus':
                                         if($request->order && $request->order == 'desc')
@@ -194,10 +192,10 @@ class PurchasesEventsController extends Controller
         ]);
     }
 
-    public function show(Request $request, $id)
+    public function show(Request $request, $uuid)
     {
         \Gate::authorize('haveaccess', 'admin.perm');
-        $compra = Purchase::with('user', 'events', 'events.product', 'events.product.images')->find($id);
+        $compra = Purchase::with('user', 'events', 'events.product', 'events.product.images')->where('uuid', $uuid)->firstOrFail();
         return Inertia::render('Admin/Boletos/Boleto', ['compra'=> $compra]);
     }
 

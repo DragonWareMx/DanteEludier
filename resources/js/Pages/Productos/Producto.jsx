@@ -148,7 +148,7 @@ const Producto = ({producto, events}) => {
                                             elevation={0}
                                             classes={{ paper: classes.menuPaper }}
                                         >
-                                            <MenuItem onClick={handleClose} style={{justifyContent:'space-between'}}><InertiaLink href={route('editar.producto',producto.id)} style={{display:'flex',textDecoration:'none', color:'white'}}><div style={{marginRight:15}}>Editar</div><EditIcon></EditIcon></InertiaLink></MenuItem>
+                                            <MenuItem onClick={handleClose} style={{justifyContent:'space-between'}}><InertiaLink href={route('editar.producto',producto.uuid)} style={{display:'flex',textDecoration:'none', color:'white'}}><div style={{marginRight:15}}>Editar</div><EditIcon></EditIcon></InertiaLink></MenuItem>
                                             <MenuItem onClick={handleClickOpen} style={{justifyContent:'space-between'}}><div style={{marginRight:15}}>Eliminar</div><DeleteIcon></DeleteIcon></MenuItem>
                                         </Menu>
                                     </Grid>

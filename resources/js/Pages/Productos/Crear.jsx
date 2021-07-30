@@ -10,7 +10,7 @@ import styled from 'styled-components';
 //Material UI
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -45,7 +45,51 @@ const DivBoton = styled.div`
     }
 `;
 
+const useStyles = makeStyles((theme) => ({
+    input: {
+        fontFamily: "Oxygen",
+        fontStyle: 'normal',
+        fontSize: '15px',
+        color: '#ffffff',
+        borderColor: "#9C9C9C",
+        "&:not(.Mui-disabled)::before": {
+            borderColor: "#9C9C9C"
+        },
+        "&:not(.Mui-disabled):hover::before": {
+            borderColor: "#9C9C9C"
+        }
+    },
+    formTextLabel: {
+        fontFamily: 'Oxygen',
+        fontSize: '14px',
+        color: '#ffffff'
+    },
+}));
+
+const theme = createMuiTheme({
+    palette: {
+        secondary: {
+            // light: will be calculated from palette.primary.main,
+            main: '#ff4400',
+            // dark: will be calculated from palette.primary.main,
+            // contrastText: will be calculated to contrast with palette.primary.main
+        },
+        primary: {
+            light: '#0066ff',
+            main: '#9c9c9c',
+            // dark: will be calculated from palette.secondary.main,
+            contrastText: '#ffcc00',
+        },
+        // error: will use the default color
+    },
+    status: {
+        danger: 'orange',
+    },
+});
+
 const Crear = () => {
+
+    const classes = useStyles();
 
     const { errors } = usePage().props
 
@@ -114,6 +158,8 @@ const Crear = () => {
         )
     }
 
+    
+
     return (
         <>
             <Grid container style={{marginTop:21,marginBottom:21}}>
@@ -133,33 +179,47 @@ const Crear = () => {
                                             {values.productoImagen === null ? 'Subir imagen' : 'Cambiar imagen'} 
                                         </Button>
                                         <input
-                                                id='productoImagen'
-                                                type="file"
-                                                hidden
-                                                accept="image/*"
-                                                onChange={readURL}
-                                            />
+                                            id='productoImagen'
+                                            type="file"
+                                            hidden
+                                            accept="image/*"
+                                            onChange={readURL}
+                                        />
                                     </DivBoton>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={9} className='verproducto_info'>
-                                    <TextField 
-                                        id="producto-titulo" 
-                                        label="Título del producto" 
-                                        style={{width:'100%'}} 
-                                        onChange={handleChange('titulo')} 
-                                        value={values.titulo}
-                                        error={errors.titulo && values.error == true && true}
-                                        helperText={values.error == true && errors.titulo}
-                                    />
-                                    <TextField 
-                                        id="producto-descripcion" 
-                                        label="Descripción del producto" 
-                                        style={{width:'100%',marginTop:25}} 
-                                        onChange={handleChange('descripcion')} 
-                                        value={values.descripcion}
-                                        error={errors.descripcion && values.error == true && true}
-                                        helperText={values.error == true && errors.descripcion}    
-                                    />
+                                    <MuiThemeProvider theme={theme}>
+                                        <TextField 
+                                            id="producto-titulo" 
+                                            label="Título del producto" 
+                                            style={{width:'100%'}} 
+                                            onChange={handleChange('titulo')} 
+                                            value={values.titulo}
+                                            error={errors.titulo && values.error == true && true}
+                                            helperText={values.error == true && errors.titulo}
+                                            InputProps={{className: classes.input,}}
+                                            InputLabelProps={{
+                                                classes: {
+                                                    root: classes.formTextLabel
+                                                }
+                                            }}
+                                        />
+                                        <TextField 
+                                            id="producto-descripcion" 
+                                            label="Descripción del producto" 
+                                            style={{width:'100%',marginTop:25}} 
+                                            onChange={handleChange('descripcion')} 
+                                            value={values.descripcion}
+                                            error={errors.descripcion && values.error == true && true}
+                                            helperText={values.error == true && errors.descripcion}
+                                            InputProps={{className: classes.input,}}
+                                            InputLabelProps={{
+                                                classes: {
+                                                    root: classes.formTextLabel
+                                                }
+                                            }}    
+                                        />
+                                    </MuiThemeProvider>
                                     <div style={{marginTop:42,color:'#9C9C9C',fontSize:16, fontFamily:'Oxygen',marginBottom:5}}>PDF de información</div>
                                     {/* /////////////INPUT DEL PDF/////////////////// */}
                                     <Button

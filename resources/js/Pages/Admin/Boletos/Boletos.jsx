@@ -214,6 +214,14 @@ const Boletos = ({ tickets, request }) => {
         return filteredProducts
     }
 
+    function handleClick(event, uuid){
+        Inertia.get(route('ticket.show', uuid))
+    }
+
+    function capitalize(word) {
+        return word[0].toUpperCase() + word.slice(1).toLowerCase();
+    }
+
     //se activa cada vez que se cambia el filtro o la busqueda
     //recarga los datos filtrados
     useEffect(() => {
@@ -321,7 +329,7 @@ const Boletos = ({ tickets, request }) => {
                                     <TableRow
                                         hover
                                         role="checkbox" tabIndex={-1} key={ticket.id}
-                                        // onClick={(event) => handleClick(event, row.name)}
+                                        onClick={event => handleClick(event, ticket.uuid)}
                                     >
                                         <TableCell style={{borderTopLeftRadius: 5, borderBottomLeftRadius: 5}}>
                                             {ticket.id}
@@ -371,7 +379,7 @@ const Boletos = ({ tickets, request }) => {
                                         </TableCell>
                                         <TableCell>
                                             {ticket.metodo_pago ?
-                                            ticket.metodo_pago
+                                            capitalize(ticket.metodo_pago)
                                             :
                                             "No registrado"
                                             }
