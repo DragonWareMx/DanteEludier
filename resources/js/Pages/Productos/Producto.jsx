@@ -25,20 +25,21 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 //CSS
 import '/css/producto.css';
 
 //componentes
 import { toInteger } from "lodash";
+import Evento from '../../components/Eventos/Evento';
 
 //Cosas del modal de eliminar
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Producto = ({producto}) => {
-
+const Producto = ({producto, events}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -147,7 +148,7 @@ const Producto = ({producto}) => {
                                             elevation={0}
                                             classes={{ paper: classes.menuPaper }}
                                         >
-                                            <MenuItem onClick={handleClose} style={{justifyContent:'space-between'}}><div style={{marginRight:15}}>Editar</div><EditIcon></EditIcon></MenuItem>
+                                            <MenuItem onClick={handleClose} style={{justifyContent:'space-between'}}><InertiaLink href={route('editar.producto',producto.id)} style={{display:'flex',textDecoration:'none', color:'white'}}><div style={{marginRight:15}}>Editar</div><EditIcon></EditIcon></InertiaLink></MenuItem>
                                             <MenuItem onClick={handleClickOpen} style={{justifyContent:'space-between'}}><div style={{marginRight:15}}>Eliminar</div><DeleteIcon></DeleteIcon></MenuItem>
                                         </Menu>
                                     </Grid>
@@ -173,14 +174,27 @@ const Producto = ({producto}) => {
                                     </Grid>  
                                 </Grid>
                                 <br></br>
+                                <Grid item xs={12}>{producto.descripcion}</Grid>
+                                <br></br>
                                 {producto.hojaDescriptiva &&
                                     <a href={'/documentos/'+producto.hojaDescriptiva} className='verproducto_pdf' target='_blank'><PictureAsPdfIcon style={{fontSize:18,marginRight:6}}></PictureAsPdfIcon> PDF</a>
                                 }
+                                <Grid container style={{justifyContent:'flex-end',marginBottom:12}}>
+                                    <InertiaLink href={'#'} style={{marginTop:31,color:'white',fontSize:14,fontFamily:'Oxygen'}}><AddCircleIcon style={{marginRight:15}}></AddCircleIcon>Agregar evento</InertiaLink>
                                 </Grid>
+                                <hr style={{backgroundColor:'#535353'}}></hr>
+
+                                {events && events.length > 0 && 
+                                    events.map((evento,index)=>(
+                                        <Evento key={index} evento={evento}/>
+                                ))}
+                            </Grid>
                         </Grid>
                     </Paper>
                 </Grid>
             </Grid>
+
+            <div style={{display:'flex',width:25,height:25}}></div>
 
             <Dialog
                 open={open}
