@@ -19,7 +19,7 @@ class PurchasesEventsController extends Controller
 
     public function index(Request $request)
     {
-        $tickets = Purchase::select('purchases.id', 'confirmed', 'metodo_pago', 'user_id')
+        $tickets = Purchase::select('purchases.id','purchases.uuid', 'confirmed', 'metodo_pago', 'user_id')
                             ->with('events:ciudad,sede,id,product_id','events.product:titulo,id','user:name,apellido_p,apellido_m,phone,id')
                             ->withCount('events')
                             ->when($request->search, function ($query, $search) use ($request) {
@@ -194,10 +194,10 @@ class PurchasesEventsController extends Controller
         ]);
     }
 
-    public function show(Request $request, $id)
+    public function show(Request $request, $uuid)
     {
         \Gate::authorize('haveaccess', 'admin.perm');
-        $compra = Purchase::with('user', 'events', 'events.product', 'events.product.images')->find($id);
+        $compra = Purchase::with('user', 'events', 'events.product', 'events.product.images')->where('uuid', $uuid)->firstOrFail();
         return Inertia::render('Admin/Boletos/Boleto', ['compra'=> $compra]);
     }
 

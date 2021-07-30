@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class EventSeeder extends Seeder
 {
@@ -47,18 +48,21 @@ class EventSeeder extends Seeder
         ]);
 
         DB::table('purchases')->insert([
+            'uuid' => Str::uuid(),
             'total' => '5000',
             'fecha' =>'2021-06-02',
             'user_id' =>'3',
         ]);
 
         DB::table('purchases')->insert([
+            'uuid' => Str::uuid(),
             'total' => '5000',
             'fecha' =>'2021-07-02',
             'user_id' =>'3',
         ]);
 
         DB::table('purchases')->insert([
+            'uuid' => Str::uuid(),
             'total' => '5000',
             'fecha' =>'2021-05-02',
             'user_id' =>'3',
