@@ -5,7 +5,7 @@ import LayoutAdmin from "../../../layouts/LayoutAdmin";
 import { Inertia } from '@inertiajs/inertia';
 // import Alertas from '../../../components/common/Alertas';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import TextField from '@material-ui/core/TextField';
@@ -36,8 +36,47 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#323232;",
         borderRadius: '4px',
         color: 'white',
+    },
+    input: {
+        fontFamily: "Oxygen",
+        fontStyle: 'normal',
+        fontSize: '15px',
+        color: '#ffffff',
+        borderColor: "#9C9C9C",
+        "&:not(.Mui-disabled)::before": {
+            borderColor: "#9C9C9C"
+        },
+        "&:not(.Mui-disabled):hover::before": {
+            borderColor: "#9C9C9C"
+        }
+    },
+    formTextLabel: {
+        fontFamily: 'Oxygen',
+        fontSize: '14px',
+        color: '#ffffff'
     }
 }));
+
+const theme = createMuiTheme({
+    palette: {
+        secondary: {
+            // light: will be calculated from palette.primary.main,
+            main: '#ff4400',
+            // dark: will be calculated from palette.primary.main,
+            // contrastText: will be calculated to contrast with palette.primary.main
+        },
+        primary: {
+            light: '#0066ff',
+            main: '#9c9c9c',
+            // dark: will be calculated from palette.secondary.main,
+            contrastText: '#ffcc00',
+        },
+        // error: will use the default color
+    },
+    status: {
+        danger: 'orange',
+    },
+});
 
 
 const AgregarEvento = ({producto}) => {
@@ -108,17 +147,27 @@ const AgregarEvento = ({producto}) => {
                         </Grid>
 
                         <form className='crearProducto_form' noValidate autoComplete="off" onSubmit={handleSubmit} style={{display:'flex', flexWrap:'wrap'}}>
+                            <MuiThemeProvider theme={theme}>
                             <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
-                                <Grid item xs={12} sm={6}><TextField  
+                                <Grid item xs={12} sm={6}>
+                                                        
+                                                            <TextField  
                                                                 color="primary" 
                                                                 required 
                                                                 id="ciudad" 
                                                                 onChange={handleChange('ciudad')}
                                                                 label={"Ciudad"}  
                                                                 className="input-edit-event"
+                                                                InputProps={{className: classes.input,}}
+                                                                InputLabelProps={{
+                                                                    classes: {
+                                                                        root: classes.formTextLabel
+                                                                    }
+                                                                }}
                                                                 error={errors.ciudad && values.error == true && true}
                                                                 helperText={values.error == true && errors.ciudad}  
                                                             />
+                                                        
                                 </Grid>
                                 <Grid item xs={12} sm={6}><TextField 
                                                                 required 
@@ -126,6 +175,12 @@ const AgregarEvento = ({producto}) => {
                                                                 onChange={handleChange('sede')}
                                                                 label="Sede" 
                                                                 className="input-edit-event"
+                                                                InputProps={{className: classes.input,}}
+                                                                InputLabelProps={{
+                                                                    classes: {
+                                                                        root: classes.formTextLabel
+                                                                    }
+                                                                }}
                                                                 error={errors.sede && values.error == true && true}
                                                                 helperText={values.error == true && errors.sede}  
                                                             />
@@ -139,6 +194,12 @@ const AgregarEvento = ({producto}) => {
                                     onChange={handleChange('direccion')}
                                     label="Dirección" 
                                     className="input-edit-event" 
+                                    InputProps={{className: classes.input,}}
+                                    InputLabelProps={{
+                                        classes: {
+                                            root: classes.formTextLabel
+                                        }
+                                    }}
                                     style={{width:'95%'}} 
                                     error={errors.direccion && values.error == true && true}
                                     helperText={values.error == true && errors.direccion}  
@@ -153,6 +214,12 @@ const AgregarEvento = ({producto}) => {
                                                                 type="number" 
                                                                 label="Precio por boleto" 
                                                                 className="input-edit-event"  
+                                                                InputProps={{className: classes.input,}}
+                                                                InputLabelProps={{
+                                                                    classes: {
+                                                                        root: classes.formTextLabel
+                                                                    }
+                                                                }}
                                                                 error={errors.precio && values.error == true && true}
                                                                 helperText={values.error == true && errors.precio} 
                                                             />
@@ -163,7 +230,13 @@ const AgregarEvento = ({producto}) => {
                                                                 onChange={handleChange('limite')}
                                                                 type="number" 
                                                                 label="Limite de boletos" 
-                                                                className="input-edit-event"  
+                                                                className="input-edit-event" 
+                                                                InputProps={{className: classes.input,}}
+                                                                InputLabelProps={{
+                                                                    classes: {
+                                                                        root: classes.formTextLabel
+                                                                    }
+                                                                }} 
                                                                 error={errors.limite && values.error == true && true}
                                                                 helperText={values.error == true && errors.limite} 
                                                             />
@@ -180,6 +253,12 @@ const AgregarEvento = ({producto}) => {
                                 max="100"
                                 label="Descuento por boleto (%)" 
                                 className="input-edit-event" 
+                                InputProps={{className: classes.input,}}
+                                InputLabelProps={{
+                                    classes: {
+                                        root: classes.formTextLabel
+                                    }
+                                }}
                                 style={{width:'95%'}} 
                                 error={errors.descuento && values.error == true && true}
                                 helperText={values.error == true && errors.descuento} 
@@ -205,9 +284,58 @@ const AgregarEvento = ({producto}) => {
                                     </Grid>
                                     <hr className="hr-div" align="left" />
                                     <Grid item xs={12} style={{display:'flex', flexWrap:'wrap', marginBottom:15}}>
-                                        <Grid item xs={12} sm={4}><TextField required id="fecha"  type="date" min="0" label="Fecha" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                                        <Grid item xs={12} sm={4}><TextField required id="inicio"  type="time" min="0" label="Hora inicio" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
-                                        <Grid item xs={12} sm={4}><TextField required id="cierre"  type="time" min="0" label="Hora cierre" InputLabelProps={{shrink: true,}} className="input-edit-event"  /></Grid>
+                                        <Grid item xs={12} sm={4}>
+                                                <TextField 
+                                                    required 
+                                                    id="fecha"  
+                                                    type="date" 
+                                                    min="0" 
+                                                    label="Fecha" 
+                                                    InputLabelProps={{shrink: true,}} 
+                                                    className="input-edit-event"  
+                                                    // InputProps={{className: classes.input,}}
+                                                    // InputLabelProps={{
+                                                    //     classes: {
+                                                    //         root: classes.formTextLabel
+                                                    //     }
+                                                    // }}
+                                                />
+                                            </Grid>
+                                        <Grid item xs={12} sm={4}>
+                                                <TextField 
+                                                    required 
+                                                    id="inicio"  
+                                                    type="time" 
+                                                    min="0" 
+                                                    label="Hora inicio" 
+                                                    InputLabelProps={{shrink: true,}} 
+                                                    className="input-edit-event"  
+                                                    // InputProps={{className: classes.input,}}
+                                                    // InputLabelProps={{
+                                                    //     classes: {
+                                                    //         root: classes.formTextLabel
+                                                    //     }
+                                                    // }}
+                                                />
+                                        </Grid>
+                                        <Grid item xs={12} sm={4}>
+                                                <TextField 
+                                                    required 
+                                                    id="cierre"  
+                                                    type="time" 
+                                                    min="0" 
+                                                    label="Hora cierre" 
+                                                    InputLabelProps={{shrink: true,}} 
+                                                    className="input-edit-event"  
+                                                    // InputProps={{className: classes.input,}}
+                                                    // InputLabelProps={{
+                                                    //     classes: {
+                                                    //         root: classes.formTextLabel
+                                                    //     }
+                                                    // }}
+                                                />
+                                        </Grid>
+                                    
                                     </Grid>
                                 </Grid>
                             {/* )} */}
@@ -216,7 +344,7 @@ const AgregarEvento = ({producto}) => {
                                 <InertiaLink href={route('dashboard.producto',producto.id)} className="btn-cancelar">Cancelar</InertiaLink>
                                 <Button variant="contained" type="submit" className="btn-action">Guardar evento</Button>
                             </Grid>
-                        
+                            </MuiThemeProvider>
                         </form>
 
                     </Grid>

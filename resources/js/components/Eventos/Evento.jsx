@@ -70,7 +70,7 @@ export default function evento({evento}){
         const day = dob.getDate();
         const monthIndex = dob.getMonth();
         const year = dob.getFullYear();
-        return `${day} ${monthNames[monthIndex]}, `;
+        return `${day} ${monthNames[monthIndex]} ${year}, `;
     }
 
     const classes = useStyles();
@@ -108,12 +108,12 @@ export default function evento({evento}){
                 <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:15,fontWeight:'bold',color:'white',marginTop:5}}>{evento.ciudad}, {evento.sede}</Grid>
                 <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'white',marginTop:9}}>
                     
-                    {evento.dates.map((date) =>
+
+                    {evento.dates && evento.dates.map((date) =>
                         transformaFecha(date.fecha)
                     )}
-
-                    {yearFecha(evento.dates[0].fecha)} 
-                    <EventIcon />
+                    {/* {yearFecha(evento.dates[0].fecha)}  */}
+                    <EventIcon style={{fontSize:16}} />
                 </Grid>
                 <Grid item xs={12} style={{fontFamily:'Oxygen',fontSize:14,color:'#D1D1D1',marginTop:9}}>Precio ${evento.precio} MXN</Grid>
                 
