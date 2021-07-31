@@ -87,6 +87,10 @@ class ProductController extends Controller
             $producto->uuid=Str::uuid();
 
             //guardar archivo del producto
+            $file=$request->file('productoPdf');
+            //storeAs recibe la ruta , el nombre que le queremos poner al archivo y el disco en este caso se creo el disco vileduid que tiene acceso directo a public
+            $file->storeAs('documentos', $file->getClientOriginalName(),['disk' => 'viledruid']);
+            $producto->hojaDescriptiva=$file->getClientOriginalName();
 
             //Guardar el producto para poder asignar una imagen después
             $producto->save();
@@ -95,16 +99,20 @@ class ProductController extends Controller
             $imagen= new ProductImage();
             $imagen->product_id=$producto->id;
             $file=$request->file('productoImagen');
-            $file->store('public/img/productos');
+            //store solo recibe la ruta y el nombre del disco, automáticamente genera un nombre hasheado para el archivo el cual es único y después
+            //para guardarlo en la base de datos lo hasheamos manualmente
+            $file->store('img/productos', ['disk' => 'viledruid']);
             $imagen->foto=$file->hashName();
             $imagen->save();
 
             \DB::commit();
-            dd('todo bien todo correcto');
+
+            return \Redirect::route('dashboard.productos')->with('success', 'Producto creado con éxito.');
+            
             
         } catch (\Throwable $th) {
             \DB::rollback();
-            dd($th);
+            return \Redirect::back()->with('error', 'Ha ocurrido un error al intentar procesar tu solicitud, inténtelo más tarde.');
         }
 
     }
