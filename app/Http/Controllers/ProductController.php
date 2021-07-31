@@ -107,12 +107,14 @@ class ProductController extends Controller
 
             \DB::commit();
 
-            return \Redirect::route('dashboard.productos')->with('success', 'Producto creado con éxito.');
+            $status = "Producto creado con éxito";
+            return redirect()->route('dashboard.productos')->with(compact('status'));
             
             
         } catch (\Throwable $th) {
             \DB::rollback();
-            return \Redirect::back()->with('error', 'Ha ocurrido un error al intentar procesar tu solicitud, inténtelo más tarde.');
+            $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
+            return redirect()->route('dashboard.productos')->with(compact('status'));
         }
 
     }
