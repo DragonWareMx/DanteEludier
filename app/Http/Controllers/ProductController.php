@@ -196,7 +196,7 @@ class ProductController extends Controller
                 $imagen= ProductImage::where('product_id',$id)->first();
 
                 if($imagen->foto){
-                    $image_path = "img/productos".$imagen->foto;
+                    $image_path = "img/productos/".$imagen->foto;
                     // Eliminar imagen
                     File::delete($image_path);
                 }
@@ -223,7 +223,6 @@ class ProductController extends Controller
 
                 if($producto->hojaDescriptiva){
                     $image_path = "documentos/".$producto->hojaDescriptiva;
-                    // dd($image_path);
                     // Eliminar pdf
                     File::delete($image_path);
                 }
@@ -243,7 +242,7 @@ class ProductController extends Controller
                 $imagen= ProductImage::where('product_id',$id)->first();
 
                 if($imagen->foto){
-                    $image_path = "img/productos".$imagen->foto;
+                    $image_path = "img/productos/".$imagen->foto;
                     // Eliminar imagen
                     File::delete($image_path);
                 }
