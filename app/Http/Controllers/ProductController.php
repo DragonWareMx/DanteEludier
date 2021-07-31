@@ -197,7 +197,7 @@ class ProductController extends Controller
 
                 if($imagen->foto){
                     $image_path = "img/productos".$imagen->foto;
-                    // Eliminar pdf
+                    // Eliminar imagen
                     File::delete($image_path);
                 }
 
@@ -244,7 +244,7 @@ class ProductController extends Controller
 
                 if($imagen->foto){
                     $image_path = "img/productos".$imagen->foto;
-                    // Eliminar pdf
+                    // Eliminar imagen
                     File::delete($image_path);
                 }
 
