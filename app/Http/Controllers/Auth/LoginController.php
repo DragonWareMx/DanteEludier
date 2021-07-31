@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -42,5 +43,16 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return Inertia::render('Login');
+    }
+
+    public function redirectTo()
+    {
+        $usuario = Auth::user()->roles;
+        foreach ($usuario as $rol) {
+            if ($rol->slug == 'admin') {
+                return route('dashboard.inicio');
+            }
+        }
+        return route('inicio');
     }
 }

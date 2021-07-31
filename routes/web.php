@@ -91,3 +91,6 @@ Route::name('ticket.')->group(function () {
 });
 
 Route::get('/dashboard/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.inicio');
+Route::get('/dashboard', function () {
+    return redirect()->route('dashboard.inicio');
+});
