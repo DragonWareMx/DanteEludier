@@ -14,6 +14,7 @@ import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 
 import "/css/boletos.css";
+import "/css/modal.css";
 import { toInteger } from 'lodash';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -154,18 +155,18 @@ const Boleto = ({compra}) => {
             aria-labelledby={"modal-titulo"+compra.id}
             aria-describedby={"modal-descripcion"+compra.id}
         >
-            <DialogTitle id={"modal-titulo"+compra.id} style={{color:'red'}}>{"¿Seguro que deseas marcar la compra de "+compra.user.name+" como pagada?"}</DialogTitle>
+            <DialogTitle id={"modal-titulo"+compra.id} className="modal-title-txt">{"¿Seguro que deseas marcar la compra de "+compra.user.name+" como pagada?"}</DialogTitle>
             <DialogContent>
-                <DialogContentText id={"modal-descripcion"+compra.id}>
+                <DialogContentText id={"modal-descripcion"+compra.id} className="modal-content-txt">
                     Una vez se haya marcado, la acción no se podrá deshacer. El usuario recibirá su(s) boleto(s) al correo {compra.user.email}
                 </DialogContentText>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={modalClose} style={{color:'black'}}>
+            <DialogActions style={{marginBottom:10, marginRight:10}}>
+                <Button onClick={modalClose} className="btn-cancel-modal">
                     Cancelar
                 </Button>
-                <InertiaLink onClick={modalClose} href={route('ticket.update', compra.id)} method="patch" style={{color:'red',fontSize:19,marginRight:10,marginTop:'-5px',textDecoration:'none'}}>
-                    Marcar
+                <InertiaLink onClick={modalClose} href={route('ticket.update', compra.id)} method="patch" as="button" className="btn-delete-modal">
+                    MARCAR
                 </InertiaLink>
             </DialogActions>
         </Dialog>
