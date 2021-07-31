@@ -1,13 +1,13 @@
-.MuiPaper-root{
+/* .MuiPaper-root{
     background-color: #282828 !important;
-}
+} */
 .modal-title-txt{
     font-family: Oxygen;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 20px;
-    color: #FFFFFF;
+    color: #282828;
 }
 .modal-content-txt{
     font-family: Oxygen !important;
@@ -15,7 +15,7 @@
     font-weight: normal !important;
     font-size: 14px !important;
     line-height: 18px !important;
-    color: #FFFFFF !important;
+    color: #282828 !important;
 }
 .btn-cancel-modal{
     font-family: Oxygen !important;
@@ -23,7 +23,7 @@
     font-weight: bold !important;
     font-size: 12px !important;
     line-height: 15px !important;
-    color: #FFFFFF !important;
+    color: #282828 !important;
 }
 .btn-delete-modal{
     font-family: Oxygen;
@@ -31,10 +31,10 @@
     font-weight: bold;
     font-size: 12px;
     line-height: 15px;
-    color: #323232;
+    color: white;
 
-    background: #FFFFFF;
-    border: 1px solid #FFFFFF;
+    background: #282828;
+    border: 1px solid #282828;
     box-sizing: border-box;
     border-radius: 50px;
 
