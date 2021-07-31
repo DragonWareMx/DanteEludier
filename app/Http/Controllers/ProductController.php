@@ -9,6 +9,8 @@ use App\Models\ProductImage;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\File; 
 
 
 class ProductController extends Controller
@@ -72,6 +74,8 @@ class ProductController extends Controller
     }
 
     public function storeProducto(Request $request){
+        $date = Carbon::now();
+        // dd($date);
 
         $request->validate([
             'titulo' => 'required',
@@ -88,6 +92,8 @@ class ProductController extends Controller
 
             //guardar archivo del producto
             $file=$request->file('productoPdf');
+            
+
             //storeAs recibe la ruta , el nombre que le queremos poner al archivo y el disco en este caso se creo el disco vileduid que tiene acceso directo a public
             $file->storeAs('documentos', $file->getClientOriginalName(),['disk' => 'viledruid']);
             $producto->hojaDescriptiva=$file->getClientOriginalName();
@@ -127,7 +133,142 @@ class ProductController extends Controller
     }
 
     public function patchProducto(Request $request,$id){
-        dd('BACKEND DE EDITAR',$request, $id);
+        $request->validate([
+            'titulo' => 'required',
+            'descripcion' => 'required',
+            'productoImagen' => 'nullable|image',
+            'productoPdf' => 'nullable|mimes:pdf'
+        ]);
+        \DB::beginTransaction();
+        try{
+
+            // No se cuarga multimedia
+            if(is_null($request->file('productoImagen')) && is_null($request->file('productoPdf'))){
+                $producto=Product::findOrFail($id);
+                $producto->titulo=$request->titulo;
+                $producto->descripcion=$request->descripcion;
+                //Guardar el producto para poder asignar una imagen después
+                $producto->save();
+
+                \DB::commit();
+
+                $status = "Producto actualizado con éxito";
+                return redirect()->route('dashboard.productos')->with(compact('status'));
+            }
+            // No se guarda foto
+            else if (is_null($request->file('productoImagen'))){
+                $producto=Product::findOrFail($id);
+                $producto->titulo=$request->titulo;
+                $producto->descripcion=$request->descripcion;
+
+                if($producto->hojaDescriptiva){
+                    $image_path = "documentos/".$producto->hojaDescriptiva;
+                    // dd($image_path);
+                    // Eliminar pdf
+                    File::delete($image_path);
+                }
+
+                //guardar archivo del producto
+                $file=$request->file('productoPdf');
+                
+
+                //storeAs recibe la ruta , el nombre que le queremos poner al archivo y el disco en este caso se creo el disco vileduid que tiene acceso directo a public
+                $file->storeAs('documentos', $file->getClientOriginalName(),['disk' => 'viledruid']);
+                $producto->hojaDescriptiva=$file->getClientOriginalName();
+
+                //Guardar el producto para poder asignar una imagen después
+                $producto->save();
+
+                \DB::commit();
+
+                $status = "Producto actualizado con éxito";
+                return redirect()->route('dashboard.productos')->with(compact('status'));
+            }
+            // No se guarda pdf
+            else if(is_null($request->file('productoPdf'))){
+                $producto=Product::findOrFail($id);
+                $producto->titulo=$request->titulo;
+                $producto->descripcion=$request->descripcion;
+                //Guardar el producto para poder asignar una imagen después
+                $producto->save();
+
+                //guardar imagen del producto
+                $imagen= ProductImage::where('product_id',$id)->first();
+
+                if($imagen->foto){
+                    $image_path = "img/productos".$imagen->foto;
+                    // Eliminar pdf
+                    File::delete($image_path);
+                }
+
+                $file=$request->file('productoImagen');
+                //store solo recibe la ruta y el nombre del disco, automáticamente genera un nombre hasheado para el archivo el cual es único y después
+                //para guardarlo en la base de datos lo hasheamos manualmente
+                $file->store('img/productos', ['disk' => 'viledruid']);
+                $imagen->foto=$file->hashName();
+                
+                $imagen->save();
+
+                \DB::commit();
+
+                $status = "Producto actualizado con éxito";
+                return redirect()->route('dashboard.productos')->with(compact('status'));
+            }
+            // Se guardan todos
+            else{
+
+                $producto=Product::findOrFail($id);
+                $producto->titulo=$request->titulo;
+                $producto->descripcion=$request->descripcion;
+
+                if($producto->hojaDescriptiva){
+                    $image_path = "documentos/".$producto->hojaDescriptiva;
+                    // dd($image_path);
+                    // Eliminar pdf
+                    File::delete($image_path);
+                }
+
+                //guardar archivo del producto
+                $file=$request->file('productoPdf');
+                
+
+                //storeAs recibe la ruta , el nombre que le queremos poner al archivo y el disco en este caso se creo el disco vileduid que tiene acceso directo a public
+                $file->storeAs('documentos', $file->getClientOriginalName(),['disk' => 'viledruid']);
+                $producto->hojaDescriptiva=$file->getClientOriginalName();
+
+                //Guardar el producto para poder asignar una imagen después
+                $producto->save();
+
+                //guardar imagen del producto
+                $imagen= ProductImage::where('product_id',$id)->first();
+
+                if($imagen->foto){
+                    $image_path = "img/productos".$imagen->foto;
+                    // Eliminar pdf
+                    File::delete($image_path);
+                }
+
+                $file=$request->file('productoImagen');
+                //store solo recibe la ruta y el nombre del disco, automáticamente genera un nombre hasheado para el archivo el cual es único y después
+                //para guardarlo en la base de datos lo hasheamos manualmente
+                $file->store('img/productos', ['disk' => 'viledruid']);
+                $imagen->foto=$file->hashName();
+                
+                $imagen->save();
+
+                \DB::commit();
+
+                $status = "Producto actualizado con éxito";
+                return redirect()->route('dashboard.productos')->with(compact('status'));
+            }
+
+        } catch (\Throwable $th) {
+            \DB::rollback();
+            $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
+            return redirect()->route('dashboard.productos')->with(compact('status'));
+        }
+        
+
     }
 
     public function delete($id){
