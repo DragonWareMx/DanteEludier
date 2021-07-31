@@ -29,6 +29,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 //CSS
 import '/css/producto.css';
+import '/css/modal.css';
 
 //componentes
 import { toInteger } from "lodash";
@@ -77,7 +78,6 @@ const Producto = ({producto, events}) => {
         const fecha = new Date();
         let disp = false;
         eventos.forEach(evento => {
-           if(evento.dates[0]){
             let fec = evento.dates[0].fecha;
             var splitDate = fec.split(" ");
             var splitDate2 = splitDate[0].split("-");
@@ -93,7 +93,6 @@ const Producto = ({producto, events}) => {
                     disp = true;
                 }
             }
-           }
         });
         return disp;
     }
@@ -206,17 +205,17 @@ const Producto = ({producto, events}) => {
                 aria-labelledby={"modal-titulo"+producto.id}
                 aria-describedby={"modal-descripcion"+producto.id}
             >
-                <DialogTitle id={"modal-titulo"+producto.id} style={{color:'red'}}>{"¿Seguro que deseas eliminar el producto "+producto.titulo+"?"}</DialogTitle>
+                <DialogTitle id={"modal-titulo"+producto.id} className="modal-title-txt">{"¿Seguro que deseas eliminar el producto "+producto.titulo+"?"}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id={"modal-descripcion"+producto.id}>
+                    <DialogContentText id={"modal-descripcion"+producto.id} className="modal-content-txt">
                         Se eliminarán todos los datos relacionados con este producto incluyendo la información de los boletos vendidos.
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={modalClose} style={{color:'black'}}>
+                <DialogActions style={{marginBottom:10, marginRight:10}}>
+                    <Button onClick={modalClose} className="btn-cancel-modal">
                         Cancelar
                     </Button>
-                    <InertiaLink onClick={modalClose} href={route('delete.producto', producto.id)} method="delete" style={{color:'red',fontSize:19,marginRight:10,marginTop:'-5px',textDecoration:'none'}}>
+                    <InertiaLink onClick={modalClose} href={route('delete.producto', producto.id)} method="delete" as="button" className="btn-delete-modal">
                         Eliminar
                     </InertiaLink>
                 </DialogActions>

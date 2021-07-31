@@ -154,4 +154,22 @@ class EventController extends Controller
             return \Redirect::back()->with('error','Ha ocurrido un error al intentar crear el evento, inténtelo más tarde.');
         }
     }
+
+    public function deleteEvento($id){
+        DB::beginTransaction();
+        try {
+            $evento = Event::findOrFail($id);
+            // buscar y eliminar dates
+            Date::where('event_id',$id)->delete();
+
+            $evento->delete();
+            DB::commit();
+            $status = "Evento eliminado con éxito";
+            return redirect()->route('dashboard.events')->with(compact('status'));
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
+            return redirect()->route('dashboard.events')->with(compact('status'));
+        }
+    }
 }

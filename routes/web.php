@@ -81,6 +81,7 @@ Route::get('/dashboard/eventos/{id}', [App\Http\Controllers\EventController::cla
 Route::get('/dashboard/agregarEvento/{id}', [App\Http\Controllers\EventController::class, 'add'])->name('dashboard.eventAdd');
 Route::patch('/dashboard/patchevento/{id}', [App\Http\Controllers\EventController::class, 'patchEvento'])->name('editar.event');
 Route::post('/dashboard/agregarEvento/{id}', [App\Http\Controllers\EventController::class, 'newEvento'])->name('agregar.event');
+Route::delete('/dashboard/eventos/delete/{id}', [App\Http\Controllers\EventController::class, 'deleteEvento'])->name('eliminarEvento');
 
 // Boletos
 Route::name('ticket.')->group(function () {

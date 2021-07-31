@@ -3,6 +3,7 @@ import { InertiaLink } from '@inertiajs/inertia-react'
 
 //CSS
 import '/css/producto.css';
+import '/css/modal.css';
 
 //iconos
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -124,18 +125,18 @@ export default function Producto({producto, precio, disponible, totalEventos, to
                 aria-labelledby={"modal-titulo"+producto.id}
                 aria-describedby={"modal-descripcion"+producto.id}
             >
-                <DialogTitle id={"modal-titulo"+producto.id} style={{color:'red'}}>{"¿Seguro que deseas eliminar el producto "+producto.titulo+"?"}</DialogTitle>
+                <DialogTitle id={"modal-titulo"+producto.id} className="modal-title-txt">{"¿Seguro que deseas eliminar el producto "+producto.titulo+"?"}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id={"modal-descripcion"+producto.id}>
+                    <DialogContentText id={"modal-descripcion"+producto.id} className="modal-content-txt">
                         Se eliminarán todos los datos relacionados con este producto incluyendo la información de los boletos vendidos.
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={modalClose} style={{color:'black'}}>
+                <DialogActions style={{marginBottom:10, marginRight:10}}>
+                    <Button onClick={modalClose} className="btn-cancel-modal">
                         Cancelar
                     </Button>
-                    <InertiaLink onClick={modalClose} href={route('delete.producto', producto.id)} method="delete" style={{color:'red',fontSize:19,marginRight:10,marginTop:'-5px',textDecoration:'none'}}>
-                        Eliminar
+                    <InertiaLink onClick={modalClose} href={route('delete.producto', producto.id)} method="delete" as="button" className="btn-delete-modal">
+                        ELIMINAR
                     </InertiaLink>
                 </DialogActions>
             </Dialog>

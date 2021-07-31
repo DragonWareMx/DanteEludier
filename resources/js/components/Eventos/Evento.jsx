@@ -4,6 +4,7 @@ import { InertiaLink } from '@inertiajs/inertia-react'
 //CSS
 import '/css/producto.css';
 import '/css/eventos.css';
+import '/css/modal.css';
 
 //iconos
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -25,6 +26,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import route from 'ziggy-js';
 
+//Cosas del modal de eliminar
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default function evento({evento}){
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,6 +41,17 @@ export default function evento({evento}){
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    //Cosas del modal eliminar
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const modalClose = () => {
+        setOpen(false);
     };
 
     const useStyles = makeStyles((theme) => ({
@@ -100,7 +117,7 @@ export default function evento({evento}){
                             classes={{ paper: classes.menuPaper }}
                         >
                             <InertiaLink href={route('dashboard.event',evento.id)} style={{display:'flex',textDecoration:'none', color:'white'}}><MenuItem style={{justifyContent:'space-between',width:'100%'}}><div style={{marginRight:15}}>Editar</div><TuneIcon></TuneIcon></MenuItem></InertiaLink>
-                            <MenuItem style={{justifyContent:'space-between'}}><div style={{marginRight:15}}>Eliminar</div><DeleteIcon></DeleteIcon></MenuItem>
+                            <MenuItem onClick={handleClickOpen} style={{justifyContent:'space-between'}}><div style={{marginRight:15}}>Eliminar</div><DeleteIcon></DeleteIcon></MenuItem>
                         </Menu>
                     </Grid>
                 </Grid>
@@ -135,6 +152,32 @@ export default function evento({evento}){
 
             </Grid>
         </Grid>
+        
+
+        <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={modalClose}
+            aria-labelledby={"modal-titulo"+evento.id}
+            aria-describedby={"modal-descripcion"+evento.id}
+            >
+            <DialogTitle id={"modal-titulo"+evento.id} className="modal-title-txt">{"¿Seguro que deseas eliminar el producto "+evento.ciudad+", "+evento.sede+"?"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id={"modal-descripcion"+evento.id} className="modal-content-txt">
+                    Se eliminarán todos los datos relacionados con este evento incluyendo la información de los boletos vendidos.
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions style={{marginBottom:10, marginRight:10}}>
+                <Button onClick={modalClose} className="btn-cancel-modal">
+                    Cancelar
+                </Button>
+                <InertiaLink onClick={modalClose} href={route('eliminarEvento', evento.id)} as="button" method="delete" className="btn-delete-modal">
+                    ELIMINAR
+                </InertiaLink>
+            </DialogActions>
+        </Dialog>
+
         </>
     );
 }

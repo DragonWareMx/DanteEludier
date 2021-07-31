@@ -74,10 +74,15 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Eventos = ({eventos}) => {
+    const {status } = usePage().props;
+
     const classes = useStyles();
 
     return (
         <Grid container style={{marginTop:21, marginBottom:40}} >
+            {status &&
+                <FormHelperText id="component-text" style={{ color: "green", fontSize: 16 }}>{status}</FormHelperText>
+            }
             <Grid item xs={12}>
                 <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
                     {/* Items eventos */}
@@ -86,6 +91,11 @@ const Eventos = ({eventos}) => {
                         evento={evento}
                          />
                     ))}
+
+                    {!eventos || eventos.data.length <= 0
+                    ? <p>SIN EVENTOS REGISTRADOS</p>
+                    : ''
+                    }
 
                     <Grid item style={{marginTop: 25}}>
                         <PaginacionAdmin links={eventos.links} />
