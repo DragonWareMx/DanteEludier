@@ -81,7 +81,7 @@ const Eventos = ({eventos}) => {
     return (
         <Grid container style={{marginTop:21, marginBottom:40}} >
             {status &&
-                <FormHelperText id="component-text" style={{ color: "green", fontSize: 16 }}>{status}</FormHelperText>
+                <FormHelperText id="component-text" className="helper">{status}</FormHelperText>
             }
             <Grid item xs={12}>
                 <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
