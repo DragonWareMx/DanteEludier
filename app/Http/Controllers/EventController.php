@@ -85,15 +85,16 @@ class EventController extends Controller
             //SE HACE COMMIT
             DB::commit();
             
-            //REDIRECCIONA A LA VISTA DE USUARIOS
-            return \Redirect::route('dashboard.events')->with('success','El evento ha sido actualizado con éxito!');
-
+            $status = "El evento ha sido actualizado con éxito";
+            return redirect()->route('dashboard.events')->with(compact('status'));
+            //REDIRECCIONA A LA VISTA DE EVENTOS
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return \Redirect::back()->with('error','Ha ocurrido un error al intentar editar el evento, inténtelo más tarde.');
+
+            $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
+            return redirect()->route('dashboard.events')->with(compact('status'));
         }
-        // dd('BACKEND DE EDITAR',$request, $id);
     }
 
     public function add($id){ 
@@ -132,26 +133,21 @@ class EventController extends Controller
             $evento->save();
 
             // FALTAN GUARDAR FECHAS
-            // $date = new Date;
-            // $date->event_id=$evento->id;
-            // // esto es temporal y fake
-            // $date->fecha='2021-01-01 12:01:01';
-            // $date->horaCierre='13:01:01';
-
-            // $date->save();
-
-            // dd($date);
+            // podrian no guardarse fechas
 
             //SE HACE COMMIT
             DB::commit();
             
-            //REDIRECCIONA A LA VISTA DE USUARIOS
-            return \Redirect::route('dashboard.events')->with('success','El evento ha sido creado con éxito!');
-
+            $status = "El evento ha sido creado con éxito";
+            return redirect()->route('dashboard.events')->with(compact('status'));
+            //REDIRECCIONA A LA VISTA DE EVENTOS
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return \Redirect::back()->with('error','Ha ocurrido un error al intentar crear el evento, inténtelo más tarde.');
+
+            $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
+            return redirect()->route('dashboard.events')->with(compact('status'));
+        
         }
     }
 
