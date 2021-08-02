@@ -446,6 +446,57 @@ const Evento = ({ eventos }) => {
                                             <MenuItem value={3}>
                                                 3 lugares
                                             </MenuItem>
+                                            <MenuItem value={4}>
+                                                4 lugares
+                                            </MenuItem>
+                                            <MenuItem value={5}>
+                                                5 lugares
+                                            </MenuItem>
+                                            <MenuItem value={6}>
+                                                6 lugares
+                                            </MenuItem>
+                                            <MenuItem value={7}>
+                                                7 lugares
+                                            </MenuItem>
+                                            <MenuItem value={8}>
+                                                8 lugares
+                                            </MenuItem>
+                                            <MenuItem value={9}>
+                                                9 lugares
+                                            </MenuItem>
+                                            <MenuItem value={10}>
+                                                10 lugares
+                                            </MenuItem>
+                                            <MenuItem value={11}>
+                                                11 lugares
+                                            </MenuItem>
+                                            <MenuItem value={12}>
+                                                12 lugares
+                                            </MenuItem>
+                                            <MenuItem value={13}>
+                                                13 lugares
+                                            </MenuItem>
+                                            <MenuItem value={14}>
+                                                14 lugares
+                                            </MenuItem>
+                                            <MenuItem value={15}>
+                                                15 lugares
+                                            </MenuItem>
+                                            <MenuItem value={16}>
+                                                16 lugares
+                                            </MenuItem>
+                                            <MenuItem value={17}>
+                                                17 lugares
+                                            </MenuItem>
+                                            <MenuItem value={18}>
+                                                18 lugares
+                                            </MenuItem>
+                                            <MenuItem value={19}>
+                                                19 lugares
+                                            </MenuItem>
+                                            <MenuItem value={20}>
+                                                20 lugares
+                                            </MenuItem>
                                             {/* HAY QUE CAMBIARLO MEJOR POR UN INPUT */}
                                         </Select>
                                     </FormControl>

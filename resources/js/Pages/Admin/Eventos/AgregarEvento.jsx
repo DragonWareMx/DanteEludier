@@ -103,23 +103,47 @@ const AgregarEvento = ({producto}) => {
 
     const handleDates = (event) => {
         
-        setValues(values=> ({ 
-            ...values, 
-            fecha_y_hora_de_inicio: [...values.fecha_y_hora_de_inicio, values.fecha_previa],
-            hora_cierre: [...values.hora_cierre, values.hora_previa],
-            fecha_previa: "",
-            hora_previa: "",
-        }));
-        
-        var padre = document.getElementById('fechas_add');
-        padre.innerHTML="";
-        var arreglo = values.fecha_y_hora_de_inicio;
-        arreglo.forEach(fecha => {
-             padre.innerHTML += "<p>"+fecha+"</p>"
-        });
-        
+        if (values.fecha_previa && values.hora_previa){
+            setValues(values=> ({ 
+                ...values, 
+                fecha_y_hora_de_inicio: [...values.fecha_y_hora_de_inicio, values.fecha_previa],
+                hora_cierre: [...values.hora_cierre, values.hora_previa],
+                fecha_previa: "",
+                hora_previa: "",
+            }));
+            
+            document.getElementById('hora_previa').value ="";
+            document.getElementById('fecha_previa').value ="";
+            alert("La fecha "+values.fecha_previa+" con hora de cierre: "+values.hora_previa+" fue agregada al evento. Puedes agregar otra fecha si así lo deseas");
+        }
+        else {
+            alert("Antes de agregar otra fecha debes elegir una fecha y una hora de cierre");
+        }
+        // var padre = document.getElementById('fechas_add');
+        // padre.innerHTML="";
+        // var arreglo = values.fecha_y_hora_de_inicio;
+        // arreglo.forEach(fecha => {
+        //      padre.innerHTML += "<p>"+fecha+"</p>"
+        // });        
     };
 
+    const deleteDates = () =>{
+        alert("por el momento esta función no está disponible")
+        // if(values.fecha_y_hora_de_inicio.length>0){
+        //     setValues(values=> { 
+        //         const [first, ...rest] = values.fecha_y_hora_de_inicio;
+                
+        //         return {
+        //             fecha_y_hora_de_inicio: rest,
+        //         }
+        //     });
+
+        //     alert("La fecha: "+values.fecha_y_hora_de_inicio[values.fecha_y_hora_de_inicio.length-1]+ "fue eliminada");
+        // }
+        // else {
+        //     alert("No hay ninguna fecha que eliminar");
+        // }  
+    };
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -300,7 +324,7 @@ const AgregarEvento = ({producto}) => {
                                     <Grid className="icon-remove" style={{display:'flex', justifyContent:'flex-end'}}>
                                         <div id="fechas_add"></div>
                                         <Tooltip title="Eliminar" placement="top">
-                                        <IconButton aria-label="remove" style={{padding:5}}>
+                                        <IconButton aria-label="remove" style={{padding:5}} onClick={deleteDates}>
                                             <RemoveCircleIcon style={{color:'white', fontSize:20}} />
                                         </IconButton>
                                         </Tooltip>
