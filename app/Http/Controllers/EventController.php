@@ -114,6 +114,7 @@ class EventController extends Controller
             'precio' => 'required|min:0',
             'limite' => 'required|min:0',
             'descuento' => 'required|min:0|max:100',
+            'fecha_y_hora_de_inicio'=> 'required',
         ]);
         //COMIENZA LA TRANSACCION
         DB::beginTransaction();
@@ -133,7 +134,15 @@ class EventController extends Controller
             $evento->save();
 
             // FALTAN GUARDAR FECHAS
-            // podrian no guardarse fechas
+            $i =0;
+            foreach ($request->fecha_y_hora_de_inicio as $fecha) {
+                $newDate = new Date;
+                $newDate->event_id = $evento->id;
+                $newDate->fecha =$fecha;
+                $newDate->horaCierre = $request->hora_cierre[$i];
+                $newDate->save();
+                $i++;
+            }
 
             //SE HACE COMMIT
             DB::commit();
@@ -144,7 +153,7 @@ class EventController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-
+            dd($e);
             $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
             return redirect()->route('dashboard.events')->with(compact('status'));
         

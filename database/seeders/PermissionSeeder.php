@@ -37,14 +37,16 @@ class PermissionSeeder extends Seeder
             'full-access' => 'no'
         ]);
 
-
-        // $user1 = User::find(1);
-        // $user2 = User::find(2);
-        // $user3 = User::find(3);
-        // $user1->roles()->sync([$rolAdmin->id]);
-        // $user2->roles()->sync([$rolCheck->id]);
-        // $user3->roles()->sync([$rolClient->id]);
+        //Para producción se comentan las siguientes 6 líneas
+        $user1 = User::find(1);
+        $user2 = User::find(2);
+        $user3 = User::find(3);
+        $user1->roles()->sync([$rolAdmin->id]);
+        $user2->roles()->sync([$rolCheck->id]);
+        $user3->roles()->sync([$rolClient->id]);
         
+
+
         //permisos
         $permission_all = [];
         $permission_check = [];

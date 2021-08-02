@@ -90,12 +90,36 @@ const AgregarEvento = ({producto}) => {
         limite: 0,
         descuento: 0,
         error: false,
+        fecha_previa: '',
+        hora_previa:'',
+        fecha_y_hora_de_inicio: [],
+        hora_cierre: [],
     });
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
         // console.log(event)
     };
+
+    const handleDates = (event) => {
+        
+        setValues(values=> ({ 
+            ...values, 
+            fecha_y_hora_de_inicio: [...values.fecha_y_hora_de_inicio, values.fecha_previa],
+            hora_cierre: [...values.hora_cierre, values.hora_previa],
+            fecha_previa: "",
+            hora_previa: "",
+        }));
+        
+        var padre = document.getElementById('fechas_add');
+        padre.innerHTML="";
+        var arreglo = values.fecha_y_hora_de_inicio;
+        arreglo.forEach(fecha => {
+             padre.innerHTML += "<p>"+fecha+"</p>"
+        });
+        
+    };
+
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -267,15 +291,14 @@ const AgregarEvento = ({producto}) => {
 
                             <Grid style={{fontSize:12,fontFamily:'Oxygen',marginTop:9, marginTop:30, marginBottom:0}}>FECHAS DE EVENTO
                             <Tooltip title="Agregar" placement="top">
-                                <IconButton aria-label="add" style={{padding:5}}>
+                                <IconButton aria-label="add" style={{padding:5}} onClick={handleDates}>
                                     <AddCircleIcon style={{color:'white', fontSize:20}} />
                                 </IconButton>
                                 </Tooltip>
                             </Grid>
-
-                            {/* {evento.dates.map((date,index) => */}
                                 <Grid item xs={12}>
                                     <Grid className="icon-remove" style={{display:'flex', justifyContent:'flex-end'}}>
+                                        <div id="fechas_add"></div>
                                         <Tooltip title="Eliminar" placement="top">
                                         <IconButton aria-label="remove" style={{padding:5}}>
                                             <RemoveCircleIcon style={{color:'white', fontSize:20}} />
@@ -287,52 +310,25 @@ const AgregarEvento = ({producto}) => {
                                         <Grid item xs={12} sm={4}>
                                                 <TextField 
                                                     required 
-                                                    id="fecha"  
-                                                    type="date" 
+                                                    id="fecha_previa"  
+                                                    type="datetime-local" 
                                                     min="0" 
-                                                    label="Fecha" 
+                                                    label="Fecha y hora de inicio" 
                                                     InputLabelProps={{shrink: true,}} 
                                                     className="input-edit-event"  
-                                                    // InputProps={{className: classes.input,}}
-                                                    // InputLabelProps={{
-                                                    //     classes: {
-                                                    //         root: classes.formTextLabel
-                                                    //     }
-                                                    // }}
+                                                    onChange= {handleChange('fecha_previa')}
                                                 />
                                             </Grid>
                                         <Grid item xs={12} sm={4}>
                                                 <TextField 
                                                     required 
-                                                    id="inicio"  
-                                                    type="time" 
-                                                    min="0" 
-                                                    label="Hora inicio" 
-                                                    InputLabelProps={{shrink: true,}} 
-                                                    className="input-edit-event"  
-                                                    // InputProps={{className: classes.input,}}
-                                                    // InputLabelProps={{
-                                                    //     classes: {
-                                                    //         root: classes.formTextLabel
-                                                    //     }
-                                                    // }}
-                                                />
-                                        </Grid>
-                                        <Grid item xs={12} sm={4}>
-                                                <TextField 
-                                                    required 
-                                                    id="cierre"  
+                                                    id="hora_previa"  
                                                     type="time" 
                                                     min="0" 
                                                     label="Hora cierre" 
                                                     InputLabelProps={{shrink: true,}} 
                                                     className="input-edit-event"  
-                                                    // InputProps={{className: classes.input,}}
-                                                    // InputLabelProps={{
-                                                    //     classes: {
-                                                    //         root: classes.formTextLabel
-                                                    //     }
-                                                    // }}
+                                                    onChange= {handleChange('hora_previa')}
                                                 />
                                         </Grid>
                                     
