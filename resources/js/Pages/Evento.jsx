@@ -82,6 +82,7 @@ const Evento = ({ eventos }) => {
     const [values, setValues] = React.useState({
         precio: 0,
         total: 0,
+        descuento: 0,
         tipo_de_pago: "",
         cantidad: ''
     });
@@ -100,11 +101,18 @@ const Evento = ({ eventos }) => {
     }
 
     const eventoChange = (e) => {
-        const value = e.target.value
-
+        const value = e.target.value;
+        const indice = e.target.name;
+        console.log(eventos[indice]);
+        console.log(eventos[indice].descuento)
+        
         setEvento(evento => ({
             ...evento,
             evento: value,
+        })),
+        setValues(values =>({
+            ...values,
+            descuento: eventos[indice].descuento,
         }))
 
         setPrecio()
@@ -390,17 +398,19 @@ const Evento = ({ eventos }) => {
                                             id="evento"
                                             value={evento.evento}
                                             onChange={eventoChange}
+                                            name={values.descuento}
                                             displayEmpty
                                         >
                                             <MenuItem value="">
                                                 <em>Selecciona un evento</em>
                                             </MenuItem>
-                                            {eventos.map((evento) => (
+                                            {eventos.map((evento, index) => (
                                                 [
                                                 evento.total < evento.limite &&
                                                 <MenuItem
                                                     key={evento.id}
                                                     value={evento.id}
+                                                    name={index}
                                                 >
                                                     {evento.ciudad},{" "}
                                                     {evento.sede}
@@ -504,9 +514,15 @@ const Evento = ({ eventos }) => {
                                 <div className="pt-3">
                                     Total con descuento *
                                     {/* FALTA PONER EL DESCUENTO BIEN DESDE LA BD */}
+                                    {values.descuento ?
                                     <div className="font-weight-bold">
-                                        ${showPrice(values.total * 0.9)} MXN
+                                        ${showPrice(values.total * (1-values.descuento))} MXN
                                     </div>
+                                    :
+                                    <div className="font-weight-bold">
+                                        ${showPrice(values.total)} MXN
+                                    </div>
+                                    }
                                 </div>
                                 <div className="pt-3">Método de pago</div>
                                 <RadioGroup
@@ -553,7 +569,7 @@ const Evento = ({ eventos }) => {
                                 <div>
                                     <small>
                                         * Debes estar registrado para obtener un
-                                        descuento del 10% en tu compra
+                                        descuento (en los eventos que apliquen) en tu compra.
                                     </small>
                                 </div>
                                 
