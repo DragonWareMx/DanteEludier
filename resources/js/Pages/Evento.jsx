@@ -218,7 +218,7 @@ const Evento = ({ eventos }) => {
             <InertiaHead>
                 <meta property="og:title" content="Dante Eludier Master coach"/>
                 <meta property="og:description" content="Liberando el potencial humano para el bien común"/>
-                <meta property="og:image" content={"/img/events/" +
+                <meta property="og:image" content={"/img/productos/" +
                                         eventos["0"].product.images["0"].foto}/>
                 <meta property="og:url" content={"https://danteeludier.com/productos/evento/"+eventos['0'].product.id}/>
                 <meta property="og:type" content="website"/>
@@ -289,7 +289,7 @@ const Evento = ({ eventos }) => {
                             <div className="col-md-4">
                                 <img
                                     src={
-                                        "/img/events/" +
+                                        "/img/productos/" +
                                         eventos["0"].product.images["0"].foto
                                     }
                                     style={{
@@ -354,7 +354,7 @@ const Evento = ({ eventos }) => {
                         <div className="col-4 p-0 d-none d-md-block">
                             <img
                                 src={
-                                    "/img/events/" +
+                                    "/img/productos/" +
                                     eventos["0"].product.images["0"].foto
                                 }
                                 style={{
@@ -367,7 +367,7 @@ const Evento = ({ eventos }) => {
                             <h3>{eventos["0"].product.titulo}</h3>
                             <img
                                 src={
-                                    "/img/events/" +
+                                    "/img/productos/" +
                                     eventos["0"].product.images["0"].foto
                                 }
                                 style={{
