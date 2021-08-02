@@ -21,6 +21,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 
 //CSS
 import '/css/producto.css';
+import '/css/modal.css';
 
 //componentes
 const DivBoton = styled.div`
@@ -163,9 +164,9 @@ const Crear = () => {
     return (
         <>
             <Grid container style={{marginTop:21,marginBottom:21}}>
-                <Grid item xs={12}>
+                <Grid item xs={12}> 
                     <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
-                        {errors.productoImagen && <div style={{color:'red',fontSize:14,fontFamily:'Oxygen', marginBottom:15, marginLeft:15}}>{errors.productoImagen}</div>}
+                        {errors.productoImagen && <div className="helper">{errors.productoImagen}</div>}
                         <form className='crearProducto_form' noValidate autoComplete="off" onSubmit={handleSubmit}>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={3} className='crearProducto_img' id='imgContainer'>
@@ -241,7 +242,7 @@ const Crear = () => {
                                         
                                         <Grid id='pdfName'></Grid>
                                     </Button>
-                                    {errors.productoPdf && <div style={{color:'red',fontSize:14,fontFamily:'Oxygen', marginBottom:15}}>{errors.productoPdf}</div>}
+                                    {errors.productoPdf && <div className="helper">{errors.productoPdf}</div>}
                                     <Grid container alignItems='center' className='crearProducto_buttons'>
                                         <InertiaLink href={route('dashboard.productos')} style={{fontFamily:'Oxygen',fontSize:12,fontWeight:'Bold',marginRight:25,color:'#FFFFFF',textDecoration:'none'}}>
                                             CANCELAR

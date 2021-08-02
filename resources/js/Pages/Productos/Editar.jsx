@@ -10,7 +10,7 @@ import styled from 'styled-components';
 //Material UI
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -21,6 +21,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 
 //CSS
 import '/css/producto.css';
+import '/css/modal.css';
 
 //componentes
 const DivBoton = styled.div`
@@ -45,9 +46,52 @@ const DivBoton = styled.div`
     }
 `;
 
+const useStyles = makeStyles((theme) => ({
+    input: {
+        fontFamily: "Oxygen",
+        fontStyle: 'normal',
+        fontSize: '15px',
+        color: '#ffffff',
+        borderColor: "#9C9C9C",
+        "&:not(.Mui-disabled)::before": {
+            borderColor: "#9C9C9C"
+        },
+        "&:not(.Mui-disabled):hover::before": {
+            borderColor: "#9C9C9C"
+        }
+    },
+    formTextLabel: {
+        fontFamily: 'Oxygen',
+        fontSize: '14px',
+        color: '#ffffff'
+    },
+}));
+
+const theme = createMuiTheme({
+    palette: {
+        secondary: {
+            // light: will be calculated from palette.primary.main,
+            main: '#ff4400',
+            // dark: will be calculated from palette.primary.main,
+            // contrastText: will be calculated to contrast with palette.primary.main
+        },
+        primary: {
+            light: '#0066ff',
+            main: '#9c9c9c',
+            // dark: will be calculated from palette.secondary.main,
+            contrastText: '#ffcc00',
+        },
+        // error: will use the default color
+    },
+    status: {
+        danger: 'orange',
+    },
+});
+
 const Editar = ({producto}) => {
 
     const { errors } = usePage().props
+    const classes = useStyles();
 
     
     const [values, setValues] = React.useState({
@@ -120,7 +164,7 @@ const Editar = ({producto}) => {
             <Grid container style={{marginTop:21,marginBottom:21}}>
                 <Grid item xs={12}>
                     <Paper style={{backgroundColor:'#282828',padding:25,color:'#FFFFFF',fontFamily:'Oxygen'}}>
-                        {errors.productoImagen && <div style={{color:'red',fontSize:14,fontFamily:'Oxygen', marginBottom:15, marginLeft:15}}>{errors.productoImagen}</div>}
+                        {errors.productoImagen && <div className="helper">{errors.productoImagen}</div>}
                         <form className='crearProducto_form' noValidate autoComplete="off" onSubmit={handleSubmit}>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={3} className='crearProducto_img' id='imgContainer' style={{backgroundImage:'url(/img/productos/'+producto.images[0].foto+')'}}>
@@ -144,6 +188,7 @@ const Editar = ({producto}) => {
                                     </DivBoton>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={9} className='verproducto_info'>
+                                <MuiThemeProvider theme={theme}>
                                     <TextField 
                                         id="producto-titulo" 
                                         label="Título del producto" 
@@ -152,6 +197,12 @@ const Editar = ({producto}) => {
                                         value={values.titulo}
                                         error={errors.titulo && values.error == true && true}
                                         helperText={values.error == true && errors.titulo}
+                                        InputProps={{className: classes.input,}}
+                                        InputLabelProps={{
+                                            classes: {
+                                                root: classes.formTextLabel
+                                            }
+                                        }}
                                         required
                                     />
                                     <TextField 
@@ -162,6 +213,12 @@ const Editar = ({producto}) => {
                                         value={values.descripcion}
                                         error={errors.descripcion && values.error == true && true}
                                         helperText={values.error == true && errors.descripcion}   
+                                        InputProps={{className: classes.input,}}
+                                        InputLabelProps={{
+                                            classes: {
+                                                root: classes.formTextLabel
+                                            }
+                                        }}
                                         required 
                                     />
                                     <div style={{marginTop:42,color:'#9C9C9C',fontSize:16, fontFamily:'Oxygen',marginBottom:5}}>PDF de información</div>
@@ -182,7 +239,7 @@ const Editar = ({producto}) => {
                                         
                                         <Grid id='pdfName'>&nbsp;{producto && producto.hojaDescriptiva && '- '+producto.hojaDescriptiva}</Grid>
                                     </Button>
-                                    {errors.productoPdf && <div style={{color:'red',fontSize:14,fontFamily:'Oxygen', marginBottom:15}}>{errors.productoPdf}</div>}
+                                    {errors.productoPdf && <div className="helper">{errors.productoPdf}</div>}
                                     <Grid container alignItems='center' className='crearProducto_buttons'>
                                         <InertiaLink href={route('dashboard.productos')} style={{fontFamily:'Oxygen',fontSize:12,fontWeight:'Bold',marginRight:25,color:'#FFFFFF',textDecoration:'none'}}>
                                             CANCELAR
@@ -191,6 +248,7 @@ const Editar = ({producto}) => {
                                             GUARDAR
                                         </Button>
                                     </Grid>
+                                    </MuiThemeProvider>
                                 </Grid>
                             </Grid>
                         </form>
