@@ -139,6 +139,7 @@ class PurchaseController extends Controller
                 //VARIABLES DE SESION
                 session(['eventoId' => $evento->id]);
                 session(['productoId' => $evento->product->id]);
+                session(['productoUuid' => $evento->product->uuid]);
                 session(['cantidad' => $request->values['cantidad']]);
                 session(['total' => $total]);
 
@@ -186,7 +187,7 @@ class PurchaseController extends Controller
 
         if (!$paymentId || !$payerId || !$token) {
             $status = "No se pudo proceder con el pago através de PayPal.";
-            return redirect()->route('evento', session('productoId'))->with(compact('status'));
+            return redirect()->route('evento', session('productoUuid'))->with(compact('status'));
         }
         $payment = Payment::get($paymentId, $this->apiContext);
 
@@ -220,16 +221,17 @@ class PurchaseController extends Controller
 
             //aqui acaba lo de registrar la venta en la bd
             Mail::to(auth()->user()->email)->send(new SendMailable($purchase->id));
-            $productoId = session('productoId');
+            $productoId = session('productoUuid');
             session()->forget('eventoId');
             session()->forget('cantidad');
             session()->forget('productoId');
+            session()->forget('productoUuid');
             session()->forget('total');
             $status = "Gracias! El pago a través de PayPal se ha procesado correctamente. Se te enviará un correo electrónico con los detalles de tu pedido.";
             return redirect()->route('evento', $productoId)->with(compact('status'));
         }
         $status = "Lo sentimos! El pago a través de PayPal no se pudo realizar.";
-        return redirect()->route('evento', session('productoId'))->with(compact('status'));
+        return redirect()->route('evento', session('productoUuid'))->with(compact('status'));
     }
 
     public function stripeIndex($idEvento)
@@ -300,7 +302,7 @@ class PurchaseController extends Controller
             session()->forget('eventoId');
 
             $status = "Gracias por tu compra! Se te enviará un correo electrónico con los detalles de tu pedido.";
-            return redirect()->route('evento', $evento->product->id)->with(compact('status'));
+            return redirect()->route('evento', $evento->product->uuid)->with(compact('status'));
         } catch (CardErrorException $e) {
             //throw $th;
             if ($e->getMessage() == 'Your card has insufficient funds.') {
