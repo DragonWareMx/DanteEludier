@@ -171,11 +171,13 @@ class PurchaseController extends Controller
                 } catch (PayPalConnectionException $ex) {
 
                     echo $ex->getData();
+
+                    dd($ex->getData());
                 }
             }
         }
 
-        $status = "Ha ocurrido un error inesperado no está entrando al else, intentalo mas tarde.";
+        $status = "Ha ocurrido un error inesperado, intentalo mas tarde.";
         return redirect()->back()->with(compact('status'));
     }
 
