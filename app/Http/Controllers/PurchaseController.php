@@ -125,7 +125,6 @@ class PurchaseController extends Controller
                 //----------------------aqui falta meter el item del descuento :v pero aun no estoy seguro de como funciona
                 $descuento = $evento->descuento * 100;
                 if ($descuento > 0) {
-                    dd($descuento);
                     $items[1] = new Item();
                     $items[1]->setName('Descuento del ' . $descuento . ' % ')
                         /** item name **/
@@ -176,7 +175,7 @@ class PurchaseController extends Controller
             }
         }
 
-        $status = "Ha ocurrido un error inesperado, intentalo mas tarde.";
+        $status = "Ha ocurrido un error inesperado no está entrando al else, intentalo mas tarde.";
         return redirect()->back()->with(compact('status'));
     }
 
