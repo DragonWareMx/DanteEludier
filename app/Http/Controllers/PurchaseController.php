@@ -131,8 +131,8 @@ class PurchaseController extends Controller
                         ->setCurrency('MXN')
                         ->setQuantity('1')
                         ->setPrice('-' . number_format(($evento->precio * ($evento->descuento)) *  $request->values['cantidad'], 2, ".", ""));
-                    $total = ($evento->precio * (1 - $evento->descuento)) * $request->values['cantidad'];
                 }
+                $total = ($evento->precio * (1 - $evento->descuento)) * $request->values['cantidad'];
                 $item_list = new ItemList();
                 $item_list->setItems($items);
 
@@ -171,8 +171,6 @@ class PurchaseController extends Controller
                 } catch (PayPalConnectionException $ex) {
 
                     echo $ex->getData();
-
-                    dd($ex->getData());
                 }
             }
         }
