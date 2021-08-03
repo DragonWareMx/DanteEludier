@@ -124,8 +124,8 @@ class PurchaseController extends Controller
                     ->setPrice(number_format($evento->precio, 2, ".", ""));
                 //----------------------aqui falta meter el item del descuento :v pero aun no estoy seguro de como funciona
                 $descuento = $evento->descuento * 100;
-                dd($descuento);
                 if ($descuento > 0) {
+                    dd($descuento);
                     $items[1] = new Item();
                     $items[1]->setName('Descuento del ' . $descuento . ' % ')
                         /** item name **/
