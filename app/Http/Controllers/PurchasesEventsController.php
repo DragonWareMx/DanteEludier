@@ -226,4 +226,25 @@ class PurchasesEventsController extends Controller
             return redirect()->route('ticket.index')->with(compact('status'));
         }
     }
+
+    public function delete($id)
+    {
+        \DB::beginTransaction();
+        try {
+            $purchase = Purchase::findOrFail($id);
+
+            $purchase->events()->detach();
+
+            $purchase->delete();
+
+            \DB::commit();
+            $status = "La compra seleccionada ha sido eliminada";
+            return redirect()->route('ticket.index')->with(compact('status'));
+        } catch (\Throwable $th) {
+           
+            \DB::rollBack();
+            $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
+            return redirect()->route('ticket.index')->with(compact('status'));
+        }
+    }
 }

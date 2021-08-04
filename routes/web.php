@@ -88,6 +88,7 @@ Route::name('ticket.')->group(function () {
     Route::get('/dashboard/boletos', [App\Http\Controllers\PurchasesEventsController::class, 'index'])->name('index')->middleware('admin');
     Route::get('/dashboard/boleto/{uuid}', [App\Http\Controllers\PurchasesEventsController::class, 'show'])->name('show')->middleware('admin');
     Route::patch('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'update'])->name('update')->middleware('admin');
+    Route::delete('/dashboard/boleto/{id}', [App\Http\Controllers\PurchasesEventsController::class, 'delete'])->name('delete')->middleware('admin');
 });
 
 Route::get('/dashboard/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.inicio');

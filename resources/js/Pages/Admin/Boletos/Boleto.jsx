@@ -25,13 +25,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Boleto = ({compra}) => {
 
     const [open, setOpen] = React.useState(false);
+    const [openD, setOpenD] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
+    //A los que se les agrega una D son para modal de eliminar
+    const handleClickOpenD = () => {
+        setOpenD(true);
+    }
+    
     const modalClose = () => {
         setOpen(false);
+    };
+
+    const modalCloseD = () => {
+        setOpenD(false);
     };
 
     const useStyles = makeStyles((theme) => ({
@@ -141,6 +151,9 @@ const Boleto = ({compra}) => {
                                 <Button variant="contained" onClick={handleClickOpen} className="btn-action">Marcar como pagado</Button>
                             </Grid>
                             }
+                            <Grid item xs={12} style={{display:'flex',justifyContent:'flex-end'}}>
+                                <Button variant="contained" onClick={handleClickOpenD} className="btn-action">Eliminar compra</Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                     
@@ -167,6 +180,30 @@ const Boleto = ({compra}) => {
                 </Button>
                 <InertiaLink onClick={modalClose} href={route('ticket.update', compra.id)} method="patch" as="button" className="btn-delete-modal">
                     MARCAR
+                </InertiaLink>
+            </DialogActions>
+        </Dialog>
+        {/* modal eliminar */}
+        <Dialog
+            open={openD}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={modalCloseD}
+            aria-labelledby={"modal-titulo"+compra.id}
+            aria-describedby={"modal-descripcion"+compra.id}
+        >
+            <DialogTitle id={"modal-titulo"+compra.id} className="modal-title-txt">{"¿Seguro que deseas eliminar la compra de "+compra.user.name+" ?"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id={"modal-descripcion"+compra.id} className="modal-content-txt">
+                    Una vez se haya eliminado, la acción no se podrá deshacer. Los boletos pertenecientes a esta compra también se eliminarán de la base de datos y volverán a estar disponibles esos lugares (siempre y cuando no haya pasado la fecha del evento).
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions style={{marginBottom:10, marginRight:10}}>
+                <Button onClick={modalCloseD} className="btn-cancel-modal">
+                    Cancelar
+                </Button>
+                <InertiaLink onClick={modalCloseD} href={route('ticket.delete', compra.id)} method="delete" as="button" className="btn-delete-modal">
+                    Eliminar
                 </InertiaLink>
             </DialogActions>
         </Dialog>
