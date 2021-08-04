@@ -142,7 +142,7 @@ export default function evento({evento}){
                     <Grid style={{marginRight:34, marginBottom:10}}>
                         {/* No se revisa que los boletos vendidos esten confirmados */}
                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS VENDIDOS</div>
-                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{evento.limite - evento.total} Boleto(s)</div>
+                        <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{evento.total} Boleto(s)</div> 
                     </Grid>
                     <Grid style={{marginRight:34, marginBottom:10}}>
                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>LIMITE DE BOLETOS</div>
