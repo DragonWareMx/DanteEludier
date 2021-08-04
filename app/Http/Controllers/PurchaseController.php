@@ -66,6 +66,12 @@ class PurchaseController extends Controller
         $evento = Event::with('product')->findOrFail($idEvento);
         if ($request->values['tipo_de_pago'] == 'Transferencia') {
             //se registra la venta en la BD en la tabla Purchases
+            $cupo = PurchasesEvents::where('event_id', $idEvento)->count();
+            $cupo = $cupo + $request->values['cantidad'];
+            if ($cupo > $evento->limite) {
+                $status = "Lo sentimos, el evento seleccionado ya no tiene espacios disponibles.";
+                return redirect()->back()->with(compact('status'));
+            }
 
             $total = ($evento->precio * $request->values['cantidad']) * (1 - ($evento->descuento));
 
@@ -94,9 +100,10 @@ class PurchaseController extends Controller
             return redirect()->back()->with(compact('status'));
         } else {
             //verificar que si haya cupo todavia
-            $cupo = PurchasesEvents::whereHas('purchase', function ($query) {
-                return $query->where('confirmed', '=', 1);
-            })->where('event_id', $idEvento)->count();
+            // $cupo = PurchasesEvents::whereHas('purchase', function ($query) {
+            //     return $query->where('confirmed', '=', 1);
+            // })->where('event_id', $idEvento)->count();
+            $cupo = PurchasesEvents::where('event_id', $idEvento)->count();
             $cupo = $cupo + $request->values['cantidad'];
             if ($cupo > $evento->limite) {
                 $status = "Lo sentimos, el evento seleccionado ya no tiene espacios disponibles.";
