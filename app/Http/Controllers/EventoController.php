@@ -89,7 +89,6 @@ class EventoController extends Controller
 
     public function diploma($uuid)
     {
-        //AGREGAR Y MODIFICAR CUANDO SE TENGA EL ATRIBUTO DE LA BASE DE DATOS PARA QUE SÓLO SE PUEDA SOLICITAR UNO POR BOLETO
         \Gate::authorize('haveaccess', 'client.perm');
         $compra_evento = PurchasesEvents::where('uuid', $uuid)->with('event', 'event.product', 'purchase', 'purchase.user', 'event.product.images')->first();
 
@@ -102,6 +101,12 @@ class EventoController extends Controller
             }
         } else return abort(403);
     }
+    public function diplomaGeneral()
+    {
+        \Gate::authorize('haveaccess', 'client.perm');
+        return Inertia::render('DiplomaAvatar');
+    }
+
 
     public function getDiploma(Request $request)
     {
@@ -138,6 +143,23 @@ class EventoController extends Controller
             'nombre' => $datos['data']['nombre'],
             'ciudad' => $compra_evento->event->ciudad,
             'fechas' => $fechaS
+        ];
+
+        $pdf = PDF::loadView('diploma', $data)->setPaper('letter');
+        return $pdf->download('diploma.pdf');
+    }
+
+    public function getAvatarPdf(Request $request)
+    {
+        //genera un diploma general de avatar, sin restricciones
+        
+        \Gate::authorize('haveaccess', 'client.perm');
+        $datos = $request->all();
+        dd($datos);
+        $data = [
+            'nombre' => $datos['data']['nombre'],
+            'ciudad' => 'Uruapan, Mich.',
+            'fechas' => '13, 14 y 15 de agosto de 2021'
         ];
 
         $pdf = PDF::loadView('diploma', $data)->setPaper('letter');

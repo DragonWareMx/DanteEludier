@@ -95,3 +95,9 @@ Route::get('/dashboard/inicio', [App\Http\Controllers\HomeController::class, 'in
 Route::get('/dashboard', function () {
     return redirect()->route('dashboard.inicio');
 });
+
+//Diploma general Avatar
+Route::get('/diploma-avatar', [App\Http\Controllers\EventoController::class, 'diplomaGeneral'])->name('diploma.general')->middleware('auth');
+Route::post('/getAvatar', [App\Http\Controllers\EventoController::class, 'getAvatarPdf'])->name('getDiploma.general');
+
+
