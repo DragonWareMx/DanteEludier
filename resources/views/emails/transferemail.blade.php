@@ -281,7 +281,7 @@
               <h4
                 style="margin: 0; font-size: 18px; font-weight: 400; letter-spacing: -1px; line-height: 30px;color: black; text-align: justify;">
                 Puedes transferir o depositar con los siguientes datos, luego envía tu comprobante al correo:
-                actividadespublicasdanteeludier@gmail.com y nos pondremos en contacto contigo para confirmar tu
+                actividadespublicasaxencapital@gmail.com y nos pondremos en contacto contigo para confirmar tu
                 asistencia.
               </h4>
               <br>
