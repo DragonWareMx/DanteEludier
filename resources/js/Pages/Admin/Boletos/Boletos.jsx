@@ -368,7 +368,7 @@ const Boletos = ({ tickets, request }) => {
                                         <TableCell>
                                             {ticket.user ?
                                                 <>
-                                                    {ticket.user.phone}
+                                                    <a href={"https://api.whatsapp.com/send?phone=52"+ticket.user.phone} style={{textDecoration:'none'}} target="_blank" >{ticket.user.phone}</a> 
                                                 </>
                                             :
                                                 "Sin teléfono"
