@@ -155,7 +155,7 @@ class EventoController extends Controller
         
         \Gate::authorize('haveaccess', 'client.perm');
         $datos = $request->all();
-        dd($datos);
+        
         $data = [
             'nombre' => $datos['data']['nombre'],
             'ciudad' => 'Uruapan, Mich.',
