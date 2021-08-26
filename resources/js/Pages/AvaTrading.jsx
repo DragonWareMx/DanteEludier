@@ -287,7 +287,7 @@ const AvaTrading =  () => {
 };
 
 AvaTrading.layout = (page) => (
-    <Layout children={page} title="Avatrading" pageTitle="Tu diploma" />
+    <Layout children={page} title="Avatrading" pageTitle="Avatrading" />
 );
 
 export default AvaTrading;
