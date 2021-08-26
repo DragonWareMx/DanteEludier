@@ -37,7 +37,7 @@ class WildcardController extends Controller
             if($request->instagram) $registro->instagram = $request->instagram;
         
             \DB::commit();
-            $status = "Registro exitoso de "+$request->nombre;
+            $status = "Se registró exitosamente tu asistencia";
             return redirect()->route('avatradingform')->with(compact('status'));
         } catch (\Throwable $th) {
             \DB::rollback();
