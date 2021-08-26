@@ -152,7 +152,7 @@ const AvaTrading =  () => {
                                     >
                                         ¡Bienvenido!
                                     </h3>
-                                    <strong style={{color:'#58ad6f'}}>Al dar clic en Registrarme aceptas los <Link rel="stylesheet" href={'/documentos/renuncia_responsabilidad'} target='_blank' style={{textDecoration: 'none'}}>Términos y condiciones del curso</Link> </strong>
+                                    <strong style={{color:'#58ad6f'}}>Al dar clic en Registrarme aceptas los <Link rel="stylesheet" href={'/documentos/renuncia_responsabilidad.pdf'} target='_blank' style={{textDecoration: 'none'}}>Términos y condiciones del curso</Link> </strong>
                                     <div className="d-flex pt-4">
                                         <AccountCircle
                                             className="align-self-end"
