@@ -119,7 +119,7 @@ class ProductController extends Controller
             
         } catch (\Throwable $th) {
             \DB::rollback();
-            dd($th);
+           
             $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
             return redirect()->route('dashboard.productos')->with(compact('status'));
         }
