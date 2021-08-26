@@ -97,8 +97,8 @@ const AvaTrading =  () => {
                 },
                 preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
             }
-        );
-        Inertia.reload()
+        )
+        
     }
 
     return (
