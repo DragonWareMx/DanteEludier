@@ -41,7 +41,8 @@ class WildcardController extends Controller
             return redirect()->route('avatradingform')->with(compact('status'));
         } catch (\Throwable $th) {
             \DB::rollback();
-            $status = $th;
+            dd($th);
+            $status = "Hubo un problema, inténtalo de nuevo";
             return redirect()->route('avatradingform')->with(compact('status'));
         }
     }
