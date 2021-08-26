@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout";
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import axios from 'axios';
 
 
 //componentes
@@ -41,6 +40,11 @@ import Grid from "@material-ui/core/Grid";
 
 import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import MailIcon from "@material-ui/icons/Mail";
+import PhoneIcon from "@material-ui/icons/Phone";
+import AddLocationIcon from '@material-ui/icons/AddLocation';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
 
 
 
@@ -158,7 +162,7 @@ const AvaTrading =  () => {
                                     >
                                         ¡Bienvenido!
                                     </h3>
-                                    <strong style={{color:'#58ad6f'}}>Al dar clic en Registrarme aceptas los <Link rel="stylesheet" href={'/documentos/renuncia_responsabilidad.pdf'} target='_blank' style={{textDecoration: 'none'}}>Términos y condiciones del curso</Link> </strong>
+                                    <strong style={{color:'#58ad6f'}}>Al dar clic en Registrarme aceptas los <Link rel="stylesheet" href={'/documentos/renuncia_responsabilidad.pdf'} target='_blank' style={{textDecoration: 'none'}}>Términos y condiciones</Link> del curso </strong>
                                     <div className="d-flex pt-4">
                                         <AccountCircle
                                             className="align-self-end"
@@ -179,7 +183,7 @@ const AvaTrading =  () => {
                                         }
                                     </div>
                                     <div className="d-flex pt-4">
-                                        <AccountCircle
+                                        <MailIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
                                         />
@@ -198,7 +202,7 @@ const AvaTrading =  () => {
                                         }
                                     </div>
                                     <div className="d-flex pt-4">
-                                        <AccountCircle
+                                        <PhoneIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
                                         />
@@ -217,7 +221,7 @@ const AvaTrading =  () => {
                                         }
                                     </div>
                                     <div className="d-flex pt-4">
-                                        <AccountCircle
+                                        <AddLocationIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
                                         />
@@ -236,7 +240,7 @@ const AvaTrading =  () => {
                                         }
                                     </div>
                                     <div className="d-flex pt-4">
-                                        <AccountCircle
+                                        <FacebookIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
                                         />
@@ -254,7 +258,7 @@ const AvaTrading =  () => {
                                         }
                                     </div>
                                     <div className="d-flex pt-4">
-                                        <AccountCircle
+                                        <InstagramIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
                                         />
