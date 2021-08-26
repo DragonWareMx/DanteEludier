@@ -84,7 +84,6 @@ const AvaTrading =  () => {
 
     //manda el forumulario
     function handleSubmit(e) {
-        e.preventDefault();
         const button = document.getElementById('boton-diploma');
         button.disabled = true;
         Inertia.post(route('avatradingcreate'), values,
