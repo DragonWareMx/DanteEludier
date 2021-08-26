@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Avatrading extends Model
 {
-    use HasFactory;
+    //use HasFactory;
+    public $timestamps = false;
 }
