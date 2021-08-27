@@ -20,7 +20,7 @@ class WildcardController extends Controller
         $request->validate([
             'nombre' => 'required|max:255|',
             'mail' => 'required|max:255|email',
-            'telefono' => 'required',
+            'telefono' => 'required|digits:10',
             'procedencia'=>'required|max:255|',
         ]);
 
