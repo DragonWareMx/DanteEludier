@@ -22,6 +22,8 @@ class WildcardController extends Controller
             'mail' => 'required|max:255|email',
             'telefono' => 'required|digits:10',
             'procedencia'=>'required|max:255|',
+            'facebook'=>'max:45',
+            'instagram'=>'max:45',
         ]);
 
         try {
