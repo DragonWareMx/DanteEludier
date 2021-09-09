@@ -202,26 +202,32 @@ class PurchasesEventsController extends Controller
 
     public function update(Request $request, $id)
     {
-        
         \Gate::authorize('haveaccess', 'admin.perm');
 
         \DB::beginTransaction();
         try {
             $purchase = Purchase::findOrFail($id);
             
-            $purchase->confirmed = 1;
-            $purchase->save();
+            // $purchase->confirmed = 1;
+            // $purchase->save();
             
 
             //Se envía mail con boletos
-            Mail::to($purchase->user->email)->send(new SendMailable($purchase->id));
+            if($request->mail){
+                Mail::to($request->mail)->send(new SendMailable($purchase->id));
+                
+            }
+            else{
+                Mail::to($purchase->user->email)->send(new SendMailable($purchase->id));
+            }
+            
             \DB::commit();
             $status = "El estatus de la compra se ha actualizado con éxito";
             return redirect()->route('ticket.index')->with(compact('status'));
         } catch (\Throwable $th) {
            
             \DB::rollBack();
-           
+            
             $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
             return redirect()->route('ticket.index')->with(compact('status'));
         }

@@ -1,7 +1,7 @@
 import React from 'react';
 import LayoutAdmin from "../../../layouts/LayoutAdmin";
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
-
+import { Inertia } from '@inertiajs/inertia';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -17,6 +17,8 @@ import "/css/boletos.css";
 import "/css/modal.css";
 import { toInteger } from 'lodash';
 
+import TextField from "@material-ui/core/TextField";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -27,6 +29,39 @@ const Boleto = ({compra}) => {
     const [open, setOpen] = React.useState(false);
     const [openD, setOpenD] = React.useState(false);
 
+    const { errors, status } = usePage().props;
+
+    const [values, setValues] = React.useState({
+        mail:'',
+    });
+
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        //const button = document.getElementById('boton-diploma');
+        //button.disabled = true;
+        Inertia.patch(route('ticket.update', compra.id), values,
+            {
+                // onError: () => {
+                //     button.disabled = false;
+                // },
+                // onSuccess: () => {
+                //     button.disabled = false;
+                // },
+                preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
+            }
+        )
+        // setValues({ ...values, 
+        //     nombre: '', 
+        //     mail:'',
+        //     telefono:'',
+        //     procedencia:'',
+        //     facebook:'',
+        //     instagram:'',});
+    }
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -64,6 +99,8 @@ const Boleto = ({compra}) => {
 
         return subtotal;
     }
+
+    
     return (
         <>
         <Grid container style={{marginTop:21, marginBottom:40}} >
@@ -167,21 +204,33 @@ const Boleto = ({compra}) => {
             onClose={modalClose}
             aria-labelledby={"modal-titulo"+compra.id}
             aria-describedby={"modal-descripcion"+compra.id}
-        >
-            <DialogTitle id={"modal-titulo"+compra.id} className="modal-title-txt">{"¿Seguro que deseas marcar la compra de "+compra.user.name+" como pagada?"}</DialogTitle>
-            <DialogContent>
-                <DialogContentText id={"modal-descripcion"+compra.id} className="modal-content-txt">
-                    Una vez se haya marcado, la acción no se podrá deshacer. El usuario recibirá su(s) boleto(s) al correo {compra.user.email}
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions style={{marginBottom:10, marginRight:10}}>
-                <Button onClick={modalClose} className="btn-cancel-modal">
-                    Cancelar
-                </Button>
-                <InertiaLink onClick={modalClose} href={route('ticket.update', compra.id)} method="patch" as="button" className="btn-delete-modal">
-                    MARCAR
-                </InertiaLink>
-            </DialogActions>
+        >  
+            <form onSubmit={handleSubmit}>
+                <DialogTitle id={"modal-titulo"+compra.id} className="modal-title-txt">{"¿Seguro que deseas marcar la compra de "+compra.user.name+" como pagada?"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id={"modal-descripcion"+compra.id} className="modal-content-txt">
+                        Una vez se haya marcado, la acción no se podrá deshacer. El usuario recibirá su(s) boleto(s) al correo {compra.user.email}
+                    </DialogContentText>
+                    <TextField
+                        error={errors.mail ? true : false}
+                        className="ml-2"
+                        id="mail"
+                        label="Si deseas enviar el boleto a otro correo electrónico, escríbelo aquí"
+                        fullWidth
+                        value={values.mail}
+                        onChange={handleChange('mail')}
+                    />
+
+                </DialogContent>
+                <DialogActions style={{marginBottom:10, marginRight:10}}>
+                    <Button onClick={modalClose} className="btn-cancel-modal">
+                        Cancelar
+                    </Button>
+                    <Button onClick={modalClose} type='submit' className="btn-delete-modal">
+                        MARCAR
+                    </Button>
+                </DialogActions>
+            </form>
         </Dialog>
         {/* modal eliminar */}
         <Dialog
