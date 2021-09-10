@@ -208,8 +208,8 @@ class PurchasesEventsController extends Controller
         try {
             $purchase = Purchase::findOrFail($id);
             
-            // $purchase->confirmed = 1;
-            // $purchase->save();
+            $purchase->confirmed = 1;
+            $purchase->save();
             
 
             //Se envía mail con boletos
