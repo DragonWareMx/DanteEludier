@@ -104,6 +104,7 @@ const Evento = ({ eventos }) => {
         const value = e.target.value;
         const descuento = e.target.name;
 
+        console.log(descuento)
         setEvento(evento => ({
             ...evento,
             evento: value,
