@@ -102,7 +102,7 @@ const Evento = ({ eventos }) => {
 
     const eventoChange = (e) => {
         const value = e.target.value;
-        const desc =0.0;
+        var desc =0.0;
 
         eventos.forEach(evento => {
             if(evento.id == value){
