@@ -397,7 +397,6 @@ const Evento = ({ eventos }) => {
                                             value={evento.evento}
                                             name={values.descuento}
                                             onChange={eventoChange}
-                                            displayEmpty
                                         >
                                             <MenuItem value="">
                                                 <em>Selecciona un evento</em>
