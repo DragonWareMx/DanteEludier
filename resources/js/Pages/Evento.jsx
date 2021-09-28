@@ -105,7 +105,7 @@ const Evento = ({ eventos }) => {
         const indice = e.target.name;
         console.log(eventos[indice]);
         console.log(eventos[indice].descuento)
-        
+
         setEvento(evento => ({
             ...evento,
             evento: value,
@@ -125,7 +125,7 @@ const Evento = ({ eventos }) => {
             ...values,
             cantidad: value,
         }))
-        
+
         setPrecio()
       }
 
@@ -159,7 +159,7 @@ const Evento = ({ eventos }) => {
                 precio: '',
             }))
         }
-        
+
         if(values.cantidad){
             if(values.precio)
             setValues(values => ({
@@ -312,7 +312,7 @@ const Evento = ({ eventos }) => {
                                         size="large"
                                     >
                                         SABER MÁS...
-                                     
+
                                     </RoundedButton>
                                     </Link>
                                 </div>
@@ -392,7 +392,7 @@ const Evento = ({ eventos }) => {
                                         variant="outlined"
                                         className="col-md-8"
                                     >
-                                        
+
                                         <Select
                                             labelId="demo-simple-select-outlined-label1"
                                             id="evento"
@@ -410,7 +410,7 @@ const Evento = ({ eventos }) => {
                                                 <MenuItem
                                                     key={evento.id}
                                                     value={evento.id}
-                                                    name={index}
+                                                    name={evento.descuento}
                                                 >
                                                     {evento.ciudad},{" "}
                                                     {evento.sede}
@@ -623,7 +623,7 @@ const Evento = ({ eventos }) => {
                                         descuento (en los eventos que apliquen) en tu compra.
                                     </small>
                                 </div>
-                                
+
                                 {!auth.user &&
                                 <div>
                                     <InertiaLink href="/register">

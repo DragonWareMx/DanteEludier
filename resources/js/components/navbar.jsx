@@ -313,6 +313,7 @@ export default function Navbar() {
                                     key="Logout"
                                     component="a"
                                     href='/logout'
+                                    method='post'
                                 >
                                     <ListItemIcon>
                                         <MeetingRoomIcon />
