@@ -101,9 +101,10 @@ const Evento = ({ eventos }) => {
     }
 
     const eventoChange = (e) => {
-        const value = e.target.value.id;
-        const desc = e.target.value.descuento;
-        console.log(value)
+        const value = e.target.value;
+        const desc = e.target.name.descuento;
+        console.log(e.target.name)
+
         setEvento(evento => ({
             ...evento,
             evento: value,
@@ -406,7 +407,8 @@ const Evento = ({ eventos }) => {
                                                 evento.total < evento.limite &&
                                                 <MenuItem
                                                     key={evento.id}
-                                                    value={evento}
+                                                    value={evento.id}
+                                                    name={evento}
                                                 >
                                                     {evento.ciudad},{" "}
                                                     {evento.sede}
