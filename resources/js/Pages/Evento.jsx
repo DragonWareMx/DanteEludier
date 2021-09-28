@@ -101,10 +101,15 @@ const Evento = ({ eventos }) => {
     }
 
     const eventoChange = (e) => {
-        console.log(e.target)
         const value = e.target.value;
-        const desc = e.target.name;
+        const desc;
 
+        eventos.forEach(evento => {
+            if(evento.id == value){
+                desc = evento.descuento;
+                break;
+            }
+        });
 
         setEvento(evento => ({
             ...evento,
@@ -398,7 +403,6 @@ const Evento = ({ eventos }) => {
                                             id="evento"
                                             value={evento.evento}
                                             onChange={eventoChange}
-                                            name={values.descuento}
                                             displayEmpty
                                         >
                                             <MenuItem value="">
@@ -410,7 +414,6 @@ const Evento = ({ eventos }) => {
                                                 <MenuItem
                                                     key={evento.id}
                                                     value={evento.id}
-                                                    name={evento.descuento}
                                                 >
                                                     {evento.ciudad},{" "}
                                                     {evento.sede}
