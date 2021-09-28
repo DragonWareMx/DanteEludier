@@ -396,8 +396,8 @@ const Evento = ({ eventos }) => {
                                             labelId="demo-simple-select-outlined-label1"
                                             id="evento"
                                             value={evento.evento}
-                                            onChange={eventoChange}
                                             name={values.descuento}
+                                            onChange={eventoChange}
                                             displayEmpty
                                         >
                                             <MenuItem value="">
@@ -408,7 +408,7 @@ const Evento = ({ eventos }) => {
                                                 evento.total < evento.limite &&
                                                 <MenuItem
                                                     key={evento.id}
-                                                    value={evento.id}
+                                                    value={evento}
                                                     name={evento.descuento}
                                                 >
                                                     {evento.ciudad},{" "}
