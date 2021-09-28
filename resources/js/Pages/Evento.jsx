@@ -102,9 +102,7 @@ const Evento = ({ eventos }) => {
 
     const eventoChange = (e) => {
         const value = e.target.value;
-        const indice = e.target.name;
-        console.log(eventos[indice]);
-        console.log(eventos[indice].descuento)
+        const descuento = e.target.name;
 
         setEvento(evento => ({
             ...evento,
@@ -112,7 +110,7 @@ const Evento = ({ eventos }) => {
         })),
         setValues(values =>({
             ...values,
-            descuento: eventos[indice].descuento,
+            descuento: descuento,
         }))
 
         setPrecio()
@@ -404,7 +402,7 @@ const Evento = ({ eventos }) => {
                                             <MenuItem value="">
                                                 <em>Selecciona un evento</em>
                                             </MenuItem>
-                                            {eventos.map((evento, index) => (
+                                            {eventos.map((evento) => (
                                                 [
                                                 evento.total < evento.limite &&
                                                 <MenuItem
