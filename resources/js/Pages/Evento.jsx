@@ -101,7 +101,7 @@ const Evento = ({ eventos }) => {
     }
 
     const eventoChange = (e) => {
-        console.log(e.target.name)
+        console.log(e.target)
         const value = e.target.value;
         const desc = e.target.name.descuento;
 
