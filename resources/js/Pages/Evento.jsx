@@ -102,16 +102,15 @@ const Evento = ({ eventos }) => {
 
     const eventoChange = (e) => {
         const value = e.target.value;
-        const descuento = e.target.name;
 
-        console.log(descuento)
+        console.log(value)
         setEvento(evento => ({
             ...evento,
-            evento: value,
+            evento: value.id,
         })),
         setValues(values =>({
             ...values,
-            descuento: descuento,
+            descuento: value.descuento,
         }))
 
         setPrecio()
@@ -409,7 +408,6 @@ const Evento = ({ eventos }) => {
                                                 <MenuItem
                                                     key={evento.id}
                                                     value={evento}
-                                                    name={evento.descuento}
                                                 >
                                                     {evento.ciudad},{" "}
                                                     {evento.sede}
