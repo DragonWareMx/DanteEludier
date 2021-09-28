@@ -101,9 +101,10 @@ const Evento = ({ eventos }) => {
     }
 
     const eventoChange = (e) => {
+        console.log(e.target.name)
         const value = e.target.value;
         const desc = e.target.name.descuento;
-        console.log(e.target.name)
+
 
         setEvento(evento => ({
             ...evento,
