@@ -409,7 +409,7 @@ const Evento = ({ eventos }) => {
                                                 <MenuItem
                                                     key={evento.id}
                                                     value={evento.id}
-                                                    name={evento}
+                                                    name={evento.descuento}
                                                 >
                                                     {evento.ciudad},{" "}
                                                     {evento.sede}
