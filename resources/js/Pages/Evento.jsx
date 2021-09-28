@@ -101,16 +101,16 @@ const Evento = ({ eventos }) => {
     }
 
     const eventoChange = (e) => {
-        const value = e.target.value;
-
+        const value = e.target.value.id;
+        const desc = e.target.value.descuento;
         console.log(value)
         setEvento(evento => ({
             ...evento,
-            evento: value.id,
+            evento: value,
         })),
         setValues(values =>({
             ...values,
-            descuento: value.descuento,
+            descuento: desc,
         }))
 
         setPrecio()
