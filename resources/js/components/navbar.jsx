@@ -311,7 +311,7 @@ export default function Navbar() {
                                 <ListItem
                                     button
                                     key="Logout"
-
+                                    component="a"
                                     method='post'
                                     href='/logout'
 
