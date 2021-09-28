@@ -398,6 +398,7 @@ const Evento = ({ eventos }) => {
                                             id="evento"
                                             value={evento.evento}
                                             onChange={eventoChange}
+                                            name={values.descuento}
                                             displayEmpty
                                         >
                                             <MenuItem value="">
