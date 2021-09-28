@@ -107,7 +107,6 @@ const Evento = ({ eventos }) => {
         eventos.forEach(evento => {
             if(evento.id == value){
                 desc = evento.descuento;
-                break;
             }
         });
 
