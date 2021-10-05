@@ -152,14 +152,14 @@ class EventoController extends Controller
     public function getAvatarPdf(Request $request)
     {
         //genera un diploma general de avatar, sin restricciones
-        
+
         \Gate::authorize('haveaccess', 'client.perm');
         $datos = $request->all();
-        
+
         $data = [
             'nombre' => $datos['data']['nombre'],
-            'ciudad' => 'Tantoyuca, Ver.',
-            'fechas' => '10, 11 y 12 de septiembre de 2021'
+            'ciudad' => 'Guadalajara, Jal.',
+            'fechas' => '1, 2 y 3 de octubre de 2021'
         ];
 
         $pdf = PDF::loadView('diploma', $data)->setPaper('letter');
