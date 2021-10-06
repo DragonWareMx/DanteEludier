@@ -73,6 +73,16 @@ class PurchaseController extends Controller
                 return redirect()->back()->with(compact('status'));
             }
 
+            $compra = Purchase::where([
+                ['confirmed', '=', 0],
+                ['user_id', '=', auth()->user()->id],
+                ['metodo_pago', '=', 'transferencia']
+            ])->first();
+            if ($compra) {
+                $status = "Tienes una solicitud pendiente, por favor revisa tu correo electrónico.";
+                return redirect()->back()->with(compact('status'));
+            }
+
             $total = ($evento->precio * $request->values['cantidad']) * (1 - ($evento->descuento));
 
             $purchase = new Purchase();
