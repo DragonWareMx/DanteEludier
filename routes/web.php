@@ -101,7 +101,7 @@ Route::get('/diploma-avatar', [App\Http\Controllers\EventoController::class, 'di
 Route::post('/getAvatar', [App\Http\Controllers\EventoController::class, 'getAvatarPdf'])->name('getDiploma.general');
 
 //Generar diplomas de cualquier avatar
-Route::get('/diploma-avatar', [App\Http\Controllers\EventoController::class, 'diplomasFecha'])->name('diploma.fecha')->middleware('auth');
+Route::get('/diploma-avatar-admin', [App\Http\Controllers\EventoController::class, 'diplomasFecha'])->name('diploma.fecha')->middleware('auth');
 Route::post('/get-diploma', [App\Http\Controllers\EventoController::class, 'getDiplomaFecha'])->name('getDiploma.fecha');
 
 

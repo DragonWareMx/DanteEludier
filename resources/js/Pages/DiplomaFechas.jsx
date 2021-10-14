@@ -98,7 +98,7 @@ const DiplomaFechas =  () => {
         e.preventDefault();
         const button = document.getElementById('boton-diploma');
         button.disabled = true;
-        axios.post('/getAvatar',
+        axios.post('/get-diploma',
             { data: values },
             { responseType: 'blob' })
             .then(res => {
