@@ -100,6 +100,10 @@ Route::get('/dashboard', function () {
 Route::get('/diploma-avatar', [App\Http\Controllers\EventoController::class, 'diplomaGeneral'])->name('diploma.general')->middleware('auth');
 Route::post('/getAvatar', [App\Http\Controllers\EventoController::class, 'getAvatarPdf'])->name('getDiploma.general');
 
+//Generar diplomas de cualquier avatar
+Route::get('/diploma-avatar', [App\Http\Controllers\EventoController::class, 'diplomasFecha'])->name('diploma.fecha')->middleware('auth');
+Route::post('/get-diploma', [App\Http\Controllers\EventoController::class, 'getDiplomaFecha'])->name('getDiploma.fecha');
+
 
 //Formulario registro Avatrading
 Route::get('/avatrading-registro', [App\Http\Controllers\WildcardController::class, 'formularioAvaT'])->name('avatradingform');

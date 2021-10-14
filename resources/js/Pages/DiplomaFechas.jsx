@@ -65,12 +65,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DiplomaAvatar =  () => {
+const DiplomaFechas =  () => {
     const { errors, status } = usePage().props;
 
     const [values, setValues] = React.useState({
         _method: 'post',
         nombre: '',
+        ciudad:'',
+        fecha:'',
     });
 
     const handleChange = (prop) => (event) => {
@@ -157,7 +159,7 @@ const DiplomaAvatar =  () => {
                                     >
                                         Escribe el nombre que aparecerá en tu diploma.
                                     </h3>
-                                    <strong style={{color:'#58ad6f'}}>Escribe tu nombre correctamente como quieres que aparezca en tu documento.</strong>
+                                    <strong style={{color:'#58ad6f'}}>Escribe correctamente el nombre, como quieres que aparezca en tu documento.</strong>
                                     <div className="d-flex pt-4">
                                         <AccountCircle
                                             className="align-self-end"
@@ -175,6 +177,48 @@ const DiplomaAvatar =  () => {
                                         />
                                         {errors.nombre &&
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.nombre}</FormHelperText>
+                                        }
+                                    </div>
+
+                                    <strong style={{color:'#58ad6f'}}>Escribe la ciudad.</strong>
+                                    <div className="d-flex pt-4">
+                                        <AccountCircle
+                                            className="align-self-end"
+                                            style={{ color: "#BFBFBF" }}
+                                        />
+                                        <TextField
+                                            error={errors.ciudad ? true : false}
+                                            className="ml-2"
+                                            id="ciudad"
+                                            label="Ciudad"
+                                            fullWidth
+                                            required
+                                            value={values.ciudad}
+                                            onChange={handleChange('ciudad')}
+                                        />
+                                        {errors.ciudad &&
+                                            <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.ciudad}</FormHelperText>
+                                        }
+                                    </div>
+
+                                    <strong style={{color:'#58ad6f'}}>Escribe las fechas (1,2 y 3 de julio, por ejemplo)</strong>
+                                    <div className="d-flex pt-4">
+                                        <AccountCircle
+                                            className="align-self-end"
+                                            style={{ color: "#BFBFBF" }}
+                                        />
+                                        <TextField
+                                            error={errors.fecha ? true : false}
+                                            className="ml-2"
+                                            id="fecha"
+                                            label="Fecha"
+                                            fullWidth
+                                            required
+                                            value={values.fecha}
+                                            onChange={handleChange('fecha')}
+                                        />
+                                        {errors.fecha &&
+                                            <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.fecha}</FormHelperText>
                                         }
                                     </div>
                                     <div className="d-flex justify-content-center justify-content-md-end pb-4 pb-md-0">
@@ -199,8 +243,8 @@ const DiplomaAvatar =  () => {
     );
 };
 
-DiplomaAvatar.layout = (page) => (
+DiplomaFechas.layout = (page) => (
     <Layout children={page} title="Tu diploma" pageTitle="Tu diploma" />
 );
 
-export default DiplomaAvatar;
+export default DiplomaFechas;

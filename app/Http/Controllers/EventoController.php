@@ -165,4 +165,28 @@ class EventoController extends Controller
         $pdf = PDF::loadView('diploma', $data)->setPaper('letter');
         return $pdf->download('diploma.pdf');
     }
+
+    public function diplomasFecha()
+    {
+        \Gate::authorize('haveaccess', 'admin.perm');
+        return Inertia::render('DiplomaFechas');
+    }
+
+    public function getDiplomaFecha(Request $request)
+    {
+        //genera un diploma general de avatar, sin restricciones
+
+        \Gate::authorize('haveaccess', 'admin.perm');
+        $datos = $request->all();
+
+        $data = [
+            'nombre' => $datos['data']['nombre'],
+            'ciudad' => $datos['data']['ciudad'],
+            'fechas' => $datos['data']['fecha'],
+        ];
+
+        $pdf = PDF::loadView('diploma', $data)->setPaper('letter');
+        return $pdf->download('diploma.pdf');
+    }
+
 }
