@@ -209,11 +209,12 @@ const Boleto = ({compra}) => {
             aria-labelledby={"modal-titulo"+compra.id}
             aria-describedby={"modal-descripcion"+compra.id}
         >
+            {!compra.confirmed ?
             <form onSubmit={handleSubmit}>
                 <DialogTitle id={"modal-titulo"+compra.id} className="modal-title-txt">{"¿Seguro que deseas marcar la compra de "+compra.user.name+" como pagada?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id={"modal-descripcion"+compra.id} className="modal-content-txt">
-                        Una vez se haya marcado, la acción no se podrá deshacer. El usuario recibirá su(s) boleto(s) al correo {compra.user.email}
+                        Una vez se haya marcado como pagado, la acción no se podrá deshacer. El usuario recibirá su(s) boleto(s) al correo {compra.user.email}
                     </DialogContentText>
                     <TextField
                         error={errors.mail ? true : false}
@@ -224,17 +225,43 @@ const Boleto = ({compra}) => {
                         value={values.mail}
                         onChange={handleChange('mail')}
                     />
-
                 </DialogContent>
                 <DialogActions style={{marginBottom:10, marginRight:10}}>
                     <Button onClick={modalClose} className="btn-cancel-modal">
                         Cancelar
                     </Button>
                     <Button onClick={modalClose} type='submit' className="btn-delete-modal">
-                        MARCAR
+                        Marcar
                     </Button>
                 </DialogActions>
             </form>
+            :
+            <form onSubmit={handleSubmit}>
+                <DialogTitle id={"modal-titulo"+compra.id} className="modal-title-txt">{"¿Quieres reenviar los boletos de "+compra.user.name+"?"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id={"modal-descripcion"+compra.id} className="modal-content-txt">
+                        El usuario recibirá su(s) boleto(s) al correo {compra.user.email}
+                    </DialogContentText>
+                    <TextField
+                        error={errors.mail ? true : false}
+                        className="ml-2"
+                        id="mail"
+                        label="Si deseas enviar el boleto a otro correo electrónico, escríbelo aquí"
+                        fullWidth
+                        value={values.mail}
+                        onChange={handleChange('mail')}
+                    />
+                </DialogContent>
+                <DialogActions style={{marginBottom:10, marginRight:10}}>
+                    <Button onClick={modalClose} className="btn-cancel-modal">
+                        Cancelar
+                    </Button>
+                    <Button onClick={modalClose} type='submit' className="btn-delete-modal">
+                        Enviar
+                    </Button>
+                </DialogActions>
+            </form>
+            }
         </Dialog>
         {/* modal eliminar */}
         <Dialog
