@@ -54,8 +54,8 @@ const Boleto = ({compra}) => {
                 preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
             }
         )
-        // setValues({ ...values, 
-        //     nombre: '', 
+        // setValues({ ...values,
+        //     nombre: '',
         //     mail:'',
         //     telefono:'',
         //     procedencia:'',
@@ -70,7 +70,7 @@ const Boleto = ({compra}) => {
     const handleClickOpenD = () => {
         setOpenD(true);
     }
-    
+
     const modalClose = () => {
         setOpen(false);
     };
@@ -89,7 +89,7 @@ const Boleto = ({compra}) => {
 
     const classes = useStyles();
 
-    
+
     function subTotal(boletos){
         let subtotal = 0;
 
@@ -100,7 +100,7 @@ const Boleto = ({compra}) => {
         return subtotal;
     }
 
-    
+
     return (
         <>
         <Grid container style={{marginTop:21, marginBottom:40}} >
@@ -147,7 +147,7 @@ const Boleto = ({compra}) => {
                                     <Grid item xs={12} className="txt-info" style={{fontWeight:'bold'}}>${compra.total} MXN</Grid>
                                 </Grid>
                             </Grid>
-                            
+
                         </Grid>
 
                         <Grid item xs={12} md={4} className="grid-boleto-compra">
@@ -183,9 +183,13 @@ const Boleto = ({compra}) => {
                                 <Grid item xs={12} className="title-info">TELÉFONO</Grid>
                                 <Grid item xs={12} className="txt-info">{compra.user.phone}</Grid>
                             </Grid>
-                            {!compra.confirmed &&            
+                            {!compra.confirmed ?
                             <Grid item xs={12} style={{display:'flex',justifyContent:'flex-end'}}>
                                 <Button variant="contained" onClick={handleClickOpen} className="btn-action">Marcar como pagado</Button>
+                            </Grid>
+                            :
+                            <Grid item xs={12} style={{display:'flex',justifyContent:'flex-end'}}>
+                                <Button variant="contained" onClick={handleClickOpen} className="btn-action">Enviar boleto (s) nuevamente</Button>
                             </Grid>
                             }
                             <Grid item xs={12} style={{display:'flex',justifyContent:'flex-end'}}>
@@ -193,7 +197,7 @@ const Boleto = ({compra}) => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    
+
                 </Paper>
             </Grid>
         </Grid>
@@ -204,7 +208,7 @@ const Boleto = ({compra}) => {
             onClose={modalClose}
             aria-labelledby={"modal-titulo"+compra.id}
             aria-describedby={"modal-descripcion"+compra.id}
-        >  
+        >
             <form onSubmit={handleSubmit}>
                 <DialogTitle id={"modal-titulo"+compra.id} className="modal-title-txt">{"¿Seguro que deseas marcar la compra de "+compra.user.name+" como pagada?"}</DialogTitle>
                 <DialogContent>
@@ -256,7 +260,7 @@ const Boleto = ({compra}) => {
                 </InertiaLink>
             </DialogActions>
         </Dialog>
-        </>  
+        </>
     )
 }
 
