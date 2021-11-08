@@ -158,8 +158,8 @@ class EventoController extends Controller
 
         $data = [
             'nombre' => $datos['data']['nombre'],
-            'ciudad' => 'Ciudad de México',
-            'fechas' => '15, 16 y 17 de octubre de 2021'
+            'ciudad' => 'León, Gto.',
+            'fechas' => '5, 6 y 7 de noviembre de 2021'
         ];
 
         $pdf = PDF::loadView('diploma', $data)->setPaper('letter');
