@@ -8,16 +8,6 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 //componentes
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FileDownload from 'js-file-download';
 
 
 
@@ -43,8 +33,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import PhoneIcon from "@material-ui/icons/Phone";
 import AddLocationIcon from '@material-ui/icons/AddLocation';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
 
 
 
@@ -69,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const AvaTrading =  () => {
+const AvatarRegistro =  () => {
     const { errors, status } = usePage().props;
 
     const [values, setValues] = React.useState({
@@ -78,8 +66,6 @@ const AvaTrading =  () => {
         mail:'',
         telefono:'',
         procedencia:'',
-        facebook:'',
-        instagram:'',
     });
 
     const handleChange = (prop) => (event) => {
@@ -91,7 +77,7 @@ const AvaTrading =  () => {
         e.preventDefault();
         const button = document.getElementById('boton-diploma');
         button.disabled = true;
-        Inertia.post(route('avatradingcreate'), values,
+        Inertia.post(route('avatar.create'), values,
             {
                 onError: () => {
                     button.disabled = false;
@@ -107,8 +93,7 @@ const AvaTrading =  () => {
             mail:'',
             telefono:'',
             procedencia:'',
-            facebook:'',
-            instagram:'',});
+            });
     }
 
     return (
@@ -136,7 +121,7 @@ const AvaTrading =  () => {
                             fontFamily: "Roboto Slab",
                         }}
                     >
-                        Avatrading - Registro
+                        Avatar - Registro
                     </h1>
                 </div>
                 {/* CARD DE PRODUCTOS */}
@@ -229,7 +214,7 @@ const AvaTrading =  () => {
                                             error={errors.procedencia ? true : false}
                                             className="ml-2"
                                             id="procedencia"
-                                            label="Procedencia (sucursal)"
+                                            label="Procedencia (ciudad de origen)"
                                             fullWidth
                                             required
                                             value={values.procedencia}
@@ -239,42 +224,7 @@ const AvaTrading =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.procedencia}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-4">
-                                        <FacebookIcon
-                                            className="align-self-end"
-                                            style={{ color: "#BFBFBF" }}
-                                        />
-                                        <TextField
-                                            error={errors.facebook ? true : false}
-                                            className="ml-2"
-                                            id="facebook"
-                                            label="Facebook"
-                                            fullWidth
-                                            value={values.facebook}
-                                            onChange={handleChange('facebook')}
-                                        />
-                                        {errors.facebook &&
-                                            <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.facebook}</FormHelperText>
-                                        }
-                                    </div>
-                                    <div className="d-flex pt-4">
-                                        <InstagramIcon
-                                            className="align-self-end"
-                                            style={{ color: "#BFBFBF" }}
-                                        />
-                                        <TextField
-                                            error={errors.instagram ? true : false}
-                                            className="ml-2"
-                                            id="instagram"
-                                            label="Instagram"
-                                            fullWidth
-                                            value={values.instagram}
-                                            onChange={handleChange('instagram')}
-                                        />
-                                        {errors.instagram &&
-                                            <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.instagram}</FormHelperText>
-                                        }
-                                    </div>
+
                                     <div className="d-flex justify-content-center justify-content-md-end pb-4 pb-md-0">
                                         <ColorButton
                                             variant="contained"
@@ -297,8 +247,8 @@ const AvaTrading =  () => {
     );
 };
 
-AvaTrading.layout = (page) => (
-    <Layout children={page} title="Avatrading" pageTitle="Avatrading" />
+AvatarRegistro.layout = (page) => (
+    <Layout children={page} title="Avatar - Registro" pageTitle="Bienvenido al Avatar" />
 );
 
-export default AvaTrading;
+export default AvatarRegistro;
