@@ -42,11 +42,11 @@ class WildcardController extends Controller
             $registro->save();
             \DB::commit();
             $status = "Se registró exitosamente tu asistencia";
-            return redirect()->route('avatar.form')->with(compact('status'));
+            return redirect()->route('avatradingform')->with(compact('status'));
         } catch (\Throwable $th) {
             \DB::rollback();
             $status = "Hubo un problema, inténtalo de nuevo";
-            return redirect()->route('avatar.form')->with(compact('status'));
+            return redirect()->route('avatradingform')->with(compact('status'));
         }
     }
 
@@ -77,12 +77,12 @@ class WildcardController extends Controller
             $registro->save();
             \DB::commit();
             $status = "Se registró exitosamente tu asistencia";
-            return redirect()->route('avatradingform')->with(compact('status'));
+            return redirect()->route('avatar.form')->with(compact('status'));
         } catch (\Throwable $th) {
             \DB::rollback();
             dd($th);
             $status = "Hubo un problema, inténtalo de nuevo";
-            return redirect()->route('avatradingform')->with(compact('status'));
+            return redirect()->route('avatar.form')->with(compact('status'));
         }
     }
 }
