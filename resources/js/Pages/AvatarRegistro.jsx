@@ -82,19 +82,22 @@ const AvatarRegistro =  () => {
             {
                 onError: () => {
                     button.disabled = false;
+
                 },
                 onSuccess: () => {
                     button.disabled = false;
+                    setValues({ ...values,
+                        nombre: '',
+                        apellidos:'',
+                        mail:'',
+                        telefono:'',
+                        procedencia:'',
+                        });
                 },
                 preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
             }
         )
-        setValues({ ...values,
-            nombre: '',
-            mail:'',
-            telefono:'',
-            procedencia:'',
-            });
+
     }
 
     return (
