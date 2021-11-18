@@ -58,16 +58,18 @@ class WildcardController extends Controller
     public function registrarAvatar(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|max:255|',
-            'mail' => 'required|max:255|email',
-            'telefono' => 'required|digits:10',
-            'procedencia'=>'required|max:255|',
+            'nombre' => ['required|max:25', 'regex:/^[A-Za-z0-9À-ÖØ-öø-ÿ_! \"#$%&\'()*+,\-.\\:\/;=?@^_]+$/'],
+            'apellidos'=> ['required|max:50', 'regex:/^[A-Za-z0-9À-ÖØ-öø-ÿ_! \"#$%&\'()*+,\-.\\:\/;=?@^_]+$/'],
+            'mail' => 'required|email',
+            'telefono' => ['required|max:25','regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.0-9]*$/i','min:10'],
+            'procedencia'=>'required|max:210|',
         ]);
 
         try {
             \DB::beginTransaction();
             $registro = new Avatar();
             $registro->nombre = $request->nombre;
+            $registro->apellidos = $request->apellidos;
             $registro->mail = $request->mail;
             $registro->telefono =$request->telefono;
             $registro->procedencia =$request->procedencia;

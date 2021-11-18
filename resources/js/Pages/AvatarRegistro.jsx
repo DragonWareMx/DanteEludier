@@ -63,6 +63,7 @@ const AvatarRegistro =  () => {
     const [values, setValues] = React.useState({
         _method: 'post',
         nombre: '',
+        apellidos:'',
         mail:'',
         telefono:'',
         procedencia:'',
@@ -157,7 +158,7 @@ const AvatarRegistro =  () => {
                                             error={errors.nombre ? true : false}
                                             className="ml-2"
                                             id="nombre"
-                                            label="Nombre"
+                                            label="Nombre(s)"
                                             fullWidth
                                             required
                                             value={values.nombre}
@@ -165,6 +166,25 @@ const AvatarRegistro =  () => {
                                         />
                                         {errors.nombre &&
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.nombre}</FormHelperText>
+                                        }
+                                    </div>
+                                    <div className="d-flex pt-4">
+                                        <AccountCircle
+                                            className="align-self-end"
+                                            style={{ color: "#BFBFBF" }}
+                                        />
+                                        <TextField
+                                            error={errors.apellidos ? true : false}
+                                            className="ml-2"
+                                            id="apellidos"
+                                            label="Apellidos"
+                                            fullWidth
+                                            required
+                                            value={values.apellidos}
+                                            onChange={handleChange('apellidos')}
+                                        />
+                                        {errors.nombre &&
+                                            <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.apellidos}</FormHelperText>
                                         }
                                     </div>
                                     <div className="d-flex pt-4">
