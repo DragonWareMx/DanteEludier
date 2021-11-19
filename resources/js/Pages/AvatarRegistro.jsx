@@ -33,8 +33,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import PhoneIcon from "@material-ui/icons/Phone";
 import AddLocationIcon from '@material-ui/icons/AddLocation';
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import MedicationIcon from '@mui/icons-material/Medication';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import MedicationIcon from '@material-ui/icons/Medication';
 
 
 
