@@ -162,7 +162,7 @@ const AvatarRegistro =  () => {
 
                                     {/* </Link> del curso */}
                                     </strong>
-                                    <div className="d-flex pt-4">
+                                    <div className="d-flex pt-1">
                                         <AccountCircle
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -181,7 +181,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.nombre}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-4">
+                                    <div className="d-flex pt-1">
                                         <AccountCircle
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -200,7 +200,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.apellidos}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-4">
+                                    <div className="d-flex pt-1">
                                         <MailIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -219,7 +219,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.mail}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-4">
+                                    <div className="d-flex pt-1">
                                         <PhoneIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -238,7 +238,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.telefono}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-4">
+                                    <div className="d-flex pt-1">
                                         <AddLocationIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -259,7 +259,7 @@ const AvatarRegistro =  () => {
                                     </div>
 
                                     {/* Alergias y enfermedades */}
-                                    <div className="d-flex pt-4">
+                                    <div className="d-flex pt-1">
                                         <LocalHospitalIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -277,7 +277,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.alergias_o_enfermedades}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-4">
+                                    <div className="d-flex pt-1">
                                         <AssignmentIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
