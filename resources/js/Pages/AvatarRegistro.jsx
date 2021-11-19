@@ -270,7 +270,6 @@ const AvatarRegistro =  () => {
                                             id="alergias_o_enfermedades"
                                             label="¿Padeces alguna alergia o enfermedad crónica?"
                                             fullWidth
-                                            required
                                             value={values.alergias_o_enfermedades}
                                             onChange={handleChange('alergias_o_enfermedades')}
                                         />
@@ -287,9 +286,8 @@ const AvatarRegistro =  () => {
                                             error={errors.medicamentos ? true : false}
                                             className="ml-2"
                                             id="medicamentos"
-                                            label="Si tomas algún medicamento menciona cuál y si es controlado"
+                                            label="¿Tomas medicamento?, ¿es controlado?"
                                             fullWidth
-                                            required
                                             value={values.medicamentos}
                                             onChange={handleChange('medicamentos')}
                                         />
