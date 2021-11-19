@@ -157,9 +157,9 @@ const AvatarRegistro =  () => {
                                     >
                                         ¡Bienvenido!
                                     </h3>
-                                    <strong style={{color:'#58ad6f'}}>Al dar clic en Registrarme aceptas los
+                                    <strong style={{color:'#75bbe0', fontFamily: 'Roboto Slab', fontSize: '20px'}}>Al dar clic en Registrarme aceptas los Términos y condiciones
                                     {/* <Link rel="stylesheet" href={'/documentos/renuncia_responsabilidad.pdf'} target='_blank' style={{textDecoration: 'none'}}> */}
-                                        Términos y condiciones
+
                                     {/* </Link> del curso */}
                                     </strong>
                                     <div className="d-flex pt-4">
