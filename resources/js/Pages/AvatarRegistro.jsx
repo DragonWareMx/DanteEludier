@@ -157,12 +157,12 @@ const AvatarRegistro =  () => {
                                     >
                                         ¡Bienvenido!
                                     </h3>
-                                    <strong style={{color:'#75bbe0', fontFamily: 'Roboto Slab', fontSize: '10px'}}>Al dar clic en Registrarme aceptas los Términos y condiciones
+                                    <strong style={{color:'#75bbe0', fontFamily: 'Roboto Slab', fontSize: '20px'}}>Al dar clic en Registrarme aceptas los Términos y condiciones
                                     {/* <Link rel="stylesheet" href={'/documentos/renuncia_responsabilidad.pdf'} target='_blank' style={{textDecoration: 'none'}}> */}
 
                                     {/* </Link> del curso */}
                                     </strong>
-                                    <div className="d-flex pt-1">
+                                    <div className="d-flex pt-4">
                                         <AccountCircle
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -181,7 +181,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.nombre}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-1">
+                                    <div className="d-flex pt-4">
                                         <AccountCircle
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -200,7 +200,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.apellidos}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-1">
+                                    <div className="d-flex pt-4">
                                         <MailIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -219,7 +219,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.mail}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-1">
+                                    <div className="d-flex pt-4">
                                         <PhoneIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -238,7 +238,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.telefono}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-1">
+                                    <div className="d-flex pt-4">
                                         <AddLocationIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -259,7 +259,7 @@ const AvatarRegistro =  () => {
                                     </div>
 
                                     {/* Alergias y enfermedades */}
-                                    <div className="d-flex pt-1">
+                                    <div className="d-flex pt-4">
                                         <LocalHospitalIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
@@ -277,7 +277,7 @@ const AvatarRegistro =  () => {
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.alergias_o_enfermedades}</FormHelperText>
                                         }
                                     </div>
-                                    <div className="d-flex pt-1">
+                                    <div className="d-flex pt-4">
                                         <AssignmentIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
