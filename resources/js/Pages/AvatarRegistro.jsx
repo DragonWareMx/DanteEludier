@@ -34,7 +34,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import PhoneIcon from "@material-ui/icons/Phone";
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
-import MedicationIcon from '@material-ui/icons/Medication';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 
 
@@ -279,7 +279,7 @@ const AvatarRegistro =  () => {
                                         }
                                     </div>
                                     <div className="d-flex pt-4">
-                                        <MedicationIcon
+                                        <AssignmentIcon
                                             className="align-self-end"
                                             style={{ color: "#BFBFBF" }}
                                         />
