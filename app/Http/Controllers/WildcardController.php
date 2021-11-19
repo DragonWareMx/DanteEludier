@@ -63,6 +63,8 @@ class WildcardController extends Controller
             'mail' => 'required|email',
             'telefono' => ['required','max:25','regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.0-9]*$/i','min:10'],
             'procedencia'=>'required|max:210',
+            'alergias_o_enfermedades' => 'nullable|max:250',
+            'medicamentos' => 'nullable|max:250'
         ]);
 
         try {
@@ -73,8 +75,13 @@ class WildcardController extends Controller
             $registro->mail = $request->mail;
             $registro->telefono =$request->telefono;
             $registro->procedencia =$request->procedencia;
+
             $registro->ciudad= "Cuernavaca, Mor.";
             $registro->fechas= "19,20 y 21 de noviembre de 2021";
+
+            if($request->medicamentos) $registro->medicamentos = $request->medicamentos;
+
+            if($request->alergias_o_enfermedades) $registro->enfermedades = $request->alergias_o_enfermedades;
 
             $registro->save();
             \DB::commit();

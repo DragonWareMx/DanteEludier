@@ -33,6 +33,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import PhoneIcon from "@material-ui/icons/Phone";
 import AddLocationIcon from '@material-ui/icons/AddLocation';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import MedicationIcon from '@mui/icons-material/Medication';
 
 
 
@@ -67,6 +69,8 @@ const AvatarRegistro =  () => {
         mail:'',
         telefono:'',
         procedencia:'',
+        alergias_o_enfermedades:'',
+        medicamentos:'',
     });
 
     const handleChange = (prop) => (event) => {
@@ -92,6 +96,8 @@ const AvatarRegistro =  () => {
                         mail:'',
                         telefono:'',
                         procedencia:'',
+                        alergias_o_enfermedades:'',
+                        medicamentos:'',
                         });
                 },
                 preserveScroll: (page) => Object.keys([page.props.status, page.props.errors]).length,
@@ -151,7 +157,11 @@ const AvatarRegistro =  () => {
                                     >
                                         ¡Bienvenido!
                                     </h3>
-                                    <strong style={{color:'#58ad6f'}}>Al dar clic en Registrarme aceptas los <Link rel="stylesheet" href={'/documentos/renuncia_responsabilidad.pdf'} target='_blank' style={{textDecoration: 'none'}}>Términos y condiciones</Link> del curso </strong>
+                                    <strong style={{color:'#58ad6f'}}>Al dar clic en Registrarme aceptas los
+                                    {/* <Link rel="stylesheet" href={'/documentos/renuncia_responsabilidad.pdf'} target='_blank' style={{textDecoration: 'none'}}> */}
+                                        Términos y condiciones
+                                    {/* </Link> del curso */}
+                                    </strong>
                                     <div className="d-flex pt-4">
                                         <AccountCircle
                                             className="align-self-end"
@@ -245,6 +255,46 @@ const AvatarRegistro =  () => {
                                         />
                                         {errors.procedencia &&
                                             <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.procedencia}</FormHelperText>
+                                        }
+                                    </div>
+
+                                    {/* Alergias y enfermedades */}
+                                    <div className="d-flex pt-4">
+                                        <LocalHospitalIcon
+                                            className="align-self-end"
+                                            style={{ color: "#BFBFBF" }}
+                                        />
+                                        <TextField
+                                            error={errors.alergias_o_enfermedades ? true : false}
+                                            className="ml-2"
+                                            id="alergias_o_enfermedades"
+                                            label="¿Padeces alguna alergia o enfermedad crónica?"
+                                            fullWidth
+                                            required
+                                            value={values.alergias_o_enfermedades}
+                                            onChange={handleChange('alergias_o_enfermedades')}
+                                        />
+                                        {errors.alergias_o_enfermedades &&
+                                            <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.alergias_o_enfermedades}</FormHelperText>
+                                        }
+                                    </div>
+                                    <div className="d-flex pt-4">
+                                        <MedicationIcon
+                                            className="align-self-end"
+                                            style={{ color: "#BFBFBF" }}
+                                        />
+                                        <TextField
+                                            error={errors.medicamentos ? true : false}
+                                            className="ml-2"
+                                            id="medicamentos"
+                                            label="Si tomas algún medicamento menciona cuál y si es controlado"
+                                            fullWidth
+                                            required
+                                            value={values.medicamentos}
+                                            onChange={handleChange('medicamentos')}
+                                        />
+                                        {errors.medicamentos &&
+                                            <FormHelperText id="component-error-text" style={{ color: 'red' }}>{errors.medicamentos}</FormHelperText>
                                         }
                                     </div>
 
