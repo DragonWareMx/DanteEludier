@@ -191,7 +191,7 @@ const AgregarEvento = ({producto}) => {
                     <Grid item xs={12} sm={8} className="producto_info evento-edit-info">
 
                         <Grid container alignItems='center' style={{flexWrap:'wrap-reverse'}}>
-                            <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',producto.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{producto.titulo}</InertiaLink></Grid>
+                            <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',producto.uuid)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{producto.titulo}</InertiaLink></Grid>
                         </Grid>
 
                         <form className='crearProducto_form' noValidate autoComplete="off" onSubmit={handleSubmit} style={{display:'flex', flexWrap:'wrap'}}>
