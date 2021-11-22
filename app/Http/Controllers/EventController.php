@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Inertia\Inertia; 
+use Inertia\Inertia;
 use App\Models\Event;
 use App\Models\Date;
 use App\Models\Product;
@@ -33,18 +33,18 @@ class EventController extends Controller
                         ->leftJoin('purchases_events','events.id', '=','purchases_events.event_id')
                         ->leftJoin('purchases','purchases_events.purchase_id', '=','purchases.id')
                         ->selectRaw('product_images.foto ,products.titulo,events.ciudad,events.sede,
-                        events.precio,events.descuento,events.id,events.limite, 
+                        events.precio,events.descuento,events.id,events.limite,
                         COUNT(purchases_events.event_id) AS total')
                         ->groupBy('product_images.foto','products.titulo','events.ciudad','events.sede','events.precio','events.descuento','events.id','events.limite')
                         ->OrderBy('products.titulo')
                         ->paginate(4);
-        
+
                         // dd($eventos);
 
         return Inertia::render('Admin/Eventos/Eventos',['eventos' => $eventos]);
     }
 
-    public function show($id){ 
+    public function show($id){
         $evento=Event::join('products', 'events.product_id', 'products.id')
                         ->join('product_images','products.id','product_images.product_id')
                         ->with('dates')
@@ -84,7 +84,7 @@ class EventController extends Controller
 
             //SE HACE COMMIT
             DB::commit();
-            
+
             $status = "El evento ha sido actualizado con éxito";
             return redirect()->route('dashboard.events')->with(compact('status'));
             //REDIRECCIONA A LA VISTA DE EVENTOS
@@ -97,7 +97,7 @@ class EventController extends Controller
         }
     }
 
-    public function add($id){ 
+    public function add($id){
         // id del producto
         $producto=Product::join('product_images','products.id','product_images.product_id')
                             ->select('product_images.foto', 'products.titulo','products.id')
@@ -146,7 +146,7 @@ class EventController extends Controller
 
             //SE HACE COMMIT
             DB::commit();
-            
+
             $status = "El evento ha sido creado con éxito";
             return redirect()->route('dashboard.events')->with(compact('status'));
             //REDIRECCIONA A LA VISTA DE EVENTOS
@@ -156,7 +156,7 @@ class EventController extends Controller
             dd($e);
             $status = "Hubo un problema al procesar tu solicitud. Inténtalo más tarde";
             return redirect()->route('dashboard.events')->with(compact('status'));
-        
+
         }
     }
 

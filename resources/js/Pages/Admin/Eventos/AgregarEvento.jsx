@@ -102,16 +102,16 @@ const AgregarEvento = ({producto}) => {
     };
 
     const handleDates = (event) => {
-        
+
         if (values.fecha_previa && values.hora_previa){
-            setValues(values=> ({ 
-                ...values, 
+            setValues(values=> ({
+                ...values,
                 fecha_y_hora_de_inicio: [...values.fecha_y_hora_de_inicio, values.fecha_previa],
                 hora_cierre: [...values.hora_cierre, values.hora_previa],
                 fecha_previa: "",
                 hora_previa: "",
             }));
-            
+
             document.getElementById('hora_previa').value ="";
             document.getElementById('fecha_previa').value ="";
             alert("La fecha "+values.fecha_previa+" con hora de cierre: "+values.hora_previa+" fue agregada al evento. Puedes agregar otra fecha si así lo deseas");
@@ -124,15 +124,15 @@ const AgregarEvento = ({producto}) => {
         // var arreglo = values.fecha_y_hora_de_inicio;
         // arreglo.forEach(fecha => {
         //      padre.innerHTML += "<p>"+fecha+"</p>"
-        // });        
+        // });
     };
 
     const deleteDates = () =>{
         alert("por el momento esta función no está disponible")
         // if(values.fecha_y_hora_de_inicio.length>0){
-        //     setValues(values=> { 
+        //     setValues(values=> {
         //         const [first, ...rest] = values.fecha_y_hora_de_inicio;
-                
+
         //         return {
         //             fecha_y_hora_de_inicio: rest,
         //         }
@@ -142,7 +142,7 @@ const AgregarEvento = ({producto}) => {
         // }
         // else {
         //     alert("No hay ninguna fecha que eliminar");
-        // }  
+        // }
     };
 
     function handleSubmit(e) {
@@ -183,13 +183,13 @@ const AgregarEvento = ({producto}) => {
                             <Alertas />
                         </div>
                     </Grid> */}
-                    
+
                     <Grid item xs={12} sm={4}>
                         <img src={producto.foto && "/img/productos/"+producto.foto} className="img-producto-edit" style={{width:'100%',height:'100%',maxHeight:446, objectFit:'cover', borderTopLeftRadius:4, borderBottomLeftRadius:4}}></img>
                     </Grid>
 
                     <Grid item xs={12} sm={8} className="producto_info evento-edit-info">
-                        
+
                         <Grid container alignItems='center' style={{flexWrap:'wrap-reverse'}}>
                             <Grid item xs={11}><InertiaLink  href={route('dashboard.producto',producto.id)} style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{producto.titulo}</InertiaLink></Grid>
                         </Grid>
@@ -198,13 +198,13 @@ const AgregarEvento = ({producto}) => {
                             <MuiThemeProvider theme={theme}>
                             <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
                                 <Grid item xs={12} sm={6}>
-                                                        
-                                                            <TextField  
-                                                                color="primary" 
-                                                                required 
-                                                                id="ciudad" 
+
+                                                            <TextField
+                                                                color="primary"
+                                                                required
+                                                                id="ciudad"
                                                                 onChange={handleChange('ciudad')}
-                                                                label={"Ciudad"}  
+                                                                label={"Ciudad"}
                                                                 className="input-edit-event"
                                                                 InputProps={{className: classes.input,}}
                                                                 InputLabelProps={{
@@ -213,15 +213,15 @@ const AgregarEvento = ({producto}) => {
                                                                     }
                                                                 }}
                                                                 error={errors.ciudad && values.error == true && true}
-                                                                helperText={values.error == true && errors.ciudad}  
+                                                                helperText={values.error == true && errors.ciudad}
                                                             />
-                                                        
+
                                 </Grid>
-                                <Grid item xs={12} sm={6}><TextField 
-                                                                required 
-                                                                id="sede" 
+                                <Grid item xs={12} sm={6}><TextField
+                                                                required
+                                                                id="sede"
                                                                 onChange={handleChange('sede')}
-                                                                label="Sede" 
+                                                                label="Sede"
                                                                 className="input-edit-event"
                                                                 InputProps={{className: classes.input,}}
                                                                 InputLabelProps={{
@@ -230,38 +230,38 @@ const AgregarEvento = ({producto}) => {
                                                                     }
                                                                 }}
                                                                 error={errors.sede && values.error == true && true}
-                                                                helperText={values.error == true && errors.sede}  
+                                                                helperText={values.error == true && errors.sede}
                                                             />
                                 </Grid>
                             </Grid>
 
                             <Grid item xs={12}>
-                                <TextField 
-                                    required 
-                                    id="direccion" 
+                                <TextField
+                                    required
+                                    id="direccion"
                                     onChange={handleChange('direccion')}
-                                    label="Dirección" 
-                                    className="input-edit-event" 
+                                    label="Dirección"
+                                    className="input-edit-event"
                                     InputProps={{className: classes.input,}}
                                     InputLabelProps={{
                                         classes: {
                                             root: classes.formTextLabel
                                         }
                                     }}
-                                    style={{width:'95%'}} 
+                                    style={{width:'95%'}}
                                     error={errors.direccion && values.error == true && true}
-                                    helperText={values.error == true && errors.direccion}  
+                                    helperText={values.error == true && errors.direccion}
                                 />
                             </Grid>
 
                             <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
-                                <Grid item xs={12} sm={6}><TextField 
-                                                                required 
-                                                                id="precio" 
+                                <Grid item xs={12} sm={6}><TextField
+                                                                required
+                                                                id="precio"
                                                                 onChange={handleChange('precio')}
-                                                                type="number" 
-                                                                label="Precio por boleto" 
-                                                                className="input-edit-event"  
+                                                                type="number"
+                                                                label="Precio por boleto"
+                                                                className="input-edit-event"
                                                                 InputProps={{className: classes.input,}}
                                                                 InputLabelProps={{
                                                                     classes: {
@@ -269,47 +269,47 @@ const AgregarEvento = ({producto}) => {
                                                                     }
                                                                 }}
                                                                 error={errors.precio && values.error == true && true}
-                                                                helperText={values.error == true && errors.precio} 
+                                                                helperText={values.error == true && errors.precio}
                                                             />
                                 </Grid>
-                                <Grid item xs={12} sm={6}><TextField 
-                                                                required 
-                                                                id="limite" 
+                                <Grid item xs={12} sm={6}><TextField
+                                                                required
+                                                                id="limite"
                                                                 onChange={handleChange('limite')}
-                                                                type="number" 
-                                                                label="Limite de boletos" 
-                                                                className="input-edit-event" 
+                                                                type="number"
+                                                                label="Limite de boletos"
+                                                                className="input-edit-event"
                                                                 InputProps={{className: classes.input,}}
                                                                 InputLabelProps={{
                                                                     classes: {
                                                                         root: classes.formTextLabel
                                                                     }
-                                                                }} 
+                                                                }}
                                                                 error={errors.limite && values.error == true && true}
-                                                                helperText={values.error == true && errors.limite} 
+                                                                helperText={values.error == true && errors.limite}
                                                             />
                                 </Grid>
                             </Grid>
 
                             <Grid item xs={12} style={{display:'flex', flexWrap:'wrap'}}>
-                                <TextField 
-                                required 
-                                id="descuento" 
+                                <TextField
+                                required
+                                id="descuento"
                                 onChange={handleChange('descuento')}
-                                type="number" 
-                                min="0" 
+                                type="number"
+                                min="0"
                                 max="100"
-                                label="Descuento por boleto (%)" 
-                                className="input-edit-event" 
+                                label="Descuento por boleto (%)"
+                                className="input-edit-event"
                                 InputProps={{className: classes.input,}}
                                 InputLabelProps={{
                                     classes: {
                                         root: classes.formTextLabel
                                     }
                                 }}
-                                style={{width:'95%'}} 
+                                style={{width:'95%'}}
                                 error={errors.descuento && values.error == true && true}
-                                helperText={values.error == true && errors.descuento} 
+                                helperText={values.error == true && errors.descuento}
                                 />
                             </Grid>
 
@@ -332,36 +332,36 @@ const AgregarEvento = ({producto}) => {
                                     <hr className="hr-div" align="left" />
                                     <Grid item xs={12} style={{display:'flex', flexWrap:'wrap', marginBottom:15}}>
                                         <Grid item xs={12} sm={4}>
-                                                <TextField 
-                                                    required 
-                                                    id="fecha_previa"  
-                                                    type="datetime-local" 
-                                                    min="0" 
-                                                    label="Fecha y hora de inicio" 
-                                                    InputLabelProps={{shrink: true,}} 
-                                                    className="input-edit-event"  
+                                                <TextField
+                                                    required
+                                                    id="fecha_previa"
+                                                    type="datetime-local"
+                                                    min="0"
+                                                    label="Fecha y hora de inicio"
+                                                    InputLabelProps={{shrink: true,}}
+                                                    className="input-edit-event"
                                                     onChange= {handleChange('fecha_previa')}
                                                 />
                                             </Grid>
                                         <Grid item xs={12} sm={4}>
-                                                <TextField 
-                                                    required 
-                                                    id="hora_previa"  
-                                                    type="time" 
-                                                    min="0" 
-                                                    label="Hora cierre" 
-                                                    InputLabelProps={{shrink: true,}} 
-                                                    className="input-edit-event"  
+                                                <TextField
+                                                    required
+                                                    id="hora_previa"
+                                                    type="time"
+                                                    min="0"
+                                                    label="Hora cierre"
+                                                    InputLabelProps={{shrink: true,}}
+                                                    className="input-edit-event"
                                                     onChange= {handleChange('hora_previa')}
                                                 />
                                         </Grid>
-                                    
+
                                     </Grid>
                                 </Grid>
                             {/* )} */}
 
                             <Grid style={{display:'flex',justifyContent:'flex-end', alignItems:'center',marginTop:10}} className="grid-btns-event-edit">
-                                <InertiaLink href={route('dashboard.producto',producto.id)} className="btn-cancelar">Cancelar</InertiaLink>
+                                <InertiaLink href={route('dashboard.producto',producto.uuid)} className="btn-cancelar">Cancelar</InertiaLink>
                                 <Button variant="contained" type="submit" className="btn-action">Guardar evento</Button>
                             </Grid>
                             </MuiThemeProvider>
@@ -369,10 +369,10 @@ const AgregarEvento = ({producto}) => {
 
                     </Grid>
                 </Paper>
-                
+
             </Grid>
         </Grid>
-        
+
     )
 }
 

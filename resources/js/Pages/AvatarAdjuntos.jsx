@@ -114,17 +114,17 @@ const Adjuntos = () => {
                     ></img>
                 </div>
                 <div
-                    className="text-center"
+                    className="text-center div-titulo-adjuntos"
                     style={{
                         color: "#FFFFFF",
                         position: "absolute",
-                        top: "30%",
+                        top: "40%",
                         left: "50%",
                         transform: "translate(-50%, -50%)",
                     }}
                 >
                     <h1
-                        className="display-4 font-weight-bold"
+                        className="display-4 font-weight-bold text_header_adjuntos"
                         style={{
                             fontFamily: "Roboto Slab",
                         }}
@@ -132,13 +132,14 @@ const Adjuntos = () => {
                         ¡Bienvenido a la tribu!
                     </h1>
                     <p
-                        className="font-weight-light lead"
+                        className="font-weight-light lead text_descrip_adjuntos"
                         style={{ color: "#E2E2E2", fontWeight: "300" }}
                     >
                         Felicidades, ya diste el paso
                     </p>
                     <div>
                     <Button
+                        id="btn_download"
                         variant="contained"
                         color="primary"
                         className="btn-action"
@@ -217,7 +218,7 @@ const Adjuntos = () => {
                                                     color="primary"
                                                     className="mt-4"
                                                     size="large"
-                                                    href="#"
+                                                    href="/documentos/PresupuestoMensual.xlsx"
                                                     target="_blank"
                                                     style={{color: 'white'}}
                                                 >
@@ -310,10 +311,10 @@ const Adjuntos = () => {
         </div>
 
         <Grid container spacing={3} style={{backgroundColor:'white', padding:'30px'}} justify="center" alignItems='center'>
-            <Grid xs={6}>
-            <iframe width="90%" height="340" src="https://www.youtube.com/embed/FKSZ6PX-hGw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <Grid lg={6} md={6} sl={12}>
+            <iframe width="95%" height="300" src="https://www.youtube.com/embed/FKSZ6PX-hGw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </Grid>
-            <Grid xs={6} >
+            <Grid lg={6} md={6} sd={12} >
                 <h3
                     className="text-center"
                     style={{
