@@ -133,7 +133,7 @@ const Producto = ({producto, events}) => {
                             <Grid item  xs={12} sm={3}>
                                 <img className="verproducto_img" src={producto.images[0] && "/img/productos/"+producto.images[0].foto}></img>
                             </Grid>
-                            <Grid item xs={12} sm={9} className="verproducto_info"> 
+                            <Grid item xs={12} sm={9} className="verproducto_info">
                                 <Grid container alignItems='center' style={{justifyContent:'space-between'}}>
                                     <Grid style={{color:'#FFFFFF',fontFamily:'Oxygen',fontSize:16,fontWeight:'bold',textDecoration:'none'}}>{producto.titulo}</Grid>
                                     <Grid>
@@ -158,7 +158,7 @@ const Producto = ({producto, events}) => {
                                 </Grid>
                                 { (producto.events && producto.events.length > 0) && disponibilidad(producto.events) ?
                                 <Grid container alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
-                                    DISPONIBLE <EventAvailableIcon></EventAvailableIcon> 
+                                    DISPONIBLE <EventAvailableIcon></EventAvailableIcon>
                                 </Grid>
                                 :
                                 <Grid container alignItems='center' style={{fontSize:12,fontFamily:'Oxygen',marginTop:9}}>
@@ -174,7 +174,7 @@ const Producto = ({producto, events}) => {
                                     <Grid style={{marginRight:34}}>
                                         <div style={{color:'#9c9c9c',fontSize:12, fontFamily:'Oxygen'}}>BOLETOS VENDIDOS</div>
                                         <div style={{color:'#FFFFFF', fontSize:14,fontFamily:'Oxygen',marginTop:4}}>{producto && producto.events && contarBoletos(producto.events)} Boleto(s)</div>
-                                    </Grid>  
+                                    </Grid>
                                 </Grid>
                                 <br></br>
                                 <Grid item xs={12}>{producto.descripcion}</Grid>
@@ -183,11 +183,11 @@ const Producto = ({producto, events}) => {
                                     <a href={'/documentos/'+producto.hojaDescriptiva} className='verproducto_pdf' target='_blank'><PictureAsPdfIcon style={{fontSize:18,marginRight:6}}></PictureAsPdfIcon> PDF</a>
                                 }
                                 <Grid container style={{justifyContent:'flex-end',marginBottom:12}}>
-                                    <InertiaLink href={route('dashboard.eventAdd',producto.id)} style={{marginTop:31,color:'white',fontSize:14,fontFamily:'Oxygen'}}><AddCircleIcon style={{marginRight:15}}></AddCircleIcon>Agregar evento</InertiaLink>
+                                    <InertiaLink href={route('dashboard.eventAdd',producto.uuid)} style={{marginTop:31,color:'white',fontSize:14,fontFamily:'Oxygen'}}><AddCircleIcon style={{marginRight:15}}></AddCircleIcon>Agregar evento</InertiaLink>
                                 </Grid>
                                 <hr style={{backgroundColor:'#535353'}}></hr>
 
-                                {events && events.length > 0 && 
+                                {events && events.length > 0 &&
                                     events.map((evento,index)=>(
                                         <Evento key={index} evento={evento}/>
                                 ))}
