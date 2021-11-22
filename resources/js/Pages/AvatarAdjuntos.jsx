@@ -270,7 +270,7 @@ const Adjuntos = () => {
             </div>
 
         <div style={{backgroundColor:"black", padding:'30px'}} >
-            <div>
+            <div style={{marginBottom: '50px'}}>
                 <h3
                         className="text-center"
                         style={{
@@ -283,6 +283,8 @@ const Adjuntos = () => {
                         Dante quiere compartirte estos videos para tu crecimiento:
                 </h3>
             </div>
+            <div style={{marginBottom: '50px'}}>
+
 
             <OwlCarousel responsive={responsive}
                 rewind
@@ -304,7 +306,7 @@ const Adjuntos = () => {
                     <iframe width="400" height="214" src="https://www.youtube.com/embed/AKHvM4V46Ow" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
             </OwlCarousel>
-
+            </div>
         </div>
 
         <Grid container spacing={3} style={{backgroundColor:'white', padding:'30px'}} justify="center" alignItems='center'>

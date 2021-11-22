@@ -69,7 +69,7 @@ Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiplom
 
 Route::get('/adjuntos-avatar', function () {
     return Inertia::render('AvatarAdjuntos');
-})->name('avatar.adjuntos');
+})->name('avatar.adjuntos')->middleware('auth');
 // ->middleware('auth');
 
 ///////// DASHBOARD ////////
