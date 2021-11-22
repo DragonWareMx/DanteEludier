@@ -100,7 +100,7 @@ class EventController extends Controller
     public function add($id){
         // id del producto
         $producto=Product::join('product_images','products.id','product_images.product_id')
-                            ->select('product_images.foto', 'products.titulo','products.id')
+                            ->select('product_images.foto', 'products.titulo','products.id', 'products.uuid')
                             ->findOrFail($id);
         // dd($producto);
         return Inertia::render('Admin/Eventos/AgregarEvento',['producto' => $producto]);
