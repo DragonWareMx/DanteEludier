@@ -65,6 +65,13 @@ Route::get('/boleto/check/{uuid}',  [App\Http\Controllers\EventoController::clas
 Route::get('/diploma/{uuid}', [App\Http\Controllers\EventoController::class, 'diploma'])->name('diploma')->middleware('auth');
 Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiploma'])->name('getDiploma');
 
+////DOCUMENTOS ADJUNTOS AVATAR ////
+
+Route::get('/adjuntos-avatar', function () {
+    return Inertia::render('AvatarAdjuntos');
+})->name('avatar.adjuntos');
+// ->middleware('auth');
+
 ///////// DASHBOARD ////////
 // Productos
 Route::get('/dashboard/productos',  [App\Http\Controllers\ProductController::class, 'productos'])->name('dashboard.productos')->middleware('admin');

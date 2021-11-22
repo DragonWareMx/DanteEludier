@@ -7,6 +7,11 @@ body{
 .portadaContacto img {
     opacity:1 !important;
 }
+
+.portadaAdjuntos img {
+    opacity:0.4 !important;
+}
+
 .title-white-card-middle{
     font-family: Roboto Slab;
     font-style: normal;
@@ -133,7 +138,7 @@ body{
 }
 @media(max-width:637px){
     .inicio_rounded{
-        margin-top: -30px !important;
+        margin-top: 30px !important;
     }
 }
 @media(max-width:600px){
