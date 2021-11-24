@@ -123,14 +123,16 @@ const Adjuntos = () => {
                         transform: "translate(-50%, -50%)",
                     }}
                 >
-                    <h1
+
+                    <img src="/img/avatarlogo1.png" className="img-fluid" />
+                    {/* <h1
                         className="display-4 font-weight-bold text_header_adjuntos"
                         style={{
                             fontFamily: "Roboto Slab",
                         }}
                     >
                         ¡Bienvenido a la tribu!
-                    </h1>
+                    </h1> */}
                     <p
                         className="font-weight-light lead text_descrip_adjuntos"
                         style={{ color: "#E2E2E2", fontWeight: "300" }}
@@ -314,7 +316,8 @@ const Adjuntos = () => {
             <Grid lg={6} md={6} sl={12}>
             <iframe width="95%" height="300" src="https://www.youtube.com/embed/FKSZ6PX-hGw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </Grid>
-            <Grid lg={6} md={6} sd={12} >
+            <Grid lg={6} md={6} sd={12} className='text-center'>
+
                 <h3
                     className="text-center"
                     style={{
@@ -325,6 +328,10 @@ const Adjuntos = () => {
                 >
                     ¿Estás listo para el siguiente nivel?
                 </h3>
+
+
+                <img src="/img/avatrading.png" className="img-fluid" width="50%"/>
+
                 <p
                     style={{
                         fontFamily: 'Roboto',
