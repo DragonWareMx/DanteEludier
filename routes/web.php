@@ -69,7 +69,7 @@ Route::post('/getPdf', [App\Http\Controllers\EventoController::class, 'getDiplom
 
 Route::get('/adjuntos-avatar', function () {
     return Inertia::render('AvatarAdjuntos');
-})->name('avatar.adjuntos')->middleware('auth');
+})->name('avatar.adjuntos');
 // ->middleware('auth');
 
 ///////// DASHBOARD ////////
@@ -118,4 +118,9 @@ Route::post('/avatrading/crearregistro', [App\Http\Controllers\WildcardControlle
 
 //Formulario registro Avatar
 Route::get('/avatar-registro', [App\Http\Controllers\WildcardController::class, 'registroAvatar'])->name('avatar.form');
-Route::post('/avatrading/crearregistro', [App\Http\Controllers\WildcardController::class, 'registrarAvatar'])->name('avatar.create');
+Route::post('/avatar/crearregistro', [App\Http\Controllers\WildcardController::class, 'registrarAvatar'])->name('avatar.create');
+
+
+//Formulario happy money movement Dante
+Route::get('/hmm-registro', [App\Http\Controllers\WildcardController::class, 'registroHmm'])->name('hmm.form');
+Route::post('/hmm/crearregistro', [App\Http\Controllers\WildcardController::class, 'registrarHmm'])->name('hmm.create');

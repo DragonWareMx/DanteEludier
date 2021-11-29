@@ -109,8 +109,9 @@ const Adjuntos = () => {
             <div style={{ backgroundColor: "#000000" }}>
                 <div className="portadaAdjuntos">
                     <img
-                        src="/img/portadas/team2.jpg"
+                        src="/img/portadas/avatar2.jpg"
                         className="img-fluid"
+                        width='100%'
                     ></img>
                 </div>
                 <div
@@ -272,7 +273,7 @@ const Adjuntos = () => {
 
             </div>
 
-        <div style={{backgroundColor:"black", padding:'30px'}} >
+        <div className="text-center" style={{backgroundColor:"black", padding:'30px'}} >
             <div style={{marginBottom: '50px'}}>
                 <h3
                         className="text-center"
@@ -345,6 +346,47 @@ const Adjuntos = () => {
 
             </Grid>
         </Grid>
+
+        <div className="text-center" style={{backgroundImage:"url(/img/portadas/background1opa.png)", padding:'30px'}}  >
+            <div style={{marginBottom: '50px'}}>
+                <h3
+                        className="text-center"
+                        style={{
+                            fontFamily: "Roboto Slab",
+                            fontWeight: "bold",
+                            alignContent: 'center',
+                            color:'white'
+                        }}
+                >
+                    Empieza ya con tus clases de trading
+                </h3>
+            </div>
+            <div style={{marginBottom: '50px'}}>
+
+
+            <OwlCarousel responsive={responsive}
+                rewind
+                dots={false}
+                autoplay
+                autoplayTimeout={5000}
+                autoplayHoverPause
+                margin={10} >
+                    <div>
+                    <iframe width="400" height="214" src="https://www.youtube.com/embed/dtB_8j5atgE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div>
+                    <iframe  width="400" height="214" src="https://www.youtube.com/embed/U34X-soz7lY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div>
+                    <iframe width='400' height="214" src="https://youtube.com/embed/azNOgW0O_Ts" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div>
+                    <iframe width="400" height="214" src="https://youtube.com/embed/1ZrXitS1xVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+            </OwlCarousel>
+            </div>
+        </div>
+
         </>
     )
 }

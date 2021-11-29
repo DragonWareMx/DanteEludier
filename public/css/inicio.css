@@ -19,6 +19,20 @@
     margin-bottom:41px;
     transition: all 0.3s;
 }
+.Hmm_rounded{
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
+    border-radius: 8px;
+    width: 60%;
+    max-width: 1800px;
+    padding-top:40px;
+    /* padding-left: 100px;
+    padding-right: 100px; */
+
+    margin-top: -80px;
+    margin-bottom:41px;
+    transition: all 0.3s;
+}
 
 .owl-item{
     height: 70px !important;
@@ -95,6 +109,11 @@
     }
 
     .inicio_rounded{
+        width: 100%;
+        border-radius: 0px;
+        transition: all 0.3s;
+    }
+    .Hmm_rounded{
         width: 100%;
         border-radius: 0px;
         transition: all 0.3s;
