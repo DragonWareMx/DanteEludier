@@ -105,7 +105,7 @@ class WildcardController extends Controller
         $request->validate([
             'nombre' => ['required','max:25', 'regex:/^[A-Za-z0-9À-ÖØ-öø-ÿ_! \"#$%&\'()*+,\-.\\:\/;=?@^_]+$/'],
             'apellidos'=> ['required','max:50', 'regex:/^[A-Za-z0-9À-ÖØ-öø-ÿ_! \"#$%&\'()*+,\-.\\:\/;=?@^_]+$/'],
-            'mail' => 'required|email|',
+            'mail' => 'required|email|unique:polls',
             'telefono' => ['required','max:25','regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.0-9]*$/i','min:10'],
             'procedencia'=>'required|max:210',
             'avatar'=>'required',
