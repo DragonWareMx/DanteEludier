@@ -19,9 +19,9 @@ class WildcardController extends Controller
     public function registrar(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|max:255|',
-            'mail' => 'required|max:255|email',
-            'telefono' => 'required|digits:10',
+            'nombre' => ['required','max:50', 'regex:/^[A-Za-z0-9À-ÖØ-öø-ÿ_! \"#$%&\'()*+,\-.\\:\/;=?@^_]+$/'],
+            'mail' => 'required|email',
+            'telefono' => ['required','max:25','regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.0-9]*$/i','min:10'],
             'procedencia'=>'required|max:255|',
             'facebook'=>'max:45',
             'instagram'=>'max:45',

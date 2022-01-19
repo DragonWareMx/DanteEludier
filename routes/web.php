@@ -113,7 +113,7 @@ Route::post('/get-diploma', [App\Http\Controllers\EventoController::class, 'getD
 
 
 //Formulario registro Avatrading
-Route::get('/avatrading-registro', [App\Http\Controllers\WildcardController::class, 'formularioAvaT'])->name('avatradingform');
+Route::get('/formulario-registro', [App\Http\Controllers\WildcardController::class, 'formularioAvaT'])->name('avatradingform');
 Route::post('/avatrading/crearregistro', [App\Http\Controllers\WildcardController::class, 'registrar'])->name('avatradingcreate');
 
 //Formulario registro Avatar

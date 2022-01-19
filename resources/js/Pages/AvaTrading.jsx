@@ -136,7 +136,7 @@ const AvaTrading =  () => {
                             fontFamily: "Roboto Slab",
                         }}
                     >
-                        Avatrading - Registro
+                        Avaventas - Registro
                     </h1>
                 </div>
                 {/* CARD DE PRODUCTOS */}
@@ -297,8 +297,5 @@ const AvaTrading =  () => {
     );
 };
 
-AvaTrading.layout = (page) => (
-    <Layout children={page} title="Avatrading" pageTitle="Avatrading" />
-);
 
 export default AvaTrading;
