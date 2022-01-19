@@ -18,7 +18,7 @@ use App\Mail\SendMailableTransfer;
 */
 
 Route::get('/', function () {
-    return redirect('avatradingform'); //REDIRIGIMOS AL FORMULARIO POR MIENTRAS, CAMBIO SE HIZO EL 19 DE ENERO DE 2022
+    return redirect()->route('avatradingform');; //REDIRIGIMOS AL FORMULARIO POR MIENTRAS, CAMBIO SE HIZO EL 19 DE ENERO DE 2022
 });
 
 Auth::routes();
